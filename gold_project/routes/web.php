@@ -23,5 +23,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('stores', 'StoresController');
-Route::get('/stores/create', 'StoresController@create');
+// Route::get('/stores', 'StoresController@index');
+Route::resource('/stores', 'StoresController');
+
+// Route::post('/stores/store', 'StoresController@store');

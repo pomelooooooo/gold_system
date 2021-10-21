@@ -47,15 +47,19 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($stores as $row)
                         <tr>
-                            <td>name</td>
-                            <td>address</td>
-                            <td>tel</td>
-                            <td>address</td>
-                            <td>tel</td>
+                            <td>{{$row['name']}}</td>
+                            <td>{{$row['address']}}</td>
+                            <td>{{$row['tel']}}</td>
+                            <td class="text-right">
+                                <a class="btn btn-warning" href=""><i class="fa fa-edit"></i> แก้ไข</a>
+                            </td>
+                            <td class="text-center">
+                            <a class="btn btn-danger" href=""><i class="fa fa-edit"></i> ลบ</a>
+                            </td>
                         </tr>
-
+                    @endforeach
                     </tbody>
                 </table>
                 </br></br>

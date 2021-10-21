@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Stores;
 use Illuminate\Http\Request;
 
 class StoresController extends Controller
@@ -13,7 +14,8 @@ class StoresController extends Controller
      */
     public function index()
     {
-        return view('admin.stores.index');
+        $stores = Stores::all()->toArray(); 
+        return view('admin.stores.index', compact('stores'));
     }
 
     /**
@@ -23,7 +25,7 @@ class StoresController extends Controller
      */
     public function create()
     {
-        return view('admin.stores.create');
+        return view('admin.stores.create-stores');
     }
 
     /**
@@ -34,7 +36,19 @@ class StoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('eeee');
+        $stores = new Stores(
+            [
+                'name' => $request->get('name'),
+                'address' => $request->get('address'),
+                'tel' => $request->get('tel'),
+                'tax_identification_number' => $request->get('tax_identification_number'),
+                'commercial_registration_number' => $request->get('commercial_registration_number'),
+            ]
+        );
+        $stores->save();
+        $stores = Stores::all()->toArray(); 
+        return view('admin.stores.index', compact('stores'));
     }
 
     /**
