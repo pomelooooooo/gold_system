@@ -30,7 +30,7 @@
                 <h3>ข้อมูลสาขา</h3>
             </div>
             <div class="col-6 text-right">
-                <a type="button" class="btn btn-outline-info" href="{{ url('/stores/create') }}"><i class="fa fa-plus"></i> เพิ่มสาขา</a>
+                <a type="button" class="btn btn-outline-info" href="{{ url('/stores/create') }}"><i class="fa fa-plus"></i> เพิ่มร้านสาขา</a>
             </div>
         </div>
         <br />
