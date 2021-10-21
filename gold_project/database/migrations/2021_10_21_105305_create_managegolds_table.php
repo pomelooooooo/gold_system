@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateManagegoldsTable extends Migration
 {
     /**
@@ -17,8 +18,12 @@ class CreateManagegoldsTable extends Migration
             $table->id();
             $table->string('code');
             $table->string('details');
+            $table->string('unit');
             $table->string('weight');
             $table->string('price');
+            $table->string('gratuity');
+            $table->string('allprice');
+            $table->string('pic')->nullable();
             $table->timestamps();
         });
     }

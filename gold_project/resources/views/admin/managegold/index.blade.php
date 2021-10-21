@@ -29,6 +29,9 @@
             <div class="col-6">
                 <h3>จัดการข้อมูลทอง</h3>
             </div>
+            <div class="col-6 text-right">
+                <a type="button" class="btn btn-outline-info" href="{{ route('managegold.create') }}"><i class="fa fa-plus"></i> เพิ่มทองเข้าร้าน</a>
+            </div>
         </div>
         <br />
         <div class="row">
@@ -36,7 +39,6 @@
                 <table class="table table-striped">
                     <thead class="table-info">
                         <tr>
-                            <th scope="col"></th>
                             <th scope="col">รหัสสินค้า</th>
                             <th scope="col">รายละเอียดสินค้า</th>
                             <th scope="col">นํ้าหนัก</th>
@@ -45,8 +47,26 @@
                             <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
 
+                    <tbody>
+                        @foreach($managegold as $row)
+                        <tr>
+                            <td>{{$row['code']}}</td>
+                            <td>{{$row['details']}}</td>
+                            <td>{{$row['weight']}}</td>
+                            <td>{{$row['price']}}</td>
+                            <td class="text-right">
+                                <a class="btn btn-warning" href="{{action('ManagegoldController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
+                            </td>
+                            <td class="text-center">
+                                <form method="POST" class="delete_from" action="{{action('ManagegoldController@destroy',$row['id'])}}">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 </br></br>
