@@ -71,7 +71,7 @@
 									<ul class="sub-menu">
 										<li><a href="stores">จัดการข้อมูลร้าน</a></li>
 										<li><a href="/createStore">อัพเดทราคากลาง</a></li>
-										<li><a href="stores">จัดการข้อมูลทอง</a></li>
+										<li><a href="managegold">จัดการข้อมูลทอง</a></li>
 									</ul>
 								</li>
 								<li><a href="about.html">นำเข้าข้อมูลลูกค้า</a></li>
