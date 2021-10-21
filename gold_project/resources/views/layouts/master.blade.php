@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
-     <!-- CSRF Token -->
-     <meta name="csrf-token" content="{{ csrf_token() }}">
+	<!-- CSRF Token -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<!-- title -->
 	<title>@yield('title')</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+	<!-- Scripts -->
+	<script src="{{ asset('js/app.js') }}" defer></script>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -38,16 +39,17 @@
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
 </head>
+
 <body>
-	
+
 	<!--PreLoader-->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
-	
+	<div class="loader">
+		<div class="loader-inner">
+			<div class="circle"></div>
+		</div>
+	</div>
+	<!--PreLoader Ends-->
+
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
 		<div class="container">
@@ -57,7 +59,7 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="home">
-								<img src="assets/img/logo.png" alt="" >
+								<img src="assets/img/logo.png" alt="">
 							</a>
 						</div>
 						<!-- logo -->
@@ -65,28 +67,28 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="home">จัดการข้อมูลร้าน</a>
+								<li class="current-list-item"><a href="stores">จัดการข้อมูลร้าน</a>
 									<ul class="sub-menu">
-										<li><a href="stores">ข้อมูลร้าน</a></li>
-                                        <li><a href="/createStore">เพิ่มข้อมูลร้าน</a></li>
+										<li><a href="stores">จัดการข้อมูลร้าน</a></li>
+										<li><a href="/createStore">อัพเดทราคากลาง</a></li>
+										<li><a href="stores">จัดการข้อมูลทอง</a></li>
 									</ul>
 								</li>
-								<li><a href="about.html">ข้อมูลลูกค้า</a></li>
-                                <li><a href="about.html">คลังทอง</a></li>
-                                <li><a href="about.html">การซื้อขายทอง</a></li>
-                                <li><a href="about.html">การจำนำทอง</a></li>
-                                <li><a href="about.html">รายงานผลการดำเนินงาน</a></li>
+								<li><a href="about.html">นำเข้าข้อมูลลูกค้า</a></li>
+								<li><a href="about.html">คลังทอง</a></li>
+								<li><a href="about.html">การซื้อขายทอง</a></li>
+								<li><a href="about.html">การจำนำทอง</a></li>
+								<li><a href="about.html">รายงานผลการดำเนินงาน</a></li>
 								<li>
 									<div class="header-icons">
-										<a class="shopping-cart" href="{{ route('logout') }}" 
-                                            onclick="event.preventDefault();
+										<a class="shopping-cart" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                        </a>
+											{{ __('Logout') }}
+										</a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                        </form>
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+											@csrf
+										</form>
 
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 									</div>
@@ -102,7 +104,7 @@
 		</div>
 	</div>
 	<!-- end header -->
-	
+
 	<!-- search area -->
 	<div class="search-area">
 		<div class="container">
@@ -122,9 +124,9 @@
 	</div>
 	<!-- end search area -->
 
-    @yield('content')
+	@yield('content')
 
-    	<!-- footer -->
+	<!-- footer -->
 	<div class="footer-area">
 		<div class="container">
 			<div class="row">
@@ -170,13 +172,13 @@
 		</div>
 	</div>
 	<!-- end footer -->
-	
+
 	<!-- copyright -->
 	<div class="copyright">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
-					<p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+					<p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>, All Rights Reserved.</p>
 				</div>
 				<div class="col-lg-6 text-right col-md-12">
 					<div class="social-icons">
@@ -193,7 +195,7 @@
 		</div>
 	</div>
 	<!-- end copyright -->
-	
+
 	<!-- jquery -->
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	<!-- bootstrap -->
@@ -216,4 +218,5 @@
 	<script src="assets/js/main.js"></script>
 
 </body>
+
 </html>
