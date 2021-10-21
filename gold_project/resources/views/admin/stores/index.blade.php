@@ -30,7 +30,7 @@
                 <h3>ข้อมูลสาขา</h3>
             </div>
             <div class="col-6 text-right">
-                <a type="button" class="btn btn-outline-info" href="{{ url('/stores/create') }}"><i class="fa fa-plus"></i> เพิ่มร้านสาขา</a>
+                <a type="button" class="btn btn-outline-info" href="{{ route('stores.create') }}"><i class="fa fa-plus"></i> เพิ่มร้านสาขา</a>
             </div>
         </div>
         <br />
@@ -53,10 +53,14 @@
                             <td>{{$row['address']}}</td>
                             <td>{{$row['tel']}}</td>
                             <td class="text-right">
-                                <a class="btn btn-warning" href=""><i class="fa fa-edit"></i> แก้ไข</a>
+                                <a class="btn btn-warning" href="{{action('StoresController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
                             </td>
                             <td class="text-center">
-                            <a class="btn btn-danger" href=""><i class="fa fa-edit"></i> ลบ</a>
+                                <form method="POST" class="delete_from" action="{{action('StoresController@destroy',$row['id'])}}">
+                                {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

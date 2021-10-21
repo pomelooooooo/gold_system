@@ -24,6 +24,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::get('/stores', 'StoresController@index');
+// Route::post('/stores/store', 'StoresController@store')->name('stores.store');
 Route::resource('/stores', 'StoresController');
-
-// Route::post('/stores/store', 'StoresController@store');

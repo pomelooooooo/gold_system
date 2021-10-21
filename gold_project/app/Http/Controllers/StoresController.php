@@ -36,7 +36,7 @@ class StoresController extends Controller
      */
     public function store(Request $request)
     {
-        dd('eeee');
+        // dd('eeee');
         $stores = new Stores(
             [
                 'name' => $request->get('name'),
@@ -70,7 +70,9 @@ class StoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        $stores = Stores::find($id);
+        // $stores = Stores::all()->toArray(); 
+        return view('admin.stores.edit', compact('stores', 'id'));
     }
 
     /**
@@ -82,7 +84,16 @@ class StoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($id);
+        $stores = Stores::find($id);
+        $stores->name = $request->get('name');
+        $stores->address = $request->get('address');
+        $stores->tel = $request->get('tel');
+        $stores->tax_identification_number = $request->get('tax_identification_number');
+        $stores->commercial_registration_number = $request->get('commercial_registration_number');
+        $stores->save();
+        $stores = Stores::all()->toArray(); 
+        return view('admin.stores.index',compact('stores','id'));
     }
 
     /**
@@ -93,6 +104,9 @@ class StoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $stores = Stores::find($id); 
+        $stores->delete();
+        $stores = Stores::all(); 
+        return view('admin.stores.index',compact('stores'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }
