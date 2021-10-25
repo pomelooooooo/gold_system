@@ -70,7 +70,7 @@
 								<li class="current-list-item"><a href="stores">จัดการข้อมูลร้าน</a>
 									<ul class="sub-menu">
 										<li><a href="stores">จัดการข้อมูลร้าน</a></li>
-										<li><a href="/createStore">อัพเดทราคากลาง</a></li>
+										<li><a href="median_price">ราคากลางทองประจำวัน</a></li>
 										<li><a href="managegold">จัดการข้อมูลทอง</a></li>
 									</ul>
 								</li>

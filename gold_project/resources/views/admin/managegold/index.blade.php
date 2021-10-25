@@ -36,7 +36,7 @@
         <br />
         <div class="row">
             <div class="col-12">
-                <table class="table table-striped">
+                <table class="table table-bordered">
                     <thead class="table-info">
                         <tr>
                             <th scope="col">รหัสสินค้า</th>
@@ -55,7 +55,7 @@
                             <td>{{$row['details']}}</td>
                             <td>{{$row['weight']}}</td>
                             <td>{{$row['price']}}</td>
-                            <td class="text-right">
+                            <td class="text-center">
                                 <a class="btn btn-warning" href="{{action('ManagegoldController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
                             </td>
                             <td class="text-center">

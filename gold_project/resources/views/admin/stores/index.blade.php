@@ -36,7 +36,7 @@
         <br />
         <div class="row">
             <div class="col-12">
-                <table class="table table-striped">
+                <table class="table table-bordered">
                     <thead class="table-info">
                         <tr>
                             <th scope="col">ชื่อร้าน</th>
@@ -52,7 +52,7 @@
                             <td>{{$row['name']}}</td>
                             <td>{{$row['address']}}</td>
                             <td>{{$row['tel']}}</td>
-                            <td class="text-right">
+                            <td class="text-center">
                                 <a class="btn btn-warning" href="{{action('StoresController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
                             </td>
                             <td class="text-center">
