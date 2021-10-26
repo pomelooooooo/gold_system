@@ -1,6 +1,34 @@
 @extends('layouts.master')
 @section('title','ราคากลางทองประจำวัน')
 @section('content')
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+      url: "http://127.0.0.1:3000/latest",
+      type: 'GET',
+      success: function(response){
+        console.log(response.response)
+        $("#date").html(response.response.date)
+        $("#update_time").html(response.response.update_time)
+        $("#gold_bar_buy").val(response.response.price.gold_bar.buy)
+        $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
+        $("#gold_buy").val(response.response.price.gold.buy)
+        $("#gold_sell").val(response.response.price.gold.sell)
+
+        $("#gold_table_bar_buy").html(response.response.price.gold_bar.buy)
+        $("#gold_table_bar_sell").html(response.response.price.gold_bar.sell)
+        $("#gold_table_buy").html(response.response.price.gold.buy)
+        $("#gold_table_sell").html(response.response.price.gold.sell)
+      },
+      error: function(xhr){
+        "Not have Data!!"
+      }
+    })
+});
+   
+</script>
+
 <!-- hero area -->
 <div class="hero-area hero-bg">
     <div class="container">
@@ -39,17 +67,17 @@
                                 <div class="media-body">
                                     <h3 class="media-title font-weight-semibold text-center"> ทองคำแท่ง </h3>
                                     <ul class=" list-inline-dotted mb-3 mb-lg-3">
-                                        <h6 class="list-inline-item">ราคาซื้อ </h6>
                                         <div class="row">
+                                            <h6 class="list-inline-item">ราคาซื้อ </h6>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input name="name" type="text" class="form-control" placeholder="" />
+                                                    <input type="text" class="form-control" placeholder="" id="gold_bar_buy"/>
                                                 </div>
                                             </div>
                                             <h6 class="list-inline-item">ราคาขาย </h6>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input name="name" type="text" class="form-control" placeholder="" />
+                                                    <input type="text" class="form-control" placeholder="" id="gold_bar_sell"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -69,17 +97,17 @@
                                 <div class="media-body">
                                     <h3 class="media-title font-weight-semibold text-center"> ทองรูปพรรณ </h3>
                                     <ul class="list-inline-dotted mb-3 mb-lg-3">
-                                        <h6 class="list-inline-item">ราคาซื้อ </h6>
                                         <div class="row">
+                                            <h6 class="list-inline-item">ราคาซื้อ </h6>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input name="name" type="text" class="form-control" placeholder="" />
+                                                    <input type="text" class="form-control" placeholder="" id="gold_buy"/>
                                                 </div>
                                             </div>
                                             <h6 class="list-inline-item">ราคาขาย </h6>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input name="name" type="text" class="form-control" placeholder="" />
+                                                    <input type="text" class="form-control" placeholder="" id="gold_sell"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +124,7 @@
             <table class="table table-bordered">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col"></th>
+                        <th colspan="2"></th>
                         <th colspan="2" class="text-center">ทองคำแท่ง</th>
                         <th colspan="2" class="text-center">ทองรูปพรรณ</th>
                     </tr>
@@ -104,17 +132,19 @@
                 <tbody>
                     <tr>
                         <td class="table-secondary">วันที่</td>
+                        <td class="table-secondary">เวลา</td>
                         <td class="table-secondary">ซื้อ</td>
                         <td class="table-secondary">ขาย</td>
                         <td class="table-secondary">ซื้อ</td>
                         <td class="table-secondary">ขาย</td>
                     </tr>
                     <tr>
-                        <td>14/10/64</td>
-                        <td>20000</td>
-                        <td>22000</td>
-                        <td>15000</td>
-                        <td>60000</td>
+                        <td id="date"></td>
+                        <td id="update_time"></td>
+                        <td id="gold_table_bar_buy"></td>
+                        <td id="gold_table_bar_sell" ></td>
+                        <td id="gold_table_buy" ></td>
+                        <td id="gold_table_sell"></td>
                     </tr>
 
                 </tbody>
@@ -125,5 +155,8 @@
         <a class="btn btn-secondary" href="#">ยกเลิก</a> -->
     </div>
 </div>
+
+
+
 
 @endsection
