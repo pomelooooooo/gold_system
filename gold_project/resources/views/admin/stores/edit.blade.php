@@ -77,16 +77,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <input name="address" type="text" class="form-control" placeholder="" value="{{$stores->address}}"/>
+                        <textarea name="address" type="text" class="form-control" placeholder="">{{$stores->address}}</textarea>
                     </div>
                 </div>
             </div>  
-            <br/><br/>
+            <br/>
             <div class="text-right">
                 <a type="button" class="btn btn-secondary" href="{{url('/stores')}}">กลับ</a>
                 <button type="submit" class="btn btn-success">อัพเดท</button>
             </div>
             <input type="hidden" name="_method" value="PATCH"/>
+            <br/>
         </form>
     </div>
 

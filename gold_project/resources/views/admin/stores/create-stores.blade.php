@@ -73,15 +73,16 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <input name="address" type="text" class="form-control" placeholder="" />
+                    <textarea name="address" type="text" class="form-control" placeholder="" ></textarea>
                 </div>
             </div>
         </div>
-        <br /><br />
+        <br />
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/stores')}}">กลับ</a>
             <button type="submit" class="btn btn-success">บันทึก</button>
         </div>
+        <br />
         <!-- <input type="hidden" name="_method" value="PATCH"/> -->
     </form>
 </div>
