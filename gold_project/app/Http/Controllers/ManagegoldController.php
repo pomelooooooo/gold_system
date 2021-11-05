@@ -41,9 +41,15 @@ class ManagegoldController extends Controller
                 'code' => $request->get('code'),
                 'details' => $request->get('details'),
                 'unit' => $request->get('unit'),
-                'weight' => $request->get('weight'),
-                'price' => $request->get('price'),
+                'striped' => $request->get('striped'),
+                'bath' => $request->get('bath'),
+                'salung' => $request->get('salung'),
+                'gram' => $request->get('gram'),
+                'status' => $request->get('status'),
+                'date_of_import' => $request->get('date_of_import'),
+                'price_of_gold' => $request->get('price_of_gold'),
                 'gratuity' => $request->get('gratuity'),
+                'tray' => $request->get('tray'),
                 'allprice' => $request->get('allprice'),
                 'pic' => $request->get('pic'),
             ]
@@ -89,9 +95,15 @@ class ManagegoldController extends Controller
         $managegold->code = $request->get('code');
         $managegold->details = $request->get('details');
         $managegold->unit = $request->get('unit');
-        $managegold->weight = $request->get('weight');
-        $managegold->price = $request->get('price');
+        $managegold->striped = $request->get('striped');
+        $managegold->bath = $request->get('bath');
+        $managegold->salung = $request->get('salung');
+        $managegold->gram = $request->get('gram');
+        $managegold->status = $request->get('status');
+        $managegold->date_of_import = $request->get('date_of_import');
+        $managegold->price_of_gold = $request->get('price_of_gold');
         $managegold->gratuity = $request->get('gratuity');
+        $managegold->tray = $request->get('tray');
         $managegold->allprice = $request->get('allprice');
         $managegold->pic = $request->get('pic');
         $managegold->save();
