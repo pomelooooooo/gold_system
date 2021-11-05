@@ -26,9 +26,9 @@ class CreateManagegoldsTable extends Migration
             $table->enum('status', ['ทองเก่า', 'ทองใหม่']);
             $table->date('date_of_import');
             $table->integer('price_of_gold');
-            $table->integer('gratuity');
+            $table->integer('gratuity')->nullable();
             $table->string('tray');
-            $table->integer('allprice');
+            $table->integer('allprice')->nullable();
             $table->string('pic')->nullable();
             $table->timestamps();
         });

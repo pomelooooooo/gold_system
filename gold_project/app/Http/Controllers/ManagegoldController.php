@@ -51,9 +51,13 @@ class ManagegoldController extends Controller
                 'gratuity' => $request->get('gratuity'),
                 'tray' => $request->get('tray'),
                 'allprice' => $request->get('allprice'),
-                'pic' => $request->get('pic'),
+                'pic' => $request->file('pic'),
             ]
         );
+        // $image = $request->file('pic');
+        // $new_name = rand() .'.'. $image->getClientOriginalExtension();
+        // $image -> move(public_path('assets/img/gold'),$new_name);
+        // dd($managegold);
         $managegold->save();
         $managegold = Managegold::all()->toArray();
         return view('admin.managegold.index', compact('managegold'));

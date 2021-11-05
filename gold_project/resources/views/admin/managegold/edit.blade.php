@@ -2,6 +2,45 @@
 @section('title','เแก้ไขข้อมูลทอง')
 @section('content')
 
+<script>
+    $(document).ready(function() {
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function(event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
+            }
+
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function() {
+            readURL(this);
+        });
+    });
+</script>
+
 <!-- hero area -->
 <div class="hero-area hero-bg">
     <div class="container">
@@ -57,17 +96,17 @@
         <div class="row">
             <div class="col-6">
                 <div class="input-group mb-3">
-                    <select class="custom-select" id="inputGroupSelect01">
+                    <select class="custom-select" name="unit" >
                         <option selected>เลือกหน่วยนับ</option>
-                        <option value="1">เส้น</option>
-                        <option value="2">แท่ง</option>
-                        <option value="3">วง</option>
+                        @foreach(["เส้น"=>"เส้น","แท่ง"=>"แท่ง","วง"=>"วง"] as $unitWay => $unitLable)
+                            <option value="{{ $unitWay }}" {{ old("unit", $managegold->unit) == $unitWay ? "selected" : "" }}>{{ $unitLable }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <input name="weight" type="text" class="form-control" placeholder="" />
+                    <input name="striped" type="text" class="form-control" placeholder="" value="{{$managegold->striped}}"/>
                 </div>
             </div>
         </div>
@@ -85,17 +124,17 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <input name="code" type="text" class="form-control" placeholder="" />
+                    <input name="bath" type="text" class="form-control" placeholder="" value="{{$managegold->bath}}"/>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <input name="code" type="text" class="form-control" placeholder="" />
+                    <input name="salung" type="text" class="form-control" placeholder="" value="{{$managegold->salung}}"/>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <input name="details" type="text" class="form-control" placeholder="" />
+                    <input name="gram" type="text" class="form-control" placeholder="" value="{{$managegold->gram}}"/>
                 </div>
             </div>
         </div>
@@ -110,16 +149,16 @@
         <div class="row">
             <div class="col-6">
                 <div class="input-group mb-3">
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>เลือกสถานะทอง</option>
-                        <option value="1">ทองเก่า</option>
-                        <option value="2">ทองใหม่</option>
+                    <select class="custom-select" name="status">
+                        @foreach(["ทองเก่า"=>"ทองเก่า","ทองใหม่"=>"ทองใหม่"] as $statusWay => $statusLable)
+                            <option value="{{ $statusWay }}" {{old("status", $managegold->status) == $statusWay ? "selected" : ""}}>{{ $statusLable }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <input name="gratuity" type="date" class="form-control" value="{{date('Y-m-d')}}" />
+                    <input name="date_of_import" type="date" class="form-control" value="{{$managegold->date_of_import}}"/>
                 </div>
             </div>
         </div>
@@ -134,12 +173,12 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <input name="code" type="text" class="form-control" placeholder="" />
+                    <input name="tray" type="text" class="form-control" placeholder="" value="{{$managegold->tray}}"/>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <input name="details" type="text" class="form-control" placeholder="" />
+                    <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$managegold->price_of_gold}}"/>
                 </div>
             </div>
         </div>
@@ -151,16 +190,24 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group">
-                    <input type="file" class="form-control" id="customFile" />
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                <input name="pic"type="file" id="imgInp" value="{{$managegold->pic}}">
+                            </span>
+                        </span>
+                    </div>
+                    <img id='img-upload' />
                 </div>
             </div>
         </div>
-        <br /><br />
+        <br />
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/managegold')}}">กลับ</a>
             <button type="submit" class="btn btn-success">อัพเดท</button>
         </div>
         <input type="hidden" name="_method" value="PATCH" />
+        <br />
     </form>
 </div>
 @endsection

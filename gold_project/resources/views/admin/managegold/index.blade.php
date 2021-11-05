@@ -43,6 +43,7 @@
                             <th scope="col">รายละเอียดสินค้า</th>
                             <th scope="col">นํ้าหนัก(บาท)</th>
                             <th scope="col">นํ้าหนัก(สลึง)</th>
+                            <th scope="col">สถานะ</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
@@ -53,8 +54,9 @@
                         <tr>
                             <td>{{$row['code']}}</td>
                             <td>{{$row['details']}}</td>
-                            <td>{{$row['weight']}}</td>
-                            <td>{{$row['price']}}</td>
+                            <td>{{$row['bath']}}</td>
+                            <td>{{$row['salung']}}</td>
+                            <td>{{$row['status']}}</td>
                             <td class="text-center">
                                 <a class="btn btn-warning" href="{{action('ManagegoldController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
                             </td>
