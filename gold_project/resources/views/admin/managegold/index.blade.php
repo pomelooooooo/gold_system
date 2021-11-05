@@ -41,8 +41,8 @@
                         <tr>
                             <th scope="col">รหัสสินค้า</th>
                             <th scope="col">รายละเอียดสินค้า</th>
-                            <th scope="col">นํ้าหนัก</th>
-                            <th scope="col">ราคา</th>
+                            <th scope="col">นํ้าหนัก(บาท)</th>
+                            <th scope="col">นํ้าหนัก(สลึง)</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>

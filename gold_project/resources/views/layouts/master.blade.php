@@ -73,11 +73,16 @@
 									<ul class="sub-menu">
 										<li><a href="stores">จัดการข้อมูลร้าน</a></li>
 										<li><a href="median_price">ราคากลางทองประจำวัน</a></li>
-										<li><a href="managegold">จัดการข้อมูลทอง</a></li>
+										<li><a href="median_price">ตั้งราคาขาย</a></li>
 									</ul>
 								</li>
 								<li><a href="about.html">นำเข้าข้อมูลลูกค้า</a></li>
-								<li><a href="about.html">คลังทอง</a></li>
+								<li><a href="about.html">คลังทอง</a>
+									<ul class="sub-menu">
+										<li><a href="managegold">จัดการข้อมูลทอง</a></li>
+										<li><a href="median_price">เช็คสต็อคสินค้า</a></li>
+									</ul>
+								</li>
 								<li><a href="about.html">การซื้อขายทอง</a></li>
 								<li><a href="about.html">การจำนำทอง</a></li>
 								<li><a href="about.html">รายงานผลการดำเนินงาน</a></li>
