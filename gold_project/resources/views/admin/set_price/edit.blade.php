@@ -203,29 +203,33 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <h4>อัพโหลดรูปภาพ</h4>
+                <h4>รูปภาพ</h4>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-default btn-file">
-                                <input name="pic" type="file" id="imgInp">
-                            </span>
-                            <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" alt="Image">
-                        </span>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group text-center">
+                            <label>Upload Image</label>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-default btn-file">
+                                        Browse… <input type="file" id="imgInp">
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" readonly>
+                            </div>
+                                <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" width="250" height="250" alt="Image">
+                            <!-- <img id='img-upload' /> -->
+                        </div>
                     </div>
-                    <img id='img-upload' />
                 </div>
-
             </div>
         </div>
         <br />
         <div class="text-right">
-            <a type="button" class="btn btn-secondary" href="{{url('/managegold')}}">กลับ</a>
+            <a type="button" class="btn btn-secondary" href="{{url('/set_price')}}">กลับ</a>
             <button type="submit" class="btn btn-success">อัพเดท</button>
         </div>
         <input type="hidden" name="_method" value="PATCH" />

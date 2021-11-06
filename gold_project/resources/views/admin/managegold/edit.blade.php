@@ -4,13 +4,13 @@
 
 <script>
     $(document).ready(function() {
-        $(document).on('change', '.btn-file :file', function() {
+        $(document).on('change', '.btn-file-img :file', function() {
             var input = $(this),
                 label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
             input.trigger('fileselect', [label]);
         });
 
-        $('.btn-file :file').on('fileselect', function(event, label) {
+        $('.btn-file-img :file').on('fileselect', function(event, label) {
 
             var input = $(this).parents('.input-group').find(':text'),
                 log = label;
@@ -187,23 +187,28 @@
                 <h4>อัพโหลดรูปภาพ</h4>
             </div>
         </div>
+        <br>
         <div class="row">
             <div class="col-6">
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-default btn-file">
-                                <input name="pic" type="file" id="imgInp">
-                            </span>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group text-center">
+                            <label>Upload Image</label>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-default btn-file-img">
+                                        Browse… <input type="file" id="imgInp">
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" readonly>
+                            </div>
                             <h5>รูปเดิม</h5>
-                            <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" alt="Image">
+                                <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" width="250" height="250" alt="Image">
                             <h5>รูปใหม่</h5>
-                        </span>
+                            <img id='img-upload' />
+                        </div>
                     </div>
-                    <img id='img-upload' />
                 </div>
-
             </div>
         </div>
         <br />

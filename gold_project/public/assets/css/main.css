@@ -2466,6 +2466,31 @@ p.gold-price-buy span {
   color: #149c0f;
 }
 
+.btn-file-img {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file-img input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+#img-upload{
+  width: 250px;
+  height: 250px;
+}
+
 a.cart-btn {
   font-family: 'Poppins', sans-serif;
   display: inline-block;
