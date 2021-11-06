@@ -24,49 +24,52 @@
 
 <div class="list-section pt-80 pb-80">
     <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>ข้อมูลสาขา</h3>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a type="button" class="btn btn-outline-info" href="{{ route('stores.create') }}"><i class="fa fa-plus"></i> เพิ่มร้านสาขา</a>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">ชื่อร้าน</th>
+                                    <th scope="col">ที่อยู่</th>
+                                    <th scope="col">เบอร์โทร</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($stores as $row)
+                                <tr>
+                                    <td>{{$row['name']}}</td>
+                                    <td>{{$row['address']}}</td>
+                                    <td>{{$row['tel']}}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-warning" href="{{action('StoresController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <form method="POST" class="delete_from" action="{{action('StoresController@destroy',$row['id'])}}">
+                                            {{csrf_field()}}
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
 
-        <div class="row">
-            <div class="col-6">
-                <h3>ข้อมูลสาขา</h3>
-            </div>
-            <div class="col-6 text-right">
-                <a type="button" class="btn btn-outline-info" href="{{ route('stores.create') }}"><i class="fa fa-plus"></i> เพิ่มร้านสาขา</a>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-12">
-                <table class="table table-bordered">
-                    <thead class="table-info">
-                        <tr>
-                            <th scope="col">ชื่อร้าน</th>
-                            <th scope="col">ที่อยู่</th>
-                            <th scope="col">เบอร์โทร</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($stores as $row)
-                        <tr>
-                            <td>{{$row['name']}}</td>
-                            <td>{{$row['address']}}</td>
-                            <td>{{$row['tel']}}</td>
-                            <td class="text-center">
-                                <a class="btn btn-warning" href="{{action('StoresController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
-                            </td>
-                            <td class="text-center">
-                                <form method="POST" class="delete_from" action="{{action('StoresController@destroy',$row['id'])}}">
-                                {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE"/>
-                                    <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                </br></br>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

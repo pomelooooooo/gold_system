@@ -73,7 +73,7 @@
 									<ul class="sub-menu">
 										<li><a href="stores">จัดการข้อมูลร้าน</a></li>
 										<li><a href="median_price">ราคากลางทองประจำวัน</a></li>
-										<li><a href="median_price">ตั้งราคาขาย</a></li>
+										<li><a href="set_price">ตั้งราคาขาย</a></li>
 									</ul>
 								</li>
 								<li><a href="about.html">นำเข้าข้อมูลลูกค้า</a></li>

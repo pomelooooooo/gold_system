@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','เแก้ไขข้อมูลทอง')
+@section('title','ตั้งราคาขาย')
 @section('content')
 
 <script>
@@ -41,7 +41,6 @@
     });
 </script>
 
-<!-- hero area -->
 <div class="hero-area hero-bg">
     <div class="container">
         <div class="row">
@@ -49,7 +48,7 @@
                 <div class="hero-text">
                     <div class="hero-text-tablecell">
                         <p class="subtitle">Gold System</p>
-                        <h1>เพิ่มทองเข้าร้าน</h1>
+                        <h1>ตั้งราคาขาย</h1>
 
                     </div>
                 </div>
@@ -60,10 +59,10 @@
 <!-- end hero area -->
 
 <br /><br />
-<h2 class="text-center">แก้ไขข้อมูลทอง</h2>
+<h2 class="text-center">ตั้งราคาขาย</h2>
 <div class="container">
     <hr class="mt-5 mb-6" />
-    <form method="POST" action="{{action('ManagegoldController@update', $id)}}" enctype="multipart/form-data">
+    <form method="POST" action="{{action('SetPriceController@update', $id)}}" enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="row">
             <div class="col-6">
@@ -184,6 +183,26 @@
         </div>
         <div class="row">
             <div class="col-6">
+                <h4>ค่ากำเหน็จ</h4>
+            </div>
+            <div class="col-6">
+                <h4>ราคารวม</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input name="gratuity" type="text" class="form-control" placeholder="" value="{{$managegold->gratuity}}" />
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input name="allprice" type="text" class="form-control" placeholder="" value="{{$managegold->allprice}}" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
                 <h4>อัพโหลดรูปภาพ</h4>
             </div>
         </div>
@@ -196,9 +215,7 @@
                             <span class="btn btn-default btn-file">
                                 <input name="pic" type="file" id="imgInp">
                             </span>
-                            <h5>รูปเดิม</h5>
                             <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" alt="Image">
-                            <h5>รูปใหม่</h5>
                         </span>
                     </div>
                     <img id='img-upload' />
@@ -215,4 +232,5 @@
         <br />
     </form>
 </div>
+
 @endsection
