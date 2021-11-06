@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Managegold;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ManagegoldController extends Controller
 {
@@ -51,9 +52,16 @@ class ManagegoldController extends Controller
                 'gratuity' => $request->get('gratuity'),
                 'tray' => $request->get('tray'),
                 'allprice' => $request->get('allprice'),
-                'pic' => $request->file('pic'),
+                // 'pic' => $request->file('pic'),
             ]
         );
+        if($request->hasFile('pic')){
+            $file = $request->file('pic');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('assets/img/gold', $filename);
+            $managegold->pic = $filename;
+        }
         // $image = $request->file('pic');
         // $new_name = rand() .'.'. $image->getClientOriginalExtension();
         // $image -> move(public_path('assets/img/gold'),$new_name);
@@ -109,7 +117,18 @@ class ManagegoldController extends Controller
         $managegold->gratuity = $request->get('gratuity');
         $managegold->tray = $request->get('tray');
         $managegold->allprice = $request->get('allprice');
-        $managegold->pic = $request->get('pic');
+        // $managegold->pic = $request->get('pic');
+        if($request->hasFile('pic')){
+            $destination = 'assets/img/gold'.$managegold->pic;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('pic');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('assets/img/gold', $filename);
+            $managegold->pic = $filename;
+        }
         $managegold->save();
         $managegold = Managegold::all()->toArray();
         return view('admin.managegold.index', compact('managegold', 'id'));
@@ -128,4 +147,15 @@ class ManagegoldController extends Controller
         $managegold = Managegold::all();
         return view('admin.managegold.index', compact('managegold'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
+
+    // function upload(Request $request) 
+    // {      
+    //     $this->validate($request, [' pic '  => 'required|image|mimes:jpg,png,gif|max:2048']);      
+    //     $image = $request->file(' pic ');      
+    //     $new_name = rand() . '.' . $image->getClientOriginalExtension();      
+    //     $image->move(public_path('images'), $new_name);      
+    //     return back()->with('success', 'อัพโหลดไฟล์เรียบร้อยแล้ว!!')->with('path', $new_name); 
+        
+    // }
+        
 }

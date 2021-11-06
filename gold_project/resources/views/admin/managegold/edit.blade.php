@@ -189,16 +189,21 @@
         </div>
         <div class="row">
             <div class="col-6">
+
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-default btn-file">
-                                <input name="pic"type="file" id="imgInp" value="{{$managegold->pic}}">
+                                <input name="pic"type="file" id="imgInp">
                             </span>
+                            <h5>รูปเดิม</h5>
+                            <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" alt="Image">
+                            <h5>รูปใหม่</h5>
                         </span>
                     </div>
                     <img id='img-upload' />
                 </div>
+
             </div>
         </div>
         <br />
