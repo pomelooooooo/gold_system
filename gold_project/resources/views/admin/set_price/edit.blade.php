@@ -208,23 +208,11 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group text-center">
-                            <label>Upload Image</label>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <span class="btn btn-default btn-file">
-                                        Browse… <input type="file" id="imgInp">
-                                    </span>
-                                </span>
-                                <input type="text" class="form-control" readonly>
-                            </div>
-                                <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" width="250" height="250" alt="Image">
-                            <!-- <img id='img-upload' /> -->
-                        </div>
+                <br>
+                    <div class="form-group text-center">       
+                        <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" width="250px" height="250px" alt="Image">
                     </div>
-                </div>
+                
             </div>
         </div>
         <br />

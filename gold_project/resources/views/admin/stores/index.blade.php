@@ -25,7 +25,7 @@
 <div class="list-section pt-80 pb-80">
     <div class="container">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header">
                 <div class="row">
                     <div class="col-6">
                         <h3>ข้อมูลสาขา</h3>
@@ -34,10 +34,11 @@
                         <a type="button" class="btn btn-outline-info" href="{{ route('stores.create') }}"><i class="fa fa-plus"></i> เพิ่มร้านสาขา</a>
                     </div>
                 </div>
-                <br />
+            </div>
+            <div class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-striped">
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">ชื่อร้าน</th>

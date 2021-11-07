@@ -1,100 +1,94 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+	<!-- CSRF Token -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+	<!-- title -->
+	<title>Welcome To Goldsystem</title>
 
-            .full-height {
-                height: 100vh;
-            }
+	<!-- Scripts -->
+	<script src="{{ asset('js/app.js') }}" defer></script>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="{{url('assets/img/favicon.png')}}">
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="{{url('assets/css/all.min.css')}}">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap.min.css')}}">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="{{url('assets/css/owl.carousel.css')}}">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="{{url('assets/css/magnific-popup.css')}}">
+	<!-- animate css -->
+	<link rel="stylesheet" href="{{url('assets/css/animate.css')}}">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="{{url('assets/css/meanmenu.min.css')}}">
+	<!-- main style -->
+	<link rel="stylesheet" href="{{url('assets/css/main.css')}}">
+	<!-- responsive -->
+	<link rel="stylesheet" href="{{url('assets/css/responsive.css')}}">
 
-            .position-ref {
-                position: relative;
-            }
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
+</head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+        <!-- header -->
+        <div class="top-header-area" id="sticker">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 text-center">
+                        <div class="main-menu-wrap">
+                            <!-- logo -->
+                            <div class="site-logo">
+                                <a href="{{url('/home')}}">
+                                    <img src="{{url('assets/img/logo.png')}}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- end header -->
+
+        <!-- hero area -->
+        <div class="hero-area hero-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 offset-lg-2 text-center">
+                        <div class="hero-text">
+                            <div class="hero-text-tablecell">
+                                <p class="subhomepage">ระบบจัดการร้านทอง</p>
+                                <h1 class="subtitle">Gold <span class="white-text">System</span></h1>
+                                <div class="hero-btns">
+                                @if (Route::has('login'))
+                                        @auth
+                                            <a href="{{ url('/home') }}" class="boxed-btn">Home</a>
+                                        @else
+                                            <a href="{{ route('login') }}" class="boxed-btn">Login</a>
+
+                                            @if (Route::has('register'))
+                                                <a href="{{ route('register') }}" class="bordered-btn">Register</a>
+                                            @endif
+                                        @endauth
+                                @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end hero area -->
     </body>
 </html>

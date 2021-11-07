@@ -60,7 +60,7 @@
 <!-- end hero area -->
 
 <br /><br />
-<h2 class="text-center">แก้ไขข้อมูลทอง</h2>
+<h2 class="text-center ">แก้ไขข้อมูลทอง</h2>
 <div class="container">
     <hr class="mt-5 mb-6" />
     <form method="POST" action="{{action('ManagegoldController@update', $id)}}" enctype="multipart/form-data">
@@ -191,21 +191,26 @@
         <div class="row">
             <div class="col-6">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="form-group text-center">
-                            <label>Upload Image</label>
+                    <div class="form-group text-center">
+                        <div class="card-header">
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <span class="btn btn-default btn-file-img">
-                                        Browse… <input type="file" id="imgInp">
+                                        เลือกรูปภาพ <input type="file" id="imgInp">
                                     </span>
                                 </span>
                                 <input type="text" class="form-control" readonly>
                             </div>
-                            <h5>รูปเดิม</h5>
-                                <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" width="250" height="250" alt="Image">
-                            <h5>รูปใหม่</h5>
-                            <img id='img-upload' />
+                        </div>
+                        <div class="card-body">
+                            <div class="single-article-text-image-top">
+                                <p>รูปเดิม</p>
+                            </div>
+                                <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" width="250px" height="250px" alt="Image">
+                            <div class="single-article-text-image-bottom"> 
+                                <p>รูปใหม่</p>
+                                <img id='img-upload' />
+                            </div>
                         </div>
                     </div>
                 </div>

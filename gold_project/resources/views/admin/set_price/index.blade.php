@@ -1,6 +1,38 @@
 @extends('layouts.master')
 @section('title','แสดงราคาขาย')
 @section('content')
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+            }       
+        }
+    }
+    $(document).ready(function()
+        { $('.delete_from').on('submit', function(){
+            if(confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+            });
+        });
+</script>
+
 <!-- hero area -->
 <div class="hero-area hero-bg">
     <div class="container">
@@ -9,7 +41,7 @@
                 <div class="hero-text">
                     <div class="hero-text-tablecell">
                         <p class="subtitle">Gold System</p>
-                        <h1>แสดงราคาขาย</h1>
+                        <h1>ตั้งราคาขาย</h1>
                     </div>
                 </div>
             </div>
@@ -21,16 +53,26 @@
 <div class="list-section pt-80 pb-80">
     <div class="container">
         <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>ตั้งราคาขาย</h3>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <h3>แสดงราคาขาย</h3>
+                        <form class="form-inline">
+                            <i class="fas fa-search" id="mySearch"></i>
+                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหารหัสสินค้า">
+                        </form>
                     </div>
                 </div>
-                <br />
+                <br>
                 <div class="row">
                     <div class="col-12">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">รหัสสินค้า</th>

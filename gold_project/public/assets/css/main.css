@@ -401,8 +401,8 @@ p:last-child {
   background-color: #f5f5f5;
 }
 
-.orange-text {
-  color: #F28123;
+.white-text {
+  color: #ffffff;
 }
 
 .blue-bg {
@@ -874,6 +874,21 @@ h2.widget-title {
   padding-bottom: 20px;
   color: #fff;
 }
+
+/* h2.title-gold {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 3.25rem;
+  color: rgb(245, 121, 4);
+} */
+
+/* h2.widget-title-gold {
+  font-size: 24px;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 20px;
+  color: rgb(0, 0, 0);
+} */
 
 h2.widget-title:after {
   position: absolute;
@@ -1406,6 +1421,22 @@ html, body {
   font-size: 15px;
 }
 
+.hero-text p.subhomepage {
+  color: #F28123;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  font-size: 25px;
+}
+
+.hero-text h1.subtitle {
+  color: #F28123;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  font-size: 70px;
+}
+
 .hero-text h1 {
   font-size: 64px;
   font-weight: 700;
@@ -1720,6 +1751,22 @@ p.excerpt {
 .single-article-text p {
   font-size: 15px;
   line-height: 1.6;
+  color: #051922;
+}
+
+.single-article-text-image-top p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #051922;
+}
+
+.single-article-text-image-bottom p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-top: 10px;
+  font-weight: 600;
   color: #051922;
 }
 
@@ -2365,6 +2412,11 @@ ul.social-link-team li a {
 #form_status .success h3 {
   color: #fff;
   margin-bottom: 10px;
+}
+
+#mySearch {
+  padding: 20px 20px 12px 10px;
+  margin-bottom: 12px;
 }
 
 /* -----------------------------------------------------------------------------
