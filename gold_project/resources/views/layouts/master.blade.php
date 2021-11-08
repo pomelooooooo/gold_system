@@ -63,7 +63,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="{{url('/home')}}">
+							<a href="median_price">
 								<img src="{{url('assets/img/logo.png')}}" alt="">
 							</a>
 						</div>
@@ -91,6 +91,7 @@
 								<li><a href="about.html">รายงานผลการดำเนินงาน</a></li>
 								<li>
 									<div class="header-icons">
+										<i class="fas fa-sign-out-alt white-text"></i>
 										<a class="shopping-cart" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 											{{ __('Logout') }}
@@ -100,13 +101,13 @@
 											@csrf
 										</form>
 
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
 									</div>
 								</li>
 							</ul>
 						</nav>
-						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-						<div class="mobile-menu"></div>
+						<!-- <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+						<div class="mobile-menu"></div> -->
 						<!-- menu end -->
 					</div>
 				</div>
@@ -116,7 +117,7 @@
 	<!-- end header -->
 
 	<!-- search area -->
-	<div class="search-area">
+	<!-- <div class="search-area">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -131,7 +132,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- end search area -->
 
 	@yield('content')

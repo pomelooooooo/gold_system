@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        return view('admin.median_price.index');
     }
 
     // public function fistpage()

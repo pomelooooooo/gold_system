@@ -2256,6 +2256,14 @@ a.video-play-btn {
   margin-bottom: 10px;
 }
 
+.orange-text {
+  color: #F28123;
+}
+
+.white-text {
+  color: #ffffff;
+}
+
 .single-team-item h4 span {
   font-size: 70%;
   display: block;
