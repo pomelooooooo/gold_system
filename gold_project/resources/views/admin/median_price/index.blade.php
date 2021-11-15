@@ -37,7 +37,7 @@
                 <div class="hero-text">
                     <div class="hero-text-tablecell">
                         <p class="subtitle">Gold System</p>
-                        <h1>ราคากลาง ทองประจำวัน</h1>
+                        <h1><span class="orange-text">ราคากลาง</span> ทองประจำวัน</h1>
                     </div>
                 </div>
             </div>

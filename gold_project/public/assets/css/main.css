@@ -754,6 +754,7 @@ nav.main-menu li a {
 .sticky-wrapper.is-sticky .top-header-area {
   background-color: #051922;
   padding: 15px 0;
+  height: 80px;
 }
 
 .top-header-area {
@@ -1440,7 +1441,7 @@ body {
   width: 100%;
   height: 100%;
   content: "";
-  /* background-color: #db0030; */
+  background-color: #272021;
   z-index: -1;
   opacity: 0.6;
 }
@@ -1454,11 +1455,13 @@ body {
 }
 
 .hero-text p.subhomepage {
-  color: #f28123;
+  color: #c9691b;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 7px;
-  font-size: 25px;
+  font-size: 30px;
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
+  /* background-color: rgb(0, 0, 0); */
 }
 
 .hero-text h1.subtitle {
