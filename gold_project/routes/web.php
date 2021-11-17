@@ -33,3 +33,5 @@ Route::resource('/stores', 'StoresController');
 Route::resource('/median_price', 'MedianPriceController');
 
 Route::resource('/set_price', 'SetPriceController');
+
+Route::resource('/manage_employee', 'ManageEmployee');

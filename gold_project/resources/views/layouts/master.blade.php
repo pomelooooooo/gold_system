@@ -81,7 +81,7 @@
 								</li>
 								<li><a href="about.html">จัดการข้อมูลผู้ใช้งาน</a>
 									<ul class="sub-menu">
-										<li><a href="managegold">จัดการข้อมูลพนักงาน</a></li>
+										<li><a href="manage_employee">จัดการข้อมูลพนักงาน</a></li>
 										<li><a href="median_price">จัดการข้อมูลลูกค้า</a></li>
 									</ul>
 								</li>
