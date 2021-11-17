@@ -2,19 +2,13 @@
 @section('title','จัดการข้อมูลร้าน')
 @section('content')
 <!-- hero area -->
-<div class="hero-area hero-bg">
+<div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 offset-lg-2 text-center">
-                <div class="hero-text">
-                    <div class="hero-text-tablecell">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
                         <p class="subtitle">Gold System</p>
                         <h1>จัดการข้อมูลร้าน</h1>
-                        <!-- <div class="hero-btns">
-								<a href="shop.html" class="boxed-btn">Fruit Collection</a>
-								<a href="contact.html" class="bordered-btn">Contact Us</a>
-							</div> -->
-                    </div>
                 </div>
             </div>
         </div>
