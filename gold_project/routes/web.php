@@ -26,12 +26,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/stores', 'StoresController@index');
 // Route::post('/stores/store', 'StoresController@store')->name('stores.store');
 
-Route::resource('/managegold', 'ManagegoldController');
+Route::resource('/managegold', 'ManagegoldController')->middleware('auth');
 
-Route::resource('/stores', 'StoresController');
+Route::resource('/stores', 'StoresController')->middleware('auth');
 
-Route::resource('/median_price', 'MedianPriceController');
+Route::resource('/median_price', 'MedianPriceController')->middleware('auth');
 
-Route::resource('/set_price', 'SetPriceController');
+Route::resource('/set_price', 'SetPriceController')->middleware('auth');
 
-Route::resource('/manage_employee', 'ManageEmployee');
+Route::resource('/manage_employee', 'ManageEmployee')->middleware('auth');
