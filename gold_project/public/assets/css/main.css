@@ -752,7 +752,7 @@ nav.main-menu li a {
 }
 
 .sticky-wrapper.is-sticky .top-header-area {
-  background-color: #051922;
+  background-color: #b9080bc5;
   padding: 15px 0;
   height: 80px;
 }
@@ -2797,7 +2797,7 @@ tr.total-data td strong {
   padding: 20px;
   text-decoration: none;
   border: none;
-  background-color: #efefef;
+  background-color: #fdfdfd;
   position: relative;
   padding-left: 50px;
   font-weight: 600;

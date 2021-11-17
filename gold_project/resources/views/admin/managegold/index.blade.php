@@ -12,25 +12,24 @@
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[0];
             if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
             }
-            }       
         }
     }
-    $(document).ready(function()
-        { $('.delete_from').on('submit', function(){
-            if(confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
+    $(document).ready(function() {
+        $('.delete_from').on('submit', function() {
+            if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-            });
         });
+    });
 </script>
 
 <!-- hero area -->
@@ -109,6 +108,7 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                     </div>
                 </div>
