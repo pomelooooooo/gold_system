@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnUsername extends Migration
+class AddColIdcard extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddColumnUsername extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->string('username')->nullable()->after('telephone');
+            $table->string('idcard')->nullable()->after('lastname');
 
         });
     }
