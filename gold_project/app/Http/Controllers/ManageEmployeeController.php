@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class ManageEmployeeController extends Controller
 {
@@ -44,18 +45,19 @@ class ManageEmployeeController extends Controller
                 'lastname' => $request->get('lastname'),
                 'idcard' => $request->get('idcard'),
                 'address' => $request->get('address'),
+                'address_now' => $request->get('address_now'),
                 'telephone' => $request->get('telephone'),
                 'username' => $request->get('username'),
                 'email' => $request->get('email'),
-                'password' => $request->get('password'),
+                'password' => Hash::make($request->get('password')),
             ]
         );
-        if ($request->hasFile('pic')) {
-            $file = $request->file('pic');
+        if ($request->hasFile('picture')) {
+            $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('assets/img/employee', $filename);
-            $manageemployee->pic = $filename;
+            $manageemployee->picture = $filename;
         }
         // $image = $request->file('pic');
         // $new_name = rand() .'.'. $image->getClientOriginalExtension();

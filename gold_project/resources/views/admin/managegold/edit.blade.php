@@ -196,7 +196,7 @@
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <span class="btn btn-default btn-file-img">
-                                                เลือกรูปภาพ <input type="file" id="imgInp">
+                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
                                             </span>
                                         </span>
                                         <input type="text" class="form-control" readonly>
