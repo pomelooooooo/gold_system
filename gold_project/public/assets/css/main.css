@@ -180,7 +180,8 @@ h6,
 }
 
 p {
-  font-family: 'Chonburi', cursive;
+    font-family: 'Chonburi', cursive;
+
   font-weight: 400;
   font-size: 1rem;
   letter-spacing: 0.1px;
