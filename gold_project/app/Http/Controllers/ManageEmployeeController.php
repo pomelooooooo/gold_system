@@ -105,21 +105,22 @@ class ManageEmployeeController extends Controller
         $manageemployee->lastname = $request->get('lastname');
         $manageemployee->idcard = $request->get('idcard');
         $manageemployee->address = $request->get('address');
+        $manageemployee->address_now = $request->get('address_now');
         $manageemployee->telephone = $request->get('telephone');
         $manageemployee->username = $request->get('username');
         $manageemployee->email = $request->get('email');
-        $manageemployee->password = $request->get('password');
+        $manageemployee->password =  Hash::make($request->get('password'));
         // $managegold->pic = $request->get('pic');
-        if ($request->hasFile('pic')) {
-            $destination = 'assets/img/employee' . $manageemployee->pic;
+        if ($request->hasFile('picture')) {
+            $destination = 'assets/img/employee' . $manageemployee->picture;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-            $file = $request->file('pic');
+            $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('assets/img/employee', $filename);
-            $manageemployee->pic = $filename;
+            $manageemployee->picture = $filename;
         }
         $manageemployee->save();
         $manageemployee = User::all()->toArray();
