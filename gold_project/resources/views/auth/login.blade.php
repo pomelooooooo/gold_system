@@ -51,15 +51,15 @@
                         </div> -->
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-11 offset-md-4">
                             
                                 <button type="submit" class="btn btn-primary">
                                 ล็อคอิน
                                 </button>
-
+<!-- 
                                 <a class="btn btn-secondary" href="/">
                                     กลับ
-                                </a>
+                                </a> -->
 
                                 <!-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
