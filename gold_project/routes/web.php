@@ -34,4 +34,4 @@ Route::resource('/median_price', 'MedianPriceController')->middleware('auth');
 
 Route::resource('/set_price', 'SetPriceController')->middleware('auth');
 
-Route::resource('/manage_employee', 'ManageEmployee')->middleware('auth');
+Route::resource('/manage_employee', 'ManageEmployeeController')->middleware('auth');
