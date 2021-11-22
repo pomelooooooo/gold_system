@@ -28,6 +28,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/managegold', 'ManagegoldController')->middleware('auth');
 
+Route::resource('/product', 'ProductController')->middleware('auth');
+
+Route::resource('/productdetail', 'ProductDetailController')->middleware('auth');
+
 Route::resource('/stores', 'StoresController')->middleware('auth');
 
 Route::resource('/median_price', 'MedianPriceController')->middleware('auth');
@@ -35,3 +39,5 @@ Route::resource('/median_price', 'MedianPriceController')->middleware('auth');
 Route::resource('/set_price', 'SetPriceController')->middleware('auth');
 
 Route::resource('/manage_employee', 'ManageEmployeeController')->middleware('auth');
+
+

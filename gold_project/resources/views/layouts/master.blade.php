@@ -93,8 +93,10 @@
 								</li>
 								<li><a href="about.html">คลังทอง</a>
 									<ul class="sub-menu">
-										<li><a href="managegold">จัดการข้อมูลทอง</a></li>
+										<li><a href="product">จัดการล็อตทอง</a></li>
+										<li><a href="productdetail">จัดการข้อมูลทอง</a></li>
 										<li><a href="median_price">เช็คสต็อคสินค้า</a></li>
+
 									</ul>
 								</li>
 								<li><a href="about.html">การซื้อขายทอง</a></li>

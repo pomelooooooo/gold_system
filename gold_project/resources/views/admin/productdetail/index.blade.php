@@ -87,7 +87,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach($managegold as $row)
+                                @foreach($productdetail as $row)
                                 <tr>
                                     <td>{{$row['code']}}</td>
                                     <td>{{$row['details']}}</td>

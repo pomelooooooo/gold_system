@@ -39,7 +39,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>จัดการข้อมูลทอง</h1>
+                    <h1>จัดการทอง</h1>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                         <h3>จัดการข้อมูลทอง</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a type="button" class="btn btn-outline-info" href="{{ route('productdetail.create') }}"><i class="fa fa-plus"></i> เพิ่มทองเข้าร้าน</a>
+                        <a type="button" class="btn btn-outline-info" href="{{ route('product.create') }}"><i class="fa fa-plus"></i> เพิ่มทองเข้าร้าน</a>
                     </div>
                 </div>
             </div>
@@ -75,31 +75,29 @@
                         <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">รหัสสินค้า</th>
-                                    <th scope="col">รายละเอียดสินค้า</th>
-                                    <th scope="col">หมวดหมู่</th>
-                                    <th scope="col">นํ้าหนัก</th>
-                                    <th scope="col">สถานะ</th>
-                                    <th scope="col">ล๊อต</th>
+                                    <th scope="col">รหัสล๊อต</th>
+                                    <th scope="col">จำนวนสินต้า</th>
+                                    <th scope="col">วันที่นำเข้า</th>
+                                    <th scope="col">ราคาทอง</th>
+                                    <th scope="col">ค่าแรง</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach($managegold as $row)
+                                @foreach($product as $row)
                                 <tr>
-                                    <td>{{$row['code']}}</td>
-                                    <td>{{$row['details']}}</td>
-                                    <td>{{$row['category']}}</td>
-                                    <td>{{$row['size']}}</td>
-                                    <td>{{$row['status']}}</td>
                                     <td>{{$row['lot_id']}}</td>
+                                    <td>{{$row['lot_count']}}</td>
+                                    <td>{{$row['date_of_import']}}</td>
+                                    <td>{{$row['price_of_gold']}}</td>
+                                    <td>{{$row['wage']}}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-warning" href="{{action('ProductDetailController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
+                                        <a class="btn btn-warning" href="{{action('ProductController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
                                     <td class="text-center">
-                                        <form method="POST" class="delete_from" action="{{action('ProductDetailController@destroy',$row['id'])}}">
+                                        <form method="POST" class="delete_from" action="{{action('ProductController@destroy',$row['id'])}}">
                                             {{csrf_field()}}
                                             <input type="hidden" name="_method" value="DELETE" />
                                             <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>
