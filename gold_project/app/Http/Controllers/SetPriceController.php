@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Managegold;
+use App\ProductDetails;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -16,8 +17,9 @@ class SetPriceController extends Controller
      */
     public function index()
     {
-        $managegold = Managegold::all()->toArray();
-        return view('admin.set_price.index', compact('managegold'));
+        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $product = Product::all();
+        return view('admin.set_price.index', compact('product', 'productdetail'));
     }
 
     /**
@@ -27,7 +29,9 @@ class SetPriceController extends Controller
      */
     public function create()
     {
-        return view('admin.set_price.set-price');
+        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $product = Product::all();
+        return view('admin.set_price.edit', compact('product', 'productdetail'));
     }
 
     /**
@@ -38,22 +42,20 @@ class SetPriceController extends Controller
      */
     public function store(Request $request)
     {
-        $managegold = new Managegold(
+        $productdetail = new ProductDetails(
             [
                 'code' => $request->get('code'),
                 'details' => $request->get('details'),
-                'unit' => $request->get('unit'),
+                'category' => $request->get('category'),
                 'striped' => $request->get('striped'),
-                'bath' => $request->get('bath'),
-                'salung' => $request->get('salung'),
+                'size' => $request->get('size'),
                 'gram' => $request->get('gram'),
                 'status' => $request->get('status'),
-                'date_of_import' => $request->get('date_of_import'),
-                'price_of_gold' => $request->get('price_of_gold'),
+                'type' => $request->get('type'),
                 'gratuity' => $request->get('gratuity'),
                 'tray' => $request->get('tray'),
                 'allprice' => $request->get('allprice'),
-                // 'pic' => $request->file('pic'),
+                'lot_id' => $request->get('lot_id'),
             ]
         );
         if ($request->hasFile('pic')) {
@@ -61,15 +63,13 @@ class SetPriceController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('assets/img/gold', $filename);
-            $managegold->pic = $filename;
+            $productdetail->pic = $filename;
         }
-        // $image = $request->file('pic');
-        // $new_name = rand() .'.'. $image->getClientOriginalExtension();
-        // $image -> move(public_path('assets/img/gold'),$new_name);
-        // dd($managegold);
-        $managegold->save();
-        $managegold = Managegold::all()->toArray();
-        return view('admin.set_price.index', compact('managegold'));
+        $productdetail->save();
+        $productdescript = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $product = Product::all();
+        // $managegold = Managegold::all()->toArray();
+        return view('admin.set_price.index', compact('productdescript', 'product'));
     }
 
     /**
@@ -91,8 +91,10 @@ class SetPriceController extends Controller
      */
     public function edit($id)
     {
-        $managegold = Managegold::find($id);
-        return view('admin.set_price.edit', compact('managegold', 'id'));
+        $productdetail = ProductDetails::find($id);
+        $productdescript = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $product = Product::all();
+        return view('admin.set_price.edit', compact('productdetail', 'productdescript', 'product', 'id'));
     }
 
     /**
@@ -104,23 +106,23 @@ class SetPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $managegold = Managegold::find($id);
-        $managegold->code = $request->get('code');
-        $managegold->details = $request->get('details');
-        $managegold->unit = $request->get('unit');
-        $managegold->striped = $request->get('striped');
-        $managegold->bath = $request->get('bath');
-        $managegold->salung = $request->get('salung');
-        $managegold->gram = $request->get('gram');
-        $managegold->status = $request->get('status');
-        $managegold->date_of_import = $request->get('date_of_import');
-        $managegold->price_of_gold = $request->get('price_of_gold');
-        $managegold->gratuity = $request->get('gratuity');
-        $managegold->tray = $request->get('tray');
-        $managegold->allprice = $request->get('allprice');
+        $productdetail = ProductDetails::find($id);
+        $productdetail->code = $request->get('code');
+        $productdetail->details = $request->get('details');
+        $productdetail->category = $request->get('category');
+        $productdetail->striped = $request->get('striped');
+        $productdetail->size = $request->get('size');
+        $productdetail->gram = $request->get('gram');
+        $productdetail->status = $request->get('status');
+        $productdetail->type = $request->get('type');
+        $productdetail->gratuity = $request->get('gratuity');
+        $productdetail->tray = $request->get('tray');
+        $productdetail->allprice = $request->get('allprice');
+        $productdetail->lot_id = $request->get('lot_id');
+
         // $managegold->pic = $request->get('pic');
         if ($request->hasFile('pic')) {
-            $destination = 'assets/img/gold' . $managegold->pic;
+            $destination = 'assets/img/gold' . $productdetail->pic;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
@@ -128,13 +130,13 @@ class SetPriceController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('assets/img/gold', $filename);
-            $managegold->pic = $filename;
+            $productdetail->pic = $filename;
         }
-        $managegold->save();
-        $managegold = Managegold::all()->toArray();
-        return view('admin.set_price.index', compact('managegold', 'id'));
+        $productdetail->save();
+        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $product = Product::all();
+        return view('admin.set_price.index', compact('productdetail', 'product', 'id'));
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -143,9 +145,10 @@ class SetPriceController extends Controller
      */
     public function destroy($id)
     {
-        $managegold = Managegold::find($id);
-        $managegold->delete();
-        $managegold = Managegold::all();
-        return view('admin.set_price.index', compact('managegold'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        $productdetail = ProductDetails::find($id);
+        $productdetail->delete();
+        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $product = Product::all();
+        return view('admin.set_price.index', compact('productdetail', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

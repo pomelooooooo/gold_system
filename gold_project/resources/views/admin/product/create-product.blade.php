@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','เพิ่มทองเข้าร้าน')
+@section('title','เพิ่มล็อตทอง')
 @section('content')
 
 <div class="breadcrumb-section breadcrumb-bg">
@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>เพิ่มทองเข้าร้าน</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>เพิ่มล็อตทอง</h1>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>เพิ่มทองเข้าร้าน</h2>
+            <h2>เพิ่มล็อตทอง</h2>
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('product.store')}} ">

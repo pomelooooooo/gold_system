@@ -46,8 +46,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>ตั้งราคาขาย</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>ตั้งราคาขาย</h1>
                 </div>
             </div>
         </div>
@@ -75,18 +75,18 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="code" type="text" class="form-control" placeholder="" value="{{$managegold->code}}" />
+                            <input name="code" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" value="{{$managegold->details}}" />
+                            <input name="details" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>หน่วยนับ</h4>
+                        <h4>ประเภท</h4>
                     </div>
                     <div class="col-6">
                         <h4>ลาย</h4>
@@ -95,45 +95,42 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="unit">
-                                <option selected>เลือกหน่วยนับ</option>
-                                @foreach(["เส้น"=>"เส้น","แท่ง"=>"แท่ง","วง"=>"วง"] as $unitWay => $unitLable)
-                                <option value="{{ $unitWay }}" {{ old("unit", $managegold->unit) == $unitWay ? "selected" : "" }}>{{ $unitLable }}</option>
+                            <select class="custom-select" name="category">
+                                <!-- <option selected>เลือกหน่วยนับ</option> -->
+                                @foreach(["ทองแท่ง"=>"ทองแท่ง","สร้อยคอ"=>"สร้อยคอ","สร้อยข้อมือ"=>"สร้อยข้อมือ","แหวน"=>"แหวน","กำไล"=>"กำไล","ต่างหู"=>"ต่างหู","จี้"=>"จี้"] as $categoryWay => $categoryLable)
+                                <option value="{{ $categoryWay }}" {{ old("category", $productdetail->category) == $categoryWay ? "selected" : "" }}>{{ $categoryLable }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" value="{{$managegold->striped}}" />
+                            <input name="striped" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
-                        <h4>นํ้าหนัก(บาท)</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>นํ้าหนัก(สลึง)</h4>
+                    <div class="col-6">
+                        <h4>นํ้าหนัก</h4>
                     </div>
                     <div class="col-6">
                         <h4>นํ้าหนัก(กรัม)</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="bath" type="text" class="form-control" placeholder="" value="{{$managegold->bath}}" />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="salung" type="text" class="form-control" placeholder="" value="{{$managegold->salung}}" />
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="size">
+                                <!-- <option selected>เลือกหน่วยนับ</option> -->
+                                @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
+                                <option value="{{ $sizeWay }}" {{ old("size", $productdetail->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$managegold->gram}}" />
+                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
                         </div>
                     </div>
                 </div>
@@ -142,22 +139,27 @@
                         <h4>สถานะทอง</h4>
                     </div>
                     <div class="col-6">
-                        <h4>วันที่นำทองเข้า</h4>
+                        <h4>ล๊อต</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
                             <select class="custom-select" name="status">
-                                @foreach(["ทองเก่า"=>"ทองเก่า","ทองใหม่"=>"ทองใหม่"] as $statusWay => $statusLable)
-                                <option value="{{ $statusWay }}" {{old("status", $managegold->status) == $statusWay ? "selected" : ""}}>{{ $statusLable }}</option>
+                                @foreach(["ทองในถาด"=>"ทองในถาด","ทองในสต๊อก"=>"ทองในสต๊อก"] as $statusWay => $statusLable)
+                                <option value="{{ $statusWay }}" {{ old("status", $productdetail->status) == $statusWay ? "selected" : "" }}>{{ $statusLable }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_of_import" type="date" class="form-control" value="{{$managegold->date_of_import}}" />
+                            <select name="lot_id" class="form-control" id="userID">
+                                <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
+                                @foreach($product as $row)
+                                <option value="{{$row->id}}" {{$row->id == $productdetail->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -166,25 +168,22 @@
                         <h4>ถาด</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคาทอง</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="tray" type="text" class="form-control" placeholder="" value="{{$managegold->tray}}" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$managegold->price_of_gold}}" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
                         <h4>ค่ากำเหน็จ</h4>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="tray" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="gratuity" type="text" class="form-control" placeholder="" value="{{$productdetail->gratuity}}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-6">
                         <h4>ราคารวม</h4>
                     </div>
@@ -192,27 +191,42 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gratuity" type="text" class="form-control" placeholder="" value="{{$managegold->gratuity}}" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$managegold->allprice}}" />
+                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>รูปภาพ</h4>
+                        <h4>อัพโหลดรูปภาพ</h4>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-6">
-                        <br>
-                            <div class="form-group text-center">       
-                                <img src="{{ asset('assets/img/gold/'. $managegold->pic) }}" width="250px" height="250px" alt="Image">
+                        <div class="card">
+                            <div class="form-group text-center">
+                                <div class="card-header">
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-default btn-file-img">
+                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
+                                            </span>
+                                        </span>
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="single-article-text-image-top">
+                                        <p>รูปเดิม</p>
+                                    </div>
+                                    <img src="{{ asset('assets/img/gold/'. $productdetail->pic) }}" width="250px" height="250px" alt="Image">
+                                    <div class="single-article-text-image-bottom">
+                                        <p>รูปใหม่</p>
+                                        <img id='img-upload' />
+                                    </div>
+                                </div>
                             </div>
-                        
+                        </div>
                     </div>
                 </div>
                 <br />

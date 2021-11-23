@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','เพิ่มทองเข้าร้าน')
+@section('title','แก้ไขข้อมูลล็อตทอง')
 @section('content')
 
 <div class="breadcrumb-section breadcrumb-bg">
@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>เพิ่มทองเข้าร้าน</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>แก้ไขข้อมูลล็อตทอง</h1>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>เพิ่มทองเข้าร้าน</h2>
+            <h2>แก้ไขข้อมูลล็อตทอง</h2>
         </div>
         <div class="card-body">
             <form method="POST" action="{{action('ProductController@update', $id)}}">
@@ -36,12 +36,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lot_id" type="text" class="form-control" placeholder="" value="{{$product->lot_id}}"/>
+                            <input name="lot_id" type="text" class="form-control" placeholder="" value="{{$product->lot_id}}" />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lot_count" type="text" class="form-control" placeholder="" value="{{$product->lot_count}}"/>
+                            <input name="lot_count" type="text" class="form-control" placeholder="" value="{{$product->lot_count}}" />
                         </div>
                     </div>
                 </div>
@@ -59,12 +59,12 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$product->price_of_gold}}"/>
+                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$product->price_of_gold}}" />
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="wage" type="text" class="form-control" placeholder="" value="{{$product->wage}}"/>
+                            <input name="wage" type="text" class="form-control" placeholder="" value="{{$product->wage}}" />
                         </div>
                     </div>
                     <div class="col-6">

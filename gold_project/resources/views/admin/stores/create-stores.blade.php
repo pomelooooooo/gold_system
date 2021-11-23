@@ -8,8 +8,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>ลงทะเบียนสาขา</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>ลงทะเบียนสาขา</h1>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                         <h4>ชื่อร้าน</h4>
                     </div>
                     <div class="col-6">
-                        <h4>เบอร์โทร</h4>
+                        <h4>เบอร์โทรร้าน</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -74,7 +74,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <textarea name="address" type="text" class="form-control" placeholder="" ></textarea>
+                            <textarea name="address" type="text" class="form-control" placeholder=""></textarea>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
             </form>
         </div>
     </div>
-    
+
 </div>
 <br />
 

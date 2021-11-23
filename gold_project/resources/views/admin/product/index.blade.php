@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','จัดการข้อมูลทอง')
+@section('title','จัดการล็อตทอง')
 @section('content')
 
 <script>
@@ -39,7 +39,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>จัดการทอง</h1>
+                    <h1>จัดการล็อตทอง</h1>
                 </div>
             </div>
         </div>
@@ -53,10 +53,10 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <h3>จัดการข้อมูลทอง</h3>
+                        <h3>จัดการล็อตทอง</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a type="button" class="btn btn-outline-info" href="{{ route('product.create') }}"><i class="fa fa-plus"></i> เพิ่มทองเข้าร้าน</a>
+                        <a type="button" class="btn btn-outline-info" href="{{ route('product.create') }}"><i class="fa fa-plus"></i> เพิ่มล็อตทอง</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     <div class="col-6">
                         <form class="form-inline">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหารหัสสินค้า">
+                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหารหัสล็อตทอง">
                         </form>
                     </div>
                 </div>

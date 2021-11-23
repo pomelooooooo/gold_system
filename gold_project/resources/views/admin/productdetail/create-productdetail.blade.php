@@ -46,8 +46,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>เพิ่มทองเข้าร้าน</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>เพิ่มทองเข้าร้าน</h1>
                 </div>
             </div>
         </div>
@@ -95,10 +95,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="category" >
+                            <select class="custom-select" name="category">
                                 <!-- <option selected>เลือกหน่วยนับ</option> -->
                                 @foreach(["ทองแท่ง"=>"ทองแท่ง","สร้อยคอ"=>"สร้อยคอ","สร้อยข้อมือ"=>"สร้อยข้อมือ","แหวน"=>"แหวน","กำไล"=>"กำไล","ต่างหู"=>"ต่างหู","จี้"=>"จี้"] as $categoryWay => $categoryLable)
-                                    <option value="{{ $categoryWay }}" >{{ $categoryLable }}</option>
+                                <option value="{{ $categoryWay }}">{{ $categoryLable }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -120,10 +120,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="size" >
+                            <select class="custom-select" name="size">
                                 <!-- <option selected>เลือกหน่วยนับ</option> -->
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
-                                    <option value="{{ $sizeWay }}" >{{ $sizeLable }}</option>
+                                <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -144,22 +144,30 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-6">
                             <select class="custom-select" name="status">
-                                @foreach(["ทองในถาด"=>"ทองในถาด","ทองในสต๊อก"=>"ทองในสต๊อก"] as $statusWay => $statusLable)
-                                    <option value="{{ $statusWay }}" >{{ $statusLable }}</option>
+                                @foreach(["ทองในถาด"=>"ทองในถาด","ทองในสต๊อค"=>"ทองในสต๊อค"] as $statusWay => $statusLable)
+                                <option value="{{ $statusWay }}">{{ $statusLable }}</option>
                                 @endforeach
                             </select>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <h5 class="form-check-label" for="inlineCheckbox1">ทองในถาด</h5>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <h5 class="form-check-label" for="inlineCheckbox2">ทองในสต็อค</h5>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                        <select name="lot_id" class="form-control" id="userID">
-                        <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
-                        @foreach($product as $row)
-                            <option value="{{$row->id}}">{{$row->lot_id}}</option>
-                        @endforeach
-                        </select>
+                            <select name="lot_id" class="form-control" id="userID">
+                                <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
+                                @foreach($product as $row)
+                                <option value="{{$row->id}}">{{$row->lot_id}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

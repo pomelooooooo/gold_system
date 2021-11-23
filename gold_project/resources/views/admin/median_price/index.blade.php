@@ -46,7 +46,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2><span class="orange-text">ราคากลาง</span> ทองประจำวัน</h2>
+            <h2><span class="orange-text">ราคาทองล่าสุด</span></h2>
         </div>
         <div class="card-body">
             <div class="row">
