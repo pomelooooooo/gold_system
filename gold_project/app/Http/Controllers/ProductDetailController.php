@@ -27,7 +27,7 @@ class ProductDetailController extends Controller
             ->orWhere('product_details.size', 'like', "%$keyword%")
             ->orWhere('product_details.lot_id', 'like', "%$keyword%");
         }
-        $productdetail = $productdetail->paginate(10);
+        $productdetail = $productdetail->paginate(5);
         // dd($productdetail);
         $product = Product::all();
         // dd($productdetail);
@@ -54,7 +54,7 @@ class ProductDetailController extends Controller
         }else{
             $code ="0001";
         }
-        dd($gold_type);
+        // dd($gold_type);
         $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
         $product = Product::all();
         return view('admin.productdetail.create-productdetail', compact('product','productdetail','gold_type','code'));

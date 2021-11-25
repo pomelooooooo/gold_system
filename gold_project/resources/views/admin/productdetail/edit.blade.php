@@ -69,7 +69,7 @@
                         <h4>รหัสสินค้า</h4>
                     </div>
                     <div class="col-6">
-                        <h4>รายละเอียดสินค้า</h4>
+                        <h4>ล๊อต</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -80,7 +80,12 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" value="{{$productdetail->details}}"/>
+                            <select name="lot_id" class="form-control" id="userID">
+                                <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
+                                @foreach($product as $row)
+                                <option value="{{$row->lot_id}}"{{$row->lot_id == $productdetail->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -136,35 +141,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>สถานะทอง</h4>
-                    </div>
-                    <div class="col-6">
-                        <h4>ล๊อต</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                    @foreach($gold_type as $statusWay => $statusLable)
-                        <div class="input-group mb-3">
-                                <input class="form-check-input" name="status" type="checkbox" value="{{ $statusWay }}" {{ $productdetail->status == $statusWay ? "checked" : "" }}/>
-                                <h5 class="form-check-label">{{ $statusLable }}</h5>
-                        </div>
-                        @endforeach
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                        <select name="lot_id" class="form-control" id="userID">
-                        <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
-                        @foreach($product as $row)
-                            <option value="{{$row->lot_id}}"{{$row->lot_id == $productdetail->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
-                        @endforeach
-                        </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
                         <h4>ถาด</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4>รายละเอียด</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -172,15 +152,31 @@
                         <div class="form-group">
                             <input name="tray" type="text" class="form-control" placeholder="" value="{{$productdetail->tray}}"/>
                         </div>
+                        
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="details" type="text" class="form-control" placeholder="" value="{{$productdetail->details}}"/>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
+                        <h4>สถานะทอง</h4>
+                    </div>
+                    <div class="col-6">
                         <h4>อัพโหลดรูปภาพ</h4>
                     </div>
                 </div>
-                <br>
                 <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            @foreach($gold_type as $statusWay => $statusLable)
+                                <input class="form-check-input" name="status" type="checkbox" value="{{ $statusWay }}" {{ $productdetail->status == $statusWay ? "checked" : "" }}/>
+                                <h5 class="form-check-label">{{ $statusLable }}</h5>
+                            @endforeach
+                        </div>
+                    </div>
                     <div class="col-6">
                         <div class="card">
                             <div class="form-group text-center">
