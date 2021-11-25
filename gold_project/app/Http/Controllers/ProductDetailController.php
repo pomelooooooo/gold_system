@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\ProductDetails;
 use App\Product;
+use App\TypeGold;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 
 class ProductDetailController extends Controller
@@ -14,11 +16,22 @@ class ProductDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $keyword = $request->get('search');
+        $productdetail = ProductDetails::select("*");
+        if(!empty($keyword)){
+            $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
+            ->orWhere('product_details.details', 'like', "%$keyword%")
+            ->orWhere('product_details.category', 'like', "%$keyword%")
+            ->orWhere('product_details.size', 'like', "%$keyword%")
+            ->orWhere('product_details.lot_id', 'like', "%$keyword%");
+        }
+        $productdetail = $productdetail->paginate(10);
+        // dd($productdetail);
         $product = Product::all();
-        return view('admin.productdetail.index', compact('product','productdetail'));
+        // dd($productdetail);
+        return view('admin.productdetail.index', compact('product','productdetail','keyword'));
     }
 
     /**
@@ -28,9 +41,23 @@ class ProductDetailController extends Controller
      */
     public function create()
     {
+        $gold_type = ["ทองในถาด","ทองในสต๊อค"];
+        $productdetail = ProductDetails::select('code')->orderBy('code',"desc")->first();
+        if(!empty($productdetail)){
+            $code = $productdetail->code+1;
+            $num = "0";
+            for($i = strlen($code);$i < 3;$i++){
+                $num .= "0";
+            }
+            $code = $num.$code;
+            // dd($num.$code);
+        }else{
+            $code ="0001";
+        }
+        dd($gold_type);
         $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
         $product = Product::all();
-        return view('admin.productdetail.create-productdetail', compact('product','productdetail'));
+        return view('admin.productdetail.create-productdetail', compact('product','productdetail','gold_type','code'));
     }
 
     /**
@@ -55,6 +82,7 @@ class ProductDetailController extends Controller
                 'tray' => $request->get('tray'),
                 'allprice' => $request->get('allprice'),
                 'lot_id' => $request->get('lot_id'),
+                'num' => $request->get('num'),
             ]
         );
         if($request->hasFile('pic')){
@@ -65,10 +93,12 @@ class ProductDetailController extends Controller
             $productdetail->pic = $filename;
         }
         $productdetail->save();
-        $productdescript = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
+        // $productdetail = ProductDetails::all();
+        // dd($productdescript[0]->code);
         // $managegold = Managegold::all()->toArray();
-        return view('admin.productdetail.index', compact('productdescript','product'));
+        return view('admin.productdetail.index', compact('productdetail','product'));
     }
 
     /**
@@ -90,10 +120,12 @@ class ProductDetailController extends Controller
      */
     public function edit($id)
     {
+        $gold_type = ["ทองในถาด","ทองในสต๊อค"];
         $productdetail = ProductDetails::find($id);
-        $productdescript = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        // $productdetail = ProductDetails::select('*')->get();
         $product = Product::all();
-        return view('admin.productdetail.edit', compact('productdetail','productdescript','product', 'id'));
+        // dd($gold_type);
+        return view('admin.productdetail.edit', compact('productdetail','product','gold_type', 'id'));
     }
 
     /**
@@ -132,7 +164,7 @@ class ProductDetailController extends Controller
             $productdetail->pic = $filename;
         }
         $productdetail->save();
-        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         return view('admin.productdetail.index', compact('productdetail','product', 'id'));
     }
@@ -147,7 +179,7 @@ class ProductDetailController extends Controller
     {
         $productdetail = ProductDetails::find($id);
         $productdetail->delete();
-        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         return view('admin.productdetail.index', compact('productdetail','product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }

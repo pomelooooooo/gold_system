@@ -40,4 +40,7 @@ Route::resource('/set_price', 'SetPriceController')->middleware('auth');
 
 Route::resource('/manage_employee', 'ManageEmployeeController')->middleware('auth');
 
+Route::resource('/type_gold', 'TypeGoldController')->middleware('auth');
+
+Route::resource('/testgen', 'TestgenController')->middleware('auth');
 

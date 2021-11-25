@@ -26,48 +26,76 @@
             <form method="POST" action="{{route('product.store')}} ">
                 {{csrf_field()}}
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <h4>รหัสล๊อต</h4>
                     </div>
-                    <div class="col-6">
-                        <h4>จำนวนสินค้า</h4>
+                    <div class="col-4">
+                        <h4>ประเภท</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>น้ำหนัก</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
-                            <input name="lot_id" type="text" class="form-control" placeholder="" />
+                            <input name="lot_id" type="text" class="form-control" placeholder="" disabled/>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
+                        <!-- <div class="form-group">
+                            <input name="type_gold_id" type="text" class="form-control" placeholder="" />
+                        </div> -->
+                        <div class="form-group">
+                            <select name="type_gold_id" class="form-control" id="typeID">
+                                <option value="">เลือกประเภท</option>
+                            @foreach($type as $row)
+                                <option value="{{$row->id}}">{{$row->category}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <input name="weight" type="text" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <h4>จำนวนสินค้า</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>ราคาทอง</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>ค่าแรง</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
                         <div class="form-group">
                             <input name="lot_count" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <h4>ราคาทอง</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ค่าแรง</h4>
-                    </div>
-                    <div class="col-6">
-                        <h4>วันที่นำเข้า</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <input name="price_of_gold" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <input name="wage" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
-                    <div class="col-6">
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <h4>วันที่นำเข้า</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
                         <div class="form-group">
                             <input name="date_of_import" type="date" class="form-control" value="{{date('Y-m-d')}}" />
                         </div>

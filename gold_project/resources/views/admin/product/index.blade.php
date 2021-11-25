@@ -88,16 +88,16 @@
                             <tbody>
                                 @foreach($product as $row)
                                 <tr>
-                                    <td>{{$row['lot_id']}}</td>
-                                    <td>{{$row['lot_count']}}</td>
-                                    <td>{{$row['date_of_import']}}</td>
-                                    <td>{{$row['price_of_gold']}}</td>
-                                    <td>{{$row['wage']}}</td>
+                                    <td>{{$row->lot_id}}</td>
+                                    <td>{{$row->lot_count}}</td>
+                                    <td>{{$row->date_of_import}}</td>
+                                    <td>{{$row->price_of_gold}}</td>
+                                    <td>{{$row->wage}}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-warning" href="{{action('ProductController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
+                                        <a class="btn btn-warning" href="{{action('ProductController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
                                     <td class="text-center">
-                                        <form method="POST" class="delete_from" action="{{action('ProductController@destroy',$row['id'])}}">
+                                        <form method="POST" class="delete_from" action="{{action('ProductController@destroy',$row->id)}}">
                                             {{csrf_field()}}
                                             <input type="hidden" name="_method" value="DELETE" />
                                             <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>

@@ -10,7 +10,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[0,1];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -63,9 +63,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <form class="form-inline">
+                        <form class="form-inline" action="/productdetail" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหารหัสสินค้า">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหารหัสสินค้า">
                         </form>
                     </div>
                 </div>
@@ -89,17 +89,17 @@
                             <tbody>
                                 @foreach($productdetail as $row)
                                 <tr>
-                                    <td>{{$row['code']}}</td>
-                                    <td>{{$row['details']}}</td>
-                                    <td>{{$row['category']}}</td>
-                                    <td>{{$row['size']}}</td>
-                                    <td>{{$row['status']}}</td>
-                                    <td>{{$row['lot_id']}}</td>
+                                    <td>{{$row->code}}</td>
+                                    <td>{{$row->details}}</td>
+                                    <td>{{$row->category}}</td>
+                                    <td>{{$row->size}}</td>
+                                    <td>{{$row->status == '0' ? 'ทองในถาด' : 'ทองในสต็อก'}}</td>
+                                    <td>{{$row->lot_id}}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-warning" href="{{action('ProductDetailController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
+                                        <a class="btn btn-warning" href="{{action('ProductDetailController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
                                     <td class="text-center">
-                                        <form method="POST" class="delete_from" action="{{action('ProductDetailController@destroy',$row['id'])}}">
+                                        <form method="POST" class="delete_from" action="{{action('ProductDetailController@destroy',$row->id)}}">
                                             {{csrf_field()}}
                                             <input type="hidden" name="_method" value="DELETE" />
                                             <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>
@@ -110,6 +110,9 @@
                             </tbody>
 
                         </table>
+                        <div class="col-6">
+                            {{ $productdetail->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
