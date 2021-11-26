@@ -46,7 +46,7 @@ class ProductDetailController extends Controller
         if(!empty($productdetail)){
             $code = $productdetail->code+1;
             $num = "0";
-            for($i = strlen($code);$i < 3;$i++){
+            for($i = strlen($code);$i < 4;$i++){
                 $num .= "0";
             }
             $code = $num.$code;
@@ -93,7 +93,7 @@ class ProductDetailController extends Controller
             $productdetail->pic = $filename;
         }
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         // $productdetail = ProductDetails::all();
         // dd($productdescript[0]->code);
@@ -164,7 +164,7 @@ class ProductDetailController extends Controller
             $productdetail->pic = $filename;
         }
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         return view('admin.productdetail.index', compact('productdetail','product', 'id'));
     }
@@ -179,7 +179,7 @@ class ProductDetailController extends Controller
     {
         $productdetail = ProductDetails::find($id);
         $productdetail->delete();
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         return view('admin.productdetail.index', compact('productdetail','product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }

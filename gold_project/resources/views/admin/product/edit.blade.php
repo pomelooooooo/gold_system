@@ -47,10 +47,10 @@
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <h4>ราคาทอง</h4>
+                        <h4>ราคาทองต่อเส้น</h4>
                     </div>
                     <div class="col-3">
-                        <h4>ค่าแรง</h4>
+                        <h4>ค่าแรงต่อเส้น</h4>
                     </div>
                     <div class="col-6">
                         <h4>วันที่นำเข้า</h4>

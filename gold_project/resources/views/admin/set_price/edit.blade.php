@@ -75,12 +75,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="code" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
+                            <input name="code" type="text" class="form-control" placeholder="" value="{{$productdetail->code}}" readonly/>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
+                            <input name="details" type="text" class="form-control" placeholder="" value="{{$productdetail->details}}" />
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
+                            <input name="striped" type="text" class="form-control" placeholder="" value="{{$productdetail->striped}}" />
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
+                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->gram}}" />
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                             <select name="lot_id" class="form-control" id="userID">
                                 <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
                                 @foreach($product as $row)
-                                <option value="{{$row->id}}" {{$row->id == $productdetail->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
+                                <option value="{{$row->lot_id}}"{{$row->lot_id == $productdetail->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -174,7 +174,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tray" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
+                            <input name="tray" type="text" class="form-control" placeholder="" value="{{$productdetail->tray}}" />
                         </div>
                     </div>
                     <div class="col-6">
@@ -187,6 +187,9 @@
                     <div class="col-6">
                         <h4>ราคารวม</h4>
                     </div>
+                    <div class="col-6">
+                        <h4>อัพโหลดรูปภาพ</h4>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -194,14 +197,6 @@
                             <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" />
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>อัพโหลดรูปภาพ</h4>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
                     <div class="col-6">
                         <div class="card">
                             <div class="form-group text-center">
@@ -229,7 +224,7 @@
                         </div>
                     </div>
                 </div>
-                <br />
+                <br>
                 <div class="text-right">
                     <a type="button" class="btn btn-secondary" href="{{url('/set_price')}}">กลับ</a>
                     <button type="submit" class="btn btn-success">อัพเดท</button>
