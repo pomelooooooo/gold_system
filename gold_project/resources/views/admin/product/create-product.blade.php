@@ -2,6 +2,24 @@
 @section('title','เพิ่มล็อตทอง')
 @section('content')
 
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
         <div class="row">
@@ -23,17 +41,17 @@
             <h2>เพิ่มล็อตทอง</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('product.store')}} ">
+            <form method="POST" action="{{route('product.store')}} " class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-4">
                         <h4>รหัสล๊อต</h4>
                     </div>
                     <div class="col-4">
-                        <h4>ประเภท</h4>
+                        <h4 for="validationtype">ประเภท</h4>
                     </div>
                     <div class="col-4">
-                        <h4>น้ำหนัก</h4>
+                        <h4 for="validationweight">น้ำหนัก</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -47,45 +65,60 @@
                             <input name="type_gold_id" type="text" class="form-control" placeholder="" />
                         </div> -->
                         <div class="form-group">
-                            <select name="type_gold_id" class="form-control" id="typeID">
-                                <option value="">เลือกประเภท</option>
+                            <select name="type_gold_id" class="form-control" id="validationtype" required>
+                                <option selected disabled value="">เลือกประเภท</option>
                             @foreach($type as $row)
                                 <option value="{{$row->id}}">{{$row->category}}</option>
                             @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                            โปรดเลือกประเภททอง
+                            </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="weight" type="text" class="form-control" placeholder="" />
+                            <input name="weight" type="text" class="form-control" placeholder="" id="validationweight" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกน้ำหนักทอง
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <h4>จำนวนสินค้า</h4>
+                        <h4 for="validationcount">จำนวนสินค้า</h4>
                     </div>
                     <div class="col-4">
-                        <h4>ราคาทองต่อเส้น</h4>
+                        <h4 for="validationprice">ราคาทองต่อเส้น</h4>
                     </div>
                     <div class="col-4">
-                        <h4>ค่าแรงต่อเส้น</h4>
+                        <h4 for="validationwage">ค่าแรงต่อเส้น</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="lot_count" type="text" class="form-control" placeholder="" />
+                            <input name="lot_count" type="text" class="form-control" placeholder="" id="validationcount" required />
+                            <div class="invalid-feedback">
+                            โปรดกรอกจำนวนสินค้า
+                            </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder="" />
+                            <input name="price_of_gold" type="text" class="form-control"  placeholder="" id="validationprice" required />
+                            <div class="invalid-feedback">
+                            โปรดกรอกราคาทองต่อเส้น
+                            </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="wage" type="text" class="form-control" placeholder="" />
+                            <input name="wage" type="text" class="form-control" placeholder="" id="validationwage" required />
+                            <div class="invalid-feedback">
+                            โปรดกรอกค่าแรงต่อเส้น
+                            </div>
                         </div>
                     </div>
                 </div>

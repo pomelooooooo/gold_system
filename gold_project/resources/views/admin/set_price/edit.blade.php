@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" value="{{$productdetail->details}}" />
+                            <input name="details" type="text" class="form-control" placeholder="" value="{{$productdetail->details}}" readonly/>
                         </div>
                     </div>
                 </div>
@@ -98,14 +98,14 @@
                             <select class="custom-select" name="category">
                                 <!-- <option selected>เลือกหน่วยนับ</option> -->
                                 @foreach(["ทองแท่ง"=>"ทองแท่ง","สร้อยคอ"=>"สร้อยคอ","สร้อยข้อมือ"=>"สร้อยข้อมือ","แหวน"=>"แหวน","กำไล"=>"กำไล","ต่างหู"=>"ต่างหู","จี้"=>"จี้"] as $categoryWay => $categoryLable)
-                                <option value="{{ $categoryWay }}" {{ old("category", $productdetail->category) == $categoryWay ? "selected" : "" }}>{{ $categoryLable }}</option>
+                                <option readonly value="{{ $categoryWay }}" {{ old("category", $productdetail->category) == $categoryWay ? "selected" : "" }}>{{ $categoryLable }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" value="{{$productdetail->striped}}" />
+                            <input name="striped" type="text" class="form-control" placeholder="" value="{{$productdetail->striped}}" readonly/>
                         </div>
                     </div>
                 </div>
@@ -123,14 +123,14 @@
                             <select class="custom-select" name="size">
                                 <!-- <option selected>เลือกหน่วยนับ</option> -->
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
-                                <option value="{{ $sizeWay }}" {{ old("size", $productdetail->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
+                                <option readonly value="{{ $sizeWay }}" {{ old("size", $productdetail->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->gram}}" />
+                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->gram}}" readonly/>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                         <div class="input-group mb-3">
                             <select class="custom-select" name="status">
                                 @foreach(["ทองในถาด"=>"ทองในถาด","ทองในสต๊อก"=>"ทองในสต๊อก"] as $statusWay => $statusLable)
-                                <option value="{{ $statusWay }}" {{ old("status", $productdetail->status) == $statusWay ? "selected" : "" }}>{{ $statusLable }}</option>
+                                <option readonly value="{{ $statusWay }}" {{ old("status", $productdetail->status) == $statusWay ? "selected" : "" }}>{{ $statusLable }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -157,7 +157,7 @@
                             <select name="lot_id" class="form-control" id="userID">
                                 <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
                                 @foreach($product as $row)
-                                <option value="{{$row->lot_id}}"{{$row->lot_id == $productdetail->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
+                                <option readonly value="{{$row->lot_id}}"{{$row->lot_id == $productdetail->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -174,7 +174,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tray" type="text" class="form-control" placeholder="" value="{{$productdetail->tray}}" />
+                            <input name="tray" type="text" class="form-control" placeholder="" value="{{$productdetail->tray}}" readonly/>
                         </div>
                     </div>
                     <div class="col-6">
