@@ -1,7 +1,26 @@
 @extends('layouts.master')
 @section('title','เพิ่มสาขา')
 @section('content')
-
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 <!-- hero area -->
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -24,11 +43,11 @@
             <h2>ลงทะเบียนสาขา</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('stores.store')}}">
+            <form method="POST" action="{{route('stores.store')}}" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ชื่อร้าน</h4>
+                        <h4 for="validationstore">ชื่อร้าน</h4>
                     </div>
                     <div class="col-6">
                         <h4>เบอร์โทรร้าน</h4>
@@ -37,7 +56,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" placeholder="" />
+                            <input name="name" type="text" class="form-control " id="validationstore" placeholder="" required />
+                            <div class="invalid-feedback">
+                                Please provide a valid store.
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
