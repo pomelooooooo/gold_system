@@ -2,13 +2,10 @@
 @section('title','เพิ่มสาขา')
 @section('content')
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
         'use strict';
         window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
                     if (form.checkValidity() === false) {
@@ -50,7 +47,7 @@
                         <h4 for="validationstore">ชื่อร้าน</h4>
                     </div>
                     <div class="col-6">
-                        <h4>เบอร์โทรร้าน</h4>
+                        <h4 for="validationtelstore">เบอร์โทรร้าน</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -58,45 +55,57 @@
                         <div class="form-group">
                             <input name="name" type="text" class="form-control " id="validationstore" placeholder="" required />
                             <div class="invalid-feedback">
-                                Please provide a valid store.
+                                โปรดกรอกชื่อร้าน
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tel" type="text" class="form-control" placeholder="" />
+                            <input name="tel" type="text" class="form-control" id="validationtelstore" placeholder="" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกเบอร์โทรร้าน
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>หมายเลขประจำตัวผู้เสียภาษี</h4>
+                        <h4 for="validationtax">หมายเลขประจำตัวผู้เสียภาษี</h4>
                     </div>
                     <div class="col-6">
-                        <h4>เลขทะเบียนการค้า</h4>
+                        <h4 for="validationcommercial">เลขทะเบียนการค้า</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tax_identification_number" type="text" class="form-control" placeholder="" />
+                            <input name="tax_identification_number" type="text" class="form-control" id="validationtax" placeholder="" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="commercial_registration_number" type="text" class="form-control" placeholder="" />
+                            <input name="commercial_registration_number" type="text" class="form-control" id="validationcommercial" placeholder="" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกเลขทะเบียนการค้า
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h4>ที่อยู่</h4>
+                        <h4 for="validationaddress">ที่อยู่</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <textarea name="address" type="text" class="form-control" placeholder=""></textarea>
+                            <textarea name="address" type="text" class="form-control" id="validationaddress" placeholder="" required></textarea>
+                            <div class="invalid-feedback">
+                                โปรดกรอกที่อยู่ร้าน
+                            </div>
                         </div>
                     </div>
                 </div>

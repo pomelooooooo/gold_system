@@ -39,6 +39,22 @@
             readURL(this);
         });
     });
+
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 
 <div class="breadcrumb-section breadcrumb-bg">
@@ -62,64 +78,70 @@
             <h2>เพิ่มทองเข้าร้าน</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('productdetail.store')}} " enctype="multipart/form-data">
+            <form method="POST" action="{{route('productdetail.store')}} " enctype="multipart/form-data" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
                         <h4>รหัสสินค้า</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ล๊อต</h4>
+                        <h4 for="validationtellotid">ล๊อต</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="code" type="text" class="form-control" placeholder="" value="{{$code}}" readonly/>
+                            <input name="code" type="text" class="form-control" placeholder="" value="{{$code}}" readonly />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <select name="lot_id" class="form-control" id="userID">
-                                <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
+                            <select name="lot_id" class="form-control" id="userID" id="validationtellotid" required>
+                                <option selected disabled value="">เลือกล๊อต</option>
                                 @foreach($product as $row)
                                 <option value="{{$row->lot_id}}">{{$row->lot_id}}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกล็อตที่ต้องการ
+                            </div>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ประเภท</h4>
+                        <h4 for="validationcategory">ประเภท</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ลาย</h4>
+                        <h4 for="validationstriped">ลาย</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="category">
-                                <!-- <option selected>เลือกหน่วยนับ</option> -->
+                            <select class="custom-select" name="category" id="validationcategory" required>
+                                <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ทองแท่ง"=>"ทองแท่ง","สร้อยคอ"=>"สร้อยคอ","สร้อยข้อมือ"=>"สร้อยข้อมือ","แหวน"=>"แหวน","กำไล"=>"กำไล","ต่างหู"=>"ต่างหู","จี้"=>"จี้"] as $categoryWay => $categoryLable)
                                 <option value="{{ $categoryWay }}">{{ $categoryLable }}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกหน่วยนับที่ต้องการ
+                            </div>
                         </div>
-                       
-                        
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" />
+                            <input name="striped" type="text" class="form-control" placeholder="" id="validationstriped" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกลายที่ต้องการ
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>นํ้าหนัก</h4>
+                        <h4 for="validationtelstore">นํ้าหนัก</h4>
                     </div>
                     <div class="col-6">
                         <h4>นํ้าหนัก(กรัม)</h4>
@@ -128,12 +150,15 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="size">
-                                <!-- <option selected>เลือกหน่วยนับ</option> -->
+                            <select class="custom-select" name="size" id="validationcategory" required>
+                                <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกนํ้าหนักที่ต้องการ
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
@@ -144,28 +169,34 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ถาด</h4>
+                        <h4 for="validationtray">ถาด</h4>
                     </div>
                     <div class="col-6">
-                        <h4>รายละเอียด</h4>
+                        <h4 for="validationdetails">รายละเอียด</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        
-                            <div class="form-group">
-                                <input name="tray" type="text" class="form-control" placeholder="" />
+
+                        <div class="form-group">
+                            <input name="tray" type="text" class="form-control" placeholder="" id="validationtray" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกถาดที่ต้องการ
                             </div>
+                        </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" />
+                            <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกรายละเอียดทอง
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>สถานะทอง</h4>
+                        <h4 for="validationstatus">สถานะทอง</h4>
                     </div>
                     <div class="col-6">
                         <h4>อัพโหลดรูปภาพ</h4>
@@ -174,10 +205,11 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                                @foreach(["0"=>"ทองในถาด","1"=>"ทองในสต๊อค"] as $statusWay => $statusLable)
-                                <input class="form-check-input" name="status" type="checkbox"value="{{ $statusWay }}">
-                                <h5 class="form-check-label">{{ $statusLable }}</h5>
-                                @endforeach
+                            @foreach(["0"=>"ทองในถาด","1"=>"ทองในสต๊อค"] as $statusWay => $statusLable)
+                            <input type="radio" class="form-check-input" name="status" type="checkbox" value="{{ $statusWay }}" id="validationstatus" required>
+                            <h5 class="form-check-label">{{ $statusLable }}</h5>
+                            <div class="invalid-feedback">โปรดเลือกสถานะทองที่ต้องการ</div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-6">
