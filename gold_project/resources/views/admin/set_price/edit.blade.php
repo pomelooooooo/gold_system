@@ -39,6 +39,21 @@
             readURL(this);
         });
     });
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 
 <div class="breadcrumb-section breadcrumb-bg">
@@ -62,7 +77,7 @@
             <h2>ตั้งราคาขาย</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{action('SetPriceController@update', $id)}}" enctype="multipart/form-data">
+            <form method="POST" action="{{action('SetPriceController@update', $id)}}" enctype="multipart/form-data" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
@@ -168,7 +183,7 @@
                         <h4>ถาด</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ค่ากำเหน็จ</h4>
+                        <h4 for="validationgratuity">ค่ากำเหน็จ</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -179,13 +194,16 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gratuity" type="text" class="form-control" placeholder="" value="{{$productdetail->gratuity}}" />
+                            <input name="gratuity" type="text" class="form-control" placeholder="" value="{{$productdetail->gratuity}}" id="validationgratuity" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกค่ากำเหน็จทอง
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคารวม</h4>
+                        <h4 for="validationallprice">ราคารวม</h4>
                     </div>
                     <div class="col-6">
                         <h4>อัพโหลดรูปภาพ</h4>
@@ -194,7 +212,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" />
+                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" id="validationallprice" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกราคารวมทอง
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
