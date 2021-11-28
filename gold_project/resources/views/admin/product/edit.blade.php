@@ -2,6 +2,24 @@
 @section('title','แก้ไขข้อมูลล็อตทอง')
 @section('content')
 
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
         <div class="row">
@@ -23,34 +41,37 @@
             <h2>แก้ไขข้อมูลล็อตทอง</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{action('ProductController@update', $id)}}">
+            <form method="POST" action="{{action('ProductController@update', $id)}}"  class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
                         <h4>รหัสล๊อต</h4>
                     </div>
                     <div class="col-6">
-                        <h4>จำนวนสินค้า</h4>
+                        <h4 for="validationcount">จำนวนสินค้า</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lot_id" type="text" class="form-control" placeholder="" value="{{$product->lot_id}}" />
+                            <input name="lot_id" type="text" class="form-control" placeholder="" value="{{$product->lot_id}}" readonly/>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lot_count" type="text" class="form-control" placeholder="" value="{{$product->lot_count}}" />
+                            <input name="lot_count" type="text" class="form-control" placeholder="" value="{{$product->lot_count}}" id="validationcount" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกจำนวนสินค้า
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <h4>ราคาทองต่อเส้น</h4>
+                        <h4 for="validationprice">ราคาทองต่อเส้น</h4>
                     </div>
                     <div class="col-3">
-                        <h4>ค่าแรงต่อเส้น</h4>
+                        <h4 for="validationwage">ค่าแรงต่อเส้น</h4>
                     </div>
                     <div class="col-6">
                         <h4>วันที่นำเข้า</h4>
@@ -59,12 +80,18 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$product->price_of_gold}}" />
+                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$product->price_of_gold}}" id="validationprice" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกราคาทองต่อเส้น
+                            </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="wage" type="text" class="form-control" placeholder="" value="{{$product->wage}}" />
+                            <input name="wage" type="text" class="form-control" placeholder="" value="{{$product->wage}}" id="validationwage" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกค่าแรงต่อเส้น
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">

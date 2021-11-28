@@ -2,6 +2,24 @@
 @section('title','เพิ่มประเภททอง')
 @section('content')
 
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
 <!-- hero area -->
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -24,25 +42,31 @@
             <h2>เพิ่มประเภททอง</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('type_gold.store')}}">
+            <form method="POST" class="needs-validation" action="{{route('type_gold.store')}}" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>รหัสประเภททอง</h4>
+                        <h4 for="validationid">รหัสประเภททอง</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ชื่อประเภท</h4>
+                        <h4 for="validationtype">ชื่อประเภท</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="category" type="text" class="form-control" placeholder="" />
+                            <input name="category" type="text" class="form-control" id="validationid" placeholder="" required/>
+                            <div class="invalid-feedback">
+                                โปรดกรอกรหัสประเภททอง
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" placeholder="" />
+                            <input name="name" type="text" class="form-control" id="validationtype" placeholder=""  required/>
+                            <div class="invalid-feedback">
+                                โปรดกรอกชื่อประเภททอง
+                            </div>
                         </div>
                     </div>
                 </div>
