@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Language" content="th" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-874">
-	
+
 
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,7 +29,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Chonburi&display=swap" rel="stylesheet">
-	
+
 	<!-- fontawesome -->
 	<link rel="stylesheet" href="{{url('assets/css/all.min.css')}}">
 	<!-- bootstrap -->
@@ -65,7 +65,7 @@
 	<div class="top-header-area" id="sticker">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
+				<div class="col-lg-12 col-sm-12 text-center" style="height: 50px;">
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">

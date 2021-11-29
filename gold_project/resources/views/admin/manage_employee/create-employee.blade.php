@@ -22,6 +22,25 @@
             }
 
         });
+        $("form#data").submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var data = {
+                picture: $('#img-upload').attr('src'),
+            };
+            formData.append("data", JSON.stringify(data));
+            $.ajax({
+                url: "{{route('manage_employee.store')}}",
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    window.location = "{{route('manage_employee.index')}}"
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
 
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -38,6 +57,116 @@
         $("#imgInp").change(function() {
             readURL(this);
         });
+    });
+
+    function openConnection() {
+        // uses global 'conn' object
+        if (conn.readyState === undefined || conn.readyState > 1) {
+
+            conn = new WebSocket('ws://localhost:8100');
+
+            conn.onopen = function() {
+                conn.send("Connection Established Confirmation");
+            };
+
+            conn.onmessage = function(event) {
+                //*********************************************//
+                //****  Web Socket Server ***//
+                //*********************************************//	
+
+                var rawStr = event.data.toString(); // Split with '@'
+                var res = rawStr.split('@');
+                console.log(res);
+
+                // Connected
+                if (res[0] == "Connected") {
+                    document.getElementById("content").innerHTML = rawStr;
+                }
+                var strtitle1 = ["-", "ID Card : ", "TH_Prefix :", "TH_Firstname : ", "TH_Lastname : ", "Sex : ", "Birthday : ", "EN_Prefix : ", "EN_Firstname : ", "EN_Lastname : ", "Issue : ", "Expire : ", "Address House No : ", "image"]
+
+                var strtitle2 = ["-", "DocumentNo : ", "Familyname : ", "Givenname : ", "Birthday : ", "PersonalNo : ", "Nationality : ", "Sex : ", "Dateofexpiry : ", "IssueState : ", "image"]
+
+                var img = "";
+                var text = "";
+                var _card = "";
+
+                /////thaiid
+
+                if (res[0] == "thaiid") {
+                    img = "1";
+
+                    for (i = 1; i <= res.length - 2; i++) {
+                        _card += res[i] + "@";
+                    }
+
+                    for (i = 1; i < res.length - 2; i++) {
+                        text += strtitle1[i] + res[i] + "<br>";
+
+                    }
+                    document.getElementById('img-upload').src = "data:image/png;base64," + res[13];
+                    $('#name').val(res[3]);
+                    document.getElementById("lastname").value = res[4];
+                    document.getElementById("idcard").value = res[1];
+                    document.getElementById("address").value = res[12];
+
+                }
+
+
+                /////img
+                // if (img == "") {
+
+                //     document.getElementById("chk").style.display = "none";
+                //     document.getElementById("chk2").style.display = "none";
+                // } else {
+
+                //     document.getElementById("chk").style.display = "block";
+                //     document.getElementById("chk2").style.display = "block";
+                // }
+
+            };
+
+            conn.onerror = function(event) {
+                // Web Socket Error
+                document.getElementById("content").innerHTML = "Web Socket Error";
+            };
+
+
+            conn.onclose = function(event) {
+                // Web Socket Closed
+                document.getElementById("content").innerHTML = "Web Socket Closed";
+
+            };
+        }
+    }
+
+
+    // function send app server
+    function doScan() {
+
+
+        conn.send("thaiidauto");
+
+    }
+
+    function doScanpassport() {
+        conn.send("passportwithphoto");
+
+    }
+
+    function Clear() {
+
+        document.getElementById("content_idcard1").innerHTML = "";
+        document.getElementById("content_idcard").innerHTML = "";
+        document.getElementById("content_passport1").innerHTML = "";
+        document.getElementById("content_passport").innerHTML = "";
+        document.getElementById("chk").style.display = "none";
+        document.getElementById("chk2").style.display = "none";
+    }
+
+    $(document).ready(function() {
+        conn = {}, window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+        openConnection();
     });
 </script>
 
@@ -64,7 +193,7 @@
             <h2>เพิ่มข้อมูลพนักงาน</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('manage_employee.store')}} " enctype="multipart/form-data">
+            <form method="POST" action="{{route('manage_employee.store')}} " enctype="multipart/form-data" id="data">
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
@@ -77,12 +206,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" placeholder="" />
+                            <input name="name" id="name" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lastname" type="text" class="form-control" placeholder="" />
+                            <input name="lastname" id="lastname" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -97,12 +226,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" type="text" class="form-control" placeholder="" />
+                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" type="text" class="form-control" placeholder="" />
+                            <input name="telephone" id="telephone" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -120,17 +249,17 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="username" type="text" class="form-control" placeholder="" />
+                            <input name="username" id="username" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="email" type="text" class="form-control" placeholder="" />
+                            <input name="email" id="email" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="password" type="text" class="form-control" placeholder="" />
+                            <input name="password" id="password" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -145,12 +274,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="address" type="text" class="form-control" placeholder="" />
+                            <input name="address" id="address" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="address_now" type="text" class="form-control" placeholder="" />
+                            <input name="address_now" id="address_now" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -168,14 +297,14 @@
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <span class="btn btn-default btn-file-img">
-                                                เลือกรูปภาพ <input type="file" id="imgInp" name="picture">
+                                                เลือกรูปภาพ <input type="file" id="imgInp">
                                             </span>
                                         </span>
                                         <input type="text" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <img id='img-upload' />
+                                    <img id='img-upload' name="picture" />
                                 </div>
                             </div>
                         </div>
@@ -192,4 +321,5 @@
     </div>
 </div>
 <br />
+
 @endsection

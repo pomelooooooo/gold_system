@@ -39,30 +39,38 @@ class ManageEmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(json_decode($request->data)->picture);
         $manageemployee = new User(
             [
-                'name' => $request->get('name'),
-                'lastname' => $request->get('lastname'),
-                'idcard' => $request->get('idcard'),
-                'address' => $request->get('address'),
-                'address_now' => $request->get('address_now'),
-                'telephone' => $request->get('telephone'),
-                'username' => $request->get('username'),
-                'email' => $request->get('email'),
-                'password' => Hash::make($request->get('password')),
+                'name' => $request->name,
+                'lastname' => $request->lastname,
+                'idcard' => $request->idcard,
+                'address' => $request->address,
+                'address_now' => $request->address_now,
+                'telephone' => $request->telephone,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
             ]
         );
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('assets/img/employee', $filename);
-            $manageemployee->picture = $filename;
+        $picture = json_decode($request->data)->picture;
+        if ($picture) {
+            // $file =  $picture;
+            // $extension = $file->getClientOriginalExtension();
+            // $filename = time() . '.' . $extension;
+            // $file->move('assets/img/employee', $filename);
+            // $manageemployee->picture = $filename;
+            $img = $picture;
+            $folderPath = "assets/img/employee/"; //path location
+            $image_parts = explode(";base64,", $img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $uniqid = $request->idcard;
+            $file = $folderPath . $uniqid . '.' . $image_type;
+            file_put_contents($file, $image_base64);
+            $manageemployee->picture = $uniqid . '.' . $image_type;
         }
-        // $image = $request->file('pic');
-        // $new_name = rand() .'.'. $image->getClientOriginalExtension();
-        // $image -> move(public_path('assets/img/gold'),$new_name);
-        // dd($managegold);
         $manageemployee->save();
         $manageemployee = User::all()->toArray();
         return view('admin.manage_employee.index', compact('manageemployee'));
