@@ -85,7 +85,7 @@
                     <div class="col-6">
                         <form class="form-inline">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหารหัสพนักงาน">
+                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาชื่อพนักงาน">
                         </form>
                     </div>
                 </div>

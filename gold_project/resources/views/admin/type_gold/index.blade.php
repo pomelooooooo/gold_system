@@ -2,6 +2,38 @@
 @section('title','จัดการประเภททอง')
 @section('content')
 
+<script>
+      $(document).ready(function() {
+        $("body").on('click', '#delete_button', function(e) {
+            var id = $(this).data("id");
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
+                $.ajax({
+                    url: "type_gold/" + id,
+                    type: 'delete',
+                    data: {
+                        id: id,
+                        _token: token
+                    },
+                    success: function(data) {
+                        window.location = "{{route('type_gold.index')}}"
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+
 <!-- hero area -->
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -51,11 +83,8 @@
                                         <a class="btn btn-warning" href="{{action('TypeGoldController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
                                     <td class="text-center">
-                                        <form method="POST" class="delete_from" action="{{action('TypeGoldController@destroy',$row->id)}}">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="_method" value="DELETE" />
-                                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> ลบ</button>
-                                        </form>
+                                        {{csrf_field()}}
+                                        <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row->id}}"><i class="fa fa-trash"></i> ลบ</button>
                                     </td>
                                 </tr>
                                 @endforeach
