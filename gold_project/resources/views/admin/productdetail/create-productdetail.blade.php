@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <select name="lot_id" class="form-control" id="userID" id="validationtellotid" required>
+                            <select name="lot_id" class="form-control" id="validationtellotid" required>
                                 <option selected disabled value="">เลือกล๊อต</option>
                                 @foreach($product as $row)
                                 <option value="{{$row->lot_id}}">{{$row->lot_id}}</option>

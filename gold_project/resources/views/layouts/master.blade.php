@@ -69,7 +69,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="median_price">
+							<a href="/median_price">
 								<img src="{{url('assets/img/logo.png')}}" alt="">
 							</a>
 						</div>
@@ -94,7 +94,6 @@
 								<li><a href="about.html">คลังทอง</a>
 									<ul class="sub-menu">
 										<li><a href="/type_gold">จัดการประเภททอง</a></li>
-										<!-- <li><a href="/type_gold">testgen</a></li> -->
 										<li><a href="/product">จัดการล็อตทอง</a></li>
 										<li><a href="/productdetail">จัดการข้อมูลทอง</a></li>
 										<li><a href="/median_price">เช็คสต็อคสินค้า</a></li>

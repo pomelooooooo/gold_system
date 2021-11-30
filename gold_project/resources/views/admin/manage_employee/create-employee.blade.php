@@ -168,6 +168,22 @@
 
         openConnection();
     });
+
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 
 
@@ -193,93 +209,120 @@
             <h2>เพิ่มข้อมูลพนักงาน</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('manage_employee.store')}} " enctype="multipart/form-data" id="data">
+            <form method="POST" action="{{route('manage_employee.store')}} " enctype="multipart/form-data" id="data" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ชื่อ</h4>
+                        <h4 for="validationname">ชื่อ</h4>
                     </div>
                     <div class="col-6">
-                        <h4>นามสกุล</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="name" id="name" type="text" class="form-control" placeholder="" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="lastname" id="lastname" type="text" class="form-control" placeholder="" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>เลขบัตรประชาชน</h4>
-                    </div>
-                    <div class="col-6">
-                        <h4>เบอร์โทร</h4>
+                        <h4 for="validationlastname">นามสกุล</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" />
+                            <input name="name" id="name" type="text" class="form-control" placeholder="" id="validationname" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกชื่อ
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" id="telephone" type="text" class="form-control" placeholder="" />
+                            <input name="lastname" id="lastname" type="text" class="form-control" placeholder="" id="validationlastname" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกนามสกุล
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ชื่อผู้ใช้</h4>
+                        <h4 for="validationid">เลขบัตรประชาชน</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationtel">เบอร์โทร</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" id="validationid" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกเลขบัตรประชาชน
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="telephone" id="telephone" type="text" class="form-control" placeholder="" id="validationtel" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกเบอร์โทร
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationusername">ชื่อผู้ใช้</h4>
                     </div>
                     <div class="col-3">
-                        <h4>อีเมล</h4>
+                        <h4 for="validationemail">อีเมล</h4>
                     </div>
                     <div class="col-3">
-                        <h4>พาสเวิส</h4>
+                        <h4 for="validationpassword">พาสเวิส</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="username" id="username" type="text" class="form-control" placeholder="" />
+                            <input name="username" id="username" type="text" class="form-control" placeholder="" id="validationusername" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกชื่อผู้ใช้
+                            </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="email" id="email" type="text" class="form-control" placeholder="" />
+                            <input name="email" id="email" type="text" class="form-control" placeholder="" id="validationemail" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกอีเมล
+                            </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="password" id="password" type="text" class="form-control" placeholder="" />
+                            <input name="password" id="password" type="text" class="form-control" placeholder=""id="validationpassword" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกพาสเวิส
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ที่อยู่ตามบัตรประชาชน</h4>
+                        <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ที่อยู่ปัจจุบัน</h4>
+                        <h4 for="validationaddressnow">ที่อยู่ปัจจุบัน</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="address" id="address" type="text" class="form-control" placeholder="" />
+                            <input name="address" id="address" type="text" class="form-control" placeholder="" id="validationaddress" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกที่อยู่ตามบัตรประชาชน
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="address_now" id="address_now" type="text" class="form-control" placeholder="" />
+                            <input name="address_now" id="address_now" type="text" class="form-control" placeholder="" id="validationaddressnow" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกที่อยู่ปัจจุบัน
+                            </div>
                         </div>
                     </div>
                 </div>
