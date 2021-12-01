@@ -50,6 +50,9 @@ class ManageEmployeeController extends Controller
                 'telephone' => $request->telephone,
                 'username' => $request->username,
                 'email' => $request->email,
+                'date_card_start' => $request->date_card_start,
+                'date_card_end' => $request->date_card_end,
+                'row_id' => $request->row_id,
                 'password' => Hash::make($request->password),
             ]
         );
@@ -117,6 +120,9 @@ class ManageEmployeeController extends Controller
         $manageemployee->telephone = $request->get('telephone');
         $manageemployee->username = $request->get('username');
         $manageemployee->email = $request->get('email');
+        $manageemployee->date_card_start = $request->get('date_card_start');
+        $manageemployee->date_card_end = $request->get('date_card_end');
+        $manageemployee->row_id = $request->get('row_id');
         $manageemployee->password =  Hash::make($request->get('password'));
         // $managegold->pic = $request->get('pic');
         if ($request->hasFile('picture')) {

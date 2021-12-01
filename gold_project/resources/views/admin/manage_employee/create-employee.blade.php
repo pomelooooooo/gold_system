@@ -108,6 +108,8 @@
                     document.getElementById("lastname").value = res[4];
                     document.getElementById("idcard").value = res[1];
                     document.getElementById("address").value = res[12];
+                    $('#date_card_start').val(res[10]);
+                    $('#date_card_end').val(res[11]);
 
                 }
 
@@ -213,6 +215,43 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
+                        <h4 for="validationusername">ชื่อผู้ใช้</h4>
+                    </div>
+                    <div class="col-3">
+                        <h4 for="validationemail">อีเมล</h4>
+                    </div>
+                    <div class="col-3">
+                        <h4 for="validationpassword">พาสเวิส</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="username" id="username" type="text" class="form-control" placeholder="" id="validationusername" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกชื่อผู้ใช้
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <input name="email" id="email" type="mail" class="form-control" placeholder="" id="validationemail" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกอีเมล
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <input name="password" id="password" type="text" class="form-control" placeholder=""id="validationpassword" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกพาสเวิส
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
                         <h4 for="validationname">ชื่อ</h4>
                     </div>
                     <div class="col-6">
@@ -265,43 +304,6 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationusername">ชื่อผู้ใช้</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4 for="validationemail">อีเมล</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4 for="validationpassword">พาสเวิส</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="username" id="username" type="text" class="form-control" placeholder="" id="validationusername" required/>
-                            <div class="invalid-feedback">
-                            โปรดกรอกชื่อผู้ใช้
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="email" id="email" type="text" class="form-control" placeholder="" id="validationemail" required/>
-                            <div class="invalid-feedback">
-                            โปรดกรอกอีเมล
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="password" id="password" type="text" class="form-control" placeholder=""id="validationpassword" required/>
-                            <div class="invalid-feedback">
-                            โปรดกรอกพาสเวิส
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
                         <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน</h4>
                     </div>
                     <div class="col-6">
@@ -322,6 +324,32 @@
                             <input name="address_now" id="address_now" type="text" class="form-control" placeholder="" id="validationaddressnow" required/>
                             <div class="invalid-feedback">
                             โปรดกรอกที่อยู่ปัจจุบัน
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationdatecardstart">วันออกบัตร</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationdatecardend">วันบัตรหมดอายุ</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="date_card_start" id="date_card_start" type="date" class="form-control" placeholder="" id="validationdatecardstart" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกวันออกบัตร
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="date_card_end" id="date_card_end" type="date" class="form-control" placeholder="" id="validationdatecardend" required/>
+                            <div class="invalid-feedback">
+                            โปรดกรอกวันบัตรหมดอายุ
                             </div>
                         </div>
                     </div>
