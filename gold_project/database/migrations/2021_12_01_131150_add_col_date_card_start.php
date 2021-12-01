@@ -15,7 +15,7 @@ class AddColDateCardStart extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->date('date_card_start')->nullable()->after('address_now');
+            $table->string('date_card_start')->nullable()->after('address_now');
 
         });
     }
