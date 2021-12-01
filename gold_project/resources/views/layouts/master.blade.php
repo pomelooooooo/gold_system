@@ -78,20 +78,20 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="stores">จัดการข้อมูลร้าน</a>
+								<li class="current-list-item"><a href="/stores">จัดการข้อมูลร้าน</a>
 									<ul class="sub-menu">
 										<li><a href="/stores">จัดการข้อมูลร้าน</a></li>
 										<li><a href="/median_price">ราคากลางทองประจำวัน</a></li>
 										<li><a href="/set_price">ตั้งราคาขาย</a></li>
 									</ul>
 								</li>
-								<li><a href="about.html">จัดการข้อมูลผู้ใช้งาน</a>
+								<li><a>จัดการข้อมูลผู้ใช้งาน</a>
 									<ul class="sub-menu">
 										<li><a href="/manage_employee">จัดการข้อมูลพนักงาน</a></li>
-										<li><a href="/median_price">จัดการข้อมูลลูกค้า</a></li>
+										<li><a href="/manage_customer">จัดการข้อมูลลูกค้า</a></li>
 									</ul>
 								</li>
-								<li><a href="about.html">คลังทอง</a>
+								<li><a>คลังทอง</a>
 									<ul class="sub-menu">
 										<li><a href="/type_gold">จัดการประเภททอง</a></li>
 										<li><a href="/product">จัดการล็อตทอง</a></li>

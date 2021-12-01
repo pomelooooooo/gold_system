@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
-class ManageEmployeeController extends Controller
+class ManageCustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ManageEmployeeController extends Controller
      */
     public function index()
     {
-        $manageemployee = User::all()->toArray();
-        return view('admin.manage_employee.index', compact('manageemployee'));
+        $managecustomer = Customer::all()->toArray();
+        return view('admin.manage_customer.index', compact('managecustomer'));
     }
 
     /**
@@ -27,8 +27,7 @@ class ManageEmployeeController extends Controller
      */
     public function create()
     {
-
-        return view('admin.manage_employee.create-employee');
+        return view('admin.manage_customer.create-customer');
     }
 
     /**
@@ -39,26 +38,22 @@ class ManageEmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $manageemployee = new User(
+        $managecustomer = new Customer(
             [
                 'name' => $request->name,
                 'lastname' => $request->lastname,
                 'idcard' => $request->idcard,
                 'address' => $request->address,
                 'address_now' => $request->address_now,
-                'telephone' => $request->telephone,
-                'username' => $request->username,
-                'email' => $request->email,
+                'tel' => $request->tel,
                 'date_card_start' => $request->date_card_start,
                 'date_card_end' => $request->date_card_end,
-                'row_id' => $request->row_id,
-                'password' => Hash::make($request->password),
             ]
         );
         $picture = json_decode($request->data)->picture;
         if ($picture) {
             $img = $picture;
-            $folderPath = "assets/img/employee/"; //path location
+            $folderPath = "assets/img/customer/"; //path location
             $image_parts = explode(";base64,", $img);
             $image_type_aux = explode("image/", $image_parts[0]);
             $image_type = $image_type_aux[1];
@@ -66,11 +61,11 @@ class ManageEmployeeController extends Controller
             $uniqid = $request->idcard;
             $file = $folderPath . $uniqid . '.' . $image_type;
             file_put_contents($file, $image_base64);
-            $manageemployee->picture = $uniqid . '.' . $image_type;
+            $managecustomer->picture = $uniqid . '.' . $image_type;
         }
-        $manageemployee->save();
-        $manageemployee = User::all()->toArray();
-        return view('admin.manage_employee.index', compact('manageemployee'));
+        $managecustomer->save();
+        $managecustomer = Customer::all()->toArray();
+        return view('admin.manage_customer.index', compact('managecustomer'));
     }
 
     /**
@@ -92,8 +87,8 @@ class ManageEmployeeController extends Controller
      */
     public function edit($id)
     {
-        $manageemployee = User::find($id);
-        return view('admin.manage_employee.edit', compact('manageemployee', 'id'));
+        $managecustomer = Customer::find($id);
+        return view('admin.manage_customer.edit', compact('managecustomer', 'id'));
     }
 
     /**
@@ -105,34 +100,29 @@ class ManageEmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $manageemployee = User::find($id);
-        $manageemployee->name = $request->get('name');
-        $manageemployee->lastname = $request->get('lastname');
-        $manageemployee->idcard = $request->get('idcard');
-        $manageemployee->address = $request->get('address');
-        $manageemployee->address_now = $request->get('address_now');
-        $manageemployee->telephone = $request->get('telephone');
-        $manageemployee->username = $request->get('username');
-        $manageemployee->email = $request->get('email');
-        $manageemployee->date_card_start = $request->get('date_card_start');
-        $manageemployee->date_card_end = $request->get('date_card_end');
-        $manageemployee->row_id = $request->get('row_id');
-        $manageemployee->password =  Hash::make($request->get('password'));
-        // $managegold->pic = $request->get('pic');
+        $managecustomer = Customer::find($id);
+        $managecustomer->name = $request->get('name');
+        $managecustomer->lastname = $request->get('lastname');
+        $managecustomer->idcard = $request->get('idcard');
+        $managecustomer->address = $request->get('address');
+        $managecustomer->address_now = $request->get('address_now');
+        $managecustomer->tel = $request->get('tel');
+        $managecustomer->date_card_start = $request->get('date_card_start');
+        $managecustomer->date_card_end = $request->get('date_card_end');
         if ($request->hasFile('picture')) {
-            $destination = 'assets/img/employee' . $manageemployee->picture;
+            $destination = 'assets/img/customer' . $managecustomer->picture;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('assets/img/employee', $filename);
-            $manageemployee->picture = $filename;
+            $file->move('assets/img/customer', $filename);
+            $managecustomer->picture = $filename;
         }
-        $manageemployee->save();
-        $manageemployee = User::all()->toArray();
-        return view('admin.manage_employee.index', compact('manageemployee', 'id'));
+        $managecustomer->save();
+        $managecustomer = Customer::all()->toArray();
+        return view('admin.manage_customer.index', compact('managecustomer', 'id'));
     }
 
     /**
@@ -143,9 +133,9 @@ class ManageEmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $manageemployee = User::find($id);
-        $manageemployee->delete();
-        $manageemployee = User::all();
-        return view('admin.manage_employee.index', compact('manageemployee'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        $managecustomer = Customer::find($id);
+        $managecustomer->delete();
+        $managecustomer = Customer::all();
+        return view('admin.manage_customer.index', compact('managecustomer'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','เแก้ไขข้อมูลพนักงาน')
+@section('title','เแก้ไขข้อมูลลูกค้า')
 @section('content')
 
 <script>
@@ -64,7 +64,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>เแก้ไขข้อมูลพนักงาน</h1>
+                    <h1>เแก้ไขข้อมูลลูกค้า</h1>
                 </div>
             </div>
         </div>
@@ -76,48 +76,11 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>เแก้ไขข้อมูลพนักงาน</h2>
+            <h2>เแก้ไขข้อมูลลูกค้า</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{action('ManageEmployeeController@update', $id)}} " enctype="multipart/form-data" class="needs-validation" novalidate>
+            <form method="POST" action="{{action('ManageCustomerController@update', $id)}} " enctype="multipart/form-data" class="needs-validation" novalidate>
                 {{csrf_field()}}
-                <div class="row">
-                    <div class="col-6">
-                        <h4 for="validationusername">ชื่อผู้ใช้</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4 for="validationemail">อีเมล</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4 for="validationpassword">พาสเวิส</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="username" type="text" class="form-control" placeholder="" value="{{$manageemployee->username}}" id="validationusername" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกชื่อผู้ใช้
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="email" type="text" class="form-control" placeholder="" value="{{$manageemployee->email}}" id="validationemail" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกอีเมล
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="password" type="text" class="form-control" placeholder="" value="{{$manageemployee->password}}" id="validationpassword" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกพาสเวิส
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-6">
                         <h4 for="validationname">ชื่อ</h4>
@@ -129,7 +92,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" placeholder="" value="{{$manageemployee->name}}" id="validationname" required />
+                            <input name="name" type="text" class="form-control" placeholder="" value="{{$managecustomer->name}}" id="validationname" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกชื่อ
                             </div>
@@ -137,7 +100,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lastname" type="text" class="form-control" placeholder="" value="{{$manageemployee->lastname}}" id="validationlastname" required />
+                            <input name="lastname" type="text" class="form-control" placeholder="" value="{{$managecustomer->lastname}}" id="validationlastname" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกนามสกุล
                             </div>
@@ -155,7 +118,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" type="text" class="form-control" placeholder="" value="{{$manageemployee->idcard}}" id="validationid" required />
+                            <input name="idcard" type="text" class="form-control" placeholder="" value="{{$managecustomer->idcard}}" id="validationid" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเลขบัตรประชาชน
                             </div>
@@ -163,7 +126,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" type="text" class="form-control" placeholder="" value="{{$manageemployee->telephone}}" id="validationtel" required />
+                            <input name="tel" type="text" class="form-control" placeholder="" value="{{$managecustomer->tel}}" id="validationtel" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร
                             </div>
@@ -181,7 +144,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="address" type="text" class="form-control" placeholder="" value="{{$manageemployee->address}}" id="validationaddress" required />
+                            <input name="address" type="text" class="form-control" placeholder="" value="{{$managecustomer->address}}" id="validationaddress" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกที่อยู่ตามบัตรประชาชน
                             </div>
@@ -189,7 +152,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="address_now" type="text" class="form-control" placeholder="" value="{{$manageemployee->address_now}}" />
+                            <input name="address_now" type="text" class="form-control" placeholder="" value="{{$managecustomer->address_now}}" />
                         </div>
                     </div>
                 </div>
@@ -204,7 +167,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" value="{{$manageemployee->date_card_start}}" id="validationdatecardstart" required />
+                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" value="{{$managecustomer->date_card_start}}" id="validationdatecardstart" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกวันออกบัตร
                             </div>
@@ -212,7 +175,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" value="{{$manageemployee->date_card_end}}" id="validationdatecardend" required />
+                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" value="{{$managecustomer->date_card_end}}" id="validationdatecardend" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกวันบัตรหมดอายุ
                             </div>
@@ -243,7 +206,7 @@
                                     <div class="single-article-text-image-top">
                                         <p>รูปเดิม</p>
                                     </div>
-                                    <img src="{{ asset('assets/img/employee/'. $manageemployee->picture) }}" width="250px" height="250px" alt="Image">
+                                    <img src="{{ asset('assets/img/customer/'. $managecustomer->picture) }}" width="250px" height="250px" alt="Image">
                                     <div class="single-article-text-image-bottom">
                                         <p>รูปใหม่</p>
                                         <img id='img-upload' />
@@ -256,7 +219,7 @@
                 </div>
                 <br />
                 <div class="text-right">
-                    <a type="button" class="btn btn-secondary" href="{{url('/manage_employee')}}">กลับ</a>
+                    <a type="button" class="btn btn-secondary" href="{{url('/manage_customer')}}">กลับ</a>
                     <button type="submit" class="btn btn-success">บันทึก</button>
                 </div>
                 <input type="hidden" name="_method" value="PATCH" />
