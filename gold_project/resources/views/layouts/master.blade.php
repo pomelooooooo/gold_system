@@ -100,9 +100,19 @@
 
 									</ul>
 								</li>
-								<li><a href="about.html">การซื้อขายทอง</a></li>
+								<li><a>การซื้อขายทอง</a>
+									<ul class="sub-menu">
+										<li><a href="/type_gold">ซื้อทอง</a></li>
+										<li><a href="/product">ขายทอง</a></li>
+									</ul>
+								</li>
 								<li><a href="about.html">การจำนำทอง</a></li>
-								<li><a href="about.html">รายงานผลการดำเนินงาน</a></li>
+								<li><a>รายงานผลการดำเนินงาน</a>
+									<ul class="sub-menu">
+										<li><a href="/type_gold">ประวัติการซื้อขายย้อนหลัง</a></li>
+
+									</ul>
+								</li>
 
 								<li>
 									<div class="header-icons">
