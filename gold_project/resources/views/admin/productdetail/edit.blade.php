@@ -170,12 +170,14 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
+                    <div class="pl-2">
                         <div class="form-group">
                             @foreach($gold_type as $statusWay => $statusLable)
-                                <input class="form-check-input" name="status" type="checkbox" value="{{ $statusWay }}" {{ $productdetail->status == $statusWay ? "checked" : "" }}/>
+                                <input class="form-check-input" name="status" type="radio" value="{{ $statusWay }}" {{ $productdetail->status == $statusWay ? "checked" : "" }}/>
                                 <h5 class="form-check-label">{{ $statusLable }}</h5>
                             @endforeach
                         </div>
+                    </div>
                     </div>
                     <div class="col-6">
                         <div class="card">
