@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="lot_id" type="text" class="form-control" placeholder="" disabled/>
+                            <input name="lot_id" type="text" class="form-control" placeholder="" disabled />
                         </div>
                     </div>
                     <div class="col-4">
@@ -67,20 +67,20 @@
                         <div class="form-group">
                             <select name="type_gold_id" class="form-control" id="validationtype" required>
                                 <option selected disabled value="">เลือกประเภท</option>
-                            @foreach($type as $row)
+                                @foreach($type as $row)
                                 <option value="{{$row->id}}">{{$row->category}}</option>
-                            @endforeach
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">
-                            โปรดเลือกประเภททอง
+                                โปรดเลือกประเภททอง
                             </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="weight" type="text" class="form-control" placeholder="" id="validationweight" required/>
+                            <input name="weight" type="text" class="form-control" placeholder="" id="validationweight" required />
                             <div class="invalid-feedback">
-                            โปรดกรอกน้ำหนักทอง
+                                โปรดกรอกน้ำหนักทอง
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         <h4 for="validationprice">ราคาทองต่อเส้น</h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationwage">ค่าแรงต่อเส้น</h4>
+                        <h4 for="validationmanufacturer">ผู้ผลิต</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -101,23 +101,23 @@
                         <div class="form-group">
                             <input name="lot_count" type="text" class="form-control" placeholder="" id="validationcount" required />
                             <div class="invalid-feedback">
-                            โปรดกรอกจำนวนสินค้า
+                                โปรดกรอกจำนวนสินค้า
                             </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control"  placeholder="" id="validationprice" required />
+                            <input name="price_of_gold" type="text" class="form-control" placeholder="" id="validationprice" required />
                             <div class="invalid-feedback">
-                            โปรดกรอกราคาทองต่อเส้น
+                                โปรดกรอกราคาทองต่อเส้น
                             </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="wage" type="text" class="form-control" placeholder="" id="validationwage" required />
+                            <input name="manufacturer" type="text" class="form-control" placeholder="" id="validationmanufacturer" required />
                             <div class="invalid-feedback">
-                            โปรดกรอกค่าแรงต่อเส้น
+                                โปรดกรอกผู้ผลิต
                             </div>
                         </div>
                     </div>

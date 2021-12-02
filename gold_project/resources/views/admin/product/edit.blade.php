@@ -41,7 +41,7 @@
             <h2>แก้ไขข้อมูลล็อตทอง</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{action('ProductController@update', $id)}}"  class="needs-validation" novalidate>
+            <form method="POST" action="{{action('ProductController@update', $id)}}" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
@@ -54,14 +54,14 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lot_id" type="text" class="form-control" placeholder="" value="{{$product->lot_id}}" readonly/>
+                            <input name="lot_id" type="text" class="form-control" placeholder="" value="{{$product->lot_id}}" readonly />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="lot_count" type="text" class="form-control" placeholder="" value="{{$product->lot_count}}" id="validationcount" required/>
+                            <input name="lot_count" type="text" class="form-control" placeholder="" value="{{$product->lot_count}}" id="validationcount" required />
                             <div class="invalid-feedback">
-                            โปรดกรอกจำนวนสินค้า
+                                โปรดกรอกจำนวนสินค้า
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                         <h4 for="validationprice">ราคาทองต่อเส้น</h4>
                     </div>
                     <div class="col-3">
-                        <h4 for="validationwage">ค่าแรงต่อเส้น</h4>
+                        <h4 for="validationmanufacturer">ผู้ผลิต</h4>
                     </div>
                     <div class="col-6">
                         <h4>วันที่นำเข้า</h4>
@@ -80,17 +80,17 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$product->price_of_gold}}" id="validationprice" required/>
+                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$product->price_of_gold}}" id="validationprice" required />
                             <div class="invalid-feedback">
-                            โปรดกรอกราคาทองต่อเส้น
+                                โปรดกรอกราคาทองต่อเส้น
                             </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="wage" type="text" class="form-control" placeholder="" value="{{$product->wage}}" id="validationwage" required/>
+                            <input name="manufacturer" type="text" class="form-control" placeholder="" value="{{$product->manufacturer}}" id="validationmanufacturer" required />
                             <div class="invalid-feedback">
-                            โปรดกรอกค่าแรงต่อเส้น
+                                โปรดกรอกผู้ผลิต
                             </div>
                         </div>
                     </div>

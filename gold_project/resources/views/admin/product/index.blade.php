@@ -21,7 +21,7 @@
             }
         }
     }
-    
+
     $(document).ready(function() {
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
@@ -100,7 +100,7 @@
                                     <th scope="col">จำนวนสินต้า</th>
                                     <th scope="col">วันที่นำเข้า</th>
                                     <th scope="col">ราคาทอง</th>
-                                    <th scope="col">ค่าแรง</th>
+                                    <th scope="col">ผู้ผลิต</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -113,7 +113,7 @@
                                     <td>{{$row->lot_count}}</td>
                                     <td>{{$row->date_of_import}}</td>
                                     <td>{{$row->price_of_gold}}</td>
-                                    <td>{{$row->wage}}</td>
+                                    <td>{{$row->manufacturer}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('ProductController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>

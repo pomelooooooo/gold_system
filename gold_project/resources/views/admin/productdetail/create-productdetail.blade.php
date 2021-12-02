@@ -82,10 +82,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>รหัสสินค้า</h4>
+                        <h4>รหัสสินค้า*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtellotid">ล๊อต</h4>
+                        <h4 for="validationtellotid">ล๊อต*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -110,7 +110,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationcategory">ประเภท</h4>
+                        <h4 for="validationcategory">ประเภท*</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationstriped">ลาย</h4>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtelstore">นํ้าหนัก</h4>
+                        <h4 for="validationtelcategory">นํ้าหนัก*</h4>
                     </div>
                     <div class="col-6">
                         <h4>นํ้าหนัก(กรัม)</h4>
@@ -169,7 +169,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtray">ถาด</h4>
+                        <h4 for="validationtray">ถาด*</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationdetails">รายละเอียด</h4>
@@ -196,13 +196,45 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationstatus">สถานะทอง</h4>
+                        <h4>ราคาทองต่อเส้น*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>อัพโหลดรูปภาพ</h4>
+                        <h4 for="validationgratuity">ค่าแรงทองต่อเส้น*</h4>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-6">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="gratuity" type="text" class="form-control" placeholder="" id="validationgratuity" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกค่าแรง
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationallprice">ราคาทุน*</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationstatus">สถานะทอง*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="allprice" type="text" class="form-control" placeholder="" id="validationallprice" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกราคาทุน
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-6">
                         <div class="pl-2">
                             <div class="form-group">
@@ -214,22 +246,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="form-group text-center">
-                                <div class="card-header">
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-default btn-file-img">
-                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
-                                            </span>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>อัพโหลดรูปภาพ</h4>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="form-group text-center">
+                            <div class="card-header">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-default btn-file-img">
+                                            เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
                                         </span>
-                                        <input type="text" class="form-control" readonly>
-                                    </div>
+                                    </span>
+                                    <input type="text" class="form-control" readonly>
                                 </div>
-                                <div class="card-body">
-                                    <img id='img-upload' />
-                                </div>
+                            </div>
+                            <div class="card-body">
+                                <img id='img-upload' />
                             </div>
                         </div>
                     </div>
