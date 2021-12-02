@@ -32,6 +32,8 @@ Route::resource('/product', 'ProductController')->middleware('auth');
 
 Route::resource('/productdetail', 'ProductDetailController')->middleware('auth');
 
+Route::get('/productdetail/price_of_gold/{lot}', 'ProductDetailController@getprice_of_gold')->middleware('auth');
+
 Route::resource('/stores', 'StoresController')->middleware('auth');
 
 Route::resource('/median_price', 'MedianPriceController')->middleware('auth');

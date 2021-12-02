@@ -54,10 +54,8 @@ class ProductDetailController extends Controller
         } else {
             $code = "0001";
         }
-        // dd($gold_type);
-        $productdetail = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
         $product = Product::all();
-        return view('admin.productdetail.create-productdetail', compact('product', 'productdetail', 'gold_type', 'code'));
+        return view('admin.productdetail.create-productdetail', compact('product', 'gold_type', 'code'));
     }
 
     /**
@@ -96,9 +94,6 @@ class ProductDetailController extends Controller
         $productdetail->save();
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
-        // $productdetail = ProductDetails::all();
-        // dd($productdescript[0]->code);
-        // $managegold = Managegold::all()->toArray();
         return view('admin.productdetail.index', compact('productdetail', 'product'));
     }
 
@@ -122,10 +117,8 @@ class ProductDetailController extends Controller
     public function edit($id)
     {
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
-        $productdetail = ProductDetails::find($id);
-        // $productdetail = ProductDetails::select('*')->get();
+        $productdetail = ProductDetails::select('product_details.*', 'products.price_of_gold')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->where('product_details.id', $id)->first();
         $product = Product::all();
-        // dd($gold_type);
         return view('admin.productdetail.edit', compact('productdetail', 'product', 'gold_type', 'id'));
     }
 
@@ -183,5 +176,11 @@ class ProductDetailController extends Controller
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         return view('admin.productdetail.index', compact('productdetail', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+    }
+
+    public function getprice_of_gold($lot)
+    {
+        $product = Product::select('price_of_gold')->where('products.lot_id', $lot)->first();
+        return response()->json(["product" => $product]);
     }
 }

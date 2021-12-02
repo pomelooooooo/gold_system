@@ -188,7 +188,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="" />
+                            <input type="text" class="form-control" value="{{$productdetail->price_of_gold}}" placeholder="" readonly />
                         </div>
                     </div>
                     <div class="col-6">

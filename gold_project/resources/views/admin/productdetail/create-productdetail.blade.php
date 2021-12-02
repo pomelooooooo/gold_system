@@ -38,6 +38,24 @@
         $("#imgInp").change(function() {
             readURL(this);
         });
+
+        $("#validationtellotid").change(function() {
+            $.ajax({
+                url: "/productdetail/price_of_gold/" + $("#validationtellotid").val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $("#priceofgold").val(data.product.price_of_gold)
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+        $("#validationgratuity").keyup(function() {
+            $("#validationallprice").val(($("#priceofgold").val() * 1) + ($("#validationgratuity").val() * 1))
+        });
     });
 
     (function() {
@@ -204,9 +222,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="" />
+                            <input type="text" class="form-control" placeholder="" id="priceofgold" readonly />
                         </div>
                     </div>
                     <div class="col-6">
@@ -229,7 +246,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="allprice" type="text" class="form-control" placeholder="" id="validationallprice" required />
+                            <input name="allprice" type="text" class="form-control" placeholder="" id="validationallprice" required readonly />
                             <div class="invalid-feedback">
                                 โปรดกรอกราคาทุน
                             </div>
