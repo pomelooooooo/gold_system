@@ -204,12 +204,14 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
-                            @foreach(["0"=>"ทองในถาด","1"=>"ทองในสต๊อค"] as $statusWay => $statusLable)
-                            <input type="radio" class="form-check-input" name="status" type="checkbox" value="{{ $statusWay }}" id="validationstatus" required>
-                            <h5 class="form-check-label">{{ $statusLable }}</h5>
-                            <div class="invalid-feedback">โปรดเลือกสถานะทองที่ต้องการ</div>
-                            @endforeach
+                        <div class="pl-2">
+                            <div class="form-group">
+                                @foreach(["0"=>"ทองในถาด","1"=>"ทองในสต๊อค"] as $statusWay => $statusLable)
+                                <input type="radio" class="form-check-input" name="status" type="checkbox" value="{{ $statusWay }}" id="validationstatus" required>
+                                <h6 class="form-check-label">{{ $statusLable }}</h6>
+                                <div class="invalid-feedback">โปรดเลือกสถานะทองที่ต้องการ</div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
