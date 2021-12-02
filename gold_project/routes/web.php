@@ -43,3 +43,5 @@ Route::resource('/manage_employee', 'ManageEmployeeController')->middleware('aut
 Route::resource('/type_gold', 'TypeGoldController')->middleware('auth');
 
 Route::resource('/manage_customer', 'ManageCustomerController')->middleware('auth');
+
+Route::resource('/buy', 'BuyController')->middleware('auth');

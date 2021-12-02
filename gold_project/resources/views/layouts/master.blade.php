@@ -102,7 +102,7 @@
 								</li>
 								<li><a>การซื้อขายทอง</a>
 									<ul class="sub-menu">
-										<li><a href="/type_gold">ซื้อทอง</a></li>
+										<li><a href="/buy">ซื้อทอง</a></li>
 										<li><a href="/product">ขายทอง</a></li>
 									</ul>
 								</li>
