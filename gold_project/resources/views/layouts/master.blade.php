@@ -82,7 +82,7 @@
 									<ul class="sub-menu">
 										<li><a href="/stores">จัดการข้อมูลร้าน</a></li>
 										<li><a href="/median_price">ราคากลางทองประจำวัน</a></li>
-										<li><a href="/set_price">ตั้งราคาขาย</a></li>
+										<!-- <li><a href="/set_price">ตั้งราคาขาย</a></li> -->
 									</ul>
 								</li>
 								<li><a>จัดการข้อมูลผู้ใช้งาน</a>
@@ -93,6 +93,7 @@
 								</li>
 								<li><a>คลังทอง</a>
 									<ul class="sub-menu">
+										<li><a href="/manufacturer">จัดการข้อมูลผู้ผลิต</a></li>
 										<li><a href="/type_gold">จัดการประเภททอง</a></li>
 										<li><a href="/product">จัดการล็อตทอง</a></li>
 										<li><a href="/productdetail">จัดการข้อมูลทอง</a></li>
@@ -103,7 +104,7 @@
 								<li><a>การซื้อขายทอง</a>
 									<ul class="sub-menu">
 										<li><a href="/buy">ซื้อทอง</a></li>
-										<li><a href="/product">ขายทอง</a></li>
+										<li><a href="/sell">ขายทอง</a></li>
 									</ul>
 								</li>
 								<li><a href="about.html">การจำนำทอง</a></li>

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','จัดการล็อตทอง')
+@section('title','ขายทอง')
 @section('content')
 
 <script>
@@ -33,14 +33,14 @@
             });
             if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
                 $.ajax({
-                    url: "product/" + id,
+                    url: "sell/" + id,
                     type: 'delete',
                     data: {
                         id: id,
                         _token: token
                     },
                     success: function(data) {
-                        window.location = "{{route('product.index')}}"
+                        window.location = "{{route('sell.index')}}"
                     },
                     cache: false,
                     contentType: false,
@@ -59,8 +59,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                    <p class="subtitle">Gold System</p>
-                    <h1>จัดการล็อตทอง</h1>
+                        <p class="subtitle">Gold System</p>
+                        <h1>ขายทอง</h1>
                 </div>
             </div>
         </div>
@@ -74,10 +74,10 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <h3>จัดการล็อตทอง</h3>
+                        <h3>ขายทอง</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a type="button" class="btn btn-outline-info" href="{{ route('product.create') }}"><i class="fa fa-plus"></i> เพิ่มล็อตทอง</a>
+                        <a type="button" class="btn btn-outline-info" href="{{ route('sell.create') }}"><i class="fa fa-plus"></i> ขายทอง</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                     <div class="col-6">
                         <form class="form-inline">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหารหัสล็อตทอง">
+                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาชื่อการขายทอง">
                         </form>
                     </div>
                 </div>
@@ -96,31 +96,17 @@
                         <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">รหัสล๊อต</th>
-                                    <th scope="col">จำนวนสินต้า</th>
-                                    <th scope="col">วันที่นำเข้า</th>
-                                    <th scope="col">ราคาทอง</th>
+                                    <th scope="col">ชื่อ</th>
+                                    <th scope="col">นามสกุล</th>
+                                    <th scope="col">เลขบัตรประชาชน</th>
+                                    <th scope="col">เบอร์โทร</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach($product as $row)
-                                <tr>
-                                    <td>{{$row->lot_id}}</td>
-                                    <td>{{$row->lot_count}}</td>
-                                    <td>{{$row->date_of_import}}</td>
-                                    <td>{{$row->price_of_gold}}</td>
-                                    <td class="text-center">
-                                        <a class="btn btn-warning" href="{{action('ProductController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
-                                    </td>
-                                    <td class="text-center">
-                                        {{csrf_field()}}
-                                        <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row->id}}"><i class="fa fa-trash"></i> ลบ</button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                               
                             </tbody>
 
                         </table>

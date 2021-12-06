@@ -115,9 +115,14 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="manufacturer" type="text" class="form-control" placeholder="" id="validationmanufacturer" required />
+                            <select name="manufacturer" class="form-control" id="validationmanufacturer" required>
+                                <option selected disabled value="">เลือกผู้ผลิต</option>
+                                @foreach($manufacturer as $row)
+                                <option value="{{$row->code}}">{{$row->name}}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback">
-                                โปรดกรอกผู้ผลิต
+                                โปรดเลือกผู้ผลิต
                             </div>
                         </div>
                     </div>
