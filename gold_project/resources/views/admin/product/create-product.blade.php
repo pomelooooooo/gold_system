@@ -68,7 +68,7 @@
                             <select name="type_gold_id" class="form-control" id="validationtype" required>
                                 <option selected disabled value="">เลือกประเภท</option>
                                 @foreach($type as $row)
-                                <option value="{{$row->id}}">{{$row->category}}</option>
+                                <option value="{{$row->id}}">{{$row->category." - ".$row->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">

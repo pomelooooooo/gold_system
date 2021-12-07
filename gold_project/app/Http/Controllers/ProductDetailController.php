@@ -55,7 +55,8 @@ class ProductDetailController extends Controller
             $code = "0001";
         }
         $product = Product::all();
-        return view('admin.productdetail.create-productdetail', compact('product', 'gold_type', 'code'));
+        $producttype = TypeGold::all();
+        return view('admin.productdetail.create-productdetail', compact('product', 'gold_type', 'code', 'producttype'));
     }
 
     /**

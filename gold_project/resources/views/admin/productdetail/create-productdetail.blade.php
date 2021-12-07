@@ -139,8 +139,8 @@
                         <div class="input-group mb-3">
                             <select class="custom-select" name="category" id="validationcategory" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
-                                @foreach(["ทองแท่ง"=>"ทองแท่ง","สร้อยคอ"=>"สร้อยคอ","สร้อยข้อมือ"=>"สร้อยข้อมือ","แหวน"=>"แหวน","กำไล"=>"กำไล","ต่างหู"=>"ต่างหู","จี้"=>"จี้"] as $categoryWay => $categoryLable)
-                                <option value="{{ $categoryWay }}">{{ $categoryLable }}</option>
+                                @foreach($producttype as $row)
+                                <option value="{{$row->id}}">{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
