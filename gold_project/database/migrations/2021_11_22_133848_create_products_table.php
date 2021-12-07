@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('weight');
             $table->date('date_of_import');
             $table->integer('price_of_gold');
-            $table->string('manufacturer')->nullable();
-            $table->string('type_gold_id');
+            $table->integer('manufacturer')->nullable();
+            $table->integer('type_gold_id');
             $table->timestamps();
         });
     }

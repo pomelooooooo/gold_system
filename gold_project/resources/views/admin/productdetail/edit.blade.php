@@ -103,10 +103,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="category" id="validationcategory" required>
-                                <!-- <option selected>เลือกหน่วยนับ</option> -->
-                                @foreach(["ทองแท่ง"=>"ทองแท่ง","สร้อยคอ"=>"สร้อยคอ","สร้อยข้อมือ"=>"สร้อยข้อมือ","แหวน"=>"แหวน","กำไล"=>"กำไล","ต่างหู"=>"ต่างหู","จี้"=>"จี้"] as $categoryWay => $categoryLable)
-                                <option value="{{ $categoryWay }}" {{ old("category", $productdetail->category) == $categoryWay ? "selected" : "" }}>{{ $categoryLable }}</option>
+                            <select class="custom-select" name="type_gold_id" id="validationcategory" required>
+                                <option selected disabled value="">เลือกหน่วยนับ</option>
+                                @foreach($producttype as $row)
+                                <option value="{{$row->id}}" {{$row->id == $productdetail->type_gold_id ? 'selected' : ''}}>{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -188,7 +188,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" value="{{$productdetail->price_of_gold}}" placeholder="" readonly />
+                            <input type="text" class="form-control"  value="{{$productdetail->price_of_gold}}" placeholder="" readonly />
                         </div>
                     </div>
                     <div class="col-6">

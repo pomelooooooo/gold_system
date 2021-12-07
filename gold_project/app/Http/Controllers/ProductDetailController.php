@@ -23,7 +23,7 @@ class ProductDetailController extends Controller
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
-                ->orWhere('product_details.category', 'like', "%$keyword%")
+                ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
                 ->orWhere('product_details.size', 'like', "%$keyword%")
                 ->orWhere('product_details.lot_id', 'like', "%$keyword%");
         }
@@ -71,11 +71,12 @@ class ProductDetailController extends Controller
             [
                 'code' => $request->get('code'),
                 'details' => $request->get('details'),
-                'category' => $request->get('category'),
+                'type_gold_id' => $request->get('type_gold_id'),
                 'striped' => $request->get('striped'),
                 'size' => $request->get('size'),
                 'gram' => $request->get('gram'),
                 'status' => $request->get('status'),
+                'status_trade' => '0',
                 'type' => $request->get('type'),
                 'gratuity' => $request->get('gratuity'),
                 'tray' => $request->get('tray'),
@@ -120,7 +121,8 @@ class ProductDetailController extends Controller
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
         $productdetail = ProductDetails::select('product_details.*', 'products.price_of_gold')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->where('product_details.id', $id)->first();
         $product = Product::all();
-        return view('admin.productdetail.edit', compact('productdetail', 'product', 'gold_type', 'id'));
+        $producttype = TypeGold::all();
+        return view('admin.productdetail.edit', compact('productdetail', 'product','producttype', 'gold_type', 'id'));
     }
 
     /**
@@ -135,11 +137,12 @@ class ProductDetailController extends Controller
         $productdetail = ProductDetails::find($id);
         $productdetail->code = $request->get('code');
         $productdetail->details = $request->get('details');
-        $productdetail->category = $request->get('category');
+        $productdetail->type_gold_id = $request->get('type_gold_id');
         $productdetail->striped = $request->get('striped');
         $productdetail->size = $request->get('size');
         $productdetail->gram = $request->get('gram');
         $productdetail->status = $request->get('status');
+        $productdetail->status_trade = '0';
         $productdetail->type = $request->get('type');
         $productdetail->gratuity = $request->get('gratuity');
         $productdetail->tray = $request->get('tray');
@@ -181,7 +184,7 @@ class ProductDetailController extends Controller
 
     public function getprice_of_gold($lot)
     {
-        $product = Product::select('price_of_gold')->where('products.lot_id', $lot)->first();
+        $product = Product::select('price_of_gold','type_gold.id')->join('type_gold', 'type_gold.id', '=', 'products.type_gold_id')->where('products.lot_id', $lot)->first();
         return response()->json(["product" => $product]);
     }
 }

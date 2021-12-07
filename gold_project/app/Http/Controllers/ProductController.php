@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::select('products.*', 'type_gold.category')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->get();
+        $product = Product::all();
         $type = TypeGold::all();
         return view('admin.product.index', compact('product', 'type'));
     }
@@ -45,7 +45,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $type = TypeGold::select('category')->where('id', $request->get('type_gold_id'))->first();
-        $manufacturer = Manufacturer::select('name')->where('code', $request->get('manufacturer'))->first();
         // dd($type);
         // dd(Carbon::parse($request->get('date_of_import'))->format("Ymd"));
         $date = Carbon::parse($request->get('date_of_import'))->format('Ymd');
@@ -63,10 +62,8 @@ class ProductController extends Controller
             ]
         );
         $product->save();
-        $product = Product::select('products.*', 'type_gold.category','manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.code')->get();
-        $type = TypeGold::all();
-        $manufacturer = Manufacturer::all();
-        return view('admin.product.index', compact('product', 'type','manufacturer'));
+        $product = Product::all();
+        return view('admin.product.index', compact('product'));
     }
 
     /**
@@ -89,7 +86,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         // $product = Product::find($id);
-        $product = Product::select('products.*', 'type_gold.category','manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.code')->find($id);
+        $product = Product::select('products.*', 'type_gold.category','manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.id')->find($id);
         $type = TypeGold::all();
         $manufacturer = Manufacturer::all();
         return view('admin.product.edit', compact('product', 'type','manufacturer', 'id'));
@@ -111,10 +108,8 @@ class ProductController extends Controller
         $product->price_of_gold = $request->get('price_of_gold');
         $product->manufacturer = $request->get('manufacturer');
         $product->save();
-        $product = Product::select('products.*', 'type_gold.category','manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.code')->get();
-        $type = TypeGold::all();
-        $manufacturer = Manufacturer::all();
-        return view('admin.product.index', compact('product', 'type','manufacturer', 'id'));
+        $product = Product::all();
+        return redirect('/product')->with('product', $product);
     }
 
     /**
@@ -127,7 +122,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        $product = Product::select('products.*', 'type_gold.category','manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.code')->get();
+        $product = Product::all();
         $type = TypeGold::all();
         $manufacturer = Manufacturer::all();
         return view('admin.product.index', compact('product', 'type'))->with('success', 'ลบข้อมูลเรียบร้อย');

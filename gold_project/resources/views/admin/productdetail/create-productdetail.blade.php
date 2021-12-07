@@ -46,6 +46,8 @@
                 dataType: 'json',
                 success: function(data) {
                     $("#priceofgold").val(data.product.price_of_gold)
+                    $("#validationcategory").val(data.product.id)
+                    console.log(data.product);
                 },
                 cache: false,
                 contentType: false,
@@ -137,7 +139,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="category" id="validationcategory" required>
+                            <select class="custom-select" name="type_gold_id" id="validationcategory" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}">{{$row->name}}</option>

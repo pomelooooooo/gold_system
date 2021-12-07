@@ -15,10 +15,14 @@ class CreateSellsTable extends Migration
     {
         Schema::create('sells', function (Blueprint $table) {
             $table->id();
-            $table->string('gold_id');
+            $table->integer('gold_id');
             $table->dateTime('date_time');
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->string('sell_price');
+            $table->string('type_gold');
+            $table->string('weight');
+            $table->string('wage');
+            $table->string('price_of_gold');
             $table->timestamps();
         });
     }

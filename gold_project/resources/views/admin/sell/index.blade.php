@@ -76,9 +76,9 @@
                     <div class="col-6">
                         <h3>ขายทอง</h3>
                     </div>
-                    <div class="col-6 text-right">
+                    <!-- <div class="col-6 text-right">
                         <a type="button" class="btn btn-outline-info" href="{{ route('sell.create') }}"><i class="fa fa-plus"></i> ขายทอง</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="card-body">
@@ -96,15 +96,26 @@
                         <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">ชื่อ</th>
-                                    <th scope="col">นามสกุล</th>
-                                    <th scope="col">เลขบัตรประชาชน</th>
-                                    <th scope="col">เบอร์โทร</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">รหัสสินค้า</th>
+                                    <th scope="col">ประเภท</th>
+                                    <th scope="col">น้ำหนัก</th>
+                                    <th scope="col">ผู้ขาย</th>
+                                    <th scope="col">สถานะ</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-
+                                @foreach($productdetail as $row)
+                                <tr>
+                                    <td>{{$row->code}}</td>
+                                    <td>{{$row->type_gold_id}}</td>
+                                    <td>{{$row->size}}</td>
+                                    <td>{{$row->user_id}}</td>
+                                    <td>{{$row->status_trade}}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-primary" href="{{action('SellController@edit',$row->id)}}"><i class="fa fa-edit"></i> ขายทอง</a>
+                                    </td>
+                                </tr>
+                                @endforeach
                             <tbody>
                                
                             </tbody>

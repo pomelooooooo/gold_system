@@ -118,7 +118,7 @@
                             <select name="manufacturer" class="form-control" id="validationmanufacturer" required>
                                 <option selected disabled value="">เลือกผู้ผลิต</option>
                                 @foreach($manufacturer as $row)
-                                <option value="{{$row->code}}">{{$row->name}}</option>
+                                <option value="{{$row->id}}">{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">

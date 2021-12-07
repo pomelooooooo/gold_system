@@ -111,7 +111,7 @@
                                 <tr>
                                     <td>{{$row->code}}</td>
                                     <td>{{$row->details}}</td>
-                                    <td>{{$row->category}}</td>
+                                    <td>{{$row->type_gold_id == '1' ? 'ทองแท่ง' : 'ทองในสต็อก'}}</td>
                                     <td>{{$row->size}}</td>
                                     <td>{{$row->status == '0' ? 'ทองในถาด' : 'ทองในสต็อก'}}</td>
                                     <td>{{$row->lot_id}}</td>

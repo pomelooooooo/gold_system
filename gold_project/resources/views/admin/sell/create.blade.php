@@ -2,10 +2,21 @@
 @section('title','ขายทอง')
 @section('content')
 
-<script>
+<script type="text/javascript">
     $(function () {
-    $('.datetimepicker').datetimepicker();
-});
+        $.ajax({
+            url: "http://127.0.0.1:3000/latest",
+            type: 'GET',
+            success: function(response) {
+                console.log(response.response)
+                $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
+                $("#gold_sell").val(response.response.price.gold.sell)
+            },
+            error: function(xhr) {
+                "Not have Data!!"
+            }
+        })
+    });
 </script>
 
 <div class="breadcrumb-section breadcrumb-bg">
@@ -35,19 +46,27 @@
                     <div class="col-6">
                         <h4>รหัสสินค้า*</h4>
                     </div>
-                    <div class="col-6">
-                        <h4>ราคากลางทองประจำวัน*</h4>
+                    <div class="col-3">
+                        <h4>ราคากลางทองแท่งประจำวัน*</h4>
+                    </div>
+                    <div class="col-3">
+                        <h4>ราคากลางทองรูปพรรณประจำวัน*</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="" type="text" class="form-control" placeholder="" readonly />
+                            <input name="gold_id" type="text" class="form-control" placeholder="" readonly />
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
-                            <input name="" type="text" class="form-control" placeholder="" readonly />
+                            <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
                         </div>
                     </div>
                 </div>
@@ -65,17 +84,17 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control datetimepicker" name=""> 
+                            <input type="datetime-local" class="form-control" name="date_time"> 
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="" type="text" class="form-control" placeholder=""  />
+                            <input name="type_gold" type="text" class="form-control" placeholder=""  />
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="" type="text" class="form-control" placeholder=""  />
+                            <input name="weight" type="text" class="form-control" placeholder=""  />
                         </div>
                     </div>
                 </div>
@@ -94,17 +113,17 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control datetimepicker" name=""> 
+                            <input type="text" class="form-control" name="user_id"> 
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="" type="text" class="form-control" placeholder=""  />
+                            <input name="wage" type="text" class="form-control" placeholder=""  />
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="" type="text" class="form-control" placeholder=""  />
+                            <input name="price_of_gold" type="text" class="form-control" placeholder=""  />
                         </div>
                     </div>
                 </div>
@@ -116,7 +135,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control datetimepicker" name=""> 
+                            <input type="text" class="form-control datetimepicker" name="sell_price"> 
                         </div>
                     </div>
                 </div>
