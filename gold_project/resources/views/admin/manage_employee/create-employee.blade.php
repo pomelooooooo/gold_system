@@ -295,7 +295,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" id="telephone" type="text" class="form-control" placeholder="" id="validationtel" required />
+                            <input name="telephone" type="text" class="form-control" placeholder="" id="validationtel" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร
                             </div>
