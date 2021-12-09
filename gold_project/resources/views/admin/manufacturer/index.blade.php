@@ -70,6 +70,8 @@
                                 <tr>
                                     <th scope="col">รหัสผู้ผลิต</th>
                                     <th scope="col">ชื่อผู้ผลิต</th>
+                                    <th scope="col">เบอร์โทร</th>
+                                    <th scope="col">ที่อยู่</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -79,6 +81,8 @@
                                 <tr>
                                     <td>{{$row->code}}</td>
                                     <td>{{$row->name}}</td>
+                                    <td>{{$row->tel}}</td>
+                                    <td>{{$row->address}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('ManufacturerController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>

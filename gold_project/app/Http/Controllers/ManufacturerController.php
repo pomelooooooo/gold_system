@@ -41,6 +41,8 @@ class ManufacturerController extends Controller
             [
                 'code' => $request->get('code'),
                 'name' => $request->get('name'),
+                'tel' => $request->get('tel'),
+                'address' => $request->get('address'),
             ]
         );
         $manufacturer->save();
@@ -83,6 +85,8 @@ class ManufacturerController extends Controller
         $manufacturer = Manufacturer::find($id);
         $manufacturer->code = $request->get('code');
         $manufacturer->name = $request->get('name');
+        $manufacturer->tel = $request->get('tel');
+        $manufacturer->address = $request->get('address');
         $manufacturer->save();
         $manufacturer = Manufacturer::all();
         return view('admin.manufacturer.index', compact('manufacturer', 'id'));
