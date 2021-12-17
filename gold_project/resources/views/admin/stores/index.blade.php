@@ -72,7 +72,7 @@
                                     <th scope="col">ที่อยู่</th>
                                     <th scope="col">เบอร์โทร</th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
+                                    <!-- <th scope="col"></th> -->
                                 </tr>
                             </thead>
                             <tbody>

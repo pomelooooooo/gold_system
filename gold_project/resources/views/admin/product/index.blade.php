@@ -96,7 +96,7 @@
                         <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">รหัสล๊อต</th>
+                                    <th scope="col">รหัสล็อต</th>
                                     <th scope="col">จำนวนสินต้า</th>
                                     <th scope="col">วันที่นำเข้า</th>
                                     <th scope="col">ราคาทอง</th>

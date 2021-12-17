@@ -45,7 +45,7 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>รหัสล๊อต</h4>
+                        <h4>รหัสล็อต</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationcount">จำนวนสินค้า</h4>

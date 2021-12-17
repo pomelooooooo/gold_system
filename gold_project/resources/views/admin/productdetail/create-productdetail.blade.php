@@ -105,7 +105,7 @@
                         <h4>รหัสสินค้า*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtellotid">ล๊อต*</h4>
+                        <h4 for="validationtellotid">ล็อต*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -117,7 +117,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <select name="lot_id" class="form-control" id="validationtellotid" required>
-                                <option selected disabled value="">เลือกล๊อต</option>
+                                <option selected disabled value="">เลือกล็อต</option>
                                 @foreach($product as $row)
                                 <option value="{{$row->lot_id}}">{{$row->lot_id}}</option>
                                 @endforeach
