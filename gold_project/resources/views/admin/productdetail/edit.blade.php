@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','เพิ่มทองเข้าร้าน')
+@section('title','แก้ไขข้อมูลทอง')
 @section('content')
 
 <script>
@@ -47,7 +47,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>เพิ่มทองเข้าร้าน</h1>
+                    <h1>แก้ไขข้อมูลทอง</h1>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>เพิ่มทองเข้าร้าน</h2>
+            <h2>แก้ไขข้อมูลทอง</h2>
         </div>
         <div class="card-body">
             <form method="POST" action="{{action('ProductDetailController@update', $id)}}" enctype="multipart/form-data" class="needs-validation" novalidate>
@@ -188,7 +188,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" class="form-control"  value="{{$productdetail->price_of_gold}}" placeholder="" readonly />
+                            <input type="text" class="form-control" value="{{$productdetail->price_of_gold}}" placeholder="" readonly />
                         </div>
                     </div>
                     <div class="col-6">

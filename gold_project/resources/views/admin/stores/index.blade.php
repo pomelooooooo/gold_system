@@ -3,7 +3,7 @@
 @section('content')
 
 <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
             var token = $("meta[name='csrf-token']").attr("content");
@@ -40,8 +40,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>จัดการข้อมูลร้าน</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>จัดการข้อมูลร้าน</h1>
                 </div>
             </div>
         </div>
@@ -84,10 +84,10 @@
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('StoresController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         {{csrf_field()}}
                                         <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row['id']}}"><i class="fa fa-trash"></i> ลบ</button>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 @endforeach
                             </tbody>

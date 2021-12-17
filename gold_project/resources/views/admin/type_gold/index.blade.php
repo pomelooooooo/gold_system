@@ -3,7 +3,7 @@
 @section('content')
 
 <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
             var token = $("meta[name='csrf-token']").attr("content");
@@ -40,8 +40,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>จัดการประเภททอง</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>จัดการประเภททอง</h1>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                         <h3>ข้อมูลประเภททอง</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a type="button" class="btn btn-outline-info" href="{{ route('type_gold.create') }}"><i class="fa fa-plus"></i> เพิ่มร้านสาขา</a>
+                        <a type="button" class="btn btn-outline-info" href="{{ route('type_gold.create') }}"><i class="fa fa-plus"></i> เพิ่มประเภททอง</a>
                     </div>
                 </div>
             </div>
