@@ -92,7 +92,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-
+                        {{ $stores->links() }}
                     </div>
                 </div>
             </div>

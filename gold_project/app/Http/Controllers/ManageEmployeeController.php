@@ -16,7 +16,8 @@ class ManageEmployeeController extends Controller
      */
     public function index()
     {
-        $manageemployee = User::all()->toArray();
+        $manageemployee = User::select("*");
+        $manageemployee = $manageemployee->paginate(5);
         return view('admin.manage_employee.index', compact('manageemployee'));
     }
 
@@ -69,7 +70,7 @@ class ManageEmployeeController extends Controller
             $manageemployee->picture = $uniqid . '.' . $image_type;
         }
         $manageemployee->save();
-        $manageemployee = User::all()->toArray();
+        $manageemployee = User::select('*')->paginate(5);
         return view('admin.manage_employee.index', compact('manageemployee'));
     }
 
@@ -131,7 +132,7 @@ class ManageEmployeeController extends Controller
             $manageemployee->picture = $filename;
         }
         $manageemployee->save();
-        $manageemployee = User::all()->toArray();
+        $manageemployee = User::select('*')->paginate(5);
         return view('admin.manage_employee.index', compact('manageemployee', 'id'));
     }
 
@@ -145,7 +146,7 @@ class ManageEmployeeController extends Controller
     {
         $manageemployee = User::find($id);
         $manageemployee->delete();
-        $manageemployee = User::all();
+        $manageemployee = User::select('*')->paginate(5);
         return view('admin.manage_employee.index', compact('manageemployee'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

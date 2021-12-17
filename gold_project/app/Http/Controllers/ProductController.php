@@ -18,7 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
+        $product = Product::select("*");
+        $product = $product->paginate(5);
         $type = TypeGold::all();
         return view('admin.product.index', compact('product', 'type'));
     }
@@ -62,7 +63,7 @@ class ProductController extends Controller
             ]
         );
         $product->save();
-        $product = Product::all();
+        $product = Product::select('*')->paginate(5);
         return view('admin.product.index', compact('product'));
     }
 
@@ -122,7 +123,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        $product = Product::all();
+        $product = Product::select('*')->paginate(5);
         $type = TypeGold::all();
         $manufacturer = Manufacturer::all();
         return view('admin.product.index', compact('product', 'type'))->with('success', 'ลบข้อมูลเรียบร้อย');

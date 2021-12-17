@@ -3,6 +3,24 @@
 @section('content')
 
 <script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
       $(document).ready(function() {
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
@@ -64,8 +82,17 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    <div class="col-6">
+                        <form class="form-inline">
+                            <i class="fas fa-search" id="mySearch"></i>
+                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาชื่อผู้ผลิต">
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
                     <div class="col-12">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">รหัสผู้ผลิต</th>
@@ -94,7 +121,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-
+                        {{ $manufacturer->links() }}
                     </div>
                 </div>
             </div>

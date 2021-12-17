@@ -14,7 +14,8 @@ class TypeGoldController extends Controller
      */
     public function index()
     {
-        $type = TypeGold::all();
+        $type = TypeGold::select("*");
+        $type = $type->paginate(5);
         return view('admin.type_gold.index', compact('type'));
     }
 
@@ -44,7 +45,7 @@ class TypeGoldController extends Controller
             ]
         );
         $type->save();
-        $type = TypeGold::all();
+        $type = TypeGold::select('*')->paginate(5);
         return view('admin.type_gold.index', compact('type'));
     }
 
@@ -85,7 +86,7 @@ class TypeGoldController extends Controller
         $type->category = $request->get('category');
         $type->name = $request->get('name');
         $type->save();
-        $type = TypeGold::all();
+        $type = TypeGold::select('*')->paginate(5);
         return view('admin.type_gold.index', compact('type', 'id'));
     }
 
@@ -99,7 +100,7 @@ class TypeGoldController extends Controller
     {
         $type = TypeGold::find($id);
         $type->delete();
-        $type = TypeGold::all();
+        $type = TypeGold::select('*')->paginate(5);
         return view('admin.type_gold.index', compact('type'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

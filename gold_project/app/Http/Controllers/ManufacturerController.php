@@ -14,7 +14,8 @@ class ManufacturerController extends Controller
      */
     public function index()
     {
-        $manufacturer = Manufacturer::all();
+        $manufacturer = Manufacturer::select("*");
+        $manufacturer = $manufacturer->paginate(5);
         return view('admin.manufacturer.index', compact('manufacturer'));
     }
 
@@ -46,7 +47,7 @@ class ManufacturerController extends Controller
             ]
         );
         $manufacturer->save();
-        $manufacturer = Manufacturer::all();
+        $manufacturer = Manufacturer::select('*')->paginate(5);
         return view('admin.manufacturer.index', compact('manufacturer'));
     }
 
@@ -88,7 +89,7 @@ class ManufacturerController extends Controller
         $manufacturer->tel = $request->get('tel');
         $manufacturer->address = $request->get('address');
         $manufacturer->save();
-        $manufacturer = Manufacturer::all();
+        $manufacturer = Manufacturer::select('*')->paginate(5);
         return view('admin.manufacturer.index', compact('manufacturer', 'id'));
     }
 
@@ -102,7 +103,7 @@ class ManufacturerController extends Controller
     {
         $manufacturer = Manufacturer::find($id);
         $manufacturer->delete();
-        $manufacturer = Manufacturer::all();
+        $manufacturer = Manufacturer::select('*')->paginate(5);
         return view('admin.manufacturer.index', compact('manufacturer'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

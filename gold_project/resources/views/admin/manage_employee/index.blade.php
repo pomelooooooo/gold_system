@@ -123,6 +123,9 @@
                             </tbody>
 
                         </table>
+                        <div class="col-6">
+                            {{ $manageemployee->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

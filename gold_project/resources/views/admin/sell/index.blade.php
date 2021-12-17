@@ -105,6 +105,7 @@
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
+                            <tbody>
                                 @foreach($productdetail as $row)
                                 <tr>
                                     <td>{{$row->code}}</td>
@@ -123,11 +124,9 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                            <tbody>
-                               
                             </tbody>
-
                         </table>
+                        {{ $productdetail->links() }}
                     </div>
                 </div>
             </div>

@@ -64,8 +64,17 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    <div class="col-6">
+                        <form class="form-inline">
+                            <i class="fas fa-search" id="mySearch"></i>
+                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาประเภททอง">
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
                     <div class="col-12">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">รหัสประเภททอง</th>
@@ -90,7 +99,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-
+                        {{ $type->links() }}
                     </div>
                 </div>
             </div>

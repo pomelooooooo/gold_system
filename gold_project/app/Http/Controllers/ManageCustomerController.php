@@ -16,7 +16,8 @@ class ManageCustomerController extends Controller
      */
     public function index()
     {
-        $managecustomer = Customer::all()->toArray();
+        $managecustomer = Customer::select("*");
+        $managecustomer = $managecustomer->paginate(5);
         return view('admin.manage_customer.index', compact('managecustomer'));
     }
 
@@ -64,7 +65,7 @@ class ManageCustomerController extends Controller
             $managecustomer->picture = $uniqid . '.' . $image_type;
         }
         $managecustomer->save();
-        $managecustomer = Customer::all()->toArray();
+        $managecustomer = Customer::select('*')->paginate(5);
         return view('admin.manage_customer.index', compact('managecustomer'));
     }
 
@@ -121,7 +122,7 @@ class ManageCustomerController extends Controller
             $managecustomer->picture = $filename;
         }
         $managecustomer->save();
-        $managecustomer = Customer::all()->toArray();
+        $managecustomer = Customer::select('*')->paginate(5);
         return view('admin.manage_customer.index', compact('managecustomer', 'id'));
     }
 
@@ -135,7 +136,7 @@ class ManageCustomerController extends Controller
     {
         $managecustomer = Customer::find($id);
         $managecustomer->delete();
-        $managecustomer = Customer::all();
+        $managecustomer = Customer::select('*')->paginate(5);
         return view('admin.manage_customer.index', compact('managecustomer'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }
