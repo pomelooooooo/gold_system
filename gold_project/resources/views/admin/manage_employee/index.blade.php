@@ -83,9 +83,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <form class="form-inline">
+                        <form class="form-inline" action="/manage_employee" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาชื่อพนักงาน">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูลพนักงาน">
                         </form>
                     </div>
                 </div>

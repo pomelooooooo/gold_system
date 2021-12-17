@@ -14,9 +14,16 @@ class ManageCustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->get('search');
         $managecustomer = Customer::select("*");
+        if (!empty($keyword)) {
+            $managecustomer = $managecustomer->where('customer.name', 'like', "%$keyword%")
+                ->orWhere('customer.lastname', 'like', "%$keyword%")
+                ->orWhere('customer.idcard', 'like', "%$keyword%")
+                ->orWhere('customer.tel', 'like', "%$keyword%");
+        }
         $managecustomer = $managecustomer->paginate(5);
         return view('admin.manage_customer.index', compact('managecustomer'));
     }

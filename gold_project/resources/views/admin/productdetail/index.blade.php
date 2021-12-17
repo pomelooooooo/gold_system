@@ -10,7 +10,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0,1];
+            td = tr[i].getElementsByTagName("td")[0, 1];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -85,7 +85,7 @@
                     <div class="col-6">
                         <form class="form-inline" action="/productdetail" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหารหัสสินค้า">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูลทอง">
                         </form>
                     </div>
                 </div>

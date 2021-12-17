@@ -3,7 +3,7 @@
 @section('content')
 
 <script>
-     function myFunction() {
+    function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
@@ -83,9 +83,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <form class="form-inline">
+                        <form class="form-inline" action="/type_gold" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาประเภททอง">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูลประเภททอง">
                         </form>
                     </div>
                 </div>

@@ -59,8 +59,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>ขายทอง</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>ขายทอง</h1>
                 </div>
             </div>
         </div>
@@ -84,9 +84,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <form class="form-inline">
+                        <form class="form-inline" action="/sell" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาชื่อการขายทอง">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
                         </form>
                     </div>
                 </div>

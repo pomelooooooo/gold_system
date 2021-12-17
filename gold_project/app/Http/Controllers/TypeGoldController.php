@@ -12,9 +12,14 @@ class TypeGoldController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->get('search');
         $type = TypeGold::select("*");
+        if (!empty($keyword)) {
+            $type = $type->where('type_gold.category', 'like', "%$keyword%")
+                ->orWhere('type_gold.name', 'like', "%$keyword%");
+        }
         $type = $type->paginate(5);
         return view('admin.type_gold.index', compact('type'));
     }

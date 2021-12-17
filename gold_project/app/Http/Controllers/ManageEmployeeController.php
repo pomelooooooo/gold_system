@@ -14,9 +14,16 @@ class ManageEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->get('search');
         $manageemployee = User::select("*");
+        if (!empty($keyword)) {
+            $manageemployee = $manageemployee->where('users.name', 'like', "%$keyword%")
+                ->orWhere('users.lastname', 'like', "%$keyword%")
+                ->orWhere('users.idcard', 'like', "%$keyword%")
+                ->orWhere('users.telephone', 'like', "%$keyword%");
+        }
         $manageemployee = $manageemployee->paginate(5);
         return view('admin.manage_employee.index', compact('manageemployee'));
     }

@@ -16,9 +16,16 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->get('search');
         $product = Product::select("*");
+        if (!empty($keyword)) {
+            $product = $product->where('products.lot_id', 'like', "%$keyword%")
+                ->orWhere('products.lot_count', 'like', "%$keyword%")
+                ->orWhere('products.date_of_import', 'like', "%$keyword%")
+                ->orWhere('products.price_of_gold', 'like', "%$keyword%");
+        }
         $product = $product->paginate(5);
         $type = TypeGold::all();
         return view('admin.product.index', compact('product', 'type'));
@@ -31,10 +38,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = Product::select('products.*', 'type_gold.category','manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.code')->get();
+        $product = Product::select('products.*', 'type_gold.category', 'manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.code')->get();
         $type = TypeGold::all();
         $manufacturer = Manufacturer::all();
-        return view('admin.product.create-product', compact('product', 'type','manufacturer'));
+        return view('admin.product.create-product', compact('product', 'type', 'manufacturer'));
     }
 
     /**
@@ -87,10 +94,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         // $product = Product::find($id);
-        $product = Product::select('products.*', 'type_gold.category','manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.id')->find($id);
+        $product = Product::select('products.*', 'type_gold.category', 'manufacturers.code')->join('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->join('manufacturers', 'products.manufacturer', '=', 'manufacturers.id')->find($id);
         $type = TypeGold::all();
         $manufacturer = Manufacturer::all();
-        return view('admin.product.edit', compact('product', 'type','manufacturer', 'id'));
+        return view('admin.product.edit', compact('product', 'type', 'manufacturer', 'id'));
     }
 
     /**

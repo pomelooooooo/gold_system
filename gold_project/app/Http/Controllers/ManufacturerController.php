@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Manufacturer;
 use Illuminate\Http\Request;
+use PharIo\Manifest\Manifest;
 
 class ManufacturerController extends Controller
 {
@@ -12,9 +13,16 @@ class ManufacturerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->get('search');
         $manufacturer = Manufacturer::select("*");
+        if (!empty($keyword)) {
+            $manufacturer = $manufacturer->where('manufacturers.code', 'like', "%$keyword%")
+                ->orWhere('manufacturers.name', 'like', "%$keyword%")
+                ->orWhere('manufacturers.address', 'like', "%$keyword%")
+                ->orWhere('manufacturers.tel', 'like', "%$keyword%");
+        }
         $manufacturer = $manufacturer->paginate(5);
         return view('admin.manufacturer.index', compact('manufacturer'));
     }

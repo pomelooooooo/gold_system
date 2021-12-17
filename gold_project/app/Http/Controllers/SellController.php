@@ -28,14 +28,15 @@ class SellController extends Controller
                 ->orWhere('product_details.details', 'like', "%$keyword%")
                 ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
                 ->orWhere('product_details.size', 'like', "%$keyword%")
-                ->orWhere('product_details.lot_id', 'like', "%$keyword%");
+                ->orWhere('product_details.user_id', 'like', "%$keyword%")
+                ->orWhere('product_details.status_trade', 'like', "%$keyword%");
         }
         $productdetail = $productdetail->paginate(5);
         // dd($productdetail);
         $product = Product::all();
         $users = User::all();
         // dd($productdetail);
-        return view('admin.sell.index', compact('product', 'productdetail','users', 'keyword'));
+        return view('admin.sell.index', compact('product', 'productdetail', 'users', 'keyword'));
     }
 
     /**
@@ -116,7 +117,7 @@ class SellController extends Controller
         $users = User::all();
         $customer = Customer::all();
         $producttype = TypeGold::all();
-        return view('admin.sell.edit', compact('productdetail', 'product','customer','users','producttype', 'gold_type', 'id'));
+        return view('admin.sell.edit', compact('productdetail', 'product', 'customer', 'users', 'producttype', 'gold_type', 'id'));
     }
 
     /**
@@ -156,7 +157,7 @@ class SellController extends Controller
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         $customer = Customer::all();
-        return view('admin.sell.index', compact('productdetail', 'product','customer', 'id'));
+        return view('admin.sell.index', compact('productdetail', 'product', 'customer', 'id'));
     }
 
     /**
@@ -172,6 +173,6 @@ class SellController extends Controller
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         $customer = Customer::all();
-        return view('admin.sell.index', compact('productdetail','customer', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return view('admin.sell.index', compact('productdetail', 'customer', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

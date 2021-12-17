@@ -21,7 +21,7 @@
             }
         }
     }
-      $(document).ready(function() {
+    $(document).ready(function() {
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
             var token = $("meta[name='csrf-token']").attr("content");
@@ -58,8 +58,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>จัดการผู้ผลิต</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>จัดการผู้ผลิต</h1>
                 </div>
             </div>
         </div>
@@ -83,9 +83,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <form class="form-inline">
+                        <form class="form-inline" action="/manufacturer" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="ค้นหาชื่อผู้ผลิต">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูลผู้ผลิต">
                         </form>
                     </div>
                 </div>
