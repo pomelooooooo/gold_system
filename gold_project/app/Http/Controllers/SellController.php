@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
 use App\ProductDetails;
 use App\Product;
 use App\TypeGold;
+use App\Sell;
 use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\File;
@@ -72,6 +74,7 @@ class SellController extends Controller
                 'lot_id' => $request->get('lot_id'),
                 'num' => $request->get('num'),
                 'user_id' => $request->get('user_id'),
+                'customer_id' => $request->get('customer_id'),
                 'sellprice' => $request->get('sellprice'),
             ]
         );
@@ -111,8 +114,9 @@ class SellController extends Controller
         $productdetail = ProductDetails::select('product_details.*', 'products.price_of_gold')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->where('product_details.id', $id)->first();
         $product = Product::all();
         $users = User::all();
+        $customer = Customer::all();
         $producttype = TypeGold::all();
-        return view('admin.sell.edit', compact('productdetail', 'product','users','producttype', 'gold_type', 'id'));
+        return view('admin.sell.edit', compact('productdetail', 'product','customer','users','producttype', 'gold_type', 'id'));
     }
 
     /**
@@ -130,7 +134,8 @@ class SellController extends Controller
         $productdetail->status_trade = '1';
         $productdetail->size = $request->get('size');
         $productdetail->user_id = $request->get('user_id');
-        $productdetail->allprice = $request->get('user_id');
+        $productdetail->customer_id = $request->get('customer_id');
+        $productdetail->allprice = $request->get('allprice');
         $productdetail->gratuity = $request->get('gratuity');
         $productdetail->sellprice = $request->get('sellprice');
         $productdetail->datetime = $request->get('datetime');
@@ -150,7 +155,8 @@ class SellController extends Controller
         $productdetail->save();
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
-        return view('admin.sell.index', compact('productdetail', 'product', 'id'));
+        $customer = Customer::all();
+        return view('admin.sell.index', compact('productdetail', 'product','customer', 'id'));
     }
 
     /**
@@ -165,6 +171,7 @@ class SellController extends Controller
         $productdetail->delete();
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
-        return view('admin.sell.index', compact('productdetail', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        $customer = Customer::all();
+        return view('admin.sell.index', compact('productdetail','customer', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

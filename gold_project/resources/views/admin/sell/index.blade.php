@@ -76,9 +76,9 @@
                     <div class="col-6">
                         <h3>ขายทอง</h3>
                     </div>
-                    <!-- <div class="col-6 text-right">
-                        <a type="button" class="btn btn-outline-info" href="{{ route('sell.create') }}"><i class="fa fa-plus"></i> ขายทอง</a>
-                    </div> -->
+                    <div class="col-6 text-right">
+                        <a type="button" class="btn btn-outline-info" href=""><i class="fa fa-plus"></i> ขายทอง</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -102,6 +102,7 @@
                                     <th scope="col">ผู้ขาย</th>
                                     <th scope="col">สถานะ</th>
                                     <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                                 @foreach($productdetail as $row)
@@ -111,6 +112,12 @@
                                     <td>{{$row->size}}</td>
                                     <td>{{$row->user_id}}</td>
                                     <td>{{$row->status_trade}}</td>
+                                    <td>
+                                        <div class="form-check text-center">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault"></label>
+                                        </div>
+                                    </td>
                                     <td class="text-center">
                                         <a class="btn btn-primary" href="{{action('SellController@edit',$row->id)}}"><i class="fa fa-edit"></i> ขายทอง</a>
                                     </td>

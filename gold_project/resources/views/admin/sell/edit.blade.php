@@ -35,14 +35,67 @@
 
 <br />
 <div class="container">
+    <form method="POST" action="{{action('SellController@update', $id)}}" enctype="multipart/form-data" class="needs-validation" novalidate>
     <div class="card">
         <div class="card-header">
             <h2>ขายทอง</h2>
         </div>
         <div class="card-body">
-        <form method="POST" action="{{action('SellController@update', $id)}}" enctype="multipart/form-data" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationuser">ผู้ขาย*</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="user_id" id="validationuser" required>
+                                <option selected disabled value="">เลือกผู้ขาย</option>
+                                @foreach($users as $row)
+                                <option value="{{$row->id}}"{{$row->id == $productdetail->user_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกหน่วยนับที่ต้องการ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="customer_id" id="validationcustomer" required>
+                                <option selected disabled value="">เลือกลูกค้า</option>
+                                @foreach($customer as $row)
+                                <option value="{{$row->id}}"{{$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกหน่วยนับที่ต้องการ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>วันเวลาที่ขาย*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class='form-group'>
+                            <input type="datetime-local" class="form-control" name="datetime"> 
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <br/>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
                     <div class="col-6">
                         <h4>รหัสสินค้า*</h4>
                     </div>
@@ -71,73 +124,38 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <h4>วันเวลาที่ขาย*</h4>
-                    </div>
                     <div class="col-3">
                         <h4>ประเภท</h4>
                     </div>
                     <div class="col-3">
                         <h4>น้ำหนัก</h4>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class='form-group'>
-                            <input type="datetime-local" class="form-control" name="datetime"> 
-                        </div>
+                    <div class="col-3">
+                        <h4>ค่าแรงทองต่อเส้น</h4>
                     </div>
                     <div class="col-3">
+                        <h4>ราคาทุน</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="type_gold_id" id="validationcategory" required>
-                                <option selected disabled value="">เลือกหน่วยนับ</option>
+                            <select class="custom-select" name="type_gold_id" readonly>
+                                <option selected disabled value="">เลือกประเภททอง</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}" {{$row->id == $productdetail->type_gold_id ? 'selected' : ''}}>{{$row->name}}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
-                            </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="size" id="validationcategory" required>
+                            <select class="custom-select" name="size"readonly>
                                 <option selected>เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}" {{ old("size", $productdetail->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback">
-                                โปรดเลือกนํ้าหนักที่ต้องการ
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-6">
-                        <h4 for="validationuser">ผู้ขาย*</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ค่าแรงทองต่อเส้น</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4 for="validationallprice">ราคาทุน</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="user_id" id="validationuser" required>
-                                <option selected disabled value="">เลือกผู้ขาย</option>
-                                @foreach($users as $row)
-                                <option value="{{$row->id}}"{{$row->id == $productdetail->user_id ? 'selected' : ''}}>{{$row->name}}</option>
-                                @endforeach
-                            </select>
-                            <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
-                            </div>
                         </div>
                     </div>
                     <div class="col-3">
@@ -147,10 +165,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" id="validationallprice" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกราคาทุน
-                            </div>
+                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" readonly />
                         </div>
                     </div>
                 </div>
@@ -162,21 +177,19 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control datetimepicker" name="sellprice" value="{{$productdetail->sellprice}}"> 
+                            <input type="text" class="form-control" name="sellprice" value="{{$productdetail->sellprice}}"> 
                         </div>
                     </div>
                 </div>
-                
-                <br />
-                <div class="text-right">
-                    <a type="button" class="btn btn-secondary" href="{{url('/sell')}}">กลับ</a>
-                    <button type="submit" class="btn btn-success">บันทึก</button>
-                </div>
-                <input type="hidden" name="_method" value="PATCH" />
-                <br />
-            </form>
         </div>
     </div>
+    <br />
+        <div class="text-right">
+            <a type="button" class="btn btn-secondary" href="{{url('/sell')}}">กลับ</a>
+            <button type="submit" class="btn btn-success">บันทึก</button>
+        </div>
+        <input type="hidden" name="_method" value="PATCH" />
+    </form>
 </div>
 <br />
 
