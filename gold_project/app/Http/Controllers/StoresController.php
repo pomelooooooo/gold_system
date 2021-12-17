@@ -14,7 +14,8 @@ class StoresController extends Controller
      */
     public function index()
     {
-        $stores = Stores::all()->toArray();
+        $stores = Stores::select("*");
+        $stores = $stores->paginate(5);
         return view('admin.stores.index', compact('stores'));
     }
 
@@ -47,7 +48,7 @@ class StoresController extends Controller
             ]
         );
         $stores->save();
-        $stores = Stores::all()->toArray();
+        $stores = Stores::select('*')->paginate(5);
         return view('admin.stores.index', compact('stores'));
     }
 
@@ -92,7 +93,7 @@ class StoresController extends Controller
         $stores->tax_identification_number = $request->get('tax_identification_number');
         $stores->commercial_registration_number = $request->get('commercial_registration_number');
         $stores->save();
-        $stores = Stores::all()->toArray();
+        $stores = Stores::select('*')->paginate(5);
         return view('admin.stores.index', compact('stores', 'id'));
     }
 
@@ -106,7 +107,7 @@ class StoresController extends Controller
     {
         $stores = Stores::find($id);
         $stores->delete();
-        $stores = Stores::all();
+        $stores = Stores::select('*')->paginate(5);
         return view('admin.stores.index', compact('stores'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }
