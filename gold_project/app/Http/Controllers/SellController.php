@@ -22,7 +22,7 @@ class SellController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("*");
+        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee' ,'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -35,7 +35,7 @@ class SellController extends Controller
         // dd($productdetail);
         $product = Product::all();
         $users = User::all();
-        // dd($productdetail);
+
         return view('admin.sell.index', compact('product', 'productdetail', 'users', 'keyword'));
     }
 
@@ -129,6 +129,7 @@ class SellController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request);
         $productdetail = ProductDetails::find($id);
         $productdetail->code = $request->get('code');
         $productdetail->type_gold_id = $request->get('type_gold_id');
@@ -140,19 +141,6 @@ class SellController extends Controller
         $productdetail->gratuity = $request->get('gratuity');
         $productdetail->sellprice = $request->get('sellprice');
         $productdetail->datetime = $request->get('datetime');
-
-        // $managegold->pic = $request->get('pic');
-        if ($request->hasFile('pic')) {
-            $destination = 'assets/img/gold' . $productdetail->pic;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $file = $request->file('pic');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('assets/img/gold', $filename);
-            $productdetail->pic = $filename;
-        }
         $productdetail->save();
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
@@ -174,5 +162,36 @@ class SellController extends Controller
         $product = Product::all();
         $customer = Customer::all();
         return view('admin.sell.index', compact('productdetail', 'customer', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+    }
+    public function sell_group($id)
+    {
+        $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
+        $productdetail = ProductDetails::select('*')->whereIn('id', explode(",",$id))->get();
+        // dd($productdetail);
+        $users = User::all();
+        $customer = Customer::all();
+        $producttype = TypeGold::all();
+        return view('admin.sell.edit', compact('productdetail', 'customer', 'users', 'producttype', 'gold_type', 'id'));
+    }
+    public function updateGroup(Request $request)
+    {
+        foreach($request->id as $key => $value){
+            $productdetail = ProductDetails::find($request->id[$key]);
+            $productdetail->code = $request->code[$key];
+            $productdetail->type_gold_id = $request->type_gold_id[$key];
+            $productdetail->status_trade = '1';
+            $productdetail->size = $request->size[$key];
+            $productdetail->user_id = $request->user_id;
+            $productdetail->customer_id = $request->customer_id;
+            $productdetail->allprice = $request->allprice[$key];
+            $productdetail->sellprice = $request->sellprice[$key];
+            $productdetail->datetime = $request->datetime;
+            $productdetail->save();
+        }
+        $productdetail = ProductDetails::select('*')->paginate(5);
+        $product = Product::all();
+        $customer = Customer::all();
+        return redirect()->route('sell.index')->with(['productdetail' => $productdetail, 'product' => $product, 'customer' => $customer]);
+        // return view('admin.sell.index', compact('productdetail', 'product', 'customer'));
     }
 }

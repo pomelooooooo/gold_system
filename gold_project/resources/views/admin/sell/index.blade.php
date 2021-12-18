@@ -23,6 +23,28 @@
     }
 
     $(document).ready(function() {
+        $("body").on('click', '#btn-sell', function(e) {
+            var sellgroup = $('.sell-group:checked').map(function() {return this.value;}).get().join(',')
+            if(sellgroup != ""){
+                console.log('ssss')
+                window.location = "/sell/group/"+sellgroup
+                // $.ajax({
+                //     url: "/sell/group/"+sellgroup,
+                //     type: 'get',
+                //     // data: {
+                //     //     id: sellgroup,
+                //     // },
+                //     success: function(data) {
+                //         // window.location = "{{route('sell.index')}}"
+                //         console.log('aaaa')
+                //     },
+                //     cache: false,
+                //     contentType: false,
+                //     processData: false
+                // })
+            }
+        })
+
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
             var token = $("meta[name='csrf-token']").attr("content");
@@ -51,6 +73,7 @@
             }
         });
     });
+    
 </script>
 
 <!-- hero area -->
@@ -77,7 +100,7 @@
                         <h3>ขายทอง</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a type="button" class="btn btn-outline-info" href=""><i class="fa fa-plus"></i> ขายทอง</a>
+                        <button id="btn-sell" type="button" class="btn btn-outline-info"><i class="fa fa-plus"></i> ขายทอง</button>
                     </div>
                 </div>
             </div>
@@ -102,26 +125,25 @@
                                     <th scope="col">ผู้ขาย</th>
                                     <th scope="col">สถานะ</th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
+                                    <!-- <th scope="col"></th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($productdetail as $row)
                                 <tr>
                                     <td>{{$row->code}}</td>
-                                    <td>{{$row->type_gold_id}}</td>
+                                    <td>{{$row->name}}</td>
                                     <td>{{$row->size}}</td>
-                                    <td>{{$row->user_id}}</td>
-                                    <td>{{$row->status_trade}}</td>
+                                    <td>{{$row->nameemployee}}</td>
+                                    <td>{{$row->status_trade == '0' ? 'ยังไม่ขาย' : 'ขายออก'}}</td>
                                     <td>
                                         <div class="form-check text-center">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault"></label>
+                                            <input class="form-check-input sell-group" type="checkbox" value="{{$row->id}}" >
                                         </div>
                                     </td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         <a class="btn btn-primary" href="{{action('SellController@edit',$row->id)}}"><i class="fa fa-edit"></i> ขายทอง</a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 @endforeach
                             </tbody>
