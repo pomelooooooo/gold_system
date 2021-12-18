@@ -64,7 +64,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>เแก้ไขข้อมูลพนักงาน</h1>
+                    <h1>แก้ไขข้อมูลพนักงาน</h1>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>เแก้ไขข้อมูลพนักงาน</h2>
+            <h2>แก้ไขข้อมูลพนักงาน</h2>
         </div>
         <div class="card-body">
             <form method="POST" action="{{action('ManageEmployeeController@update', $id)}} " enctype="multipart/form-data" class="needs-validation" novalidate>
