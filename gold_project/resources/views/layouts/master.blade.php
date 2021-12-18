@@ -69,7 +69,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="/median_price">
+							<a>
 								<img src="{{url('assets/img/logo.png')}}" alt="">
 							</a>
 						</div>
@@ -78,7 +78,7 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="/stores">จัดการข้อมูลร้าน</a>
+								<li class="current-list-item"><a>จัดการข้อมูลร้าน</a>
 									<ul class="sub-menu">
 										<li><a href="/stores">จัดการข้อมูลร้าน</a></li>
 										<li><a href="/median_price">ราคากลางทองประจำวัน</a></li>
@@ -110,7 +110,7 @@
 								<li><a href="about.html">การจำนำทอง</a></li>
 								<li><a>รายงานผลการดำเนินงาน</a>
 									<ul class="sub-menu">
-										<li><a href="/type_gold">ประวัติการซื้อขายย้อนหลัง</a></li>
+										<li><a>ประวัติการซื้อขายย้อนหลัง</a></li>
 
 									</ul>
 								</li>
