@@ -46,11 +46,11 @@ class ProductDetailController extends Controller
         if (!empty($productdetail)) {
             $code = $productdetail->code + 1;
             $num = "0";
-            for ($i = strlen($code); $i < 4; $i++) {
+            // dd(strlen(str_replace('0', '', $code)));
+            for ($i = strlen(str_replace('0', '', $code)); $i < 3; $i++) {
                 $num .= "0";
             }
-            $code = $num . $code;
-            // dd($num.$code);
+            $code = $num . str_replace('0', '', $code);
         } else {
             $code = "0001";
         }
@@ -122,7 +122,7 @@ class ProductDetailController extends Controller
         $productdetail = ProductDetails::select('product_details.*', 'products.price_of_gold')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->where('product_details.id', $id)->first();
         $product = Product::all();
         $producttype = TypeGold::all();
-        return view('admin.productdetail.edit', compact('productdetail', 'product','producttype', 'gold_type', 'id'));
+        return view('admin.productdetail.edit', compact('productdetail', 'product', 'producttype', 'gold_type', 'id'));
     }
 
     /**
@@ -184,7 +184,7 @@ class ProductDetailController extends Controller
 
     public function getprice_of_gold($lot)
     {
-        $product = Product::select('price_of_gold','type_gold.id')->join('type_gold', 'type_gold.id', '=', 'products.type_gold_id')->where('products.lot_id', $lot)->first();
+        $product = Product::select('price_of_gold', 'type_gold.id')->join('type_gold', 'type_gold.id', '=', 'products.type_gold_id')->where('products.lot_id', $lot)->first();
         return response()->json(["product" => $product]);
     }
 }
