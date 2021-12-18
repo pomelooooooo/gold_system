@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','เแก้ไขข้อมูลพนักงาน')
+@section('title','แก้ไขข้อมูลพนักงาน')
 @section('content')
 
 <script>
