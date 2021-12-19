@@ -164,7 +164,8 @@ class ProductDetailController extends Controller
         $productdetail->save();
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
-        return view('admin.productdetail.index', compact('productdetail', 'product', 'id'));
+        // return view('admin.productdetail.index', compact('productdetail', 'product', 'id'));
+        return redirect('/productdetail')->with(['productdetail' => $productdetail, 'product' => $product]);
     }
 
     /**

@@ -94,7 +94,9 @@ class StoresController extends Controller
         $stores->commercial_registration_number = $request->get('commercial_registration_number');
         $stores->save();
         $stores = Stores::select('*')->paginate(5);
-        return view('admin.stores.index', compact('stores', 'id'));
+        // return view('admin.stores.index', compact('stores', 'id'));
+        return redirect('/stores')->with('stores' , $stores);
+
     }
 
     /**

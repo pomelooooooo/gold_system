@@ -98,7 +98,8 @@ class ManufacturerController extends Controller
         $manufacturer->address = $request->get('address');
         $manufacturer->save();
         $manufacturer = Manufacturer::select('*')->paginate(5);
-        return view('admin.manufacturer.index', compact('manufacturer', 'id'));
+        // return view('admin.manufacturer.index', compact('manufacturer', 'id'));
+        return redirect('/manufacturer')->with('manufacturer' , $manufacturer);
     }
 
     /**

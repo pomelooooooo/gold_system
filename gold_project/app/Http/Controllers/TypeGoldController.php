@@ -92,7 +92,8 @@ class TypeGoldController extends Controller
         $type->name = $request->get('name');
         $type->save();
         $type = TypeGold::select('*')->paginate(5);
-        return view('admin.type_gold.index', compact('type', 'id'));
+        // return view('admin.type_gold.index', compact('type', 'id'));
+        return redirect('/type_gold')->with('type' , $type);
     }
 
     /**

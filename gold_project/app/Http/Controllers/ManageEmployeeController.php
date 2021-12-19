@@ -140,7 +140,8 @@ class ManageEmployeeController extends Controller
         }
         $manageemployee->save();
         $manageemployee = User::select('*')->paginate(5);
-        return view('admin.manage_employee.index', compact('manageemployee', 'id'));
+        // return view('admin.manage_employee.index', compact('manageemployee', 'id'));
+        return redirect('/manage_employee')->with('manageemployee' , $manageemployee);
     }
 
     /**
