@@ -89,7 +89,7 @@
                         <h4 for="validationemail">อีเมล</h4>
                     </div>
                     <div class="col-3">
-                        <h4 for="validationpassword">พาสเวิส</h4>
+                        <h4 for="validationpassword">พาสเวิร์ด</h4>
                     </div>
                 </div>
                 <div class="row">
