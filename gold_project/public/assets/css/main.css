@@ -263,6 +263,9 @@ p:last-child {
   -webkit-animation: none;
   animation: none;
 }
+.medien-center {
+  margin-left: 200px;
+}
 
 @-webkit-keyframes spinLeft {
   from {
