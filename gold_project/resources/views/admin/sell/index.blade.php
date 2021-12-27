@@ -28,22 +28,15 @@
             if(sellgroup != ""){
                 console.log('ssss')
                 window.location = "/sell/group/"+sellgroup
-                // $.ajax({
-                //     url: "/sell/group/"+sellgroup,
-                //     type: 'get',
-                //     // data: {
-                //     //     id: sellgroup,
-                //     // },
-                //     success: function(data) {
-                //         // window.location = "{{route('sell.index')}}"
-                //         console.log('aaaa')
-                //     },
-                //     cache: false,
-                //     contentType: false,
-                //     processData: false
-                // })
             }
         })
+
+        // $("body").on("click", "[type='checkbox']", function(e) {
+        //     if (this.checked) {
+        //         $(this).attr("value", "true");
+        //     } else {
+        //         $(this).attr("value","false");}
+        //  });
 
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");

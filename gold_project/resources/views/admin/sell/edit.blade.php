@@ -62,6 +62,26 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
+                        <h4>ราคากลางทองแท่งประจำวัน*</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4>ราคากลางทองรูปพรรณประจำวัน*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
                         <h4 for="validationuser">ผู้ขาย*</h4>
                     </div>
                     <div class="col-6">
@@ -120,10 +140,10 @@
                         <h4>รหัสสินค้า*</h4>
                     </div>
                     <div class="col-3">
-                        <h4>ราคากลางทองแท่งประจำวัน*</h4>
+                        <h4>ประเภท</h4>
                     </div>
                     <div class="col-3">
-                        <h4>ราคากลางทองรูปพรรณประจำวัน*</h4>
+                        <h4>น้ำหนัก</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -132,32 +152,6 @@
                             <input name="code[]" type="text" class="form-control" placeholder="" value="{{$value->code}}" readonly />
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <h4>ประเภท</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>น้ำหนัก</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ค่าแรงทองต่อเส้น</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ราคาทุน</h4>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-3">
                         <div class="input-group mb-3">
                             <select class="custom-select" name="type_gold_id[]" readonly>
@@ -178,9 +172,22 @@
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <h4>ค่าแรงทองต่อเส้น</h4>
+                    </div>
+                    <div class="col-3">
+                        <h4>ราคาทุน</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4>ราคาขาย*</h4>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" value="{{$value->price_of_gold}}" placeholder="" readonly />
+                            <input name="gratuity[]" type="text" class="form-control" value="{{$value->gratuity}}" placeholder="" readonly />
                         </div>
                     </div>
                     <div class="col-3">
@@ -188,13 +195,6 @@
                             <input name="allprice[]" type="text" class="form-control" placeholder="" value="{{$value->allprice}}" readonly />
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>ราคาขาย*</h4>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
                             <input type="text" class="form-control" name="sellprice[]" value="{{$value->sellprice}}"> 

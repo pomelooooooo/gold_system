@@ -146,9 +146,7 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->lot_id}}" />
-                        </div>
+                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->gram}}" />
                     </div>
                 </div>
                 <div class="row">
