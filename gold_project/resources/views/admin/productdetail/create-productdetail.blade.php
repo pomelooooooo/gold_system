@@ -164,7 +164,7 @@
                         <h4 for="validationtelcategory">นํ้าหนัก*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>นํ้าหนัก(กรัม)</h4>
+                        <h4>นํ้าหนัก(กรัม)*</h4>
                     </div>
                 </div>
                 <div class="row">

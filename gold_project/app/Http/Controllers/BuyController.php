@@ -7,6 +7,8 @@ use App\Product;
 use App\TypeGold;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\User;
+use App\Customer;
 use Illuminate\Support\Facades\File;
 
 class BuyController extends Controller
@@ -19,19 +21,19 @@ class BuyController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $buy = ProductDetails::select("*");
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee','type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type','ทองเก่า');
         if(!empty($keyword)){
             $buy = $buy->where('product_details.code', 'like', "%$keyword%")
             ->orWhere('product_details.details', 'like', "%$keyword%")
+            ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
             ->orWhere('product_details.category', 'like', "%$keyword%")
-            ->orWhere('product_details.size', 'like', "%$keyword%")
-            ->orWhere('product_details.lot_id', 'like', "%$keyword%");
+            ->orWhere('product_details.user_id', 'like', "%$keyword%")
+            ->orWhere('product_details.customer_id', 'like', "%$keyword%");
         }
         $buy = $buy->paginate(5);
-        // dd($buy);
-        $product = Product::all();
-        // dd($buy);
-        return view('admin.buy.index', compact('product','buy','keyword'));
+        $customer = Customer::all();
+        $users = User::all();
+        return view('admin.buy.index', compact('buy','users','keyword','customer'));
     }
 
     /**
@@ -43,21 +45,21 @@ class BuyController extends Controller
     {
         $gold_type = ["ทองในถาด","ทองในสต๊อค"];
         $buy = ProductDetails::select('code')->orderBy('code',"desc")->first();
-        if(!empty($buy)){
-            $code = $buy->code+1;
+        if (!empty($buy)) {
+            $code = $buy->code + 1;
             $num = "0";
-            for($i = strlen($code);$i < 4;$i++){
+            // dd(strlen(str_replace('0', '', $code)));
+            for ($i = strlen(str_replace('0', '', $code)); $i < 3; $i++) {
                 $num .= "0";
             }
-            $code = $num.$code;
-            // dd($num.$code);
-        }else{
-            $code ="0001";
+            $code = $num . str_replace('0', '', $code);
+        } else {
+            $code = "0001";
         }
-        // dd($gold_type);
-        $buy = ProductDetails::select('product_details.*', 'products.lot_id')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->get();
-        $product = Product::all();
-        return view('admin.buy.create-buy', compact('product','buy','gold_type','code'));
+        $producttype = TypeGold::all();
+        $users = User::all();
+        $customer = Customer::all();
+        return view('admin.buy.create-buy', compact('producttype','buy','gold_type','code','users','customer'));
     }
 
     /**
@@ -72,16 +74,18 @@ class BuyController extends Controller
             [
                 'code' => $request->get('code'),
                 'details' => $request->get('details'),
-                'category' => $request->get('category'),
+                'type_gold_id' => $request->get('type_gold_id'),
                 'striped' => $request->get('striped'),
                 'size' => $request->get('size'),
                 'gram' => $request->get('gram'),
-                'status' => $request->get('status'),
-                'type' => $request->get('type'),
+                'status' => '1',
+                'status_trade' => '0',
+                'type' => 'ทองเก่า',
                 'gratuity' => $request->get('gratuity'),
-                'tray' => $request->get('tray'),
                 'allprice' => $request->get('allprice'),
-                'lot_id' => $request->get('lot_id'),
+                'user_id' => $request->get('user_id'),
+                'customer_id' => $request->get('customer_id'),
+                'datetime' => $request->get('datetime'),
                 'num' => $request->get('num'),
             ]
         );
@@ -94,11 +98,9 @@ class BuyController extends Controller
         }
         $buy->save();
         $buy = ProductDetails::select('*')->paginate(5);
-        $product = Product::all();
-        // $productdetail = ProductDetails::all();
-        // dd($productdescript[0]->code);
-        // $managegold = Managegold::all()->toArray();
-        return view('admin.buy.index', compact('buy','product'));
+        $customer = Customer::all();
+        $users = User::all();
+        return view('admin.buy.index', compact('buy','customer','users'));
     }
 
     /**
@@ -122,10 +124,10 @@ class BuyController extends Controller
     {
         $gold_type = ["ทองในถาด","ทองในสต๊อค"];
         $buy = ProductDetails::find($id);
-        // $productdetail = ProductDetails::select('*')->get();
-        $product = Product::all();
-        // dd($gold_type);
-        return view('admin.buy.edit', compact('buy','product','gold_type', 'id'));
+        $producttype = TypeGold::all();
+        $users = User::all();
+        $customer = Customer::all();
+        return view('admin.buy.edit', compact('buy','producttype', 'customer', 'users','gold_type', 'id'));
     }
 
     /**
@@ -140,16 +142,18 @@ class BuyController extends Controller
         $buy = ProductDetails::find($id);
         $buy->code = $request->get('code');
         $buy->details = $request->get('details');
-        $buy->category = $request->get('category');
         $buy->striped = $request->get('striped');
         $buy->size = $request->get('size');
         $buy->gram = $request->get('gram');
-        $buy->status = $request->get('status');
-        $buy->type = $request->get('type');
+        $buy->status = '1';
+        $buy->status_trade = '0';
+        $buy->type = 'ทองเก่า';
         $buy->gratuity = $request->get('gratuity');
-        $buy->tray = $request->get('tray');
+        $buy->user_id = $request->get('user_id');
+        $buy->datetime = $request->get('datetime');
+        $buy->customer_id = $request->get('customer_id');
+        $buy->type_gold_id = $request->get('type_gold_id');
         $buy->allprice = $request->get('allprice');
-        $buy->lot_id = $request->get('lot_id');
 
         // $managegold->pic = $request->get('pic');
         if($request->hasFile('pic')){
@@ -165,8 +169,10 @@ class BuyController extends Controller
         }
         $buy->save();
         $buy = ProductDetails::select('*')->paginate(5);
-        $product = Product::all();
-        return view('admin.buy.index', compact('buy','product', 'id'));
+        $customer = Customer::all();
+        $users = User::all();
+        // return view('admin.buy.index', compact('buy','users','customer', 'id'));
+        return redirect()->route('buy.index')->with(['buy' => $buy, 'users' => $users,'customer' => $customer]);
     }
 
     /**
@@ -181,6 +187,8 @@ class BuyController extends Controller
         $buy->delete();
         $buy = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
-        return view('admin.buy.index', compact('buy','product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        $customer = Customer::all();
+        $users = User::all();
+        return view('admin.buy.index', compact('buy','users','product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }

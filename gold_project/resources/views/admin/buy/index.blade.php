@@ -97,10 +97,10 @@
                                 <tr>
                                     <th scope="col">รหัสสินค้า</th>
                                     <th scope="col">รายละเอียดสินค้า</th>
-                                    <th scope="col">หมวดหมู่</th>
+                                    <th scope="col">ประเภท</th>
                                     <th scope="col">นํ้าหนัก</th>
-                                    <th scope="col">สถานะ</th>
-                                    <th scope="col">ล๊อต</th>
+                                    <th scope="col">ผู้รับซื้อ</th>
+                                    <th scope="col">ลูกค้า</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -111,10 +111,10 @@
                                 <tr>
                                     <td>{{$row->code}}</td>
                                     <td>{{$row->details}}</td>
-                                    <td>{{$row->category}}</td>
+                                    <td>{{$row->name}}</td>
                                     <td>{{$row->size}}</td>
-                                    <td>{{$row->status == '0' ? 'ทองในถาด' : 'ทองในสต็อก'}}</td>
-                                    <td>{{$row->lot_id}}</td>
+                                    <td>{{$row->nameemployee}}</td>
+                                    <td>{{$row->namecustomer}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('BuyController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>

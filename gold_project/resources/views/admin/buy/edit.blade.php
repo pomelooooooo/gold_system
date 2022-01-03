@@ -66,10 +66,46 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
+                        <h4 for="validationuser">ผู้รับซื้อ*</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="user_id" id="validationuser" required>
+                                <option selected disabled value="">เลือกผู้รับซื้อ</option>
+                                @foreach($users as $row)
+                                <option value="{{$row->id}}"{{!empty($buy->user_id)&&$row->id == $buy->user_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกผู้รับซื้อที่ต้องการ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="customer_id" id="validationcustomer" required>
+                                <option selected disabled value="">เลือกลูกค้า</option>
+                                @foreach($customer as $row)
+                                <option value="{{$row->id}}"{{!empty($buy->customer_id)&&$row->id == $buy->customer_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกเลือกลูกค้าที่ต้องการ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
                         <h4>รหัสสินค้า</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ล๊อต</h4>
+                        <h4 for="validationcategory">ประเภท*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -79,106 +115,96 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
-                            <select name="lot_id" class="form-control" id="userID">
-                                <option value="0" label="เลือกล๊อต">เลือกล๊อต</option>
-                                @foreach($product as $row)
-                                <option value="{{$row->lot_id}}"{{$row->lot_id == $buy->lot_id ? 'selected' : ''}}>{{$row->lot_id}}</option>
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="type_gold_id" id="validationcategory" required>
+                                <option selected disabled value="">เลือกหน่วยนับ</option>
+                                @foreach($producttype as $row)
+                                <option value="{{$row->id}}"{{$row->id == $buy->type_gold_id ? 'selected' : ''}}>{{$row->name}}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกหน่วยนับที่ต้องการ
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ประเภท</h4>
+                        <h4 for="validationtelstore">นํ้าหนัก*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ลาย</h4>
+                        <h4>นํ้าหนัก(กรัม)*</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="category" >
-                                <!-- <option selected>เลือกหน่วยนับ</option> -->
-                                @foreach(["ทองแท่ง"=>"ทองแท่ง","สร้อยคอ"=>"สร้อยคอ","สร้อยข้อมือ"=>"สร้อยข้อมือ","แหวน"=>"แหวน","กำไล"=>"กำไล","ต่างหู"=>"ต่างหู","จี้"=>"จี้"] as $categoryWay => $categoryLable)
-                                    <option value="{{ $categoryWay }}" {{ old("category", $buy->category) == $categoryWay ? "selected" : "" }}>{{ $categoryLable }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" value="{{$buy->striped}}"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>นํ้าหนัก</h4>
-                    </div>
-                    <div class="col-6">
-                        <h4>นํ้าหนัก(กรัม)</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="size" >
-                                <!-- <option selected>เลือกหน่วยนับ</option> -->
+                            <select class="custom-select" name="size" id="validationcategory" required>
+                                <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
-                                    <option value="{{ $sizeWay }}" {{ old("size", $buy->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
+                                <option value="{{ $sizeWay }}" {{ old("size", $buy->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกนํ้าหนักที่ต้องการ
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$buy->lot_id}}"/>
+                            <input name="gram" type="text" class="form-control" placeholder="" value="{{$buy->gram}}" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ถาด</h4>
+                        <h4 for="validationstriped">ลาย*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>รายละเอียด</h4>
+                        <h4 for="validationdetails">รายละเอียด</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tray" type="text" class="form-control" placeholder="" value="{{$buy->tray}}"/>
+                            <input name="striped" type="text" class="form-control" placeholder="" id="validationstriped" value="{{$buy->striped}}" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกลายที่ต้องการ
+                            </div>
                         </div>
-                        
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" value="{{$buy->details}}"/>
+                            <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" value="{{$buy->details}}" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกรายละเอียดทอง
+                            </div>
                         </div>
                     </div>
                 </div>
+              <div class="row">
+                   <div class="col-6">
+                        <h4 for="validationprice">ราคารับซื้อ</h4>
+                   </div>
+               </div>
+               <div class="row">
+                   <div class="col-6">
+                        <div class="form-group">
+                            <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice"  value="{{$buy->allprice}}" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกราคารับซื้อ
+                            </div>
+                        </div>
+                   </div>
+               </div>
+               
                 <div class="row">
-                    <div class="col-6">
-                        <h4>สถานะทอง</h4>
-                    </div>
+                   
                     <div class="col-6">
                         <h4>อัพโหลดรูปภาพ</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                    <div class="pl-2">
-                        <div class="form-group">
-                            @foreach($gold_type as $statusWay => $statusLable)
-                                <input class="form-check-input" name="status" type="radio" value="{{ $statusWay }}" {{ $buy->status == $statusWay ? "checked" : "" }}/>
-                                <h5 class="form-check-label">{{ $statusLable }}</h5>
-                            @endforeach
-                        </div>
-                    </div>
-                    </div>
                     <div class="col-6">
                         <div class="card">
                             <div class="form-group text-center">

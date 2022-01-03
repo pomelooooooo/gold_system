@@ -19,7 +19,7 @@ class ProductDetailController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("*");
+        $productdetail = ProductDetails::select("*")->where('type','ทองใหม่');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -77,7 +77,7 @@ class ProductDetailController extends Controller
                 'gram' => $request->get('gram'),
                 'status' => $request->get('status'),
                 'status_trade' => '0',
-                'type' => $request->get('type'),
+                'type' => 'ทองใหม่',
                 'gratuity' => $request->get('gratuity'),
                 'tray' => $request->get('tray'),
                 'allprice' => $request->get('allprice'),
@@ -143,7 +143,7 @@ class ProductDetailController extends Controller
         $productdetail->gram = $request->get('gram');
         $productdetail->status = $request->get('status');
         $productdetail->status_trade = '0';
-        $productdetail->type = $request->get('type');
+        $productdetail->type = 'ทองใหม่';
         $productdetail->gratuity = $request->get('gratuity');
         $productdetail->tray = $request->get('tray');
         $productdetail->allprice = $request->get('allprice');

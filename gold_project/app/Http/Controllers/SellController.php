@@ -22,7 +22,7 @@ class SellController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee' ,'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id');
+        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee' ,'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type','ทองใหม่');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -129,7 +129,7 @@ class SellController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
+        // dd($request);
         $productdetail = ProductDetails::find($id);
         $productdetail->code = $request->get('code');
         $productdetail->type_gold_id = $request->get('type_gold_id');
@@ -145,7 +145,8 @@ class SellController extends Controller
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         $customer = Customer::all();
-        return view('admin.sell.index', compact('productdetail', 'product', 'customer', 'id'));
+        $users = User::all();
+        return view('admin.sell.index', compact('productdetail','users', 'product', 'customer', 'id'));
     }
 
     /**
@@ -191,7 +192,8 @@ class SellController extends Controller
         $productdetail = ProductDetails::select('*')->paginate(5);
         $product = Product::all();
         $customer = Customer::all();
-        return redirect()->route('sell.index')->with(['productdetail' => $productdetail, 'product' => $product, 'customer' => $customer]);
+        $users = User::all();
+        return redirect()->route('sell.index')->with(['productdetail' => $productdetail, 'product' => $product, 'customer' => $customer,'users' => $users]);
         // return view('admin.sell.index', compact('productdetail', 'product', 'customer'));
     }
 }
