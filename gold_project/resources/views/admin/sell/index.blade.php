@@ -33,13 +33,6 @@
             }
         })
 
-        // $("body").on("click", "[type='checkbox']", function(e) {
-        //     if (this.checked) {
-        //         $(this).attr("value", "true");
-        //     } else {
-        //         $(this).attr("value","false");}
-        //  });
-
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
             var token = $("meta[name='csrf-token']").attr("content");
@@ -104,6 +97,13 @@
                         <form class="form-inline" action="/sell" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
                             <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
+                            <select class="form-control" name="filter_type" id="validationcategory">
+                                <option value="">เลือกหน่วยนับ</option>
+                                @foreach($producttype as $row)
+                                <option value="{{$row->id}}" {{$row->id == $filter_type?"selected":""}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <input type="submit" class="btn btn-danger" value="Filter">
                         </form>
                     </div>
                 </div>

@@ -11,28 +11,16 @@
                 console.log(response.response)
                 $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
                 $("#gold_sell").val(response.response.price.gold.sell)
+                $('.gold_sell_cal').each(function(i, obj) {
+                    $("#gold_sell_cal" + i).val(parseFloat(response.response.price.gold.sell.replace(",", "")) + (parseFloat($("#gratuity_cal" + i).val()) * 0.7))
+                });
+                // console.log(response.response.price.gold.sell, parseFloat($(".gratuity_cal").val()) * 0.7)
             },
             error: function(xhr) {
                 "Not have Data!!"
             }
         })
-        // $("body").on('click', '#btn-save', function(e) {
-        //     var formdata = $('form').serialize()
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         }
-        //     });
-        //     $.ajax({
-        //         url:"{{url('/sell/group')}}",  
-        //         method:"POST",
-        //         data:formdata,
-        //         // dataType:'JSON',                   
-        //         success: function( data ) {
-        //             // console.log(data);
-        //         }
-        //     });
-        // })
+
     });
 </script>
 
@@ -187,7 +175,7 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="gratuity[]" type="text" class="form-control" value="{{$value->gratuity}}" placeholder="" readonly />
+                            <input name="gratuity[]" type="text" class="form-control gratuity_cal" value="{{$value->gratuity}}" id="gratuity_cal{{$key}}" placeholder="" readonly />
                         </div>
                     </div>
                     <div class="col-3">
@@ -209,7 +197,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control" name="sellprice[]" value="{{$value->sellprice}}">
+                            <input type="text" class="form-control gold_sell_cal " name="sellprice[]" id="gold_sell_cal{{$key}}" value="{{$value->sellprice}}">
                         </div>
                     </div>
                 </div>
