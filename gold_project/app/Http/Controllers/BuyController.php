@@ -21,19 +21,19 @@ class BuyController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee','type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type','ทองเก่า');
-        if(!empty($keyword)){
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
+        if (!empty($keyword)) {
             $buy = $buy->where('product_details.code', 'like', "%$keyword%")
-            ->orWhere('product_details.details', 'like', "%$keyword%")
-            ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
-            ->orWhere('product_details.category', 'like', "%$keyword%")
-            ->orWhere('product_details.user_id', 'like', "%$keyword%")
-            ->orWhere('product_details.customer_id', 'like', "%$keyword%");
+                ->orWhere('product_details.details', 'like', "%$keyword%")
+                ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
+                ->orWhere('product_details.category', 'like', "%$keyword%")
+                ->orWhere('product_details.user_id', 'like', "%$keyword%")
+                ->orWhere('product_details.customer_id', 'like', "%$keyword%");
         }
         $buy = $buy->paginate(5);
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy','users','keyword','customer'));
+        return view('admin.buy.index', compact('buy', 'users', 'keyword', 'customer'));
     }
 
     /**
@@ -43,8 +43,8 @@ class BuyController extends Controller
      */
     public function create()
     {
-        $gold_type = ["ทองในถาด","ทองในสต๊อค"];
-        $buy = ProductDetails::select('code')->orderBy('code',"desc")->first();
+        $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
+        $buy = ProductDetails::select('code')->orderBy('code', "desc")->where('type', 'ทองเก่า')->first();
         if (!empty($buy)) {
             $code = $buy->code + 1;
             $num = "0";
@@ -59,7 +59,7 @@ class BuyController extends Controller
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
-        return view('admin.buy.create-buy', compact('producttype','buy','gold_type','code','users','customer'));
+        return view('admin.buy.create-buy', compact('producttype', 'buy', 'gold_type', 'code', 'users', 'customer'));
     }
 
     /**
@@ -89,18 +89,18 @@ class BuyController extends Controller
                 'num' => $request->get('num'),
             ]
         );
-        if($request->hasFile('pic')){
+        if ($request->hasFile('pic')) {
             $file = $request->file('pic');
             $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
+            $filename = time() . '.' . $extension;
             $file->move('assets/img/gold', $filename);
             $buy->pic = $filename;
         }
         $buy->save();
-        $buy = ProductDetails::select('*')->paginate(5);
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->paginate(5);
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy','customer','users'));
+        return view('admin.buy.index', compact('buy', 'customer', 'users'));
     }
 
     /**
@@ -122,12 +122,12 @@ class BuyController extends Controller
      */
     public function edit($id)
     {
-        $gold_type = ["ทองในถาด","ทองในสต๊อค"];
+        $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
         $buy = ProductDetails::find($id);
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
-        return view('admin.buy.edit', compact('buy','producttype', 'customer', 'users','gold_type', 'id'));
+        return view('admin.buy.edit', compact('buy', 'producttype', 'customer', 'users', 'gold_type', 'id'));
     }
 
     /**
@@ -156,23 +156,23 @@ class BuyController extends Controller
         $buy->allprice = $request->get('allprice');
 
         // $managegold->pic = $request->get('pic');
-        if($request->hasFile('pic')){
-            $destination = 'assets/img/gold'.$buy->pic;
-            if(File::exists($destination)){
+        if ($request->hasFile('pic')) {
+            $destination = 'assets/img/gold' . $buy->pic;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file('pic');
             $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
+            $filename = time() . '.' . $extension;
             $file->move('assets/img/gold', $filename);
             $buy->pic = $filename;
         }
         $buy->save();
-        $buy = ProductDetails::select('*')->paginate(5);
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->paginate(5);
         $customer = Customer::all();
         $users = User::all();
         // return view('admin.buy.index', compact('buy','users','customer', 'id'));
-        return redirect()->route('buy.index')->with(['buy' => $buy, 'users' => $users,'customer' => $customer]);
+        return redirect()->route('buy.index')->with(['buy' => $buy, 'users' => $users, 'customer' => $customer]);
     }
 
     /**
@@ -185,10 +185,10 @@ class BuyController extends Controller
     {
         $buy = ProductDetails::find($id);
         $buy->delete();
-        $buy = ProductDetails::select('*')->paginate(5);
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->paginate(5);
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy','users','product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return view('admin.buy.index', compact('buy', 'users', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
 }
