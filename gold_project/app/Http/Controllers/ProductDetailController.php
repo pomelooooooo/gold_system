@@ -19,7 +19,7 @@ class ProductDetailController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("*")->where('type','ทองใหม่');
+        $productdetail = ProductDetails::select("*")->where('type', 'ทองใหม่');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -47,10 +47,12 @@ class ProductDetailController extends Controller
             $code = $productdetail->code + 1;
             $num = "0";
             // dd(strlen(str_replace('0', '', $code)));
-            for ($i = strlen(str_replace('0', '', $code)); $i < 3; $i++) {
-                $num .= "0";
+            if (strlen($code) <= 3) {
+                for ($i = strlen($code); $i < 3; $i++) {
+                    $num .= "0";
+                }
+                $code = $num . $code;
             }
-            $code = $num . str_replace('0', '', $code);
         } else {
             $code = "0001";
         }
