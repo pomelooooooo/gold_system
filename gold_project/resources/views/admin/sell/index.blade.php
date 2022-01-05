@@ -24,10 +24,12 @@
 
     $(document).ready(function() {
         $("body").on('click', '#btn-sell', function(e) {
-            var sellgroup = $('.sell-group:checked').map(function() {return this.value;}).get().join(',')
-            if(sellgroup != ""){
+            var sellgroup = $('.sell-group:checked').map(function() {
+                return this.value;
+            }).get().join(',')
+            if (sellgroup != "") {
                 console.log('ssss')
-                window.location = "/sell/group/"+sellgroup
+                window.location = "/sell/group/" + sellgroup
             }
         })
 
@@ -66,7 +68,6 @@
             }
         });
     });
-    
 </script>
 
 <!-- hero area -->
@@ -116,7 +117,7 @@
                                     <th scope="col">ประเภท</th>
                                     <th scope="col">น้ำหนัก</th>
                                     <th scope="col">ผู้ขาย</th>
-                                    <th scope="col">สถานะ</th>
+                                    <th scope="col">ลาย</th>
                                     <th scope="col"></th>
                                     <!-- <th scope="col"></th> -->
                                 </tr>
@@ -128,10 +129,11 @@
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->size}}</td>
                                     <td>{{$row->nameemployee}}</td>
-                                    <td>{{$row->status_trade == '0' ? 'ยังไม่ขาย' : 'ขายออก'}}</td>
+                                    <td>{{$row->striped}}</td>
+                                    <!-- <td>{{$row->status_trade == '0' ? 'ยังไม่ขาย' : 'ขายออก'}}</td> -->
                                     <td>
                                         <div class="form-check text-center">
-                                            <input class="form-check-input sell-group" type="checkbox" value="{{$row->id}}" >
+                                            <input class="form-check-input sell-group" type="checkbox" value="{{$row->id}}">
                                         </div>
                                     </td>
                                     <!-- <td class="text-center">

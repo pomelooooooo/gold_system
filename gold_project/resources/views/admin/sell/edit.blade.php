@@ -181,7 +181,7 @@
                         <h4>ราคาทุน</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคาขาย*</h4>
+                        <h4>ลาย</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -195,6 +195,18 @@
                             <input name="allprice[]" type="text" class="form-control" placeholder="" value="{{$value->allprice}}" readonly />
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class='form-group'>
+                            <input name="striped[]" type="text" class="form-control" placeholder="" value="{{$value->striped}}" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>ราคาขาย*</h4>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
                             <input type="text" class="form-control" name="sellprice[]" value="{{$value->sellprice}}">
