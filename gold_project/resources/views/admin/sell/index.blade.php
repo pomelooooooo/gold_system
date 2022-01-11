@@ -93,14 +93,20 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                         <form class="form-inline" action="/sell" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
                             <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
-                            <select class="form-control" name="filter_type" id="validationcategory">
+                            <select class="form-control mr-sm-2" name="filter_type" id="validationcategory">
                                 <option value="">เลือกประเภท</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}" {{$row->id == $filter_type?"selected":""}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-control " name="filter_size">
+                                <option value="">เลือกนํ้าหนัก</option>
+                                @foreach($productdetail as $row)
+                                <option value="{{$row->size}}" {{$row->id == $filter_size?"selected":""}}>{{$row->size}}</option>
                                 @endforeach
                             </select>
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">

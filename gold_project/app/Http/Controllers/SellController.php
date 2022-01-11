@@ -36,12 +36,16 @@ class SellController extends Controller
         if (!empty($filter_type)) {
             $productdetail = $productdetail->where('product_details.type_gold_id', $filter_type);
         }
+        $filter_size = $request->get('filter_size');
+        if (!empty($filter_size)) {
+            $productdetail = $productdetail->where('product_details.size', $filter_size);
+        }
         $productdetail = $productdetail->paginate(10);
         $product = Product::all();
         $users = User::all();
         $producttype = TypeGold::all();
 
-        return view('admin.sell.index', compact('product', 'productdetail', 'users', 'keyword', 'producttype', 'filter_type'));
+        return view('admin.sell.index', compact('product', 'productdetail', 'users', 'keyword', 'producttype', 'filter_type', 'filter_size'));
     }
 
     /**
