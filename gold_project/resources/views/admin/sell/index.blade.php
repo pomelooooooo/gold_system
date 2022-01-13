@@ -120,9 +120,11 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">รหัสสินค้า</th>
+                                    <th scope="col">ล็อต</th>
                                     <th scope="col">ประเภท</th>
                                     <th scope="col">น้ำหนัก</th>
-                                    <th scope="col">ผู้ขาย</th>
+                                    <!-- <th scope="col">ผู้ขาย</th>
+                                    <th scope="col">นามสกุล</th> -->
                                     <th scope="col">ลาย</th>
                                     <th scope="col"></th>
                                     <!-- <th scope="col"></th> -->
@@ -132,9 +134,11 @@
                                 @foreach($productdetail as $row)
                                 <tr>
                                     <td>{{$row->code}}</td>
+                                    <td>{{$row->lot_id}}</td>
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->size}}</td>
-                                    <td>{{$row->nameemployee}}</td>
+                                    <!-- <td>{{$row->nameemployee}}</td>
+                                    <td>{{$row->lastnameemployee}}</td> -->
                                     <td>{{$row->striped}}</td>
                                     <!-- <td>{{$row->status_trade == '0' ? 'ยังไม่ขาย' : 'ขายออก'}}</td> -->
                                     <td>
