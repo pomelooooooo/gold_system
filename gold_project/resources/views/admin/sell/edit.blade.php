@@ -2,8 +2,19 @@
 @section('title','ขายทอง')
 @section('content')
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+
 <script type="text/javascript">
+    
     $(function() {
+        $("#validationuser").select2({
+            placeholder: "เลือกผู้ขาย",
+            // allowClear: true
+        });
+        $("#validationcustomer").select2({
+            placeholder: "เลือกลูกค้า",
+            // allowClear: true
+        });
         $.ajax({
             url: "http://127.0.0.1:3000/latest",
             type: 'GET',
@@ -20,8 +31,8 @@
                 "Not have Data!!"
             }
         })
-
     });
+
 </script>
 
 <div class="breadcrumb-section breadcrumb-bg">
@@ -79,10 +90,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="user_id" id="validationuser" required>
+                            <select class="custom-select selectpicker" name="user_id" id="validationuser" required>
                                 <option selected disabled value="">เลือกผู้ขาย</option>
                                 @foreach($users as $row)
-                                <option value="{{$row->id}}" {{!empty($productdetail->user_id)&&$row->id == $productdetail->user_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{!empty($productdetail->user_id)&&$row->id == $productdetail->user_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -92,10 +103,10 @@
                     </div>
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="customer_id" id="validationcustomer" required>
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
-                                <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -112,7 +123,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="datetime-local" class="form-control" name="datetime">
+                            <input type="datetime-local" class="form-control" name="datetime" value="{{date('Y-m-d').'T'.date('H:i:s')}}"> 
                         </div>
                     </div>
                 </div>

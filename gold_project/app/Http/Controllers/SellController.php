@@ -40,7 +40,7 @@ class SellController extends Controller
         if (!empty($filter_size)) {
             $productdetail = $productdetail->where('product_details.size', $filter_size);
         }
-        $productdetail = $productdetail->paginate(10);
+        $productdetail = $productdetail->paginate(20);
         $product = Product::all();
         $users = User::all();
         $producttype = TypeGold::all();
@@ -96,7 +96,7 @@ class SellController extends Controller
             $productdetail->pic = $filename;
         }
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(20);
         $product = Product::all();
         return view('admin.sell.index', compact('productdetail', 'product'));
     }
@@ -151,7 +151,7 @@ class SellController extends Controller
         $productdetail->sellprice = $request->get('sellprice');
         $productdetail->datetime = $request->get('datetime');
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(20);
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
@@ -168,7 +168,7 @@ class SellController extends Controller
     {
         $productdetail = ProductDetails::find($id);
         $productdetail->delete();
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(20);
         $product = Product::all();
         $customer = Customer::all();
         return view('admin.sell.index', compact('productdetail', 'customer', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
@@ -198,7 +198,7 @@ class SellController extends Controller
             $productdetail->datetime = $request->datetime;
             $productdetail->save();
         }
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(20);
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
