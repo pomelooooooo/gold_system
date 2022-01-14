@@ -23,13 +23,89 @@
     }
 
     $(document).ready(function() {
+        var url1 = location.search.split('?sellall=')
+        if (url1.length > 1) {
+            if (url1[1].indexOf('filter_type') > -1) {
+                url1 = url1[1].split('&page')
+                $('a.page-link').each(function() {
+                    var page = this.href.split('page=')
+                    var urlsearch = location.href.split('&search')[1].split('&page')
+
+                    this.href = location.href.split('?')[0] + '?sellall=' + url1[0] + '&page=' + page[1]
+                })
+            }
+        }
+
         $("body").on('click', '#btn-sell', function(e) {
             var sellgroup = $('.sell-group:checked').map(function() {
                 return this.value;
             }).get().join(',')
+            let id = location.search.split('?sellall=')
+            id = id[1].split('&')
+            if (id[0] != '') {
+                sellgroup = id[0] + ',' + sellgroup
+            }
             if (sellgroup != "") {
-                console.log('ssss')
+                sellgroup = sellgroup.split(',')
+                var myNewArray = sellgroup.filter(function(elem, index, self) {
+                    return index === self.indexOf(elem);
+                });
+
+                let arr = $.unique(myNewArray).filter(function(v) {
+                    return v !== ''
+                });
+                sellgroup = arr.join(',')
                 window.location = "/sell/group/" + sellgroup
+            }
+        })
+
+        $("body").on('click', '.sell-group', function(e) {
+            var sellall = ''
+            $('.sell-group:checked').each(function() {
+                sellall += this.value + ','
+            });
+
+            sellall = sellall.substr(0, sellall.length - 1)
+            var url1 = location.search.split('?sellall=')
+            if (url1.length > 1) {
+                var url2 = url1[1].split('&page')
+                if (url1[1].indexOf('filter_type') > -1) {
+                    url2 = url1[1].split('&')
+                }
+                var num_id = url2[0]
+
+                let all = decodeURIComponent(num_id) + ',' + sellall
+                all = all.split(',')
+                var myNewArray = all.filter(function(elem, index, self) {
+                    return index === self.indexOf(elem);
+                });
+
+                let arr = $.unique(myNewArray).filter(function(v) {
+                    return v !== ''
+                });
+                num_id = arr.join(',')
+                $('.sell-group').each(function() {
+                    if (!$(this).is(':checked')) {
+                        num_id = num_id.replace($(this).val(), '')
+                    }
+                })
+
+                if (url1[1].indexOf('filter_type') > -1) {
+                    $('a.page-link').each(function() {
+                        var page = this.href.split('page=')
+                        var urlsearch = location.href.split('&search')[1].split('&page')
+                        this.href = location.href.split('?')[0] + '?sellall=' + num_id + '&search' + urlsearch[0] + '&page=' + page[1]
+                    })
+                } else {
+                    $('a.page-link').each(function() {
+                        this.href = this.href.split('?')[0] + '?sellall=' + num_id + '&page=' + this.href.split('page=')[1]
+                    })
+                }
+                // }
+            } else {
+                $('a.page-link').each(function() {
+                    this.href = this.href.split('?')[0] + '?sellall=' + sellall + '&page=' + this.href.split('page=')[1]
+                })
             }
         })
 
@@ -95,6 +171,7 @@
                 <div class="row">
                     <div class="col-8">
                         <form class="form-inline" action="/sell" method="GET">
+                            <input type="hidden" id="sell-all" name="sellall">
                             <i class="fas fa-search" id="mySearch"></i>
                             <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
                             <select class="form-control mr-sm-2" name="filter_type" id="validationcategory">
@@ -143,7 +220,7 @@
                                     <!-- <td>{{$row->status_trade == '0' ? 'ยังไม่ขาย' : 'ขายออก'}}</td> -->
                                     <td>
                                         <div class="form-check text-center">
-                                            <input class="form-check-input sell-group" type="checkbox" value="{{$row->id}}">
+                                            <input class="form-check-input sell-group" type="checkbox" value="{{$row->id}}" {{in_array($row->id, $sellall_arr) ? 'checked' : ''}}>
                                         </div>
                                     </td>
                                     <!-- <td class="text-center">
@@ -153,7 +230,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $productdetail->links() }}
+                        {{ $productdetail->appends(['sellall'=>$sellall])->links() }}
                     </div>
                 </div>
             </div>

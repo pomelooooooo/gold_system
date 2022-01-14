@@ -22,7 +22,9 @@ class SellController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee','users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('status_trade', '0');
+        // dd($request->get('sellall'));
+        $sellall = $request->get('sellall');
+        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('status_trade', '0');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -40,12 +42,13 @@ class SellController extends Controller
         if (!empty($filter_size)) {
             $productdetail = $productdetail->where('product_details.size', $filter_size);
         }
-        $productdetail = $productdetail->paginate(20);
+        $productdetail = $productdetail->paginate(5);
         $product = Product::all();
         $users = User::all();
         $producttype = TypeGold::all();
+        $sellall_arr = explode(',', $sellall);
 
-        return view('admin.sell.index', compact('product', 'productdetail', 'users', 'keyword', 'producttype', 'filter_type', 'filter_size'));
+        return view('admin.sell.index', compact('product', 'productdetail', 'users', 'keyword', 'producttype', 'filter_type', 'filter_size', 'sellall', 'sellall_arr'));
     }
 
     /**
@@ -96,7 +99,7 @@ class SellController extends Controller
             $productdetail->pic = $filename;
         }
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(20);
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         return view('admin.sell.index', compact('productdetail', 'product'));
     }
@@ -151,7 +154,7 @@ class SellController extends Controller
         $productdetail->sellprice = $request->get('sellprice');
         $productdetail->datetime = $request->get('datetime');
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(20);
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
@@ -168,7 +171,7 @@ class SellController extends Controller
     {
         $productdetail = ProductDetails::find($id);
         $productdetail->delete();
-        $productdetail = ProductDetails::select('*')->paginate(20);
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         $customer = Customer::all();
         return view('admin.sell.index', compact('productdetail', 'customer', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
@@ -198,7 +201,7 @@ class SellController extends Controller
             $productdetail->datetime = $request->datetime;
             $productdetail->save();
         }
-        $productdetail = ProductDetails::select('*')->paginate(20);
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
