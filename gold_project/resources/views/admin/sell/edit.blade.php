@@ -22,8 +22,20 @@
                 console.log(response.response)
                 $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
                 $("#gold_sell").val(response.response.price.gold.sell)
+                let size_arr = {"ครึ่งสลึง":0.125,"1 สลึง":0.25,"2 สลึง":0.5,"3 สลึง":0.75,"6 สลึง":1.5,"1 บาท":1,"2 บาท":2,"3 บาท":3,"4 บาท":4,"5 บาท":5,"10 บาท":10}
+                // console.log($.parseJSON(size_arr))
                 $('.gold_sell_cal').each(function(i, obj) {
-                    $("#gold_sell_cal" + i).val(parseFloat(response.response.price.gold.sell.replace(",", "")) + (parseFloat($("#gratuity_cal" + i).val()) * 0.7))
+                    let price_gold_sell = parseFloat(response.response.price.gold.sell.replace(",", ""))
+                    let gratuity_cal = parseFloat($("#gratuity_cal" + i).val())
+                    let size = ''
+                    $.each(size_arr,function(key,value){
+                        if($('#size' + i).val() ==  key){
+                            size = value
+                        }
+                    });
+                    let vat = ((price_gold_sell * size) + gratuity_cal) * 0.07
+
+                    $("#gold_sell_cal" + i).val(((price_gold_sell * size) + gratuity_cal) + vat)
                 });
                 // console.log(response.response.price.gold.sell, parseFloat($(".gratuity_cal").val()) * 0.7)
             },
@@ -153,7 +165,8 @@
                     </div>
                     <div class="col-3">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="type_gold_id[]" readonly>
+                            <input type="hidden" name="type_gold_id[]" value="{{$value->type_gold_id}}">
+                            <select class="custom-select" disabled>
                                 <option selected disabled value="">เลือกประเภททอง</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}" {{$row->id == $value->type_gold_id ? 'selected' : ''}}>{{$row->name}}</option>
@@ -163,7 +176,8 @@
                     </div>
                     <div class="col-3">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="size[]" readonly>
+                        <input type="hidden" name="size[]" value="{{$value->size}}">
+                            <select class="custom-select" id="size{{$key}}" disabled>
                                 <option selected>เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}" {{ old("size", $value->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>

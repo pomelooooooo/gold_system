@@ -40,10 +40,12 @@
             var sellgroup = $('.sell-group:checked').map(function() {
                 return this.value;
             }).get().join(',')
-            let id = location.search.split('?sellall=')
-            id = id[1].split('&')
-            if (id[0] != '') {
-                sellgroup = id[0] + ',' + sellgroup
+            if(location.search != ''){
+                let id = location.search.split('?sellall=')
+                id = id[1].split('&')
+                if (id[0] != '') {
+                    sellgroup = id[0] + ',' + sellgroup
+                }
             }
             if (sellgroup != "") {
                 sellgroup = sellgroup.split(',')
