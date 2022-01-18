@@ -187,7 +187,7 @@ class ProductDetailController extends Controller
 
     public function getprice_of_gold($lot)
     {
-        $product = Product::select('price_of_gold', 'type_gold.id')->join('type_gold', 'type_gold.id', '=', 'products.type_gold_id')->where('products.lot_id', $lot)->first();
+        $product = Product::select('price_of_gold', 'type_gold.id', 'weight')->join('type_gold', 'type_gold.id', '=', 'products.type_gold_id')->where('products.lot_id', $lot)->first();
         return response()->json(["product" => $product]);
     }
 }

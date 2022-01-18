@@ -47,7 +47,28 @@
                 success: function(data) {
                     $("#priceofgold").val(data.product.price_of_gold)
                     $("#validationcategory").val(data.product.id)
-                    console.log(data.product);
+                    let size_arr = {
+                        "ครึ่งสลึง": "001:1.9",
+                        "1 สลึง": "01:3.8",
+                        "2 สลึง": "02:7.6",
+                        "3 สลึง": "03:11.4",
+                        "6 สลึง": "06:22.8",
+                        "1 บาท": "1:15.2",
+                        "2 บาท": "2:30.4",
+                        "3 บาท": "3:45.5",
+                        "4 บาท": "4:60.6",
+                        "5 บาท": "5:76",
+                        "10 บาท": "10:152"
+                    }
+
+                    $.each(size_arr, function(i, el) {
+                        let weight = el.split(':')
+                        if (data.product.weight == weight[0]) {
+                            $('#size option[value="' + i + '"]').prop("selected", true)
+                            $('#gram').val(weight[1])
+                        }
+                    })
+
                 },
                 cache: false,
                 contentType: false,
@@ -161,7 +182,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtelcategory">นํ้าหนัก*</h4>
+                        <h4 for="size">นํ้าหนัก*</h4>
                     </div>
                     <div class="col-6">
                         <h4>นํ้าหนัก(กรัม)*</h4>
@@ -170,7 +191,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="size" id="validationcategory" required>
+                            <select class="custom-select" name="size" id="size" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -183,7 +204,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram" type="text" class="form-control" placeholder="" />
+                            <input name="gram" id="gram" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -230,7 +251,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gratuity" type="text" class="form-control" placeholder="" id="validationgratuity" required />
+                            <input name="gratuity" type="number" class="form-control" placeholder="" id="validationgratuity" min="0" max="3000" required style="width: 100% !important;" />
                             <div class="invalid-feedback">
                                 โปรดกรอกค่าแรง
                             </div>
