@@ -137,7 +137,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <select name="lot_id" class="form-control" id="validationtellotid" required>
+                            <select name="lot_id" class="custom-select" id="validationtellotid" required>
                                 <option selected disabled value="">เลือกล็อต</option>
                                 @foreach($product as $row)
                                 <option value="{{$row->lot_id}}">{{$row->lot_id}}</option>
@@ -161,13 +161,13 @@
                     <div class="col-6">
                         <div class="input-group mb-3">
                             <select class="custom-select" name="type_gold_id" id="validationcategory" required>
-                                <option selected disabled value="">เลือกหน่วยนับ</option>
+                                <option selected disabled value="">เลือกประเภท</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}">{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
+                                โปรดเลือกประเภทที่ต้องการ
                             </div>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                         <h4 for="size">นํ้าหนัก*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>นํ้าหนัก(กรัม)*</h4>
+                        <h4 for="gram">นํ้าหนัก(กรัม)*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -204,7 +204,10 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram" id="gram" type="text" class="form-control" placeholder="" />
+                            <input name="gram" id="gram" type="text" class="form-control" placeholder="" required/>
+                            <div class="invalid-feedback">
+                                โปรดกรอกน้ำหนักกรัม
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -253,7 +256,7 @@
                         <div class="form-group">
                             <input name="gratuity" type="number" class="form-control" placeholder="" id="validationgratuity" min="0" max="3000" required style="width: 100% !important;" />
                             <div class="invalid-feedback">
-                                โปรดกรอกค่าแรง
+                                โปรดกรอกค่าแรงในช่วง 0-3000
                             </div>
                         </div>
                     </div>

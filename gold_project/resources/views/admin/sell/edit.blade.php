@@ -96,12 +96,12 @@
                         <h4 for="validationuser">ผู้ขาย*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                        <h4>ลูกค้า</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="user_id" id="validationuser" required>
                                 <option selected disabled value="">เลือกผู้ขาย</option>
                                 @foreach($users as $row)
@@ -114,16 +114,13 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
+                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer">
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
                                 <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
-                            </div>
                         </div>
                     </div>
                 </div>
