@@ -2,7 +2,18 @@
 @section('title','ซื้อทอง')
 @section('content')
 
-<script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+<script type="text/javascript">
+    $(function() {
+        $("#validationuser").select2({
+            placeholder: "เลือกผู้รับซื้อ",
+            // allowClear: true
+        });
+        $("#validationcustomer").select2({
+            placeholder: "เลือกลูกค้า",
+            // allowClear: true
+        });
+    })
     $(document).ready(function() {
         $(document).on('change', '.btn-file :file', function() {
             var input = $(this),
@@ -117,7 +128,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับซื้อ*</h4>
+                        <h4 for="validationuser">ผู้รับซื้อ</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationcustomer">ลูกค้า*</h4>
@@ -125,11 +136,11 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="user_id" id="validationuser" required>
+                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                            <select class="custom-select selectpicker" name="user_id" id="validationuser" required>
                                 <option selected disabled value="">เลือกผู้รับซื้อ</option>
                                 @foreach($users as $row)
-                                <option value="{{$row->id}}"{{!empty($productdetail->user_id)&&$row->id == $productdetail->user_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{!empty($productdetail->user_id)&&$row->id == $productdetail->user_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -138,147 +149,169 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="customer_id" id="validationcustomer" required>
+                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer">
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
-                                <option value="{{$row->id}}"{{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
-                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>วันเวลาที่รับซื้อ*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class='form-group'>
+                            <input type="datetime-local" class="form-control" name="datetime" value="{{date('Y-m-d').'T'.date('H:i:s')}}">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <br>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-3">
+                <h6>โปรดระบุจำนวนทองที่ต้องการรับซื้อ</h6>
+            </div>
+            <div class="col-3">
+                <div class="float-right">
+                    <input type="number" min='1'>
+                    <a type="button" class="btn btn-info"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="card">
             <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <h4>รหัสสินค้า</h4>
-                        </div>
-                        <div class="col-6">
-                            <h4 for="validationcategory">ประเภท*</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <input name="code" type="text" class="form-control" placeholder="" value="{{$code}}" readonly />
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select" name="type_gold_id" id="validationcategory" required>
-                                    <option selected disabled value="">เลือกหน่วยนับ</option>
-                                    @foreach($producttype as $row)
-                                    <option value="{{$row->id}}">{{$row->name}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="invalid-feedback">
-                                    โปรดเลือกหน่วยนับที่ต้องการ
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <h4 for="validationtelstore">นํ้าหนัก*</h4>
-                        </div>
-                        <div class="col-6">
-                            <h4>นํ้าหนัก(กรัม)*</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select" name="size" id="validationcategory" required>
-                                    <option selected disabled value="">เลือกหน่วยนับ</option>
-                                    @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
-                                    <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="invalid-feedback">
-                                    โปรดเลือกนํ้าหนักที่ต้องการ
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <input name="gram" type="text" class="form-control" placeholder="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <h4 for="validationstriped">ลาย*</h4>
-                        </div>
-                        <div class="col-6">
-                            <h4 for="validationdetails">รายละเอียด</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <input name="striped" type="text" class="form-control" placeholder="" id="validationstriped" required />
-                                <div class="invalid-feedback">
-                                    โปรดกรอกลายที่ต้องการ
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" required />
-                                <div class="invalid-feedback">
-                                    โปรดกรอกรายละเอียดทอง
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 <div class="row">
                     <div class="col-6">
-                            <h4 for="validationprice">ราคารับซื้อ</h4>
+                        <h4>รหัสสินค้า</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationcategory">ประเภท*</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                            <div class="form-group">
-                                <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice" required />
-                                <div class="invalid-feedback">
-                                    โปรดกรอกราคารับซื้อ
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <h4>อัพโหลดรูปภาพ</h4>
+                        <div class="form-group">
+                            <input name="code" type="text" class="form-control" placeholder="" value="{{$code}}" readonly />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="form-group text-center">
-                                    <div class="card-header">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <span class="btn btn-default btn-file-img">
-                                                    เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
-                                                </span>
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="type_gold_id" id="validationcategory" required>
+                                <option selected disabled value="">เลือกหน่วยนับ</option>
+                                @foreach($producttype as $row)
+                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกหน่วยนับที่ต้องการ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4>นํ้าหนัก(กรัม)*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="size" id="validationcategory" required>
+                                <option selected disabled value="">เลือกหน่วยนับ</option>
+                                @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
+                                <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกนํ้าหนักที่ต้องการ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="gram" type="text" class="form-control" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationstriped">ลาย*</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationdetails">รายละเอียด</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="striped" type="text" class="form-control" placeholder="" id="validationstriped" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกลายที่ต้องการ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกรายละเอียดทอง
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationprice">ราคารับซื้อ</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกราคารับซื้อ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>อัพโหลดรูปภาพ</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="form-group text-center">
+                                <div class="card-header">
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-default btn-file-img">
+                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
                                             </span>
-                                            <input type="text" class="form-control" readonly>
-                                        </div>
+                                        </span>
+                                        <input type="text" class="form-control" readonly>
                                     </div>
-                                    <div class="card-body">
-                                        <img id='img-upload' />
-                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <img id='img-upload' />
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <br>
