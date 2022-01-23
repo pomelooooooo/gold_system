@@ -175,14 +175,14 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-6"></div>
-            <div class="col-3">
-                <h6>โปรดระบุจำนวนทองที่ต้องการรับซื้อ</h6>
-            </div>
-            <div class="col-3">
+            <!-- <div class="col-4"></div> -->
+            <div class="col-12">
                 <div class="float-right">
-                    <input type="number" min='1'>
-                    <a type="button" class="btn btn-info"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
+                    <div class='form-group'>
+                        <h5>โปรดระบุจำนวนทองที่ต้องการรับซื้อ
+                        <input type="number" min='1' style="width: 80px;">
+                        <a type="button" class="btn btn-info btn-sm text-white"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a></h5>
+                    </div>
                 </div>
             </div>
         </div>
