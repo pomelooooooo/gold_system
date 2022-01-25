@@ -131,7 +131,7 @@
                         <h4 for="validationuser">ผู้รับซื้อ</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                        <h4 for="validationcustomer">ลูกค้า</h4>
                     </div>
                 </div>
                 <div class="row">

@@ -4,6 +4,23 @@
 
 <script>
     $(document).ready(function() {
+        $(document).on('keyup', '#idcard', function() {
+            $.ajax({
+                url: "/manage_employee/validateIdcard/"+$(this).val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.status){
+                        $('#validate_id_card').css('display', 'none')
+                    } else {
+                        $('#validate_id_card').css('display', 'block')
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
         $(document).on('change', '.btn-file :file', function() {
             var input = $(this),
                 label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -34,7 +51,13 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    window.location = "{{route('manage_employee.index')}}"
+                    if(data.status){
+                        window.location = "{{route('manage_employee.index')}}"
+                    } else {
+                        $('#validate_id_card').css('display', 'block')
+                        $("#validate_id_card").focus();
+                    }
+                    // window.location = "{{route('manage_employee.index')}}"
                 },
                 cache: false,
                 contentType: false,
@@ -211,7 +234,7 @@
             <h2>เพิ่มข้อมูลพนักงาน</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('manage_employee.store')}} " enctype="multipart/form-data" id="data" class="needs-validation" novalidate>
+            <form method="POST" action="{{route('manage_employee.store')}}" enctype="multipart/form-data" id="data" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
@@ -278,7 +301,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationid">เลขบัตรประชาชน*</h4>
+                        <h4 for="idcard">เลขบัตรประชาชน*</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationtel">เบอร์โทร*</h4>
@@ -287,7 +310,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" id="validationid" required />
+                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" required />
+                            <div class="invalid-feedback" style="display: none;" id="validate_id_card">
+                               เลขบัตรประชาชนซ้ำ
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกเลขบัตรประชาชน
                             </div>
@@ -321,7 +347,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="address_now" id="address_now" type="text" class="form-control" placeholder="" />
+                            <input name="address_now" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>

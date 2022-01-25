@@ -4,10 +4,53 @@
 
 <script>
     $(document).ready(function() {
+        $(document).on('keyup', '#idcard', function() {
+            $.ajax({
+                url: "/manage_employee/validateIdcard/"+$(this).val()+'/'+$('#id').val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.status){
+                        $('#validate_id_card').css('display', 'none')
+                    } else {
+                        $('#validate_id_card').css('display', 'block')
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
         $(document).on('change', '.btn-file-img :file', function() {
             var input = $(this),
                 label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
             input.trigger('fileselect', [label]);
+        });
+
+        $("form#data").submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var data = {
+                picture: $('#img-upload').attr('src'),
+            };
+            formData.append("data", JSON.stringify(data));
+            $.ajax({
+                url: "{{action('ManageEmployeeController@update', $id)}}",
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    if(data.status){
+                        window.location = "{{route('manage_employee.index')}}"
+                    } else {
+                        $('#validate_id_card').css('display', 'block')
+                        $("#validate_id_card").focus();
+                    }
+                    // window.location = "{{route('manage_employee.index')}}"
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
         });
 
         $('.btn-file-img :file').on('fileselect', function(event, label) {
@@ -79,8 +122,9 @@
             <h2>แก้ไขข้อมูลพนักงาน</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{action('ManageEmployeeController@update', $id)}} " enctype="multipart/form-data" class="needs-validation" novalidate>
+            <form method="POST" action="{{action('ManageEmployeeController@update', $id)}}" id="data" enctype="multipart/form-data" class="needs-validation" novalidate>
                 {{csrf_field()}}
+                <input type="hidden" value="{{$manageemployee->id}}" id="id" />
                 <div class="row">
                     <div class="col-6">
                         <h4 for="validationusername">ชื่อผู้ใช้</h4>
@@ -146,7 +190,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationid">เลขบัตรประชาชน</h4>
+                        <h4 for="idcard">เลขบัตรประชาชน</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationtel">เบอร์โทร</h4>
@@ -155,7 +199,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" type="text" class="form-control" placeholder="" value="{{$manageemployee->idcard}}" id="validationid" required />
+                            <input name="idcard" type="text" class="form-control" placeholder="" value="{{$manageemployee->idcard}}" id="idcard" required />
+                            <div class="invalid-feedback" style="display: none;" id="validate_id_card">
+                               เลขบัตรประชาชนซ้ำ
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกเลขบัตรประชาชน
                             </div>
