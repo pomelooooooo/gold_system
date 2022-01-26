@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','ซื้อทอง')
+@section('title','จัดการลายทอง')
 @section('content')
 
 <script>
@@ -10,7 +10,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0,1];
+            td = tr[i].getElementsByTagName("td")[0];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -32,14 +32,14 @@
             });
             if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
                 $.ajax({
-                    url: "buy/" + id,
+                    url: "striped/" + id,
                     type: 'delete',
                     data: {
                         id: id,
                         _token: token
                     },
                     success: function(data) {
-                        window.location = "{{route('buy.index')}}"
+                        window.location = "{{route('striped.index')}}"
                     },
                     cache: false,
                     contentType: false,
@@ -59,7 +59,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>ซื้อทอง</h1>
+                    <h1>จัดการลายทอง</h1>
                 </div>
             </div>
         </div>
@@ -73,19 +73,19 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <h3>ซื้อทอง</h3>
+                        <h3>ข้อมูลประเภททอง</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a type="button" class="btn btn-outline-info" href="{{ route('buy.create') }}"><i class="fa fa-plus"></i> ซื้อทองเข้าร้าน</a>
+                        <a type="button" class="btn btn-outline-info" href="{{ route('striped.create') }}"><i class="fa fa-plus"></i> เพิ่มลายทอง</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <form class="form-inline" action="/buy" method="GET">
+                        <form class="form-inline" action="/striped" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหารหัสสินค้า">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูลประเภททอง">
                         </form>
                     </div>
                 </div>
@@ -95,28 +95,17 @@
                         <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">รหัสสินค้า</th>
-                                    <th scope="col">รายละเอียดสินค้า</th>
-                                    <th scope="col">ประเภท</th>
-                                    <th scope="col">นํ้าหนัก</th>
-                                    <th scope="col">ผู้รับซื้อ</th>
-                                    <th scope="col">ลูกค้า</th>
+                                    <th scope="col">ชื่อลายทอง</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-
                             <tbody>
-                                @foreach($buy as $row)
+                                @foreach($striped as $row)
                                 <tr>
-                                    <td>{{$row->code}}</td>
-                                    <td>{{$row->details}}</td>
                                     <td>{{$row->name}}</td>
-                                    <td>{{$row->size}}</td>
-                                    <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
-                                    <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-warning" href="{{action('BuyController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
+                                        <a class="btn btn-warning" href="{{action('StripedController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
                                     <td class="text-center">
                                         {{csrf_field()}}
@@ -125,11 +114,8 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-
                         </table>
-                        <div class="col-6">
-                            {{ $buy->links() }}
-                        </div>
+                        {{ $striped->links() }}
                     </div>
                 </div>
             </div>

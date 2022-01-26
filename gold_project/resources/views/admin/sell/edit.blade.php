@@ -206,10 +206,21 @@
                         </div>
                     </div>
                     <div class="col-6">
+                        <div class="input-group mb-3">
+                            <input type="hidden" name="striped_id[]" value="{{$value->striped_id}}">
+                            <select class="custom-select" disabled>
+                                <option selected disabled value="">เลือกลายทอง</option>
+                                @foreach($striped as $row)
+                                <option value="{{$row->id}}" {{$row->id == $value->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="col-6">
                         <div class='form-group'>
                             <input name="striped[]" type="text" class="form-control" placeholder="" value="{{$value->striped}}" readonly />
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col-6">

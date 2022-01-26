@@ -106,6 +106,7 @@
 									<ul class="sub-menu">
 										<li><a href="/manufacturer">จัดการข้อมูลผู้ผลิต</a></li>
 										<li><a href="/type_gold">จัดการประเภททอง</a></li>
+										<li><a href="/striped">จัดการลายทอง</a></li>
 										<li><a href="/product">จัดการล็อตทอง</a></li>
 										<li><a href="/productdetail">จัดการข้อมูลทอง</a></li>
 										<li><a href="/median_price">เช็คสต็อคสินค้า</a></li>

@@ -90,7 +90,7 @@
                             <select class="custom-select selectpicker" name="user_id" id="validationuser" required>
                                 <option selected disabled value="">เลือกผู้รับซื้อ</option>
                                 @foreach($users as $row)
-                                <option value="{{$row->id}}" {{!empty($productdetail->user_id)&&$row->id == $productdetail->user_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
+                                <option value="{{$row->id}}" {{!empty($buy->user_id)&&$row->id == $buy->user_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -99,11 +99,11 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="customer_id" id="validationcustomer" required>
+                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
-                                <option value="{{$row->id}}" {{!empty($buy->customer_id)&&$row->id == $buy->customer_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{!empty($buy->customer_id)&&$row->id == $buy->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -178,10 +178,15 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" id="validationstriped" value="{{$buy->striped}}" required />
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="striped_id" id="validationstriped" required>
+                                <option selected disabled value="">เลือกลาย</option>
+                                @foreach($striped as $row)
+                                <option value="{{$row->id}}"{{$row->id == $buy->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback">
-                                โปรดกรอกลายที่ต้องการ
+                                โปรดเลือกหน่วยนับที่ต้องการ
                             </div>
                         </div>
                     </div>
@@ -205,39 +210,6 @@
                             <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice" value="{{$buy->allprice}}" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>อัพโหลดรูปภาพ</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="form-group text-center">
-                                <div class="card-header">
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-default btn-file-img">
-                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
-                                            </span>
-                                        </span>
-                                        <input type="text" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="single-article-text-image-top">
-                                        <p>รูปเดิม</p>
-                                    </div>
-                                    <img src="{{ asset('assets/img/gold/'. $buy->pic) }}" width="250px" height="250px" alt="Image">
-                                    <div class="single-article-text-image-bottom">
-                                        <p>รูปใหม่</p>
-                                        <img id='img-upload' />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

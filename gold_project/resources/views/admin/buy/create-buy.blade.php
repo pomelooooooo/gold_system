@@ -128,7 +128,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับซื้อ</h4>
+                        <h4 for="validationuser">ผู้รับซื้อ*</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationcustomer">ลูกค้า</h4>
@@ -255,10 +255,15 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" id="validationstriped" required />
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="striped_id" id="validationstriped" required>
+                                <option selected disabled value="">เลือกลาย</option>
+                                @foreach($striped as $row)
+                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback">
-                                โปรดกรอกลายที่ต้องการ
+                                โปรดเลือกหน่วยนับที่ต้องการ
                             </div>
                         </div>
                     </div>
@@ -273,7 +278,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationprice">ราคารับซื้อ</h4>
+                        <h4 for="validationprice">ราคารับซื้อ*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -282,32 +287,6 @@
                             <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>อัพโหลดรูปภาพ</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="form-group text-center">
-                                <div class="card-header">
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-default btn-file-img">
-                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
-                                            </span>
-                                        </span>
-                                        <input type="text" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <img id='img-upload' />
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ class CreateProductDetailsTable extends Migration
             $table->string('code');
             $table->string('details');
             $table->integer('type_gold_id');
-            $table->string('striped');
+            $table->integer('striped_id');
             $table->enum('size',['ครึ่งสลึง','1 สลึง','2 สลึง','3 สลึง','6 สลึง','1 บาท','2 บาท','3 บาท','4 บาท','5 บาท','10 บาท']);
             $table->string('gram')->nullable();
             $table->enum('status', ['0', '1']);

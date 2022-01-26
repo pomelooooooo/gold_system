@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ProductDetails;
 use App\Product;
 use App\TypeGold;
+use App\Striped;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
@@ -58,7 +59,8 @@ class ProductDetailController extends Controller
         }
         $product = Product::all();
         $producttype = TypeGold::all();
-        return view('admin.productdetail.create-productdetail', compact('product', 'gold_type', 'code', 'producttype'));
+        $striped = Striped::all();
+        return view('admin.productdetail.create-productdetail', compact('product', 'gold_type','striped', 'code', 'producttype'));
     }
 
     /**
@@ -74,7 +76,7 @@ class ProductDetailController extends Controller
                 'code' => $request->get('code'),
                 'details' => $request->get('details'),
                 'type_gold_id' => $request->get('type_gold_id'),
-                'striped' => $request->get('striped'),
+                'striped_id' => $request->get('striped_id'),
                 'size' => $request->get('size'),
                 'gram' => $request->get('gram'),
                 'status' => $request->get('status'),
@@ -124,7 +126,8 @@ class ProductDetailController extends Controller
         $productdetail = ProductDetails::select('product_details.*', 'products.price_of_gold')->join('products', 'product_details.lot_id', '=', 'products.lot_id')->where('product_details.id', $id)->first();
         $product = Product::all();
         $producttype = TypeGold::all();
-        return view('admin.productdetail.edit', compact('productdetail', 'product', 'producttype', 'gold_type', 'id'));
+        $striped = Striped::all();
+        return view('admin.productdetail.edit', compact('productdetail', 'product', 'producttype','striped', 'gold_type', 'id'));
     }
 
     /**
@@ -140,7 +143,7 @@ class ProductDetailController extends Controller
         $productdetail->code = $request->get('code');
         $productdetail->details = $request->get('details');
         $productdetail->type_gold_id = $request->get('type_gold_id');
-        $productdetail->striped = $request->get('striped');
+        $productdetail->striped_id = $request->get('striped_id');
         $productdetail->size = $request->get('size');
         $productdetail->gram = $request->get('gram');
         $productdetail->status = $request->get('status');

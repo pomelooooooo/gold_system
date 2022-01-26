@@ -204,7 +204,7 @@
                                     <th scope="col">น้ำหนัก</th>
                                     <!-- <th scope="col">ผู้ขาย</th>
                                     <th scope="col">นามสกุล</th> -->
-                                    <th scope="col">ลาย</th>
+                                    <th scope="col">รายละเอียดสินค้า</th>
                                     <th scope="col"></th>
                                     <!-- <th scope="col"></th> -->
                                 </tr>
@@ -216,10 +216,7 @@
                                     <td>{{$row->lot_id}}</td>
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->size}}</td>
-                                    <!-- <td>{{$row->nameemployee}}</td>
-                                    <td>{{$row->lastnameemployee}}</td> -->
-                                    <td>{{$row->striped}}</td>
-                                    <!-- <td>{{$row->status_trade == '0' ? 'ยังไม่ขาย' : 'ขายออก'}}</td> -->
+                                    <td>{{$row->details}}</td>
                                     <td>
                                         <div class="form-check text-center">
                                             <input class="form-check-input sell-group" type="checkbox" value="{{$row->id}}" {{in_array($row->id, $sellall_arr) ? 'checked' : ''}}>

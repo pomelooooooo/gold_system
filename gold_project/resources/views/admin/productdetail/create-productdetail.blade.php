@@ -154,7 +154,7 @@
                         <h4 for="validationcategory">ประเภท*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationstriped">ลาย</h4>
+                        <h4 for="validationstriped">ลาย*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -172,10 +172,15 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="striped" type="text" class="form-control" placeholder="" id="validationstriped" required />
+                        <div class="input-group mb-3">
+                            <select class="custom-select" name="striped_id" id="validationstriped" required>
+                                <option selected disabled value="">เลือกลาย</option>
+                                @foreach($striped as $row)
+                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback">
-                                โปรดกรอกลายที่ต้องการ
+                                โปรดเลือกประเภทที่ต้องการ
                             </div>
                         </div>
                     </div>
@@ -213,33 +218,6 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtray">ถาด*</h4>
-                    </div>
-                    <div class="col-6">
-                        <h4 for="validationdetails">รายละเอียด</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-
-                        <div class="form-group">
-                            <input name="tray" type="text" class="form-control" placeholder="" id="validationtray" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกถาดที่ต้องการ
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกรายละเอียดทอง
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
                         <h4>ราคาทองต่อเส้น*</h4>
                     </div>
                     <div class="col-6">
@@ -266,7 +244,7 @@
                         <h4 for="validationallprice">ราคาทุน*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationstatus">สถานะทอง*</h4>
+                        <h4 for="validationdetails">รายละเอียด*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -279,6 +257,24 @@
                         </div>
                     </div>
                     <div class="col-6">
+                        <div class="form-group">
+                            <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" required />
+                            <div class="invalid-feedback">
+                                โปรดกรอกรายละเอียดทอง
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-6">
+                        <h4 for="validationstatus">สถานะทอง*</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationtray">ถาด</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
                         <div class="pl-2">
                             <div class="form-group">
                                 @foreach(["0"=>"ทองในถาด","1"=>"ทองในสต๊อค"] as $statusWay => $statusLable)
@@ -289,7 +285,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="tray" type="text" class="form-control" placeholder="" id="validationtray"/>
+                        </div>
+                    </div>
                 </div>
+               
                 <div class="row">
                     <div class="col-12">
                         <h4>อัพโหลดรูปภาพ</h4>

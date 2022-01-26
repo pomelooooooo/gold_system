@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\ProductDetails;
 use App\Product;
 use App\TypeGold;
+use App\Striped;
 use App\Sell;
 use Carbon\Carbon;
 use App\User;
@@ -24,7 +25,7 @@ class SellController extends Controller
         $keyword = $request->get('search');
         // dd($request->get('sellall'));
         $sellall = $request->get('sellall');
-        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('status_trade', '0');
+        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('status_trade', '0')->where('type', 'ทองใหม่');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -184,7 +185,8 @@ class SellController extends Controller
         $users = User::all();
         $customer = Customer::all();
         $producttype = TypeGold::all();
-        return view('admin.sell.edit', compact('productdetail', 'customer', 'users', 'producttype', 'gold_type', 'id'));
+        $striped = Striped::all();
+        return view('admin.sell.edit', compact('productdetail', 'customer','striped', 'users', 'producttype', 'gold_type', 'id'));
     }
     public function updateGroup(Request $request)
     {

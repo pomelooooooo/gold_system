@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Customer;
+use App\Striped;
 use Illuminate\Support\Facades\File;
 
 class BuyController extends Controller
@@ -21,7 +22,7 @@ class BuyController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee','users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
         if (!empty($keyword)) {
             $buy = $buy->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -59,7 +60,8 @@ class BuyController extends Controller
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
-        return view('admin.buy.create-buy', compact('producttype', 'buy', 'gold_type', 'code', 'users', 'customer'));
+        $striped = Striped::all();
+        return view('admin.buy.create-buy', compact('producttype', 'buy','striped', 'gold_type', 'code', 'users', 'customer'));
     }
 
     /**
@@ -75,7 +77,7 @@ class BuyController extends Controller
                 'code' => $request->get('code'),
                 'details' => $request->get('details'),
                 'type_gold_id' => $request->get('type_gold_id'),
-                'striped' => $request->get('striped'),
+                'striped_id' => $request->get('striped_id'),
                 'size' => $request->get('size'),
                 'gram' => $request->get('gram'),
                 'status' => '1',
@@ -127,7 +129,8 @@ class BuyController extends Controller
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
-        return view('admin.buy.edit', compact('buy', 'producttype', 'customer', 'users', 'gold_type', 'id'));
+        $striped = Striped::all();
+        return view('admin.buy.edit', compact('buy', 'producttype','striped', 'customer', 'users', 'gold_type', 'id'));
     }
 
     /**
@@ -142,7 +145,7 @@ class BuyController extends Controller
         $buy = ProductDetails::find($id);
         $buy->code = $request->get('code');
         $buy->details = $request->get('details');
-        $buy->striped = $request->get('striped');
+        $buy->striped_id = $request->get('striped_id');
         $buy->size = $request->get('size');
         $buy->gram = $request->get('gram');
         $buy->status = '1';

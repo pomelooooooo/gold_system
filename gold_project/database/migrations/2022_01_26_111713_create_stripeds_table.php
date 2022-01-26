@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColProductsdetailsCustomerId extends Migration
+class CreateStripedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddColProductsdetailsCustomerId extends Migration
      */
     public function up()
     {
-        Schema::table('product_details', function (Blueprint $table) {
-
-            $table->integer('customer_id')->nullable()->after('user_id');
-
+        Schema::create('stripeds', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ class AddColProductsdetailsCustomerId extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_details');
+        Schema::dropIfExists('stripeds');
     }
 }
