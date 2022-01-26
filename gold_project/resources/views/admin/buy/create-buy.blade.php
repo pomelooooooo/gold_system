@@ -213,22 +213,6 @@
             </div>
         </div>
         <br>
-        <div class="row">
-            <!-- <div class="col-4"></div> -->
-            <div class="col-12">
-                <div class="float-right">
-                    <div class='form-group'>
-                        <h5>โปรดระบุจำนวนทองที่ต้องการรับซื้อ
-                            <input type="number" min='1' style="width: 80px;">
-                            <a type="button" class="btn btn-info btn-sm text-white" id="btn-buy"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
-                            <a type="button" class="btn btn-danger btn-sm text-white" id="btn-remove"><i class="fa fa-trash"></i> ลบ</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-
         <div id="card">
             <div class="card card-item">
                 <div class="card-body">
@@ -329,38 +313,28 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-6">
-                            <h4>อัพโหลดรูปภาพ</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="form-group text-center">
-                                    <div class="card-header">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <span class="btn btn-default btn-file-img">
-                                                    เลือกรูปภาพ <input type="file" name="pic[]">
-                                                </span>
-                                            </span>
-                                            <input type="text" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <img id='img-upload' />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
         <br>
-        <div class="text-right">
-            <p id="total-price">0</p>
+        <div class="row">
+            <!-- <div class="col-4"></div> -->
+            <div class="col-12">
+                <div class="float-right">
+                    <div class='form-group'>
+                        <a type="button" class="btn btn-info btn-sm text-white" id="btn-buy"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
+                        <a type="button" class="btn btn-danger btn-sm text-white" id="btn-remove"><i class="fa fa-trash"></i> ลบ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="text-right">
+                    <h4>ราคารวม</h4>
+                    <h4 id="total-price">0</h4>
+                </div>
+            </div>
         </div>
         <br>
         <div class="text-right">
