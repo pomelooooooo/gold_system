@@ -15,41 +15,80 @@
         });
     })
     $(document).ready(function() {
-        $(document).on('change', '.btn-file :file', function() {
-            var input = $(this),
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [label]);
-        });
+        $('#btn-buy').click(function() {
+            var $item = $('#templateCard .card-item').clone();
+            $('#card').append('<br>')
+            $item.appendTo('#card');
+            setItem($item)
+        })
 
-        $('.btn-file :file').on('fileselect', function(event, label) {
-
-            var input = $(this).parents('.input-group').find(':text'),
-                log = label;
-
-            if (input.length) {
-                input.val(log);
-            } else {
-                if (log) alert(log);
+        $('#btn-remove').click(function() {
+            var item_card = $('.card-item').not(':first').not(':last').last();
+            if (item_card.length > 0) {
+                item_card.remove()
             }
+        })
 
-        });
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('#img-upload').attr('src', e.target.result);
+        $('body').on('keyup', '.allprice', function() {
+            var total = 0
+            $('.allprice').each(function(index, el) {
+                if (!isNaN(parseFloat(el.value))) {
+                    total += parseFloat(el.value)
                 }
+            })
+            $('#total-price').html(total.toFixed(2))
+        })
 
-                reader.readAsDataURL(input.files[0]);
-            }
+        // $(document).on('change', '.btn-file :file', function() {
+        //     var input = $(this),
+        //         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        //     input.trigger('fileselect', [label]);
+        // });
+
+        // $('.btn-file :file').on('fileselect', function(event, label) {
+
+        //     var input = $(this).parents('.input-group').find(':text'),
+        //         log = label;
+
+        //     if (input.length) {
+        //         input.val(log);
+        //     } else {
+        //         if (log) alert(log);
+        //     }
+
+        // });
+
+        // function readURL(input) {
+        //     if (input.files && input.files[0]) {
+        //         var reader = new FileReader();
+
+        //         reader.onload = function(e) {
+        //             $('#img-upload').attr('src', e.target.result);
+        //         }
+
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
+
+        // $("#imgInp").change(function() {
+        //     readURL(this);
+        // });
+    });
+
+
+    function setItem($item) {
+        var maxItem = $('.card-item').length;
+        var $txtFormNumber = $('*[name^="code"]', $item);
+        var $items = $('.card-item').not(':first').not(':first');
+        var code = $('.card-item .code')[1].value
+        var num_code = "0"
+        for (let i = (parseInt(code) + 1).toString().length; i < 3; i++) {
+            num_code += "0";
         }
 
-        $("#imgInp").change(function() {
-            readURL(this);
-        });
-    });
+        $txtFormNumber.val(num_code + (parseInt(code) + 1).toString());
+    }
+
     (function() {
         'use strict';
         window.addEventListener('load', function() {
@@ -99,7 +138,7 @@
 
 <br />
 <div class="container">
-    <form method="POST" action="{{route('buy.store')}} " enctype="multipart/form-data" class="needs-validation" novalidate>
+    <form method="POST" action="{{route('buy.store')}} " class="needs-validation">
         <div class="card">
             <div class="card-header">
                 <h2>ซื้อทองเข้าร้าน</h2>
@@ -128,7 +167,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับซื้อ*</h4>
+                        <h4 for="validationuser">ผู้รับซื้อ</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationcustomer">ลูกค้า</h4>
@@ -180,14 +219,158 @@
                 <div class="float-right">
                     <div class='form-group'>
                         <h5>โปรดระบุจำนวนทองที่ต้องการรับซื้อ
-                        <input type="number" min='1' style="width: 80px;">
-                        <a type="button" class="btn btn-info btn-sm text-white"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a></h5>
+                            <input type="number" min='1' style="width: 80px;">
+                            <a type="button" class="btn btn-info btn-sm text-white" id="btn-buy"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
+                            <a type="button" class="btn btn-danger btn-sm text-white" id="btn-remove"><i class="fa fa-trash"></i> ลบ</a>
+                        </h5>
                     </div>
                 </div>
             </div>
         </div>
         <br>
-        <div class="card">
+
+        <div id="card">
+            <div class="card card-item">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>รหัสสินค้า</h4>
+                        </div>
+                        <div class="col-6">
+                            <h4 for="validationcategory">ประเภท*</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input name="code[]" type="text" class="form-control code" placeholder="" value="{{$code}}" readonly />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <select class="custom-select" name="type_gold_id[]" required>
+                                    <option selected disabled value="">เลือกหน่วยนับ</option>
+                                    @foreach($producttype as $row)
+                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">
+                                    โปรดเลือกหน่วยนับที่ต้องการ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                        </div>
+                        <div class="col-6">
+                            <h4>นํ้าหนัก(กรัม)*</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <select class="custom-select" name="size[]" required>
+                                    <option selected disabled value="">เลือกหน่วยนับ</option>
+                                    @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
+                                    <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">
+                                    โปรดเลือกนํ้าหนักที่ต้องการ
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input name="gram[]" type="text" class="form-control" placeholder="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 for="validationstriped">ลาย*</h4>
+                        </div>
+                        <div class="col-6">
+                            <h4 for="validationdetails">รายละเอียด</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input name="striped[]" type="text" class="form-control" placeholder="" required />
+                                <div class="invalid-feedback">
+                                    โปรดกรอกลายที่ต้องการ
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input name="details[]" type="text" class="form-control" placeholder="" required />
+                                <div class="invalid-feedback">
+                                    โปรดกรอกรายละเอียดทอง
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 for="validationprice">ราคารับซื้อ</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                                <div class="invalid-feedback">
+                                    โปรดกรอกราคารับซื้อ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-6">
+                            <h4>อัพโหลดรูปภาพ</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="form-group text-center">
+                                    <div class="card-header">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file-img">
+                                                    เลือกรูปภาพ <input type="file" name="pic[]">
+                                                </span>
+                                            </span>
+                                            <input type="text" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <img id='img-upload' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="text-right">
+            <p id="total-price">0</p>
+        </div>
+        <br>
+        <div class="text-right">
+            <a type="button" class="btn btn-secondary" href="{{url('/buy')}}">กลับ</a>
+            <button type="submit" class="btn btn-success">บันทึก</button>
+        </div>
+    </form>
+
+    <div id="templateCard" style="display: none;">
+        <div class="card card-item">
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
@@ -200,12 +383,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="code" type="text" class="form-control" placeholder="" value="{{$code}}" readonly />
+                            <input name="code[]" type="text" class="form-control code" placeholder="" value="{{$code}}" readonly />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="type_gold_id" id="validationcategory" required>
+                            <select class="custom-select" name="type_gold_id[]" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}">{{$row->name}}</option>
@@ -228,7 +411,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="size" id="validationcategory" required>
+                            <select class="custom-select" name="size[]" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -241,7 +424,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram" type="text" class="form-control" placeholder="" />
+                            <input name="gram[]" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -255,21 +438,16 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="striped_id" id="validationstriped" required>
-                                <option selected disabled value="">เลือกลาย</option>
-                                @foreach($striped as $row)
-                                <option value="{{$row->id}}">{{$row->name}}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-group">
+                            <input name="striped[]" type="text" class="form-control" placeholder="" required />
                             <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
+                                โปรดกรอกลายที่ต้องการ
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" required />
+                            <input name="details[]" type="text" class="form-control" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกรายละเอียดทอง
                             </div>
@@ -278,27 +456,48 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationprice">ราคารับซื้อ*</h4>
+                        <h4 for="validationprice">ราคารับซื้อ</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice" required />
+                            <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- <div class="row">
+                        <div class="col-6">
+                            <h4>อัพโหลดรูปภาพ</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="form-group text-center">
+                                    <div class="card-header">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file-img">
+                                                    เลือกรูปภาพ <input type="file" name="pic[]">
+                                                </span>
+                                            </span>
+                                            <input type="text" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <img id='img-upload' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
             </div>
         </div>
-        <br>
-        <div class="text-right">
-            <a type="button" class="btn btn-secondary" href="{{url('/buy')}}">กลับ</a>
-            <button type="submit" class="btn btn-success">บันทึก</button>
-        </div>
-    </form>
+    </div>
 </div>
 <br />
 @endsection

@@ -22,7 +22,7 @@ class BuyController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee','users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
         if (!empty($keyword)) {
             $buy = $buy->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -61,7 +61,7 @@ class BuyController extends Controller
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.buy.create-buy', compact('producttype', 'buy','striped', 'gold_type', 'code', 'users', 'customer'));
+        return view('admin.buy.create-buy', compact('producttype', 'buy', 'striped', 'gold_type', 'code', 'users', 'customer'));
     }
 
     /**
@@ -72,33 +72,34 @@ class BuyController extends Controller
      */
     public function store(Request $request)
     {
-        $buy = new ProductDetails(
-            [
-                'code' => $request->get('code'),
-                'details' => $request->get('details'),
-                'type_gold_id' => $request->get('type_gold_id'),
-                'striped_id' => $request->get('striped_id'),
-                'size' => $request->get('size'),
-                'gram' => $request->get('gram'),
-                'status' => '1',
-                'status_trade' => '0',
-                'type' => 'ทองเก่า',
-                'gratuity' => $request->get('gratuity'),
-                'allprice' => $request->get('allprice'),
-                'user_id' => $request->get('user_id'),
-                'customer_id' => $request->get('customer_id'),
-                'datetime' => $request->get('datetime'),
-                'num' => $request->get('num'),
-            ]
-        );
-        if ($request->hasFile('pic')) {
-            $file = $request->file('pic');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('assets/img/gold', $filename);
-            $buy->pic = $filename;
+        foreach ($request->get('code') as $key => $value) {
+            $buy = new ProductDetails(
+                [
+                    'code' => $request->get('code')[$key],
+                    'details' => $request->get('details')[$key],
+                    'type_gold_id' => $request->get('type_gold_id')[$key],
+                    'striped_id' => $request->get('striped')[$key],
+                    'size' => $request->get('size')[$key],
+                    'gram' => $request->get('gram')[$key],
+                    'status' => '1',
+                    'status_trade' => '0',
+                    'type' => 'ทองเก่า',
+                    'allprice' => $request->get('allprice')[$key],
+                    'user_id' => $request->get('user_id'),
+                    'customer_id' => $request->get('customer_id'),
+                    'datetime' => $request->get('datetime'),
+                ]
+            );
+            $buy->save();
         }
-        $buy->save();
+
+        // if ($request->hasFile('pic')) {
+        //     $file = $request->file('pic');
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = time() . '.' . $extension;
+        //     $file->move('assets/img/gold', $filename);
+        //     $buy->pic = $filename;
+        // }
         $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->paginate(5);
         $customer = Customer::all();
         $users = User::all();
@@ -130,7 +131,7 @@ class BuyController extends Controller
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.buy.edit', compact('buy', 'producttype','striped', 'customer', 'users', 'gold_type', 'id'));
+        return view('admin.buy.edit', compact('buy', 'producttype', 'striped', 'customer', 'users', 'gold_type', 'id'));
     }
 
     /**
