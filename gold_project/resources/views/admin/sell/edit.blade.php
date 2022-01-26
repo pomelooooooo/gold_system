@@ -34,7 +34,6 @@
                     "5 บาท": 5,
                     "10 บาท": 10
                 }
-                // console.log($.parseJSON(size_arr))
                 $('.gold_sell_cal').each(function(i, obj) {
                     let price_gold_sell = parseFloat(response.response.price.gold.sell.replace(",", ""))
                     let gratuity_cal = parseFloat($("#gratuity_cal" + i).val())
@@ -53,6 +52,17 @@
             error: function(xhr) {
                 "Not have Data!!"
             }
+        })
+    });
+    $(document).ready(function() {
+        $('body').on('keyup', '.gold_sell_cal', function() {
+            var total = 0
+            $('.gold_sell_cal').each(function(index, el) {
+                if (!isNaN(parseFloat(el.value))) {
+                    total += parseFloat(el.value)
+                }
+            })
+            $('#total-price').html(total.toFixed(2))
         })
     });
 </script>
@@ -119,18 +129,21 @@
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
+                                โปรดเลือกผู้ขาย
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="input-group mb-3" style="margin-top: 0.5em;">
-                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer">
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
                                 <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกลูกค้า
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -212,7 +225,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="allprice[]" type="text" class="form-control" placeholder="" value="{{$value->allprice}}" readonly />
+                            <input name="allprice[]" type="text" class="form-control allprice" placeholder="" value="{{$value->allprice}}" readonly />
                         </div>
                     </div>
                     <div class="col-6">
@@ -226,11 +239,6 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="col-6">
-                        <div class='form-group'>
-                            <input name="striped[]" type="text" class="form-control" placeholder="" value="{{$value->striped}}" readonly />
-                        </div>
-                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -240,7 +248,10 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control gold_sell_cal " name="sellprice[]" id="gold_sell_cal{{$key}}" value="{{$value->sellprice}}">
+                            <input type="text" class="form-control gold_sell_cal " name="sellprice[]" id="gold_sell_cal{{$key}}" value="{{$value->sellprice}}" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            โปรดกรอกราคาขาย
                         </div>
                     </div>
                 </div>
@@ -248,11 +259,19 @@
         </div>
         <br />
         @endforeach
+        <div class="row">
+            <div class="col-12">
+                <div class="text-right">
+                    <h4>ราคารวม</h4>
+                    <h3 id="total-price">0</h3>
+                </div>
+            </div>
+        </div>
         <br />
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/sell')}}">กลับ</a>
-            <a type="button" class="btn btn-info" href="{{url('/sell')}}">พิมพ์ใบเสร็จรับเงิน</a>
-            <a type="button" class="btn btn-info" href="{{url('/sell')}}">พิมพ์ใบกำกับภาษี</a>
+            <a type="button" class="btn btn-info" href="{{url('/sell')}}"><i class="fas fa-receipt"></i> พิมพ์ใบเสร็จรับเงิน</a>
+            <a type="button" class="btn btn-info" href="{{url('/sell')}}"><i class="fas fa-receipt"></i> พิมพ์ใบกำกับภาษี</a>
             <button id="btn-save" type="submit" class="btn btn-success">ทำการขาย</button>
         </div>
         <!-- <input type="hidden" name="_method" value="PATCH" /> -->

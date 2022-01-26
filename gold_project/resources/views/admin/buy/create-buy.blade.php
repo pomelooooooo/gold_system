@@ -38,41 +38,6 @@
             })
             $('#total-price').html(total.toFixed(2))
         })
-
-        // $(document).on('change', '.btn-file :file', function() {
-        //     var input = $(this),
-        //         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        //     input.trigger('fileselect', [label]);
-        // });
-
-        // $('.btn-file :file').on('fileselect', function(event, label) {
-
-        //     var input = $(this).parents('.input-group').find(':text'),
-        //         log = label;
-
-        //     if (input.length) {
-        //         input.val(log);
-        //     } else {
-        //         if (log) alert(log);
-        //     }
-
-        // });
-
-        // function readURL(input) {
-        //     if (input.files && input.files[0]) {
-        //         var reader = new FileReader();
-
-        //         reader.onload = function(e) {
-        //             $('#img-upload').attr('src', e.target.result);
-        //         }
-
-        //         reader.readAsDataURL(input.files[0]);
-        //     }
-        // }
-
-        // $("#imgInp").change(function() {
-        //     readURL(this);
-        // });
     });
 
 
@@ -282,10 +247,15 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="form-group">
-                                <input name="striped[]" type="text" class="form-control" placeholder="" required />
+                            <div class="input-group mb-3">
+                                <select class="custom-select" name="striped_id" id="validationstriped" required>
+                                    <option selected disabled value="">เลือกลาย</option>
+                                    @foreach($striped as $row)
+                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                    @endforeach
+                                </select>
                                 <div class="invalid-feedback">
-                                    โปรดกรอกลายที่ต้องการ
+                                    โปรดเลือกประเภทที่ต้องการ
                                 </div>
                             </div>
                         </div>
@@ -318,12 +288,11 @@
         </div>
         <br>
         <div class="row">
-            <!-- <div class="col-4"></div> -->
             <div class="col-12">
                 <div class="float-right">
                     <div class='form-group'>
-                        <a type="button" class="btn btn-info btn-sm text-white" id="btn-buy"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
-                        <a type="button" class="btn btn-danger btn-sm text-white" id="btn-remove"><i class="fa fa-trash"></i> ลบ</a>
+                        <a type="button" class="btn btn-info text-white" id="btn-buy"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
+                        <a type="button" class="btn btn-danger text-white" id="btn-remove"><i class="fa fa-trash"></i> ลบ</a>
                     </div>
                 </div>
             </div>
@@ -332,7 +301,7 @@
             <div class="col-12">
                 <div class="text-right">
                     <h4>ราคารวม</h4>
-                    <h4 id="total-price">0</h4>
+                    <h3 id="total-price">0</h3>
                 </div>
             </div>
         </div>
@@ -443,32 +412,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row">
-                        <div class="col-6">
-                            <h4>อัพโหลดรูปภาพ</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="form-group text-center">
-                                    <div class="card-header">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <span class="btn btn-default btn-file-img">
-                                                    เลือกรูปภาพ <input type="file" name="pic[]">
-                                                </span>
-                                            </span>
-                                            <input type="text" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <img id='img-upload' />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
             </div>
         </div>
     </div>
