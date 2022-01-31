@@ -59,4 +59,6 @@ Route::put('/sellGroup/update', 'SellController@updateGroup')->middleware('auth'
 
 Route::resource('/manufacturer', 'ManufacturerController')->middleware('auth');
 
+Route::resource('/stock', 'StockController')->middleware('auth');
+
 
