@@ -47,6 +47,14 @@
 
                     $("#gold_sell_cal" + i).val((((price_gold_sell * size) + gratuity_cal) + vat).toFixed(2))
                 });
+
+                var totals = 0
+                $('.gold_sell_cal').each(function(index, el) {
+                    if (!isNaN(parseFloat(el.value))) {
+                        totals += parseFloat(el.value)
+                    }
+                })
+                $('#total-price').html(totals.toFixed(2))
                 // console.log(response.response.price.gold.sell, parseFloat($(".gratuity_cal").val()) * 0.7)
             },
             error: function(xhr) {

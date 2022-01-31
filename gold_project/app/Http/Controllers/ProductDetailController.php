@@ -62,7 +62,7 @@ class ProductDetailController extends Controller
         $product = Product::all();
         $producttype = TypeGold::all();
         $striped = Striped::all();
-        return view('admin.productdetail.create-productdetail', compact('product', 'gold_type','striped', 'code', 'producttype'));
+        return view('admin.productdetail.create-productdetail', compact('product', 'gold_type', 'striped', 'code', 'producttype'));
     }
 
     /**
@@ -129,7 +129,7 @@ class ProductDetailController extends Controller
         $product = Product::all();
         $producttype = TypeGold::all();
         $striped = Striped::all();
-        return view('admin.productdetail.edit', compact('productdetail', 'product', 'producttype','striped', 'gold_type', 'id'));
+        return view('admin.productdetail.edit', compact('productdetail', 'product', 'producttype', 'striped', 'gold_type', 'id'));
     }
 
     /**

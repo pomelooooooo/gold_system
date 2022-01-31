@@ -100,7 +100,6 @@
     </div>
 </div>
 <!-- end hero area -->
-
 <br />
 <div class="container">
     <form method="POST" action="{{route('buy.store')}} " class="needs-validation">

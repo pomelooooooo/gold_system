@@ -78,7 +78,7 @@ class BuyController extends Controller
                     'code' => $request->get('code')[$key],
                     'details' => $request->get('details')[$key],
                     'type_gold_id' => $request->get('type_gold_id')[$key],
-                    'striped_id' => $request->get('striped')[$key],
+                    'striped_id' => $request->get('striped_id')[$key],
                     'size' => $request->get('size')[$key],
                     'gram' => $request->get('gram')[$key],
                     'status' => '1',

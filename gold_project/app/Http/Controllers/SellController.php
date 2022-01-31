@@ -186,7 +186,8 @@ class SellController extends Controller
         $customer = Customer::all();
         $producttype = TypeGold::all();
         $striped = Striped::all();
-        return view('admin.sell.edit', compact('productdetail', 'customer','striped', 'users', 'producttype', 'gold_type', 'id'));
+
+        return view('admin.sell.edit', compact('productdetail', 'customer', 'striped', 'users', 'producttype', 'gold_type', 'id'));
     }
     public function updateGroup(Request $request)
     {
