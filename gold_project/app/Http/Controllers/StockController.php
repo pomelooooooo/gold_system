@@ -43,7 +43,24 @@ class StockController extends Controller
             $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date);
         }
         $stocknew = $stocknew->paginate(20);
+        $keyword2 = $request->get('search2');
         $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
+        if (!empty($keyword2)) {
+            $stockold = $stockold->where('product_details.code', 'like', "%$keyword2%")
+                ->orWhere('product_details.details', 'like', "%$keyword2%");
+        }
+        $filter_type2 = $request->get('filter_type2');
+        if (!empty($filter_type2)) {
+            $stockold = $stockold->where('product_details.type_gold_id', $filter_type2);
+        }
+        $filter_size2 = $request->get('filter_size2');
+        if (!empty($filter_size2)) {
+            $stockold = $stockold->where('product_details.size', $filter_size2);
+        }
+        $filter_date2 = $request->get('filter_date2');
+        if (!empty($filter_date2)) {
+            $stockold = $stockold->whereDate('product_details.created_at', $filter_date2);
+        }
         $stockold = $stockold->paginate(20);
         $product = Product::all();
         $typegold = TypeGold::all();
@@ -51,7 +68,7 @@ class StockController extends Controller
         $customer = Customer::all();
         $striped = Striped::all();
         // dd($filter_status);
-        return view('admin.stock.index', compact('product', 'stocknew', 'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date'));
+        return view('admin.stock.index', compact('product', 'stocknew', 'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2'));
     }
 
     /**

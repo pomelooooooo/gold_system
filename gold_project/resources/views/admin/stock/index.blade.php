@@ -95,19 +95,20 @@
                         <div class="col-12">
                             <input type="hidden" id="sell-all" name="sellall">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" name="search2" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
+                            <input class="form-control mr-sm-2" name="search2" value="{{isset($keyword2)?$keyword2:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
                             <select class="form-control mr-sm-2" name="filter_type2" id="validationcategory">
                                 <option value="">เลือกประเภท</option>
-
+                                @foreach($typegold as $row)
+                                <option value="{{$row->id}}" {{$row->id == $filter_type2?"selected":""}}>{{$row->name}}</option>
+                                @endforeach
                             </select>
                             <select class="form-control " name="filter_size2">
                                 <option value="">เลือกนํ้าหนัก</option>
-
+                                @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
+                                <option value="{{ $sizeWay }}" {{$sizeWay == $filter_size2?"selected":""}}>{{ $sizeLable }}</option>
+                                @endforeach
                             </select>
-                            <select class="form-control " name="filter_size2">
-                                <option value="">วันที่นำเข้า</option>
-
-                            </select>
+                            <input class="form-control" type="date" name="filter_date2" value="{{$filter_date2}}">
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
                         </div>
                     </div>
