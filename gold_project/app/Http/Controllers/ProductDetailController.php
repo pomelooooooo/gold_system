@@ -20,7 +20,7 @@ class ProductDetailController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("*")->where('type', 'ทองใหม่');
+        $productdetail = ProductDetails::select("product_details.*")->where('type', 'ทองใหม่');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -33,6 +33,7 @@ class ProductDetailController extends Controller
         $product = Product::all();
         // dd($productdetail);
         return view('admin.productdetail.index', compact('product', 'productdetail', 'keyword'));
+        // return redirect('/productdetail')->with(['productdetail' => $productdetail, 'product' => $product , 'keyword' => $keyword]);
     }
 
     /**
@@ -43,6 +44,7 @@ class ProductDetailController extends Controller
     public function create()
     {
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
+        // $typegold = ProductDetails::select("*")->where('type', 'ทองใหม่');
         $productdetail = ProductDetails::select('code')->orderBy('code', "desc")->first();
         if (!empty($productdetail)) {
             $code = $productdetail->code + 1;
