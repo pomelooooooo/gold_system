@@ -18,7 +18,7 @@
             url: "http://127.0.0.1:3000/latest",
             type: 'GET',
             success: function(response) {
-                console.log(response.response)
+                // console.log(response.response)
                 $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
                 $("#gold_sell").val(response.response.price.gold.sell)
                 let size_arr = {
@@ -55,7 +55,6 @@
                     }
                 })
                 $('#total-price').html(totals.toFixed(2))
-                // console.log(response.response.price.gold.sell, parseFloat($(".gratuity_cal").val()) * 0.7)
             },
             error: function(xhr) {
                 "Not have Data!!"

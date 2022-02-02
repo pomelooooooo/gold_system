@@ -30,7 +30,7 @@
                         <div class="col-12">
                             <input type="hidden" id="sell-all" name="sellall">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาทอง">
                             <select class="form-control mr-sm-2" name="filter_type" id="validationcategory">
                                 <option value="">เลือกประเภท</option>
                                 @foreach($typegold as $row)
@@ -95,7 +95,7 @@
                         <div class="col-12">
                             <input type="hidden" id="sell-all" name="sellall">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" name="search2" value="{{isset($keyword2)?$keyword2:''}}" type="search" id="myInput" placeholder="ค้นหาทองที่ต้องการขาย">
+                            <input class="form-control mr-sm-2" name="search2" value="{{isset($keyword2)?$keyword2:''}}" type="search" id="myInput" placeholder="ค้นหาทอง">
                             <select class="form-control mr-sm-2" name="filter_type2" id="validationcategory">
                                 <option value="">เลือกประเภท</option>
                                 @foreach($typegold as $row)

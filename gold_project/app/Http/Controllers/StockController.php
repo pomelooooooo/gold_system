@@ -21,7 +21,7 @@ class StockController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $stocknew = ProductDetails::select("product_details.*", 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่');
+        $stocknew = ProductDetails::select("product_details.*", 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->orderBy('code', "desc")->where('type', 'ทองใหม่');
         if (!empty($keyword)) {
             $stocknew = $stocknew->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%");
@@ -44,7 +44,7 @@ class StockController extends Controller
         }
         $stocknew = $stocknew->paginate(20);
         $keyword2 = $request->get('search2');
-        $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
+        $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('code', "desc")->where('type', 'ทองเก่า');
         if (!empty($keyword2)) {
             $stockold = $stockold->where('product_details.code', 'like', "%$keyword2%")
                 ->orWhere('product_details.details', 'like', "%$keyword2%");

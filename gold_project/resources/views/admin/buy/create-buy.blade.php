@@ -247,7 +247,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="input-group mb-3">
-                                <select class="custom-select" name="striped_id" id="validationstriped" required>
+                                <select class="custom-select" name="striped_id[]" id="validationstriped" required>
                                     <option selected disabled value="">เลือกลาย</option>
                                     @foreach($striped as $row)
                                     <option value="{{$row->id}}">{{$row->name}}</option>
@@ -269,7 +269,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationprice">ราคารับซื้อ</h4>
+                            <h4 for="validationprice">ราคารับซื้อ*</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -380,12 +380,21 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="striped[]" type="text" class="form-control" placeholder="" required />
+                        <select class="custom-select" name="striped_id[]"  required>
+                            <option selected disabled value="">เลือกลาย</option>
+                            @foreach($striped as $row)
+                            <option value="{{$row->id}}">{{$row->name}}</option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback">
+                            โปรดเลือกประเภทที่ต้องการ
+                        </div>
+                        <!-- <div class="form-group">
+                            <input name="striped_id[]" type="text" class="form-control" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกลายที่ต้องการ
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-6">
                         <div class="form-group">
@@ -398,7 +407,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationprice">ราคารับซื้อ</h4>
+                        <h4 for="validationprice">ราคารับซื้อ*</h4>
                     </div>
                 </div>
                 <div class="row">
