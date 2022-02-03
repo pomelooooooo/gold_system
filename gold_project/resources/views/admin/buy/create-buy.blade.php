@@ -13,6 +13,42 @@
             placeholder: "เลือกลูกค้า",
             // allowClear: true
         });
+
+        $("#size").change(function() {
+            $.ajax({
+                url: "/buy/size_gram/" + $("#size").val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // $("#priceofgold").val(data.product.price_of_gold)
+                    // $("#validationcategory").val(data.product.id)
+                    let size_arr = {
+                        "ครึ่งสลึง": "1.9",
+                        "1 สลึง": "3.8",
+                        "2 สลึง": "7.6",
+                        "3 สลึง": "11.4",
+                        "6 สลึง": "22.8",
+                        "1 บาท": "15.2",
+                        "2 บาท": "30.4",
+                        "3 บาท": "45.5",
+                        "4 บาท": "60.6",
+                        "5 บาท": "76",
+                        "10 บาท": "152"
+                    }
+
+                    $.each(size_arr, function(i) {
+                        if (data.product.weight == weight[0]) {
+                            $('#size option[value="' + i + '"]').prop("selected", true)
+                            $('#gram').val(weight[1])
+                        }
+                    })
+
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
     })
     $(document).ready(function() {
         $('#btn-buy').click(function() {
@@ -219,7 +255,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="input-group mb-3">
-                                <select class="custom-select" name="size[]" required>
+                                <select class="custom-select" name="size[]" id="size" required>
                                     <option selected disabled value="">เลือกหน่วยนับ</option>
                                     @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                     <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -232,7 +268,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input name="gram[]" type="text" class="form-control" placeholder="" />
+                                <input name="gram[]" type="text" class="form-control" id="gram" placeholder="" />
                             </div>
                         </div>
                     </div>
@@ -353,7 +389,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="size[]" required>
+                            <select class="custom-select" name="size[]" id="size" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -366,7 +402,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="gram[]" type="text" class="form-control" placeholder="" />
+                            <input name="gram[]" type="text" class="form-control" id="gram" placeholder="" />
                         </div>
                     </div>
                 </div>
