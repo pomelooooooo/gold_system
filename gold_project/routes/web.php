@@ -41,7 +41,7 @@ Route::resource('/median_price', 'MedianPriceController')->middleware('auth');
 Route::resource('/set_price', 'SetPriceController')->middleware('auth');
 
 Route::resource('/manage_employee', 'ManageEmployeeController')->middleware('auth');
-Route::get('/manage_employee/validateIdcard/{idCard}/{id?}','ManageEmployeeController@validateIdcard')->middleware('auth');
+Route::get('/manage_employee/validateIdcard/{idCard}/{id?}', 'ManageEmployeeController@validateIdcard')->middleware('auth');
 
 Route::resource('/type_gold', 'TypeGoldController')->middleware('auth');
 
@@ -61,4 +61,5 @@ Route::resource('/manufacturer', 'ManufacturerController')->middleware('auth');
 
 Route::resource('/stock', 'StockController')->middleware('auth');
 
-
+Route::get('/stocknew', 'StockController@stocknew')->middleware('auth');
+Route::get('/stockold', 'StockController@stockold')->middleware('auth');
