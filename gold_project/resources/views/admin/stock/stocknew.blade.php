@@ -80,6 +80,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="text-right">
+                        <a type="button" class="btn btn-secondary" href="{{url('/stock')}}">กลับ</a>
+                    </div>
                 </div>
             </div>
         </div>

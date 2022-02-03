@@ -57,6 +57,7 @@
                                 <th scope="col">ลูกค้า</th>
                                 <th scope="col">ราคารับซื้อ</th>
                                 <th scope="col">วันที่นำเข้า</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,10 +71,20 @@
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
                                 <td>{{$row->created_at}}</td>
+                                <td>
+                                    <div class="form-check text-center">
+                                        <input class="form-check-input" type="checkbox" value="">
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <br>
+                    <div class="text-right">
+                        <a type="button" class="btn btn-secondary" href="{{url('/stock')}}">กลับ</a>
+                        <button type="submit" class="btn btn-success">นำส่งโรงหลอม</button>
+                    </div>
                 </div>
             </div>
         </div>
