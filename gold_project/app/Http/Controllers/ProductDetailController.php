@@ -20,7 +20,7 @@ class ProductDetailController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("product_details.*")->where('type', 'ทองใหม่');
+        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -28,11 +28,20 @@ class ProductDetailController extends Controller
                 ->orWhere('product_details.size', 'like', "%$keyword%")
                 ->orWhere('product_details.lot_id', 'like', "%$keyword%");
         }
+        $filter_type = $request->get('filter_type');
+        if (!empty($filter_type)) {
+            $productdetail = $productdetail->where('product_details.type_gold_id', $filter_type);
+        }
+        $filter_size = $request->get('filter_size');
+        if (!empty($filter_size)) {
+            $productdetail = $productdetail->where('product_details.size', $filter_size);
+        }
         $productdetail = $productdetail->paginate(5);
         // dd($productdetail);
+        $producttype = TypeGold::all();
         $product = Product::all();
         // dd($productdetail);
-        return view('admin.productdetail.index', compact('product', 'productdetail', 'keyword'));
+        return view('admin.productdetail.index', compact('product', 'productdetail', 'keyword','filter_type','filter_size','producttype'));
         // return redirect('/productdetail')->with(['productdetail' => $productdetail, 'product' => $product , 'keyword' => $keyword]);
     }
 

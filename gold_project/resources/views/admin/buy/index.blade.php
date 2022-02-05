@@ -82,10 +82,24 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                         <form class="form-inline" action="/buy" method="GET">
+                            <input type="hidden" id="buy-all" name="buyall">
                             <i class="fas fa-search" id="mySearch"></i>
                             <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหารหัสสินค้า">
+                            <select class="form-control mr-sm-2" name="filter_type" id="validationcategory">
+                                <option value="">เลือกประเภท</option>
+                                @foreach($producttype as $row)
+                                <option value="{{$row->id}}" {{$row->id == $filter_type?"selected":""}}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-control " name="filter_size">
+                                <option value="">เลือกนํ้าหนัก</option>
+                                @foreach($buy as $row)
+                                <option value="{{$row->size}}" {{$row->id == $filter_size?"selected":""}}>{{$row->size}}</option>
+                                @endforeach
+                            </select>
+                            <input type="submit" class="btn btn-primary filters" value="ค้นหา">
                         </form>
                     </div>
                 </div>
@@ -101,6 +115,7 @@
                                     <th scope="col">นํ้าหนัก</th>
                                     <th scope="col">ผู้รับซื้อ</th>
                                     <th scope="col">ลูกค้า</th>
+                                    <th scope="col">วันที่รับซื้อ</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -115,6 +130,7 @@
                                     <td>{{$row->size}}</td>
                                     <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                     <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
+                                    <td>{{$row->created_at}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('BuyController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>

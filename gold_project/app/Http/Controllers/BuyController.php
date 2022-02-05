@@ -22,7 +22,7 @@ class BuyController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('created_at', "desc")->where('type', 'ทองเก่า');
         if (!empty($keyword)) {
             $buy = $buy->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -31,10 +31,19 @@ class BuyController extends Controller
                 ->orWhere('product_details.user_id', 'like', "%$keyword%")
                 ->orWhere('product_details.customer_id', 'like', "%$keyword%");
         }
+        $filter_type = $request->get('filter_type');
+        if (!empty($filter_type)) {
+            $buy = $buy->where('product_details.type_gold_id', $filter_type);
+        }
+        $filter_size = $request->get('filter_size');
+        if (!empty($filter_size)) {
+            $buy = $buy->where('product_details.size', $filter_size);
+        }
         $buy = $buy->paginate(5);
         $customer = Customer::all();
+        $producttype = TypeGold::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy', 'users', 'keyword', 'customer'));
+        return view('admin.buy.index', compact('buy', 'users', 'keyword', 'customer','producttype','filter_type','filter_size'));
     }
 
     /**
