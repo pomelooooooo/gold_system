@@ -25,7 +25,7 @@ class SellController extends Controller
         $keyword = $request->get('search');
         // dd($request->get('sellall'));
         $sellall = $request->get('sellall');
-        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('status_trade', '0')->where('type', 'ทองใหม่');
+        $productdetail = ProductDetails::select("product_details.*", 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->orderBy('created_at', "desc")->where('status_trade', '0')->where('type', 'ทองใหม่');
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")

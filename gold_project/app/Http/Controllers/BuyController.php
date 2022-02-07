@@ -22,7 +22,7 @@ class BuyController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('created_at', "desc")->where('type', 'ทองเก่า');
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า');
         if (!empty($keyword)) {
             $buy = $buy->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -39,6 +39,7 @@ class BuyController extends Controller
         if (!empty($filter_size)) {
             $buy = $buy->where('product_details.size', $filter_size);
         }
+        $buy = $buy->orderBy('created_at', "desc");
         $buy = $buy->paginate(5);
         $customer = Customer::all();
         $producttype = TypeGold::all();
@@ -58,14 +59,16 @@ class BuyController extends Controller
         if (!empty($buy)) {
             $code = $buy->code + 1;
             $num = "0";
-            // dd(strlen(str_replace('0', '', $code)));
-            for ($i = strlen(str_replace('0', '', $code)); $i < 3; $i++) {
-                $num .= "0";
+            if (strlen($code) <= 3) {
+                for ($i = strlen($code); $i < 3; $i++) {
+                    $num .= "0";
+                }
+                $code = $num . $code;
             }
-            $code = $num . str_replace('0', '', $code);
         } else {
             $code = "0001";
         }
+        $code = "L".$code;
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
@@ -102,17 +105,11 @@ class BuyController extends Controller
             $buy->save();
         }
 
-        // if ($request->hasFile('pic')) {
-        //     $file = $request->file('pic');
-        //     $extension = $file->getClientOriginalExtension();
-        //     $filename = time() . '.' . $extension;
-        //     $file->move('assets/img/gold', $filename);
-        //     $buy->pic = $filename;
-        // }
-        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'users.name as nameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->paginate(5);
+        $producttype = TypeGold::all();
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('created_at', "desc")->paginate(5);
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy', 'customer', 'users'));
+        return view('admin.buy.index', compact('buy','producttype', 'customer', 'users'));
     }
 
     /**
@@ -202,6 +199,13 @@ class BuyController extends Controller
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy', 'users', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        $producttype = TypeGold::all();
+        return view('admin.buy.index', compact('buy', 'users', 'product', 'producttype'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }
+
+    // public function size_gram($lot)
+    // {
+    //     $size = Product::select('size_gram', 'type_gold.id', 'weight')->join('type_gold', 'type_gold.id', '=', 'products.type_gold_id')->where('products.lot_id', $lot)->first();
+    //     return response()->json(["size" => $size]);
+    // }
 }
