@@ -39,6 +39,19 @@
             readURL(this);
         });
 
+        function setItem($item) {
+        var $txtFormNumber = $('*[name^="code"]', $item);
+        var no = $('.card-item .code').not(':first').not(':first').length
+        var code = $('.card-item .code')[0].value
+        var num_code = "0"
+        var code_string = code.replace('N', '')
+        var items = parseInt(code_string) + parseInt(no);
+        for (let i = (parseInt(code_string) + 1).toString().length; i < 3; i++) {
+            num_code += "0";
+        }
+        $txtFormNumber.val("N" + num_code + items.toString());
+    }
+
         $("#validationtellotid").change(function() {
             $.ajax({
                 url: "/productdetail/price_of_gold/" + $("#validationtellotid").val(),
@@ -114,7 +127,7 @@
 
 <br />
 <div class="container">
-    <div class="card">
+    <div class="card card-item">
         <div class="card-header">
             <h2>เพิ่มทองเข้าร้าน</h2>
         </div>

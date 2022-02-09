@@ -30,24 +30,60 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
+            // if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
+            //     $.ajax({
+            //         url: "productdetail/" + id,
+            //         type: 'delete',
+            //         data: {
+            //             id: id,
+            //             _token: token
+            //         },
+            //         success: function(data) {
+            //             window.location = "{{route('productdetail.index')}}"
+            //         },
+            //         cache: false,
+            //         contentType: false,
+            //         processData: false
+            //     });
+            // } else {
+            //     return false;
+            // }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "ต้องการลบข้อมูลทองหรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'ไม่',
+                confirmButtonText: 'ใช่'
+            }).then((result) => {
+                if (result.isConfirmed) {
                 $.ajax({
-                    url: "productdetail/" + id,
+                    url: "/productdetail/" + id,
                     type: 'delete',
                     data: {
                         id: id,
                         _token: token
                     },
+                    dataType: 'json',
                     success: function(data) {
-                        window.location = "{{route('productdetail.index')}}"
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-            } else {
-                return false;
-            }
+                        if(data.status){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'ลบข้อมูลเรียบร้อย',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then((result) => {
+                                window.location = '/productdetail'
+                            })
+                        }
+                        
+                    }
+                    });
+                }
+            })
         });
     });
 </script>

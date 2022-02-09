@@ -20,7 +20,7 @@ class ProductDetailController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่');
+        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->orderBy('created_at', "desc");
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -36,7 +36,7 @@ class ProductDetailController extends Controller
         if (!empty($filter_size)) {
             $productdetail = $productdetail->where('product_details.size', $filter_size);
         }
-        $productdetail = $productdetail->paginate(5);
+        $productdetail = $productdetail->paginate(10);
         // dd($productdetail);
         $producttype = TypeGold::all();
         $product = Product::all();
@@ -55,6 +55,7 @@ class ProductDetailController extends Controller
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
         $productdetail = ProductDetails::select('code')->orderBy('code', "desc")->first();
         if (!empty($productdetail)) {
+            $productdetail->code = substr($productdetail->code, 1);
             $code = $productdetail->code + 1;
             $num = "0";
             // dd(strlen(str_replace('0', '', $code)));
@@ -67,6 +68,7 @@ class ProductDetailController extends Controller
         } else {
             $code = "0001";
         }
+        $code = "N".$code;
         $product = Product::all();
         $producttype = TypeGold::all();
         $striped = Striped::all();
@@ -107,10 +109,19 @@ class ProductDetailController extends Controller
             $file->move('assets/img/gold', $filename);
             $productdetail->pic = $filename;
         }
+        $filter_type = $request->get('filter_type');
+        if (!empty($filter_type)) {
+            $productdetail = $productdetail->where('product_details.type_gold_id', $filter_type);
+        }
+        $filter_size = $request->get('filter_size');
+        if (!empty($filter_size)) {
+            $productdetail = $productdetail->where('product_details.size', $filter_size);
+        }
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(5);
+        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->orderBy('created_at', "desc")->paginate(10);
         $product = Product::all();
-        return view('admin.productdetail.index', compact('productdetail', 'product'));
+        $producttype = TypeGold::all();
+        return view('admin.productdetail.index', compact('productdetail', 'product','producttype','filter_type','filter_size'));
     }
 
     /**
@@ -177,7 +188,7 @@ class ProductDetailController extends Controller
             $productdetail->pic = $filename;
         }
         $productdetail->save();
-        $productdetail = ProductDetails::select('*')->paginate(5);
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         // return view('admin.productdetail.index', compact('productdetail', 'product', 'id'));
         return redirect('/productdetail')->with(['productdetail' => $productdetail, 'product' => $product]);
@@ -193,7 +204,7 @@ class ProductDetailController extends Controller
     {
         $productdetail = ProductDetails::find($id);
         $productdetail->delete();
-        $productdetail = ProductDetails::select('*')->paginate(5);
+        $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
         return view('admin.productdetail.index', compact('productdetail', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
     }

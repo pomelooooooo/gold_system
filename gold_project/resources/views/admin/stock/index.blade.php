@@ -82,8 +82,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="col-6">
+                        {{ $stocknew->links() }}
+                    </div>
                     <td class="text-center">
-                        <a class="btn btn-primary" href="{{action('StockController@stocknew')}}"><i class="fa fa-edit"></i> ทองใหม่</a>
+                        <a class="btn btn-info" href="{{action('StockController@stocknew')}}"><i class="fa fa-edit"></i> จัดการทองใหม่</a>
                     </td>
                 </div>
             </div>
@@ -144,8 +147,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="col-6">
+                        {{ $stocknew->links() }}
+                    </div>
                     <td class="text-center">
-                        <a class="btn btn-primary" href="{{action('StockController@stockold')}}"><i class="fa fa-edit"></i> ทองเก่า</a>
+                        <a class="btn btn-info" href="{{action('StockController@stockold')}}"><i class="fa fa-edit"></i> จัดการทองเก่า</a>
                     </td>
                 </div>
             </div>

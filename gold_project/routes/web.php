@@ -31,7 +31,6 @@ Route::resource('/managegold', 'ManagegoldController')->middleware('auth');
 Route::resource('/product', 'ProductController')->middleware('auth');
 
 Route::resource('/productdetail', 'ProductDetailController')->middleware('auth');
-
 Route::get('/productdetail/price_of_gold/{lot}', 'ProductDetailController@getprice_of_gold')->middleware('auth');
 
 Route::resource('/stores', 'StoresController')->middleware('auth');
@@ -52,9 +51,7 @@ Route::resource('/manage_customer', 'ManageCustomerController')->middleware('aut
 Route::resource('/buy', 'BuyController')->middleware('auth');
 
 Route::resource('/sell', 'SellController')->middleware('auth');
-
 Route::get('/sell/group/{id}', 'SellController@sell_group')->middleware('auth');
-
 Route::put('/sellGroup/update', 'SellController@updateGroup')->middleware('auth');
 
 Route::resource('/manufacturer', 'ManufacturerController')->middleware('auth');
@@ -62,4 +59,7 @@ Route::resource('/manufacturer', 'ManufacturerController')->middleware('auth');
 Route::resource('/stock', 'StockController')->middleware('auth');
 
 Route::get('/stocknew', 'StockController@stocknew')->middleware('auth');
+
 Route::get('/stockold', 'StockController@stockold')->middleware('auth');
+Route::post('/stockold/group', 'StockController@updateGroup')->middleware('auth');
+

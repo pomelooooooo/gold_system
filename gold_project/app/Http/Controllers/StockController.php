@@ -42,7 +42,8 @@ class StockController extends Controller
         if (!empty($filter_date)) {
             $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date);
         }
-        $stocknew = $stocknew->paginate(20);
+        $stocknew = $stocknew->paginate(5);
+        
         $keyword2 = $request->get('search2');
         $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('code', "desc")->where('type', 'ทองเก่า');
         if (!empty($keyword2)) {
@@ -61,7 +62,7 @@ class StockController extends Controller
         if (!empty($filter_date2)) {
             $stockold = $stockold->whereDate('product_details.created_at', $filter_date2);
         }
-        $stockold = $stockold->paginate(20);
+        $stockold = $stockold->paginate(5);
         $product = Product::all();
         $typegold = TypeGold::all();
         $user = User::all();
@@ -188,7 +189,7 @@ class StockController extends Controller
         if (!empty($filter_date2)) {
             $stockold = $stockold->whereDate('product_details.created_at', $filter_date2);
         }
-        $stockold = $stockold->paginate(20);
+        $stockold = $stockold->paginate(15);
         $product = Product::all();
         $typegold = TypeGold::all();
         $user = User::all();
@@ -196,5 +197,12 @@ class StockController extends Controller
         $striped = Striped::all();
         // dd($filter_status);
         return view('admin.stock.stockold', compact('product',  'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2'));
+    }
+
+    public function updateGroup(Request $request)
+    {
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_trade' => '3']);
+
+        return response()->json(['status' => true], 200);
     }
 }

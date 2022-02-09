@@ -1,6 +1,60 @@
 @extends('layouts.master')
 @section('title','สต๊อกทองเก่า')
 @section('content')
+<script>
+    $(document).ready(function(){
+        $("body").on('click', '#btn-update', function(e) {
+            // checkbox_update
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "ต้องการส่งโรงหลอมหรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'ไม่',
+                confirmButtonText: 'ใช่'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if($('.checkbox_update').is(':checked')){
+                        var id = ''
+                        $.each($('input[name="checkbox_update[]"]:checked'), function(i, el){
+                            id += $(this).data("id")+','
+                        })
+                        id = id.substr(0, id.length-1)
+
+                        $.ajax({
+                            url: "/stockold/group",
+                            type: 'POST',
+                            data: {_token: "{{ csrf_token() }}", id: id},
+                            dataType: 'json',
+                            success: function(data) {
+                                if(data.status){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'อัปเดตสถานะเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    }).then((result) => {
+                                        window.location = '/stockold'
+                                    })
+                                }
+                            }
+                        });
+
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'กรุณาเลือกรายการ',
+                            'warning'
+                        )
+                    }
+                }
+            })
+        })
+    })
+</script>
+
 <!-- hero area -->
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -57,6 +111,7 @@
                                 <th scope="col">ลูกค้า</th>
                                 <th scope="col">ราคารับซื้อ</th>
                                 <th scope="col">วันที่นำเข้า</th>
+                                <th scope="col">สถานะ</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -71,9 +126,10 @@
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
                                 <td>{{$row->created_at}}</td>
+                                <td class="{{$row->status_trade == '3' ? 'text-success' : ''}}">{{$row->status_trade == '3' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>
                                     <div class="form-check text-center">
-                                        <input class="form-check-input" type="checkbox" value="">
+                                        <input class="form-check-input checkbox_update" data-id="{{$row->id}}" name="checkbox_update[]" type="checkbox" value="">
                                     </div>
                                 </td>
                             </tr>
@@ -81,9 +137,13 @@
                         </tbody>
                     </table>
                     <br>
+                    <div class="col-6">
+                        {{ $stockold->links() }}
+                    </div>
+                    <br>
                     <div class="text-right">
                         <a type="button" class="btn btn-secondary" href="{{url('/stock')}}">กลับ</a>
-                        <button type="submit" class="btn btn-success">นำส่งโรงหลอม</button>
+                        <button id="btn-update" type="button" class="btn btn-success">นำส่งโรงหลอม</button>
                     </div>
                 </div>
             </div>

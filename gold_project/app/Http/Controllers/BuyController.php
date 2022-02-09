@@ -57,6 +57,7 @@ class BuyController extends Controller
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
         $buy = ProductDetails::select('code')->orderBy('code', "desc")->where('type', 'ทองเก่า')->first();
         if (!empty($buy)) {
+            $buy->code = substr($buy->code, 1);
             $code = $buy->code + 1;
             $num = "0";
             if (strlen($code) <= 3) {
