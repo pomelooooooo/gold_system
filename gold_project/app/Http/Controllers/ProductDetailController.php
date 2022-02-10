@@ -206,7 +206,7 @@ class ProductDetailController extends Controller
         $productdetail->delete();
         $productdetail = ProductDetails::select('*')->paginate(10);
         $product = Product::all();
-        return view('admin.productdetail.index', compact('productdetail', 'product'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 
     public function getprice_of_gold($lot)

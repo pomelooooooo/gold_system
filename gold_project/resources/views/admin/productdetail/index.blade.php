@@ -30,25 +30,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            // if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
-            //     $.ajax({
-            //         url: "productdetail/" + id,
-            //         type: 'delete',
-            //         data: {
-            //             id: id,
-            //             _token: token
-            //         },
-            //         success: function(data) {
-            //             window.location = "{{route('productdetail.index')}}"
-            //         },
-            //         cache: false,
-            //         contentType: false,
-            //         processData: false
-            //     });
-            // } else {
-            //     return false;
-            // }
-
             Swal.fire({
                 title: 'Are you sure?',
                 text: "ต้องการลบข้อมูลทองหรือไม่?",
