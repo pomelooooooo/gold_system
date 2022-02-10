@@ -10,7 +10,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0,1];
+            td = tr[i].getElementsByTagName("td")[0, 1];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -30,24 +30,41 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
-                $.ajax({
-                    url: "buy/" + id,
-                    type: 'delete',
-                    data: {
-                        id: id,
-                        _token: token
-                    },
-                    success: function(data) {
-                        window.location = "{{route('buy.index')}}"
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-            } else {
-                return false;
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "ต้องการลบข้อมูลการซื้อหรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'ไม่',
+                confirmButtonText: 'ใช่'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/buy/" + id,
+                        type: 'delete',
+                        data: {
+                            id: id,
+                            _token: token
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.status) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'ลบข้อมูลเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    window.location = '/buy'
+                                })
+                            }
+
+                        }
+                    });
+                }
+            })
         });
     });
 </script>

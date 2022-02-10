@@ -131,8 +131,7 @@ class ManageCustomerController extends Controller
         $managecustomer->save();
         $managecustomer = Customer::select('*')->paginate(5);
         // return view('admin.manage_customer.index', compact('managecustomer', 'id'));
-        return redirect('/manage_customer')->with('managecustomer' , $managecustomer);
-
+        return redirect('/manage_customer')->with('managecustomer', $managecustomer);
     }
 
     /**
@@ -146,6 +145,6 @@ class ManageCustomerController extends Controller
         $managecustomer = Customer::find($id);
         $managecustomer->delete();
         $managecustomer = Customer::select('*')->paginate(5);
-        return view('admin.manage_customer.index', compact('managecustomer'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 }

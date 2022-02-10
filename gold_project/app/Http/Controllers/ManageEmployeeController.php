@@ -48,7 +48,7 @@ class ManageEmployeeController extends Controller
     public function store(Request $request)
     {
         $validate_id_card = User::where('idcard', $request->idcard)->first();
-        if(!empty($validate_id_card)){
+        if (!empty($validate_id_card)) {
             return response()->json(['status' => false], 200);
         }
         $manageemployee = new User(
@@ -118,8 +118,8 @@ class ManageEmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validate_id_card = User::where('idcard', $request->get('idcard'))->where('id','!=', $id)->first();
-        if(!empty($validate_id_card)){
+        $validate_id_card = User::where('idcard', $request->get('idcard'))->where('id', '!=', $id)->first();
+        if (!empty($validate_id_card)) {
             return response()->json(['status' => false], 200);
         }
         $manageemployee = User::find($id);
@@ -163,18 +163,18 @@ class ManageEmployeeController extends Controller
         $manageemployee = User::find($id);
         $manageemployee->delete();
         $manageemployee = User::select('*')->paginate(5);
-        return view('admin.manage_employee.index', compact('manageemployee'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 
     public function validateIdcard($idCard, $id = '')
     {
-        if(!empty($id)){
-            $manageemployee = User::where('idcard', $idCard)->where('id','!=', $id)->first();
+        if (!empty($id)) {
+            $manageemployee = User::where('idcard', $idCard)->where('id', '!=', $id)->first();
         } else {
             $manageemployee = User::where('idcard', $idCard)->first();
         }
-        if(!empty($manageemployee))
-        return response()->json(['status' => false], 200);
+        if (!empty($manageemployee))
+            return response()->json(['status' => false], 200);
 
         return response()->json(['status' => true], 200);
     }

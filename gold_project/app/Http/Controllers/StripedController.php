@@ -91,7 +91,7 @@ class StripedController extends Controller
         $striped->save();
         $striped = Striped::select('*')->paginate(5);
         // return view('admin.type_gold.index', compact('type', 'id'));
-        return redirect('/striped')->with('striped' , $striped);
+        return redirect('/striped')->with('striped', $striped);
     }
 
     /**
@@ -105,6 +105,6 @@ class StripedController extends Controller
         $striped = Striped::find($id);
         $striped->delete();
         $striped = Striped::select('*')->paginate(5);
-        return view('admin.striped.index', compact('striped'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 }

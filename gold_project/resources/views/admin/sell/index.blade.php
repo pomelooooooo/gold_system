@@ -40,7 +40,7 @@
             var sellgroup = $('.sell-group:checked').map(function() {
                 return this.value;
             }).get().join(',')
-            if(location.search != ''){
+            if (location.search != '') {
                 let id = location.search.split('?sellall=')
                 id = id[1].split('&')
                 if (id[0] != '') {

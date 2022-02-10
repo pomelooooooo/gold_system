@@ -44,7 +44,7 @@ class BuyController extends Controller
         $customer = Customer::all();
         $producttype = TypeGold::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy', 'users', 'keyword', 'customer','producttype','filter_type','filter_size'));
+        return view('admin.buy.index', compact('buy', 'users', 'keyword', 'customer', 'producttype', 'filter_type', 'filter_size'));
     }
 
     /**
@@ -69,7 +69,7 @@ class BuyController extends Controller
         } else {
             $code = "0001";
         }
-        $code = "L".$code;
+        $code = "L" . $code;
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
@@ -110,7 +110,7 @@ class BuyController extends Controller
         $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('created_at', "desc")->paginate(5);
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.buy.index', compact('buy','producttype', 'customer', 'users'));
+        return view('admin.buy.index', compact('buy', 'producttype', 'customer', 'users'));
     }
 
     /**
@@ -201,7 +201,7 @@ class BuyController extends Controller
         $customer = Customer::all();
         $users = User::all();
         $producttype = TypeGold::all();
-        return view('admin.buy.index', compact('buy', 'users', 'product', 'producttype'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 
     // public function size_gram($lot)

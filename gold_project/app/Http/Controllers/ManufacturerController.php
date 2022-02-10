@@ -99,7 +99,7 @@ class ManufacturerController extends Controller
         $manufacturer->save();
         $manufacturer = Manufacturer::select('*')->paginate(5);
         // return view('admin.manufacturer.index', compact('manufacturer', 'id'));
-        return redirect('/manufacturer')->with('manufacturer' , $manufacturer);
+        return redirect('/manufacturer')->with('manufacturer', $manufacturer);
     }
 
     /**
@@ -113,6 +113,6 @@ class ManufacturerController extends Controller
         $manufacturer = Manufacturer::find($id);
         $manufacturer->delete();
         $manufacturer = Manufacturer::select('*')->paginate(5);
-        return view('admin.manufacturer.index', compact('manufacturer'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 }

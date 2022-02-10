@@ -133,6 +133,6 @@ class ProductController extends Controller
         $product = Product::select('*')->paginate(5);
         $type = TypeGold::all();
         $manufacturer = Manufacturer::all();
-        return view('admin.product.index', compact('product', 'type'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 }
