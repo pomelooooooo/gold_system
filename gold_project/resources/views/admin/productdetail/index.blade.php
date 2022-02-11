@@ -55,7 +55,7 @@
                                 icon: 'success',
                                 title: 'ลบข้อมูลเรียบร้อย',
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 1500
                             }).then((result) => {
                                 window.location = '/productdetail'
                             })
