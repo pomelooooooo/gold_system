@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','สต๊อกทองเก่า')
+@section('title','สต๊อกทองใหม่')
 @section('content')
 <script>
     $(document).ready(function(){
