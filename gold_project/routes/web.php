@@ -63,3 +63,5 @@ Route::get('/stocknew', 'StockController@stocknew')->middleware('auth');
 Route::get('/stockold', 'StockController@stockold')->middleware('auth');
 Route::post('/stockold/group', 'StockController@updateGroup')->middleware('auth');
 
+Route::resource('/pledge', 'PledgeController')->middleware('auth');
+

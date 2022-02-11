@@ -203,10 +203,4 @@ class BuyController extends Controller
         $producttype = TypeGold::all();
         return response()->json(['status' => true], 200);
     }
-
-    // public function size_gram($lot)
-    // {
-    //     $size = Product::select('size_gram', 'type_gold.id', 'weight')->join('type_gold', 'type_gold.id', '=', 'products.type_gold_id')->where('products.lot_id', $lot)->first();
-    //     return response()->json(["size" => $size]);
-    // }
 }

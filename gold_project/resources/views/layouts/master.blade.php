@@ -121,7 +121,7 @@
 										<li><a href="/sell">ขายทอง</a></li>
 									</ul>
 								</li>
-								<li><a href="about.html">การจำนำทอง</a></li>
+								<li><a href="/pledge">การจำนำทอง</a></li>
 								<li><a>รายงานผลการดำเนินงาน</a>
 									<ul class="sub-menu">
 										<li><a>ประวัติการซื้อขายย้อนหลัง</a></li>
