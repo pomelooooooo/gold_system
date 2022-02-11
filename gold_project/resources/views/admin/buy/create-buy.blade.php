@@ -264,7 +264,7 @@
                             <h4 for="validationstriped">ลาย*</h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationdetails">รายละเอียด</h4>
+                            <h4 for="validationdetails">รายละเอียด*</h4>
                         </div>
                     </div>
                     <div class="row">
