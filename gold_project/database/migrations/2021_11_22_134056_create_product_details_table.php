@@ -23,6 +23,7 @@ class CreateProductDetailsTable extends Migration
             $table->string('gram')->nullable();
             $table->enum('status', ['0', '1'])->nullable();
             $table->enum('status_trade', ['0', '1','2','3','4','5'])->default('0');
+            $table->enum('status_check', ['0', '1','2'])->nullable();
             $table->enum('type', ['ทองเก่า', 'ทองใหม่', 'ทองจำนำ'])->nullable();
             $table->integer('gratuity')->nullable();
             $table->string('tray')->nullable();

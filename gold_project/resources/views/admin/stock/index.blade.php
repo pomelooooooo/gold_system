@@ -140,7 +140,7 @@
                                 <td>{{$row->details}}</td>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->size}}</td>
-                                <td class="{{$row->status_trade == '3' ? 'text-success' : ''}}">{{$row->status_trade == '3' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
+                                <td class="{{$row->status_trade == '2' ? 'text-success' : ''}}">{{$row->status_trade == '2' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
@@ -153,7 +153,7 @@
                         {{ $stocknew->links() }}
                     </div>
                     <td class="text-center">
-                        <a class="btn btn-info" href="{{action('StockController@stockold')}}"><i class="fa fa-edit"></i> เช็คสต๊อกรายวัน</a>
+                        <a class="btn btn-info" href="{{action('StockController@stock_old')}}"><i class="fa fa-edit"></i> เช็คสต๊อกรายวัน</a>
                     </td>
                 </div>
             </div>
