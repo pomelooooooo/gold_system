@@ -154,7 +154,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับซื้อ*</h4>
+                        <h4 for="validationuser">ผู้รับจำนำ*</h4>
                     </div>
                     <div class="col-4">
                         <h4 for="validationcustomer">ลูกค้า*</h4>
@@ -208,7 +208,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <h4>รหัสสินค้า</h4>
+                            <h4>รหัสการรับจำนำ</h4>
                         </div>
                         <div class="col-6">
                             <h4 for="validationcategory">ประเภท*</h4>
@@ -295,7 +295,13 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationprice">ราคารับซื้อ*</h4>
+                            <h4 for="validationprice">ราคารับจำนำ*</h4>
+                        </div>
+                        <div class="col-3">
+                            <h4 for="validationprice">ดอกเบี้ย*</h4>
+                        </div>
+                        <div class="col-3">
+                            <h4 for="validationprice">ค่างวด*</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -304,6 +310,22 @@
                                 <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
                                 <div class="invalid-feedback">
                                     โปรดกรอกราคารับซื้อ
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <input name="" type="text" class="form-control" placeholder="" value="1.25" required />
+                                <div class="invalid-feedback">
+                                    โปรดกรอกดอกเบี้ย
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <input name="" type="text" class="form-control" placeholder="" required />
+                                <div class="invalid-feedback">
+                                    โปรดกรอกค่างวด
                                 </div>
                             </div>
                         </div>

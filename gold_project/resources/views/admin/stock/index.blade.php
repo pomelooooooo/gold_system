@@ -86,7 +86,7 @@
                         {{ $stocknew->links() }}
                     </div>
                     <td class="text-center">
-                        <a class="btn btn-info" href="{{action('StockController@stocknew')}}"><i class="fa fa-edit"></i> จัดการทองใหม่</a>
+                        <a class="btn btn-info" href="{{action('StockController@stocknew')}}"><i class="fa fa-edit"></i> เช็คสต๊อกรายวัน</a>
                     </td>
                 </div>
             </div>
@@ -126,6 +126,7 @@
                                 <th scope="col">รายละเอียดสินค้า</th>
                                 <th scope="col">ประเภท</th>
                                 <th scope="col">นํ้าหนัก</th>
+                                <th scope="col">สถานะ</th>
                                 <th scope="col">ผู้รับซื้อ</th>
                                 <th scope="col">ลูกค้า</th>
                                 <th scope="col">ราคารับซื้อ</th>
@@ -139,6 +140,7 @@
                                 <td>{{$row->details}}</td>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->size}}</td>
+                                <td class="{{$row->status_trade == '3' ? 'text-success' : ''}}">{{$row->status_trade == '3' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
@@ -151,7 +153,7 @@
                         {{ $stocknew->links() }}
                     </div>
                     <td class="text-center">
-                        <a class="btn btn-info" href="{{action('StockController@stockold')}}"><i class="fa fa-edit"></i> จัดการทองเก่า</a>
+                        <a class="btn btn-info" href="{{action('StockController@stockold')}}"><i class="fa fa-edit"></i> เช็คสต๊อกรายวัน</a>
                     </td>
                 </div>
             </div>

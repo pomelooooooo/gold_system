@@ -1,13 +1,13 @@
 @extends('layouts.master')
-@section('title','สต๊อกทองใหม่')
+@section('title','ส่งโรงหลอม')
 @section('content')
 <script>
     $(document).ready(function(){
         $("body").on('click', '#btn-update', function(e) {
             // checkbox_update
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการส่งโรงหลอมหรือไม่?",
+                title: 'ต้องการส่งโรงหลอมหรือไม่?',
+                // text: "ต้องการส่งโรงหลอมหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -62,7 +62,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>สต๊อกทองใหม่</h1>
+                    <h1>ส่งโรงหลอม</h1>
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
                     </div>
                     <br>
                     <div class="text-right">
-                        <a type="button" class="btn btn-secondary" href="{{url('/stock')}}">กลับ</a>
+                        <!-- <a type="button" class="btn btn-secondary" href="{{url('/stock')}}">กลับ</a> -->
                         <button id="btn-update" type="button" class="btn btn-success">นำส่งโรงหลอม</button>
                     </div>
                 </div>
