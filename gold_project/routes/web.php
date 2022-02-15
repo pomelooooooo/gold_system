@@ -59,8 +59,10 @@ Route::resource('/manufacturer', 'ManufacturerController')->middleware('auth');
 Route::resource('/stock', 'StockController')->middleware('auth');
 
 Route::get('/stocknew', 'StockController@stocknew')->middleware('auth');
+Route::post('/stocknew/status_check_new', 'StockController@updateStatusCheckNew')->middleware('auth');
 
 Route::get('/stock_old', 'StockController@stock_old')->middleware('auth');
+Route::post('/stock_old/status_check', 'StockController@updateStatusCheck')->middleware('auth');
 
 Route::get('/stockold', 'StockController@stockold')->middleware('auth');
 Route::post('/stockold/group', 'StockController@updateGroup')->middleware('auth');

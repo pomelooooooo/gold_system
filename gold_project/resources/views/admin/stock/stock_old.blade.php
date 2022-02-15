@@ -1,6 +1,59 @@
 @extends('layouts.master')
 @section('title','สต๊อกทองเก่า')
 @section('content')
+<script>
+    $(document).ready(function(){
+        $("body").on('click', '#btn-save', function(e) {
+            // checkbox_update
+            Swal.fire({
+                title: 'อัปเดตผลการเช็คสต็อก?',
+                // text: "ต้องการส่งโรงหลอมหรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'ไม่',
+                confirmButtonText: 'ใช่'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if($('.checkbox').is(':checked')){
+                        var id = ''
+                        $.each($('input[name="checkbox[]"]:checked'), function(i, el){
+                            id += $(this).data("id")+','
+                        })
+                        id = id.substr(0, id.length-1)
+
+                        $.ajax({
+                            url: "/stock_old/status_check",
+                            type: 'POST',
+                            data: {_token: "{{ csrf_token() }}", id: id, status_check: $('#status_check').val()},
+                            dataType: 'json',
+                            success: function(data) {
+                                if(data.status){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'อัปเดตสถานะเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then((result) => {
+                                        window.location = '/stock_old'
+                                    })
+                                }
+                            }
+                        });
+
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'กรุณาเลือกรายการ',
+                            'warning'
+                        )
+                    }
+                }
+            })
+        })
+    })
+</script>
 <!-- hero area -->
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -47,7 +100,9 @@
                                 <option value="{{$key}}" {{($filter_status3 == '0' || $filter_status3 == '2') && $key == $filter_status3?"selected":""}}>{{$val}}</option>
                                 @endforeach
                             </select>
-                            <input class="form-control" type="date" name="filter_date2" value="{{$filter_date3}}">
+                            <br>
+                            <input class="form-control" type="date" name="filter_date3" value="{{$filter_date3}}"> ถึง
+                            <input class="form-control" type="date" name="filter_date_end3" value="{{$filter_date_end3}}">
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
                         </div>
                     </div>
@@ -80,10 +135,21 @@
                                 <td>{{$row->allprice}}</td>
                                 <td class="{{$row->status_trade == '2' ? 'text-success' : ''}}">{{$row->status_trade == '2' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>{{$row->created_at}}</td>
-                                <td>-</td>
+                                @php
+                                    if($row->status_check == '0'){
+                                        $status_check_text = 'ปกติ';
+                                    } else if($row->status_check == '1') {
+                                        $status_check_text = 'ทองปลอม';
+                                    } else if($row->status_check == '2') {
+                                        $status_check_text = 'ทองหาย';
+                                    } else {
+                                        $status_check_text = '-';
+                                    }
+                                @endphp
+                                <td>{{$status_check_text}}</td>
                                 <td>
                                     <div class="form-check text-center">
-                                        <input class="form-check-input" data-id="" name="" type="checkbox" value="">
+                                        <input class="form-check-input checkbox" data-id="{{$row->id}}" name="checkbox[]" type="checkbox" value="">
                                     </div>
                                 </td>
                             </tr>
@@ -112,7 +178,7 @@
                         <div class="modal-body">
                             <a>กรุณาเลือกรายการผลการเช็คสต๊อก</a>
                             <br>
-                            <select class="custom-select" name="status_check" id="">
+                            <select class="custom-select" name="status_check" id="status_check">
                                 <option selected disabled value="">เลือกผลการเช็ค</option>
                                 @foreach(["0"=>"ปกติ","1"=>"ทองปลอม","2"=>"ทองหาย"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -121,7 +187,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="button" class="btn btn-success">บันทึก</button>
+                            <button type="button" id="btn-save" class="btn btn-success">บันทึก</button>
                         </div>
                         </div>
                     </div>

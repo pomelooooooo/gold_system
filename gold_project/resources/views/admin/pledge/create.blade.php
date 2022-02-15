@@ -69,12 +69,12 @@
         var no = $('.card-item .code').not(':first').not(':first').length
         var code = $('.card-item .code')[0].value
         var num_code = "0"
-        var code_string = code.replace('L', '')
+        var code_string = code.replace('P', '')
         var items = parseInt(code_string) + parseInt(no);
         for (let i = (parseInt(code_string) + 1).toString().length; i < 3; i++) {
             num_code += "0";
         }
-        $txtFormNumber.val("L" + num_code + items.toString());
+        $txtFormNumber.val("P" + num_code + items.toString());
     }
 
     (function() {

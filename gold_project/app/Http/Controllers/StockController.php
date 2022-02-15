@@ -165,13 +165,18 @@ class StockController extends Controller
         if (!empty($filter_date)) {
             $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date);
         }
+        $filter_date_end = $request->get('filter_date_end');
+        if (!empty($filter_date_end)) {
+            $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date_end);
+        }
+        $filter_date_all = ProductDetails::whereBetween('created_at', [$filter_date, $filter_date_end])->get();
         $stocknew = $stocknew->paginate(15);
         $product = Product::all();
         $typegold = TypeGold::all();
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status','filter_status_gold', 'filter_date'));
+        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status','filter_status_gold', 'filter_date','filter_date_end','filter_date_all'));
     }
     public function stockold(Request $request)
     {
@@ -220,11 +225,15 @@ class StockController extends Controller
         }
         $filter_date3 = $request->get('filter_date3');
         if (!empty($filter_date3)) {
-            $stock_old = $stock_old->whereDate('product_details.created_at', $filter_date3);
+            $stock_old = $stock_old->where('product_details.created_at','>=', $filter_date3);
         }
         $filter_status3 = $request->get('filter_status3');
         if ($filter_status3 == '2' || $filter_status3 == '0') {
             $stock_old = $stock_old->where('product_details.status_trade', "$filter_status3");
+        }
+        $filter_date_end3 = $request->get('filter_date_end3');
+        if (!empty($filter_date_end3)) {
+            $stock_old = $stock_old->where('product_details.created_at','<=', $filter_date_end3);
         }
         $stock_old = $stock_old->paginate(15);
         $product = Product::all();
@@ -232,12 +241,26 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stock_old', compact('product',  'stock_old', 'typegold', 'user', 'customer', 'striped', 'keyword3', 'filter_type3', 'filter_size3','filter_status3', 'filter_date3'));
+        return view('admin.stock.stock_old', compact('product',  'stock_old', 'typegold', 'user', 'customer', 'striped', 'keyword3', 'filter_type3', 'filter_size3','filter_status3', 'filter_date3','filter_date_end3'));
     }
 
     public function updateGroup(Request $request)
     {
         ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_trade' => '2']);
+
+        return response()->json(['status' => true], 200);
+    }
+
+    public function updateStatusCheck(Request $request)
+    {
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check"]);
+
+        return response()->json(['status' => true], 200);
+    }
+
+    public function updateStatusCheckNew(Request $request)
+    {
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check"]);
 
         return response()->json(['status' => true], 200);
     }

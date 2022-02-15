@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Customer;
+use App\Pledge;
 use Illuminate\Support\Facades\File;
 
 class PledgeController extends Controller
@@ -105,6 +106,14 @@ class PledgeController extends Controller
                 ]
             );
             $productdetail->save();
+            $pledges = new Pledge(
+                [
+                    'product_detail_id' => $productdetail->id,
+                    'installment_start' => $request->get('installment_start'),
+                    'installment_end' => $request->get('installment_end'),
+                ]
+            );
+            $pledges -> save();
         }
 
         $producttype = TypeGold::all();
