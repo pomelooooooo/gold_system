@@ -2,55 +2,128 @@
 @section('title','ส่งโรงหลอม')
 @section('content')
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $("body").on('click', '#btn-update', function(e) {
-            // checkbox_update
-            Swal.fire({
-                title: 'ต้องการส่งโรงหลอมหรือไม่?',
-                // text: "ต้องการส่งโรงหลอมหรือไม่?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'ไม่',
-                confirmButtonText: 'ใช่'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    if($('.checkbox_update').is(':checked')){
-                        var id = ''
-                        $.each($('input[name="checkbox_update[]"]:checked'), function(i, el){
-                            id += $(this).data("id")+','
-                        })
-                        id = id.substr(0, id.length-1)
-
-                        $.ajax({
-                            url: "/stockold/group",
-                            type: 'POST',
-                            data: {_token: "{{ csrf_token() }}", id: id},
-                            dataType: 'json',
-                            success: function(data) {
-                                if(data.status){
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'อัปเดตสถานะเรียบร้อย',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    }).then((result) => {
-                                        window.location = '/stockold'
-                                    })
-                                }
-                            }
-                        });
-
-                    } else {
-                        Swal.fire(
-                            'Error!',
-                            'กรุณาเลือกรายการ',
-                            'warning'
-                        )
-                    }
+            if ($('.checkbox_update').is(':checked')) {
+                let size_arr = {
+                    "ครึ่งสลึง": 0.125,
+                    "1 สลึง": 0.25,
+                    "2 สลึง": 0.5,
+                    "3 สลึง": 0.75,
+                    "6 สลึง": 1.5,
+                    "1 บาท": 1,
+                    "2 บาท": 2,
+                    "3 บาท": 3,
+                    "4 บาท": 4,
+                    "5 บาท": 5,
+                    "10 บาท": 10
                 }
-            })
+                var total = 0
+                var name_arr = []
+                var id = ''
+                $.each($('input[name="checkbox_update[]"]:checked'), function(i, el) {
+                    id += $(this).data("id") + ','
+                    name_arr.push($(this).data('name'))
+                    total += size_arr[$(this).data('size')]
+                })
+                id = id.substr(0, id.length - 1)
+                var result = name_arr.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
+                var text = ''
+                $.each(result, function(i, el) {
+                    text += i + ' = ' + el + "<br>"
+                })
+                // checkbox_update
+                Swal.fire({
+                    title: 'ต้องการส่งโรงหลอมหรือไม่?',
+                    icon: 'warning',
+                    input: 'text',
+                    inputAttributes: {
+                        autocapitalize: 'off'
+                    },
+                    html: 'จำนวนทองที่ส่งโรงหลอม' + "<br>" +
+                        text +
+                        'น้ำหนักรวม ' + total + ' กรัม' + "<br>" +
+                        '<b style="left: 0;position: absolute;margin-left: 30px;">ราคาทองรวม</b>',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'ไม่',
+                    confirmButtonText: 'ใช่',
+                    showLoaderOnConfirm: true,
+                    preConfirm: (total_price) => {
+                        return fetch(`/stockold/report_smelters`, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    _token: "{{ csrf_token() }}",
+                                    total_size: total,
+                                    total_price: total_price,
+                                    pd_Id: id
+                                })
+                            })
+                            .then(response => {
+                                if (!response.status) {
+                                    throw new Error(response.status)
+                                }
+                                return response.status
+                            })
+                            .catch(error => {
+                                Swal.showValidationMessage(
+                                    `Request failed: ${error}`
+                                )
+                            })
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        if ($('.checkbox_update').is(':checked')) {
+                            var id = ''
+                            $.each($('input[name="checkbox_update[]"]:checked'), function(i, el) {
+                                id += $(this).data("id") + ','
+                            })
+                            id = id.substr(0, id.length - 1)
+
+                            $.ajax({
+                                url: "/stockold/group",
+                                type: 'POST',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id: id
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    if (data.status) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'อัปเดตสถานะเรียบร้อย',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        }).then((result) => {
+                                            window.location = '/stockold'
+                                        })
+                                    }
+                                }
+                            });
+
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'กรุณาเลือกรายการ',
+                                'warning'
+                            )
+                        }
+                    }
+                })
+            } else {
+                Swal.fire(
+                    'Error!',
+                    'กรุณาเลือกรายการ',
+                    'warning'
+                )
+            }
         })
     })
 </script>
@@ -129,7 +202,7 @@
                                 <td class="{{$row->status_trade == '2' ? 'text-success' : ''}}">{{$row->status_trade == '2' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>
                                     <div class="form-check text-center">
-                                        <input class="form-check-input checkbox_update" data-id="{{$row->id}}" name="checkbox_update[]" type="checkbox" value="">
+                                        <input class="form-check-input checkbox_update" data-name="{{$row->name}}" data-size="{{$row->size}}" data-id="{{$row->id}}" name="checkbox_update[]" type="checkbox" value="">
                                     </div>
                                 </td>
                             </tr>

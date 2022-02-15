@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Customer;
+use App\ReportSmelter;
 use App\Striped;
 
 class StockController extends Controller
@@ -43,7 +44,7 @@ class StockController extends Controller
             $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date);
         }
         $stocknew = $stocknew->paginate(5);
-        
+
         $keyword2 = $request->get('search2');
         $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('code', "desc")->where('type', 'ทองเก่า');
         if (!empty($keyword2)) {
@@ -176,7 +177,7 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status','filter_status_gold', 'filter_date','filter_date_end','filter_date_all'));
+        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'filter_date_all'));
     }
     public function stockold(Request $request)
     {
@@ -225,7 +226,7 @@ class StockController extends Controller
         }
         $filter_date3 = $request->get('filter_date3');
         if (!empty($filter_date3)) {
-            $stock_old = $stock_old->where('product_details.created_at','>=', $filter_date3);
+            $stock_old = $stock_old->where('product_details.created_at', '>=', $filter_date3);
         }
         $filter_status3 = $request->get('filter_status3');
         if ($filter_status3 == '2' || $filter_status3 == '0') {
@@ -233,7 +234,7 @@ class StockController extends Controller
         }
         $filter_date_end3 = $request->get('filter_date_end3');
         if (!empty($filter_date_end3)) {
-            $stock_old = $stock_old->where('product_details.created_at','<=', $filter_date_end3);
+            $stock_old = $stock_old->where('product_details.created_at', '<=', $filter_date_end3);
         }
         $stock_old = $stock_old->paginate(15);
         $product = Product::all();
@@ -241,7 +242,7 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stock_old', compact('product',  'stock_old', 'typegold', 'user', 'customer', 'striped', 'keyword3', 'filter_type3', 'filter_size3','filter_status3', 'filter_date3','filter_date_end3'));
+        return view('admin.stock.stock_old', compact('product',  'stock_old', 'typegold', 'user', 'customer', 'striped', 'keyword3', 'filter_type3', 'filter_size3', 'filter_status3', 'filter_date3', 'filter_date_end3'));
     }
 
     public function updateGroup(Request $request)
@@ -261,6 +262,31 @@ class StockController extends Controller
     public function updateStatusCheckNew(Request $request)
     {
         ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check"]);
+
+        return response()->json(['status' => true], 200);
+    }
+
+    public function reportSmelters(Request $request)
+    {
+        $pd_id = explode(',', $request->json('pd_Id'));
+
+        $reportSmelter = ReportSmelter::select('name_group')->orderBy('name_group', "desc")->first();
+        if (!empty($reportSmelter)) {
+            $name_group = $reportSmelter->name_group + 1;
+        } else {
+            $name_group = 1;
+        }
+        foreach ($pd_id as $key => $id) {
+            $report_smelter = new ReportSmelter(
+                [
+                    'name_group' => $name_group,
+                    'product_detail_id' => $id,
+                    'total_size' => $request->json('total_size'),
+                    'total_price' => $request->json('total_price'),
+                ]
+            );
+            $report_smelter->save();
+        }
 
         return response()->json(['status' => true], 200);
     }
