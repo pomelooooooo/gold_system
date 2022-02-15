@@ -6,8 +6,8 @@
         $("body").on('click', '#btn-save', function(e) {
             // checkbox_update
             Swal.fire({
-                title: 'อัปเดตผลการเช็คสต็อก?',
-                // text: "ต้องการส่งโรงหลอมหรือไม่?",
+                title: 'อัปเดตผลการเช็คสต็อก',
+                text: "ต้องการอัปเดตผลการเช็คสต็อกหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -137,16 +137,20 @@
                                 <td>{{$row->created_at}}</td>
                                 @php
                                     if($row->status_check == '0'){
+                                        $status_check_color = 'text-success';
                                         $status_check_text = 'ปกติ';
                                     } else if($row->status_check == '1') {
+                                        $status_check_color = 'text-warning';
                                         $status_check_text = 'ทองปลอม';
                                     } else if($row->status_check == '2') {
+                                        $status_check_color = 'text-danger';
                                         $status_check_text = 'ทองหาย';
                                     } else {
+                                        $status_check_color = '';
                                         $status_check_text = '-';
                                     }
                                 @endphp
-                                <td>{{$status_check_text}}</td>
+                                <td class="{{$status_check_color}}">{{$status_check_text}}</td>
                                 <td>
                                     <div class="form-check text-center">
                                         <input class="form-check-input checkbox" data-id="{{$row->id}}" name="checkbox[]" type="checkbox" value="">

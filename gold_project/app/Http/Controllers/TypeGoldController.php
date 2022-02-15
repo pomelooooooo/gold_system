@@ -107,6 +107,6 @@ class TypeGoldController extends Controller
         $type = TypeGold::find($id);
         $type->delete();
         $type = TypeGold::select('*')->paginate(5);
-        return view('admin.type_gold.index', compact('type'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 }

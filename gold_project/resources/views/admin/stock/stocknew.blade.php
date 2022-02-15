@@ -6,8 +6,8 @@
         $("body").on('click', '#btn-save', function(e) {
             // checkbox_update
             Swal.fire({
-                title: 'อัปเดตผลการเช็คสต็อก?',
-                // text: "ต้องการส่งโรงหลอมหรือไม่?",
+                title: 'อัปเดตผลการเช็คสต็อก',
+                text: "ต้องการอัปเดตผลการเช็คสต็อกหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

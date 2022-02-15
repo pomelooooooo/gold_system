@@ -31,8 +31,8 @@
                 }
             });
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการลบข้อมูลผู้ผลิตหรือไม่?",
+                title: 'ต้องการลบข้อมูลผู้ผลิตหรือไม่?',
+                // text: "ต้องการลบข้อมูลผู้ผลิตหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

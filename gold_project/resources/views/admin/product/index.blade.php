@@ -32,8 +32,8 @@
                 }
             });
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการลบข้อมูลล็อตหรือไม่?",
+                title: 'ต้องการลบข้อมูลล็อตหรือไม่?',
+                // text: "ต้องการลบข้อมูลล็อตหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

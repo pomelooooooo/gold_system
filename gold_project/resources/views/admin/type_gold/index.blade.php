@@ -30,24 +30,41 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
-                $.ajax({
-                    url: "type_gold/" + id,
-                    type: 'delete',
-                    data: {
-                        id: id,
-                        _token: token
-                    },
-                    success: function(data) {
-                        window.location = "{{route('type_gold.index')}}"
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-            } else {
-                return false;
-            }
+            Swal.fire({
+                title: 'ต้องการลบข้อมูลประเภททองหรือไม่?',
+                // text: "ต้องการลบข้อมูลลายหรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'ไม่',
+                confirmButtonText: 'ใช่'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/type_gold/" + id,
+                        type: 'delete',
+                        data: {
+                            id: id,
+                            _token: token
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.status) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'ลบข้อมูลเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then((result) => {
+                                    window.location = '/type_gold'
+                                })
+                            }
+
+                        }
+                    });
+                }
+            })
         });
     });
 </script>

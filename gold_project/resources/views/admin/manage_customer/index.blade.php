@@ -31,8 +31,8 @@
                 }
             });
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการลบข้อมูลพนักงานหรือไม่?",
+                title: 'ต้องการลบข้อมูลพนักงานหรือไม่?',
+                // text: "ต้องการลบข้อมูลพนักงานหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

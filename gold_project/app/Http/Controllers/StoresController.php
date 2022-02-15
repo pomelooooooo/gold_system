@@ -110,6 +110,6 @@ class StoresController extends Controller
         $stores = Stores::find($id);
         $stores->delete();
         $stores = Stores::select('*')->paginate(5);
-        return view('admin.stores.index', compact('stores'))->with('success', 'ลบข้อมูลเรียบร้อย');
+        return response()->json(['status' => true], 200);
     }
 }

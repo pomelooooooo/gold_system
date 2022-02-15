@@ -31,8 +31,8 @@
                 }
             });
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการลบข้อมูลลายหรือไม่?",
+                title: 'ต้องการลบข้อมูลลายหรือไม่?',
+                // text: "ต้องการลบข้อมูลลายหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

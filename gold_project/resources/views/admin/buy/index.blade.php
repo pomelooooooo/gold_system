@@ -31,8 +31,8 @@
                 }
             });
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการลบข้อมูลการซื้อหรือไม่?",
+                title: 'ต้องการลบข้อมูลการซื้อหรือไม่?',
+                // text: "ต้องการลบข้อมูลการซื้อหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

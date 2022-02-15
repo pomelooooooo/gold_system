@@ -31,8 +31,8 @@
                 }
             });
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการลบข้อมูลทองหรือไม่?",
+                title: 'ต้องการลบข้อมูลทองหรือไม่?',
+                // text: "ต้องการลบข้อมูลทองหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
