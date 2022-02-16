@@ -164,20 +164,19 @@ class StockController extends Controller
         }
         $filter_date = $request->get('filter_date');
         if (!empty($filter_date)) {
-            $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date);
+            $stocknew = $stocknew->where('product_details.created_at', '>=', $filter_date);
         }
         $filter_date_end = $request->get('filter_date_end');
         if (!empty($filter_date_end)) {
-            $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date_end);
+            $stocknew = $stocknew->where('product_details.created_at', '<=', $filter_date_end);
         }
-        $filter_date_all = ProductDetails::whereBetween('created_at', [$filter_date, $filter_date_end])->get();
         $stocknew = $stocknew->paginate(15);
         $product = Product::all();
         $typegold = TypeGold::all();
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'filter_date_all'));
+        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end'));
     }
     public function stockold(Request $request)
     {

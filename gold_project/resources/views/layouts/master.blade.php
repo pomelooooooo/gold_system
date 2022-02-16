@@ -111,7 +111,7 @@
 										<li><a href="/striped">จัดการลายทอง</a></li>
 										<li><a href="/product">จัดการล็อตทอง</a></li>
 										<li><a href="/productdetail">จัดการข้อมูลทอง</a></li>
-										<li><a href="/stock">เช็คสต็อคสินค้า</a></li>
+										<li><a href="/stock">เช็คสต๊อก</a></li>
 										<li><a href="/stockold">ส่งโรงหลอม</a></li>
 									</ul>
 								</li>

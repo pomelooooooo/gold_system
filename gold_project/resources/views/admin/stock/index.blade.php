@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','สต๊อกสินค้า')
+@section('title','เช็คสต๊อก')
 @section('content')
 
 <!-- hero area -->
@@ -9,7 +9,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p class="subtitle">Gold System</p>
-                    <h1>สต๊อกสินค้า</h1>
+                    <h1>เช็คสต๊อก</h1>
                 </div>
             </div>
         </div>

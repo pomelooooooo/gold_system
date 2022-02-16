@@ -117,7 +117,6 @@
                                 <th scope="col">ผู้รับซื้อ</th>
                                 <th scope="col">ลูกค้า</th>
                                 <th scope="col">ราคารับซื้อ</th>
-                                <th scope="col">สถานะ</th>
                                 <th scope="col">วันที่นำเข้า</th>
                                 <th scope="col">ผลการเช็คสต๊อก</th>
                                 <th scope="col"></th>
@@ -133,7 +132,6 @@
                                 <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
-                                <td class="{{$row->status_trade == '2' ? 'text-success' : ''}}">{{$row->status_trade == '2' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>{{$row->created_at}}</td>
                                 @php
                                     if($row->status_check == '0'){

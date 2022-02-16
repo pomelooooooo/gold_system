@@ -126,7 +126,9 @@
                                 <th scope="col">สถานะทอง</th>
                                 <th scope="col">ราคาขายออก</th>
                                 <th scope="col">วันที่นำเข้า</th>
+                                <th scope="col">วันที่เช็คล่าสุด</th>
                                 <th scope="col">ผลการเช็คสต๊อก</th>
+                                <th scope="col">บันทึกช่วยจำ</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -142,6 +144,7 @@
                                 <td>{{$row->status == '0' ? 'ทองในถาด' : 'ทองในสต็อก'}}</td>
                                 <td>{{$row->sellprice}}</td>
                                 <td>{{$row->created_at}}</td>
+                                <td>{{$row->updated_at}}</td>
                                 @php
                                     if($row->status_check == '0'){
                                         $status_check_color = 'text-success';
@@ -158,6 +161,7 @@
                                     }
                                 @endphp
                                 <td class="{{$status_check_color}}">{{$status_check_text}}</td>
+                                <td>-</td>
                                 <td>
                                     <div class="form-check text-center">
                                         <input class="form-check-input checkbox" data-id="{{$row->id}}" name="checkbox[]" type="checkbox" value="">

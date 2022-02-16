@@ -43,7 +43,7 @@
                     html: 'จำนวนทองที่ส่งโรงหลอม' + "<br>" +
                         text +
                         'น้ำหนักรวม ' + total + ' กรัม' + "<br>" +
-                        '<b style="left: 0;position: absolute;margin-left: 30px;">ราคาทองรวม</b>',
+                        '<b style="left: 0;position: absolute;margin-left: 30px;">ราคาขาย(บาท)</b>',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
