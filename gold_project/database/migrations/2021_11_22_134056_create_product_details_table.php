@@ -29,6 +29,7 @@ class CreateProductDetailsTable extends Migration
             $table->string('tray')->nullable();
             $table->integer('allprice')->nullable();
             $table->string('pic')->nullable();
+            $table->string('note')->nullable();
             $table->dateTime('datetime')->nullable();
             $table->string('lot_id')->nullable();
             $table->integer('user_id')->nullable();

@@ -76,7 +76,14 @@
                                 <td>{{$row->size}}</td>
                                 <td>{{$row->lot_id}}</td>
                                 <td class="{{$row->status_trade == '0' ? '' : 'text-success'}}">{{$row->status_trade == '0' ? 'ทองในสต็อก' : 'ขายออกแล้ว'}}</td>
-                                <td>{{$row->sellprice}}</td>
+                                @php
+                                    if($row->sellprice == ''){
+                                        $sellprice_text = '-';
+                                    } else {
+                                        $sellprice_text = $row->sellprice;
+                                    }
+                                @endphp
+                                <td>{{$sellprice_text}}</td>
                                 <td>{{$row->created_at}}</td>
                             </tr>
                             @endforeach

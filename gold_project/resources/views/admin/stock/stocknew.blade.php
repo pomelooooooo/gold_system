@@ -26,7 +26,7 @@
                         $.ajax({
                             url: "/stocknew/status_check_new",
                             type: 'POST',
-                            data: {_token: "{{ csrf_token() }}", id: id, status_check: $('#status_check').val()},
+                            data: {_token: "{{ csrf_token() }}", id: id, status_check: $('#status_check').val() , note: $('#note').val()},
                             dataType: 'json',
                             success: function(data) {
                                 if(data.status){
@@ -142,7 +142,14 @@
                                 <td>{{$row->lot_id}}</td>
                                 <td class="{{$row->status_trade == '0' ? '' : 'text-success'}}">{{$row->status_trade == '0' ? 'ยังไม่ขายออก' : 'ขายออกแล้ว'}}</td>
                                 <td>{{$row->status == '0' ? 'ทองในถาด' : 'ทองในสต็อก'}}</td>
-                                <td>{{$row->sellprice}}</td>
+                                @php
+                                    if($row->sellprice == ''){
+                                        $sellprice_text = '-';
+                                    } else {
+                                        $sellprice_text = $row->sellprice;
+                                    }
+                                @endphp
+                                <td>{{$sellprice_text}}</td>
                                 <td>{{$row->created_at}}</td>
                                 <td>{{$row->updated_at}}</td>
                                 @php
@@ -161,7 +168,14 @@
                                     }
                                 @endphp
                                 <td class="{{$status_check_color}}">{{$status_check_text}}</td>
-                                <td>-</td>
+                                @php
+                                    if($row->note == ''){
+                                        $note_text = '-';
+                                    } else {
+                                        $note_text = $row->note;
+                                    }
+                                @endphp
+                                <td>{{$note_text}}</td>
                                 <td>
                                     <div class="form-check text-center">
                                         <input class="form-check-input checkbox" data-id="{{$row->id}}" name="checkbox[]" type="checkbox" value="">
@@ -195,6 +209,9 @@
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
+                            <br>
+                            <a>หมายเหตุ(ถ้ามี) </a>
+                            <input name="note" type="text" class="form-control" id="note" placeholder="" />
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
