@@ -168,7 +168,9 @@
                                 <option value="{{ $sizeWay }}" {{$sizeWay == $filter_size2?"selected":""}}>{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
-                            <input class="form-control" type="date" name="filter_date2" value="{{$filter_date2}}">
+                            <br>
+                            <input class="form-control" type="date" name="filter_date2" value="{{$filter_date2}}"> ถึง
+                            <input class="form-control" type="date" name="filter_date_end2" value="{{$filter_date_end2}}">
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
                         </div>
                     </div>

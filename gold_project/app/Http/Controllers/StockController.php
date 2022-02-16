@@ -41,7 +41,11 @@ class StockController extends Controller
         }
         $filter_date = $request->get('filter_date');
         if (!empty($filter_date)) {
-            $stocknew = $stocknew->whereDate('product_details.created_at', $filter_date);
+            $stocknew = $stocknew->where('product_details.created_at','>=', $filter_date);
+        }
+        $filter_date_end = $request->get('filter_date_end');
+        if (!empty($filter_date_end)) {
+            $stocknew = $stocknew->where('product_details.created_at','<=', $filter_date_end);
         }
         $stocknew = $stocknew->paginate(5);
 
@@ -61,7 +65,11 @@ class StockController extends Controller
         }
         $filter_date2 = $request->get('filter_date2');
         if (!empty($filter_date2)) {
-            $stockold = $stockold->whereDate('product_details.created_at', $filter_date2);
+            $stockold = $stockold->where('product_details.created_at','>=', $filter_date2);
+        }
+        $filter_date_end2 = $request->get('filter_date_end2');
+        if (!empty($filter_date_end2)) {
+            $stocknew = $stocknew->where('product_details.created_at','<=', $filter_date_end2);
         }
         $stockold = $stockold->paginate(5);
         $product = Product::all();
@@ -70,7 +78,7 @@ class StockController extends Controller
         $customer = Customer::all();
         $striped = Striped::all();
         // dd($filter_status);
-        return view('admin.stock.index', compact('product', 'stocknew', 'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2'));
+        return view('admin.stock.index', compact('product', 'stocknew', 'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date','filter_date_end', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2','filter_date_end2'));
     }
 
     /**
@@ -181,7 +189,7 @@ class StockController extends Controller
     public function stockold(Request $request)
     {
         $keyword2 = $request->get('search2');
-        $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('code', "desc")->where('type', 'ทองเก่า');
+        $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('code', "desc")->where('type', 'ทองเก่า')->where('status_trade', '0');
         if (!empty($keyword2)) {
             $stockold = $stockold->where('product_details.code', 'like', "%$keyword2%")
                 ->orWhere('product_details.details', 'like', "%$keyword2%");
@@ -196,7 +204,11 @@ class StockController extends Controller
         }
         $filter_date2 = $request->get('filter_date2');
         if (!empty($filter_date2)) {
-            $stockold = $stockold->whereDate('product_details.created_at', $filter_date2);
+            $stockold = $stockold->where('product_details.created_at', '>=', $filter_date2);
+        }
+        $filter_date_end2 = $request->get('filter_date_end2');
+        if (!empty($filter_date_end2)) {
+            $stockold = $stockold->where('product_details.created_at', '<=', $filter_date_end2);
         }
         $stockold = $stockold->paginate(15);
         $product = Product::all();
@@ -204,7 +216,7 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stockold', compact('product',  'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2'));
+        return view('admin.stock.stockold', compact('product',  'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2','filter_date_end2'));
     }
 
     public function stock_old(Request $request)

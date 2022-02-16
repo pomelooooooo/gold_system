@@ -48,8 +48,9 @@
                                 @foreach(["0"=>"ทองในสต็อค" ,"1"=>"ขายออกแล้ว"] as $key => $val)
                                 <option value="{{$key}}" {{($filter_status == '0' || $filter_status == '1') && $key == $filter_status?"selected":""}}>{{$val}}</option>
                                 @endforeach
-                            </select>
-                            <input class="form-control" type="date" name="filter_date" value="{{$filter_date}}">
+                            </select><br>
+                            <input class="form-control" type="date" name="filter_date" value="{{$filter_date}}"> ถึง
+                            <input class="form-control" type="date" name="filter_date_end" value="{{$filter_date_end}}">
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
                         </div>
                     </div>
@@ -121,7 +122,9 @@
                                 <option value="{{ $sizeWay }}" {{$sizeWay == $filter_size2?"selected":""}}>{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
-                            <input class="form-control" type="date" name="filter_date2" value="{{$filter_date2}}">
+                            <br>
+                            <input class="form-control" type="date" name="filter_date2" value="{{$filter_date2}}"> ถึง
+                            <input class="form-control" type="date" name="filter_date_end2" value="{{$filter_date_end2}}">
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
                         </div>
                     </div>
