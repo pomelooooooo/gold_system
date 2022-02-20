@@ -156,12 +156,12 @@
                                     if($row->status_check == '0'){
                                         $status_check_color = 'text-success';
                                         $status_check_text = 'ปกติ';
-                                    } else if($row->status_check == '1') {
-                                        $status_check_color = 'text-warning';
-                                        $status_check_text = 'ทองปลอม';
-                                    } else if($row->status_check == '2') {
+                                    } else if($row->status_check == '3') {
                                         $status_check_color = 'text-danger';
-                                        $status_check_text = 'ทองหาย';
+                                        $status_check_text = 'ชำรุด';
+                                    } else if($row->status_check == '4') {
+                                        $status_check_color = 'text-warning';
+                                        $status_check_text = 'อื่นๆ';
                                     } else {
                                         $status_check_color = '';
                                         $status_check_text = '-';
@@ -205,7 +205,7 @@
                             <br>
                             <select class="custom-select"  name="status_check" id="status_check">
                                 <option selected disabled value="">เลือกผลการเช็ค</option>
-                                @foreach(["0"=>"ปกติ","1"=>"ทองปลอม","2"=>"ทองหาย"] as $sizeWay => $sizeLable)
+                                @foreach(["0"=>"ปกติ","3"=>"ชำรุด","4"=>"อื่นๆ"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
                                 @endforeach
                             </select>

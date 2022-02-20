@@ -173,7 +173,7 @@
                         <h4 for="validationstriped">ลาย*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdetails">รายละเอียด</h4>
+                        <h4 for="validationdetails">รายละเอียด*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -201,7 +201,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationprice">ราคารับซื้อ</h4>
+                        <h4 for="validationprice">ราคารับซื้อ*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -210,6 +210,37 @@
                             <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice" value="{{$buy->allprice}}" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>อัพโหลดรูปภาพ</h4>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="form-group text-center">
+                            <div class="card-header">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-default btn-file-img">
+                                            เลือกรูปภาพ <input type="file" id="imgInp" name="pic">
+                                        </span>
+                                    </span>
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="single-article-text-image-top">
+                                    <p>รูปเดิม</p>
+                                </div>
+                                <img src="{{ asset('assets/img/gold/'. $buy->pic) }}" width="250px" height="250px" alt="Image">
+                                <div class="single-article-text-image-bottom">
+                                    <p>รูปใหม่</p>
+                                    <img id='img-upload' />
+                                </div>
                             </div>
                         </div>
                     </div>

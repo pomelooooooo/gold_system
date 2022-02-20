@@ -61,6 +61,41 @@
             })
             $('#total-price').html(total.toFixed(2))
         })
+
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function(event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
+            }
+
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function() {
+            readURL(this);
+        });
     });
 
 
@@ -305,6 +340,32 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>อัพโหลดรูปภาพ*</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="form-group text-center">
+                                    <div class="card-header">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file-img">
+                                                    เลือกรูปภาพ <input type="file" id="imgInp" name="pic[]">
+                                                </span>
+                                            </span>
+                                            <input type="text" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <img id='img-upload' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -398,7 +459,7 @@
                         <h4 for="validationstriped">ลาย*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdetails">รายละเอียด</h4>
+                        <h4 for="validationdetails">รายละเอียด*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -439,6 +500,32 @@
                             <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>อัพโหลดรูปภาพ*</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="form-group text-center">
+                                <div class="card-header">
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-default btn-file-img">
+                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic[]">
+                                            </span>
+                                        </span>
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <img id='img-upload' />
+                                </div>
                             </div>
                         </div>
                     </div>

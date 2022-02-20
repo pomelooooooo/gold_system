@@ -20,6 +20,7 @@
                 $("#gold_table_bar_sell").html(response.response.price.gold_bar.sell)
                 $("#gold_table_buy").html(response.response.price.gold.buy)
                 $("#gold_table_sell").html(response.response.price.gold.sell)
+                $("#gold_spot").html(response.response.gold_spot)
             },
             error: function(xhr) {
                 "Not have Data!!"
@@ -140,16 +141,18 @@
                                 <th colspan="2"></th>
                                 <th colspan="2" class="text-center">ทองคำแท่ง</th>
                                 <th colspan="2" class="text-center">ทองรูปพรรณ</th>
+                                <th colspan="1"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="table-secondary text-center">วันที่</td>
                                 <td class="table-secondary">เวลา</td>
-                                <td class="table-secondary">ซื้อ</td>
-                                <td class="table-secondary">ขาย</td>
-                                <td class="table-secondary">ซื้อ</td>
-                                <td class="table-secondary">ขาย</td>
+                                <td class="table-secondary">รับซื้อ(บาท)</td>
+                                <td class="table-secondary">ขายออก(บาท)</td>
+                                <td class="table-secondary">รับซื้อ(บาท)</td>
+                                <td class="table-secondary">ขายออก(บาท)</td>
+                                <td class="table-secondary">Gold spot</td>
                             </tr>
                             <tr>
                                 <td id="date"></td>
@@ -158,6 +161,7 @@
                                 <td id="gold_table_bar_sell"></td>
                                 <td id="gold_table_buy"></td>
                                 <td id="gold_table_sell"></td>
+                                <td id="gold_spot"></td>
                             </tr>
 
                         </tbody>

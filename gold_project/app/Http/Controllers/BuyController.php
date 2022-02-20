@@ -103,6 +103,13 @@ class BuyController extends Controller
                     'datetime' => $request->get('datetime'),
                 ]
             );
+            if ($request->hasFile('pic')[$key]) {
+                $file = $request->file('pic')[$key];
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('assets/img/gold', $filename);
+                $buy->pic = $filename;
+            }
             $buy->save();
         }
 
