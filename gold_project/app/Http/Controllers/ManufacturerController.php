@@ -21,9 +21,10 @@ class ManufacturerController extends Controller
             $manufacturer = $manufacturer->where('manufacturers.code', 'like', "%$keyword%")
                 ->orWhere('manufacturers.name', 'like', "%$keyword%")
                 ->orWhere('manufacturers.address', 'like', "%$keyword%")
-                ->orWhere('manufacturers.tel', 'like', "%$keyword%");
+                ->orWhere('manufacturers.tel', 'like', "%$keyword%")
+                ->orWhere('manufacturers.tax', 'like', "%$keyword%");
         }
-        $manufacturer = $manufacturer->paginate(5);
+        $manufacturer = $manufacturer->paginate(8);
         return view('admin.manufacturer.index', compact('manufacturer'));
     }
 
@@ -52,6 +53,7 @@ class ManufacturerController extends Controller
                 'name' => $request->get('name'),
                 'tel' => $request->get('tel'),
                 'address' => $request->get('address'),
+                'tax' => $request->get('tax'),
             ]
         );
         $manufacturer->save();
@@ -96,6 +98,7 @@ class ManufacturerController extends Controller
         $manufacturer->name = $request->get('name');
         $manufacturer->tel = $request->get('tel');
         $manufacturer->address = $request->get('address');
+        $manufacturer->tax = $request->get('tax');
         $manufacturer->save();
         $manufacturer = Manufacturer::select('*')->paginate(5);
         // return view('admin.manufacturer.index', compact('manufacturer', 'id'));

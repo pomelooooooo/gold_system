@@ -109,12 +109,13 @@
                 <br>
                 <div class="row">
                     <div class="col-12">
-                        <table class="table table-bordered table-striped" id="myTable">
+                        <table class="table table-bordered table-striped " id="myTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">รหัสผู้ผลิต</th>
+                                    <th scope="col" class="text-center">รหัสผู้ผลิต</th>
                                     <th scope="col">ชื่อผู้ผลิต</th>
                                     <th scope="col">เบอร์โทร</th>
+                                    <th scope="col" class="text-center">หมายเลขประจำตัวผู้เสียภาษี</th>
                                     <th scope="col">ที่อยู่</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
@@ -126,6 +127,7 @@
                                     <td>{{$row->code}}</td>
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->tel}}</td>
+                                    <td>{{$row->tax}}</td>
                                     <td>{{$row->address}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('ManufacturerController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>

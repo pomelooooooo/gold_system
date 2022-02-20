@@ -139,9 +139,8 @@
                         <thead class="table-dark">
                             <tr>
                                 <th colspan="2"></th>
-                                <th colspan="2" class="text-center">ทองคำแท่ง</th>
-                                <th colspan="2" class="text-center">ทองรูปพรรณ</th>
-                                <th colspan="1"></th>
+                                <th colspan="2" class="text-center">ทองคำแท่ง (96.5%)</th>
+                                <th colspan="3" class="text-center">ทองรูปพรรณ (96.5%)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,7 +151,7 @@
                                 <td class="table-secondary">ขายออก(บาท)</td>
                                 <td class="table-secondary">รับซื้อ(บาท)</td>
                                 <td class="table-secondary">ขายออก(บาท)</td>
-                                <td class="table-secondary">Gold spot</td>
+                                <td class="table-secondary">รับซื้อ(กรัม)</td>
                             </tr>
                             <tr>
                                 <td id="date"></td>

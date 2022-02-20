@@ -27,7 +27,7 @@ server.get('/latest', (req, res) => {
       gold_buy = $('#rightCol > div.divgta.goldshopf > table > tbody > tr:nth-child(3) > td:nth-child(2)').text()
       goldBar_sell = $('#rightCol > div.divgta.goldshopf > table > tbody > tr:nth-child(2) > td:nth-child(3)').text()
       goldBar_buy = $('#rightCol > div.divgta.goldshopf > table > tbody > tr:nth-child(2) > td:nth-child(2)').text()
-      gold_spot = $('#content > table.flip.pdtable.bdo > tbody > tr:nth-child(1) > td:nth-child(7)').text()
+      gold_spot = $('#divDaily > table.pdtable > tbody > tr:nth-child(3) > td:nth-child(4)').text()
       res.send({
           status: 'success',
           response: {

@@ -81,20 +81,19 @@
 
         });
 
-        function readURL(input) {
+        function readURL(input, img) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
                 reader.onload = function(e) {
-                    $('#img-upload').attr('src', e.target.result);
+                    img.attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
-        $("#imgInp").change(function() {
-            readURL(this);
+        $("body").on('change', '.imgInp', function() {
+            readURL(this, $(this).closest('.card').find('.img-upload'));
         });
     });
 
@@ -160,7 +159,7 @@
 <!-- end hero area -->
 <br />
 <div class="container">
-    <form method="POST" action="{{route('buy.store')}} " class="needs-validation">
+    <form method="POST" action="{{route('buy.store')}} " class="needs-validation" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
                 <h2>ซื้อทองเข้าร้าน</h2>
@@ -353,14 +352,14 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-default btn-file-img">
-                                                    เลือกรูปภาพ <input type="file" id="imgInp" name="pic[]">
+                                                    เลือกรูปภาพ <input type="file" class="imgInp" name="pic[]">
                                                 </span>
                                             </span>
                                             <input type="text" class="form-control" readonly>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <img id='img-upload' />
+                                        <img class='img-upload' />
                                     </div>
                                 </div>
                             </div>
@@ -517,14 +516,14 @@
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <span class="btn btn-default btn-file-img">
-                                                เลือกรูปภาพ <input type="file" id="imgInp" name="pic[]">
+                                                เลือกรูปภาพ <input type="file" class="imgInp" name="pic[]">
                                             </span>
                                         </span>
                                         <input type="text" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <img id='img-upload' />
+                                    <img class="img-upload" />
                                 </div>
                             </div>
                         </div>

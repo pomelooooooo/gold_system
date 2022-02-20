@@ -53,18 +53,33 @@
                             <h4 for="validationttel">เบอร์โทร</h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationaddress">ที่อยู่</h4>
+                            <h4 for="validationttax">หมายเลขประจำตัวผู้เสียภาษี</h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <input name="tel" type="text" class="form-control" id="validationttel" placeholder=""  value="{{$manufacturer->tel}}" required/>
+                                <input name="tel" type="text" class="form-control" id="validationttel" placeholder="" value="{{$manufacturer->tel}}" required/>
                                 <div class="invalid-feedback">
                                     โปรดกรอกเบอร์โทร
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input name="tax" type="text" class="form-control" id="validationttax" placeholder="" value="{{$manufacturer->tax}}" required/>
+                                <div class="invalid-feedback">
+                                    โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 for="validationaddress">ที่อยู่</h4>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <textarea name="address" type="text" class="form-control" id="validationaddress" placeholder="" value="{{$manufacturer->address}}" required>{{$manufacturer->address}}</textarea>

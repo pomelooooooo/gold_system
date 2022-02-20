@@ -75,7 +75,7 @@
                         <h4 for="validationttel">เบอร์โทร</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationaddress">ที่อยู่</h4>
+                        <h4 for="validationttax">หมายเลขประจำตัวผู้เสียภาษี</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -87,6 +87,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input name="tax" type="text" class="form-control" id="validationttax" placeholder=""  required/>
+                            <div class="invalid-feedback">
+                                โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationaddress">ที่อยู่</h4>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <textarea name="address" type="text" class="form-control" id="validationaddress" placeholder="" required></textarea>
