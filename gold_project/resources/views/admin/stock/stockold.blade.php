@@ -33,90 +33,108 @@
                     text += i + ' = ' + el + "<br>"
                 })
                 // checkbox_update
-                Swal.fire({
-                    title: 'ต้องการส่งโรงหลอมหรือไม่?',
-                    icon: 'warning',
-                    input: 'text',
-                    inputAttributes: {
-                        autocapitalize: 'off'
-                    },
-                    html: 'จำนวนทองที่ส่งโรงหลอม' + "<br>" +
-                        text +
-                        'น้ำหนักรวม ' + total + ' กรัม' + "<br>" +
-                        '<b style="left: 0;position: absolute;margin-left: 30px;">ราคาขาย(บาท)</b>',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'ไม่',
-                    confirmButtonText: 'ใช่',
-                    showLoaderOnConfirm: true,
-                    preConfirm: (total_price) => {
-                        return fetch(`/stockold/report_smelters`, {
-                                method: 'POST',
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    _token: "{{ csrf_token() }}",
-                                    total_size: total,
-                                    total_price: total_price,
-                                    pd_Id: id
-                                })
+                var manufacturer = ''
+                $.ajax({
+                    url: "/stockold/getManusactor",
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status) {
+                            $.each(data.data, function(i, el) {
+                                manufacturer += '<option value="' + el.id + '">' + el.name + '</option>'
                             })
-                            .then(response => {
-                                if (!response.status) {
-                                    throw new Error(response.status)
-                                }
-                                return response.status
-                            })
-                            .catch(error => {
-                                Swal.showValidationMessage(
-                                    `Request failed: ${error}`
-                                )
-                            })
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        if ($('.checkbox_update').is(':checked')) {
-                            var id = ''
-                            $.each($('input[name="checkbox_update[]"]:checked'), function(i, el) {
-                                id += $(this).data("id") + ','
-                            })
-                            id = id.substr(0, id.length - 1)
 
-                            $.ajax({
-                                url: "/stockold/group",
-                                type: 'POST',
-                                data: {
-                                    _token: "{{ csrf_token() }}",
-                                    id: id
+                            Swal.fire({
+                                title: 'ต้องการส่งโรงหลอมหรือไม่?',
+                                icon: 'warning',
+                                input: 'text',
+                                inputAttributes: {
+                                    autocapitalize: 'off'
                                 },
-                                dataType: 'json',
-                                success: function(data) {
-                                    if (data.status) {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'อัปเดตสถานะเรียบร้อย',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        }).then((result) => {
-                                            window.location = '/stockold'
+                                html: 'จำนวนทองที่ส่งโรงหลอม' + "<br>" +
+                                    text +
+                                    'น้ำหนักรวม ' + total + ' กรัม' + "<br>" +
+                                    '<b style="float: left">ผู้ผลิต</b>' +
+                                    '<select id="manufacturer" class="form-control">' + manufacturer + '</select>' + "<br>" +
+                                    '<b style="left: 0;position: absolute;margin-left: 30px;">ราคาขาย(บาท)</b>',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                cancelButtonText: 'ไม่',
+                                confirmButtonText: 'ใช่',
+                                showLoaderOnConfirm: true,
+                                preConfirm: (total_price) => {
+                                    return fetch(`/stockold/report_smelters`, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Accept': 'application/json',
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({
+                                                _token: "{{ csrf_token() }}",
+                                                total_size: total,
+                                                total_price: total_price,
+                                                manufacturer: $('#manufacturer').val(),
+                                                pd_Id: id
+                                            })
                                         })
+                                        .then(response => {
+                                            if (!response.status) {
+                                                throw new Error(response.status)
+                                            }
+                                            return response.status
+                                        })
+                                        .catch(error => {
+                                            Swal.showValidationMessage(
+                                                `Request failed: ${error}`
+                                            )
+                                        })
+                                },
+                                allowOutsideClick: () => !Swal.isLoading()
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    if ($('.checkbox_update').is(':checked')) {
+                                        var id = ''
+                                        $.each($('input[name="checkbox_update[]"]:checked'), function(i, el) {
+                                            id += $(this).data("id") + ','
+                                        })
+                                        id = id.substr(0, id.length - 1)
+
+                                        $.ajax({
+                                            url: "/stockold/group",
+                                            type: 'POST',
+                                            data: {
+                                                _token: "{{ csrf_token() }}",
+                                                id: id,
+                                            },
+                                            dataType: 'json',
+                                            success: function(data) {
+                                                if (data.status) {
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'อัปเดตสถานะเรียบร้อย',
+                                                        showConfirmButton: false,
+                                                        timer: 1500
+                                                    }).then((result) => {
+                                                        window.location = '/stockold'
+                                                    })
+                                                }
+                                            }
+                                        });
+
+                                    } else {
+                                        Swal.fire(
+                                            'Error!',
+                                            'กรุณาเลือกรายการ',
+                                            'warning'
+                                        )
                                     }
                                 }
-                            });
-
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                'กรุณาเลือกรายการ',
-                                'warning'
-                            )
+                            })
                         }
                     }
-                })
+                });
+
             } else {
                 Swal.fire(
                     'Error!',

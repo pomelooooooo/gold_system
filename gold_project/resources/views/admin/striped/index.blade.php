@@ -90,7 +90,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <h3>ข้อมูลประเภททอง</h3>
+                        <h3>ข้อมูลลายทอง</h3>
                     </div>
                     <div class="col-6 text-right">
                         <a type="button" class="btn btn-outline-info" href="{{ route('striped.create') }}"><i class="fa fa-plus"></i> เพิ่มลายทอง</a>

@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Customer;
+use App\Manufacturer;
 use App\ReportSmelter;
 use App\Striped;
+use DB;
 
 class StockController extends Controller
 {
@@ -41,11 +43,11 @@ class StockController extends Controller
         }
         $filter_date = $request->get('filter_date');
         if (!empty($filter_date)) {
-            $stocknew = $stocknew->where('product_details.created_at','>=', $filter_date);
+            $stocknew = $stocknew->where('product_details.created_at', '>=', $filter_date);
         }
         $filter_date_end = $request->get('filter_date_end');
         if (!empty($filter_date_end)) {
-            $stocknew = $stocknew->where('product_details.created_at','<=', $filter_date_end);
+            $stocknew = $stocknew->where('product_details.created_at', '<=', $filter_date_end);
         }
         $stocknew = $stocknew->paginate(5);
 
@@ -65,11 +67,11 @@ class StockController extends Controller
         }
         $filter_date2 = $request->get('filter_date2');
         if (!empty($filter_date2)) {
-            $stockold = $stockold->where('product_details.created_at','>=', $filter_date2);
+            $stockold = $stockold->where('product_details.created_at', '>=', $filter_date2);
         }
         $filter_date_end2 = $request->get('filter_date_end2');
         if (!empty($filter_date_end2)) {
-            $stocknew = $stocknew->where('product_details.created_at','<=', $filter_date_end2);
+            $stocknew = $stocknew->where('product_details.created_at', '<=', $filter_date_end2);
         }
         $stockold = $stockold->paginate(5);
         $product = Product::all();
@@ -78,7 +80,7 @@ class StockController extends Controller
         $customer = Customer::all();
         $striped = Striped::all();
         // dd($filter_status);
-        return view('admin.stock.index', compact('product', 'stocknew', 'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date','filter_date_end', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2','filter_date_end2'));
+        return view('admin.stock.index', compact('product', 'stocknew', 'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'filter_date_end', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2', 'filter_date_end2'));
     }
 
     /**
@@ -171,12 +173,12 @@ class StockController extends Controller
             $stocknew = $stocknew->where('product_details.status', "$filter_status_gold");
         }
         $filter_date = $request->get('filter_date');
-        if (!empty($filter_date)) {
-            $stocknew = $stocknew->where('product_details.created_at', '>=', $filter_date);
-        }
         $filter_date_end = $request->get('filter_date_end');
+        if (!empty($filter_date)) {
+            $stocknew = $stocknew->whereDate('product_details.created_at', '>=', $filter_date);
+        }
         if (!empty($filter_date_end)) {
-            $stocknew = $stocknew->where('product_details.created_at', '<=', $filter_date_end);
+            $stocknew = $stocknew->whereDate('product_details.created_at', '<=', $filter_date_end);
         }
         $stocknew = $stocknew->paginate(15);
         $product = Product::all();
@@ -184,7 +186,9 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end'));
+        $stocknewCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->groupBy('type_gold_id')->get();
+
+        return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'stocknewCount'));
     }
     public function stockold(Request $request)
     {
@@ -216,7 +220,7 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stockold', compact('product',  'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2','filter_date_end2'));
+        return view('admin.stock.stockold', compact('product',  'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2', 'filter_date_end2'));
     }
 
     public function stock_old(Request $request)
@@ -272,7 +276,7 @@ class StockController extends Controller
 
     public function updateStatusCheckNew(Request $request)
     {
-        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check" , 'note' => "$request->note"]);
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check", 'note' => "$request->note"]);
 
         return response()->json(['status' => true], 200);
     }
@@ -292,6 +296,7 @@ class StockController extends Controller
                 [
                     'name_group' => $name_group,
                     'product_detail_id' => $id,
+                    'manufacturer' => $request->json('manufacturer'),
                     'total_size' => $request->json('total_size'),
                     'total_price' => $request->json('total_price'),
                 ]
@@ -300,5 +305,12 @@ class StockController extends Controller
         }
 
         return response()->json(['status' => true], 200);
+    }
+
+    public function getManusactor()
+    {
+        $manufacturer = Manufacturer::all();
+
+        return response()->json(['status' => true, 'data' => $manufacturer]);
     }
 }

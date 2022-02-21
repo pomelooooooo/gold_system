@@ -67,5 +67,6 @@ Route::post('/stock_old/status_check', 'StockController@updateStatusCheck')->mid
 Route::get('/stockold', 'StockController@stockold')->middleware('auth');
 Route::post('/stockold/report_smelters', 'StockController@reportSmelters')->middleware('auth');
 Route::post('/stockold/group', 'StockController@updateGroup')->middleware('auth');
+Route::get('/stockold/getManusactor', 'StockController@getManusactor')->middleware('auth');
 
 Route::resource('/pledge', 'PledgeController')->middleware('auth');
