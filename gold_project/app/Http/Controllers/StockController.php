@@ -220,6 +220,8 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
+
+
         return view('admin.stock.stockold', compact('product',  'stockold', 'typegold', 'user', 'customer', 'striped', 'keyword2', 'filter_type2', 'filter_size2', 'filter_date2', 'filter_date_end2'));
     }
 
@@ -257,7 +259,9 @@ class StockController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.stock.stock_old', compact('product',  'stock_old', 'typegold', 'user', 'customer', 'striped', 'keyword3', 'filter_type3', 'filter_size3', 'filter_status3', 'filter_date3', 'filter_date_end3'));
+        $stockoldCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองเก่า')->where('status_trade', '0')->groupBy('type_gold_id')->get();
+
+        return view('admin.stock.stock_old', compact('product',  'stock_old', 'typegold', 'user', 'customer', 'striped', 'keyword3', 'filter_type3', 'filter_size3', 'filter_status3', 'filter_date3', 'filter_date_end3', 'stockoldCount'));
     }
 
     public function updateGroup(Request $request)

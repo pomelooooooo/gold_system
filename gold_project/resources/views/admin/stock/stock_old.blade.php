@@ -2,7 +2,7 @@
 @section('title','สต๊อกทองเก่า')
 @section('content')
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $("body").on('click', '#btn-save', function(e) {
             // checkbox_update
             Swal.fire({
@@ -16,20 +16,25 @@
                 confirmButtonText: 'ใช่'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    if($('.checkbox').is(':checked')){
+                    if ($('.checkbox').is(':checked')) {
                         var id = ''
-                        $.each($('input[name="checkbox[]"]:checked'), function(i, el){
-                            id += $(this).data("id")+','
+                        $.each($('input[name="checkbox[]"]:checked'), function(i, el) {
+                            id += $(this).data("id") + ','
                         })
-                        id = id.substr(0, id.length-1)
+                        id = id.substr(0, id.length - 1)
 
                         $.ajax({
                             url: "/stock_old/status_check",
                             type: 'POST',
-                            data: {_token: "{{ csrf_token() }}", id: id, status_check: $('#status_check').val(), note: $('#note').val()},
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                id: id,
+                                status_check: $('#status_check').val(),
+                                note: $('#note').val()
+                            },
                             dataType: 'json',
                             success: function(data) {
-                                if(data.status){
+                                if (data.status) {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'อัปเดตสถานะเรียบร้อย',
@@ -107,6 +112,14 @@
                         </div>
                     </div>
                     <br>
+                    <div class="card">
+                        <div class="card-body">
+                            @foreach($stockoldCount as $key => $value)
+                            <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><br>
+                            @endforeach
+                        </div>
+                    </div>
+                    <br>
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead class="table-dark">
                             <tr>
@@ -135,27 +148,27 @@
                                 <td>{{$row->allprice}}</td>
                                 <td>{{$row->created_at}}</td>
                                 @php
-                                    if($row->status_check == '0'){
-                                        $status_check_color = 'text-success';
-                                        $status_check_text = 'ปกติ';
-                                    } else if($row->status_check == '1') {
-                                        $status_check_color = 'text-warning';
-                                        $status_check_text = 'ทองปลอม';
-                                    } else if($row->status_check == '2') {
-                                        $status_check_color = 'text-danger';
-                                        $status_check_text = 'ทองหาย';
-                                    } else {
-                                        $status_check_color = '';
-                                        $status_check_text = '-';
-                                    }
+                                if($row->status_check == '0'){
+                                $status_check_color = 'text-success';
+                                $status_check_text = 'ปกติ';
+                                } else if($row->status_check == '1') {
+                                $status_check_color = 'text-warning';
+                                $status_check_text = 'ทองปลอม';
+                                } else if($row->status_check == '2') {
+                                $status_check_color = 'text-danger';
+                                $status_check_text = 'ทองหาย';
+                                } else {
+                                $status_check_color = '';
+                                $status_check_text = '-';
+                                }
                                 @endphp
                                 <td class="{{$status_check_color}}">{{$status_check_text}}</td>
                                 @php
-                                    if($row->note == ''){
-                                        $note_text = '-';
-                                    } else {
-                                        $note_text = $row->note;
-                                    }
+                                if($row->note == ''){
+                                $note_text = '-';
+                                } else {
+                                $note_text = $row->note;
+                                }
                                 @endphp
                                 <td>{{$note_text}}</td>
                                 <td>
@@ -180,29 +193,29 @@
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">ผลการเช็คสต๊อก</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <a>กรุณาเลือกรายการผลการเช็คสต๊อก</a>
-                            <br>
-                            <select class="custom-select" name="status_check" id="status_check">
-                                <option selected disabled value="">เลือกผลการเช็ค</option>
-                                @foreach(["0"=>"ปกติ","1"=>"ทองปลอม","2"=>"ทองหาย"] as $sizeWay => $sizeLable)
-                                <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
-                                @endforeach
-                            </select>
-                            <br>
-                            <a>หมายเหตุ(ถ้ามี) </a>
-                            <input name="note" type="text" class="form-control" id="note" placeholder="" />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="button" id="btn-save" class="btn btn-success">บันทึก</button>
-                        </div>
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="exampleModalLabel">ผลการเช็คสต๊อก</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <a>กรุณาเลือกรายการผลการเช็คสต๊อก</a>
+                                <br>
+                                <select class="custom-select" name="status_check" id="status_check">
+                                    <option selected disabled value="">เลือกผลการเช็ค</option>
+                                    @foreach(["0"=>"ปกติ","1"=>"ทองปลอม","2"=>"ทองหาย"] as $sizeWay => $sizeLable)
+                                    <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
+                                    @endforeach
+                                </select>
+                                <br>
+                                <a>หมายเหตุ(ถ้ามี) </a>
+                                <input name="note" type="text" class="form-control" id="note" placeholder="" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                <button type="button" id="btn-save" class="btn btn-success">บันทึก</button>
+                            </div>
                         </div>
                     </div>
                 </div>
