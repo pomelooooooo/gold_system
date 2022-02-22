@@ -1,76 +1,159 @@
-@extends('layouts.form')
-@section('title','ใบเสร็จรับเงิน/ใบกำกับภาษี')
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: normal;
+            font-weight: normal;
+            src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: normal;
+            font-weight: bold;
+            src: url("{{ public_path('fonts/THSarabunNew Bold.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: italic;
+            font-weight: normal;
+            src: url("{{ public_path('fonts/THSarabunNew Italic.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: italic;
+            font-weight: bold;
+            src: url("{{ public_path('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
+        }
+        body {
+            font-family: "THSarabunNew";
+        }
+        table {
+            border-collapse: collapse;
+        }
+        .table-bor td, th {
+            border: 1px solid;
+        }
+        table.wrap-box {
+        width: 100%;
+        text-align: left;
+        line-height: 97%;
+    }
 
+    table.wrap-top {
+        width: 100%;        
+        text-align: left;
+        line-height: 97%;
+    }
+
+    table.wrap-content, table.wrap-total {
+        width: 100%;        
+        text-align: left;
+        line-height: 97%;
+    }
+    table.wrap-content tr th{
+        font-weight: bold;
+        text-align: center;
+        background-color: #eee;
+    }
+
+    table.wrap-content tr td{
+        border-bottom-color: #ddd;
+        border-bottom-style: solid;
+        border-bottom-width: 0.5px;
+    }
+
+    table.wrap-total tr td{
+        text-align: right;
+    }
+
+    .line-top{
+        border-top: 1px solid #ccc;
+    }
+    .line-bottom{
+        border-bottom: 1px solid #ccc;
+    }
+    .line-left{
+        border-left: 1px solid #ccc;
+    }
+    .line-right{
+        border-right: 1px solid #ccc;
+    }
+
+    .header-title {
+        font-size: 22px;
+        font-weight: bold;
+    }   
+    </style>
+</head>
+<body>
 <table class="wrap-box" cellpadding="0" cellspacing="0">
     <tr>
-        <td style="width: 60%;"><span class="header-title">ห้างทองมาทอง</span>
-            <br /> ที่อยู่
-            <br /> เลขที่ประจำตัวผู้เสียภาษี
+        <td style="width: 60%;"><span class="header-title">ห้างหุ้นส่วนจำกัด มาทอง เยาราช (สำนักงานใหญ่)</span>
+            <br /> เลขที่ 158 หมู่ที่ 1 ตำบลขนอม อำเภอขนอม จังหวัดนครศรีธรรมราช
+            <br /> โทรศัพท์ 086-6947040 เลขที่ประจำตัวผู้เสียภาษี Tax ID : 0803564001495
         </td>
-        <td style="text-align: right;width: 40%;"><span class="header-title">ใบกำกับภาษี/ใบเสร็จรับเงิน</span><br/>123456</td>
+        <td style="text-align: right;width: 40%;"><span class="header-title">ใบกำกับภาษี/ใบเสร็จรับเงิน</span>
+        <br/>
+        เล่มที่ ...................... เลขที่......................<br/>
+        วันที่.........................................................
+        </td>
     </tr>
 </table>
+<br>
 <div class="line"></div>
 
 <table class="wrap-box line-top" cellpadding="0" cellspacing="0">
     <tr>
-        <td style="width:70%;"><table class="wrap-top" cellpadding="3" cellspacing="0">
+        <td style="width:60%;"><table class="wrap-top" cellpadding="3" cellspacing="0">
                 <tr>
-                    <td style="width:20%;"><b>รหัสลูกค้า</b></td>
-                    <td style="width:80%;">123456</td>
+                    <td style="width:20%;"><b>ชื่อลูกค้า</b></td>
+                    <td style="width:80%;">Name   Surname</td>
                 </tr>
                 <tr>
-                    <td><b>ชื่อลูกค้า</b></td>
-                    <td>Name Surname</td>
-                </tr>
-                <tr>
-                    <td><b>ที่อยู่</b></td>
-                    <td>address</td>
-                </tr>
-                <tr>                    
-                    <td colspan="2"><b>เบอร์โทร</b> 092666666, <b>แฟกซ์</b> 18584212120</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>เลขประจำตัวผู้เสียภาษี</b> 3954542154</td>
+                    <td colspan="2"><b>ที่อยู่</b></td>
+                    <td></td>
                 </tr>
             </table>
         </td>
-        <td><table class="wrap-top" cellpadding="3" cellspacing="0">
+        <td>
+            <table class="wrap-top" cellpadding="3" cellspacing="0">
                 <tr>
-                    <td style="width:25%;"><b>เลขที่เอกสาร</b></td>
+                    <td style="width:25%;"><b>เลขผู้เสียภาษี</b></td>
                     <td style="width:75%;">12/45/4411</td>
                 </tr>
+               
                 <tr>
-                    <td><b>วันที่เอกสาร</b></td>
-                    <td>12/45/4411></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td><b>วันที่ครบกำหนด</b></td>
-                    <td>12/45/4411</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td><b>เอกสารอ้างอิง</b></td>
-                    <td>9999999</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td><b>ผู้ติดต่อ</b></td>
-                    <td>sssssssss</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </td>
     </tr>
 </table>
 <div class="line"></div>
-<table class="wrap-box" cellpadding="0" cellspacing="0">
+<table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
     <tr>
         <td><table class="wrap-content" cellpadding="3" cellspacing="0">
             <tr>
-                <th style="width:5%;">#</th>                
-                <th style="width:55%;">รายละเอียด</th>
-                <th style="width:13%;">จำนวน</th>
-                <th style="width:12%;">ราคา/หน่วย</th>
-                <th style="width:15%;">รวม</th>
+                <th style="width:6%;">ลำดับที่</th>                
+                <th style="width:44%;">รายการสินค้า</th>
+                <th style="width:23%;">น้ำหนัก(กรัม)</th>
+                <th style="width:27%;">จำนวนเงิน(บาท)</th>
             </tr>
            
                 <tr>
@@ -78,7 +161,6 @@
                     <td></td>
                     <td style="text-align:right;"></td>
                     <td style="text-align:right;"></td>
-                    <td style="text-align:right;"></td> 
                 </tr>
 
         </table></td>
@@ -86,46 +168,42 @@
 </table>
 
 
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
+    <table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
         <tr>
             <td><table class="wrap-total" cellpadding="3" cellspacing="0">
                     <tr>
-                        <td style="width: 60%"></td>
-                        <td style="width: 20%; font-weight: bold;">รวมทั้งหมด</td>
-                        <td style="width: 20%;">5000 บาท</td>
+                        <td style="width: 60%; text-align:left">ทองคำแท่งซื้อเข้า บาทละ : </td>
+                        <td style="width: 20%; font-weight: bold;">ราคาสินค้ารวมค่ากำเหน็จก่อนภาษี</td>
+                        <td style="width: 20%;"> บาท</td>
                     </tr>                    
                         <tr>
-                            <td>&nbsp;</td>
+                            <td style="text-align:left">ทองคำแท่งขายออก บาทละ : </td>
                             <td style="font-weight: bold;">ส่วนลด</td>
-                            <td></td>
+                            <td>-</td>
                         </tr>
                         
                         <tr>
-                            <td>&nbsp;</td>
-                            <td style="font-weight: bold;">ราคาหลังหักส่วนลด</td>
+                            <td style="text-align:left">ทองรูปพรรณรับซื้อคืน บาทละ : </td>
+                            <td style="font-weight: bold;">หักราคาซื้อทองประจำวัน</td>
                             <td> บาท</td>
                         </tr>    
                                    
                     <tr>
-                        <td>&nbsp;</td>
-                        <td style="font-weight: bold;">ภาษีมูลค่าเพิ่ม 7%</td>
+                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน กรัมละ : </td>
+                        <td style="font-weight: bold;">จำนวนส่วนต่างฐานภาษี</td>
                         <td> บาท</td>
                     </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td style="font-weight: bold;">ราคาไม่รวมภาษี</td>
+                            <td style="font-weight: bold;">ภาษีมูลค่าเพิ่ม 7%</td>
                             <td> บาท</td>
                         </tr>
                     <tr>
-                        <td style="text-align: center;">()</td>
-                        <td style="font-weight: bold;"> รวมสุทธิทั้งหมด</td>
+                        <td style="text-align: left;background-color:#A2A2A2 ">(ตัวอักษร)</td>
+                        <td style="font-weight: bold;"> รวมรับเงินสุทธิ</td>
                         <td> บาท</td>
                     </tr>
-                    <tr>
-                        <td style="width: 50%"></td>
-                        <td style="width: 10%"></td>
-                        <td style="border-top: 0.5px solid #ccc; width: 40%;"></td>
-                    </tr>
+                   
                 </table>
             </td>
         </tr>
@@ -138,4 +216,6 @@
                 </td>
             </tr>
         </table>
-@endsection
+
+</body>
+</html>

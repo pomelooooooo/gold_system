@@ -20,7 +20,10 @@
             success: function(response) {
                 // console.log(response.response)
                 $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
+                $("#gold_bar_buy").val(response.response.price.gold_bar.buy)
                 $("#gold_sell").val(response.response.price.gold.sell)
+                $("#gold_buy").val(response.response.price.gold.buy)
+                $("#gold_spot").val(response.response.gold_spot)
                 let size_arr = {
                     "ครึ่งสลึง": 0.125,
                     "1 สลึง": 0.25,
@@ -161,12 +164,16 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
+                            <input type="text" name="goldBar_sell_medain_price" class="form-control" id="gold_bar_sell" placeholder="" readonly />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
+                            <input type="text" name="" class="form-control" id="gold_sell" placeholder="" readonly />
+                            <input type="hidden" id="gold_spot" name="gold_buy_gram_medain_price" value="">
+                            <input type="hidden" id="gold_bar_buy" name="goldBar_buy_medain_price" value="">
+                            <input type="hidden" id="gold_buy" name="gold_buy_medain_price" value="">
+
                         </div>
                     </div>
                 </div>

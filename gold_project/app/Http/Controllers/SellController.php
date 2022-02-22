@@ -193,6 +193,13 @@ class SellController extends Controller
     }
     public function updateGroup(Request $request)
     {
+        $form_sell = FormSell::select('group_id')->orderBy('group_id', "desc")->first();
+        if (!empty($form_sell)) {
+            $group_id = $form_sell->group_id + 1;
+        } else {
+            $group_id = 1;
+        }
+        // dd($request);
         foreach ($request->id as $key => $value) {
             $productdetail = ProductDetails::find($request->id[$key]);
             $productdetail->code = $request->code[$key];
@@ -205,57 +212,40 @@ class SellController extends Controller
             $productdetail->sellprice = $request->sellprice[$key];
             $productdetail->datetime = $request->datetime;
             $productdetail->save();
-        }
-        $productdetail = ProductDetails::select('*')->paginate(10);
 
-        $pd_id = explode(',', $request->json('pd_Id'));
-        $form_sell = FormSell::select('group_id')->orderBy('group_id', "desc")->first();
-        if (!empty($form_sell)) {
-            $group_id = $form_sell->group_id + 1;
-        } else {
-            $group_id = 1;
-        }
-        foreach ($pd_id as $key => $id) {
             $formsell = new FormSell([
                 'group_id' => $group_id,
-                'product_detail_id' => $id,
+                'product_detail_id' => $productdetail->id,
                 'customer_id' => $request->get('customer_id'),
-                'goldBar_buy_medain_price' => '1000',
-                'goldBar_sell_medain_price' => '3000',
-                'gold_buy_medain_price' => '400',
-                'gold_buy_gram_medain_price' => '500',
+                'goldBar_buy_medain_price' => str_replace(',', '', $request->get('goldBar_buy_medain_price')),
+                'goldBar_sell_medain_price' => str_replace(',', '', $request->get('goldBar_sell_medain_price')),
+                'gold_buy_medain_price' => str_replace(',', '', $request->get('goldBar_buy_medain_price')),
+                'gold_buy_gram_medain_price' => str_replace(',', '', $request->get('gold_buy_gram_medain_price')),
             ]);
             $formsell->save();
         }
+        $productdetail = ProductDetails::select('*')->paginate(10);
+        $pd_id = explode(',', $request->json('pd_Id'));
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
-        // $reportSmelter = ReportSmelter::select('group_id')->orderBy('group_id', "desc")->first();
-        // if (!empty($reportSmelter)) {
-        //     $group_id = $reportSmelter->group_id + 1;
-        // } else {
-        //     $group_id = 1;
-        // }
-
-        // return response()->json(['status' => true], 200);
         return response()->json(['status' => true, 'id' => $group_id], 200);
-
-        // return redirect()->route('sell.index')->with(['productdetail' => $productdetail, 'product' => $product, 'customer' => $customer, 'users' => $users]);
-        // return view('admin.sell.index', compact('productdetail', 'product', 'customer'));
     }
 
     public function formSell($id)
     {
         $form = FormSell::find($id);
-        $pdf = PDF::loadView('pdf', compact('form'));
+        $pdf = PDF::loadView('admin.sell.form', compact('form'));
 
         // return view('admin.sell.form');
-        return $pdf->download('formsell.pdf');
+        return $pdf->stream('formsell.pdf');
     }
 
     public function formSelltest()
     {
+        
         $pdf = PDF::loadView('admin.sell.form');
-        return $pdf->download('formtest.pdf');
+        // return $pdf->download('formtest.pdf');
+        return view('admin.sell.form');
     }
 }

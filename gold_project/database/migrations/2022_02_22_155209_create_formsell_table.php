@@ -18,10 +18,10 @@ class CreateFormsellTable extends Migration
             $table->integer('group_id');
             $table->integer('product_detail_id');
             $table->integer('customer_id');
-            $table->float('goldBar_buy_medain_price');
-            $table->float('goldBar_sell_medain_price');
-            $table->float('gold_buy_medain_price');
-            $table->float('gold_buy_gram_medain_price');
+            $table->decimal('goldBar_buy_medain_price',15,2);
+            $table->decimal('goldBar_sell_medain_price',15,2);
+            $table->decimal('gold_buy_medain_price',15,2);
+            $table->decimal('gold_buy_gram_medain_price',15,2);
             $table->timestamps();
         });
     }
