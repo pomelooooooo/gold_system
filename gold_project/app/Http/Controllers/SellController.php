@@ -9,6 +9,7 @@ use App\Product;
 use App\TypeGold;
 use App\Striped;
 use App\Sell;
+use App\FormSell;
 use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\File;
@@ -208,7 +209,27 @@ class SellController extends Controller
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
-        return redirect()->route('sell.index')->with(['productdetail' => $productdetail, 'product' => $product, 'customer' => $customer, 'users' => $users]);
+        // $reportSmelter = ReportSmelter::select('group_id')->orderBy('group_id', "desc")->first();
+        // if (!empty($reportSmelter)) {
+        //     $group_id = $reportSmelter->group_id + 1;
+        // } else {
+        //     $group_id = 1;
+        // }
+
+        return response()->json(['status' => true], 200);
+        // return response()->json(['status' => true, 'id' => $group_id], 200);
+
+        // return redirect()->route('sell.index')->with(['productdetail' => $productdetail, 'product' => $product, 'customer' => $customer, 'users' => $users]);
         // return view('admin.sell.index', compact('productdetail', 'product', 'customer'));
+    }
+
+    public function formSell()
+    {
+        return view('admin.sell.form');
+    }
+
+    public function formSelltest()
+    {
+        return view('admin.sell.form');
     }
 }

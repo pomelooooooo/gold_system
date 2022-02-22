@@ -71,6 +71,58 @@
             })
             $('#total-price').html(total.toFixed(2))
         })
+
+        $("body").on('click', '#btn-save', function(e) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = new FormData($('#form-data')[0]);
+                    $.ajax({
+                        url: "/sellGroup/update",
+                        type: 'POST',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            // var group_id = data.id
+                            var group_id = 1
+                            if (data.status) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'อัปเดตสถานะเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result) => {
+                                    Swal.fire({
+                                        title: 'ต้องการพิมพ์ใบกำกับภาษีหรือไม่?',
+                                        // text: "You won't be able to revert this!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes',
+                                        cancelButtonText: 'No',
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.open('/sellGroup/formSell/'+group_id, '_blank')
+                                        }
+                                        window.location = '/sell'
+                                    })
+                                })
+                            }
+                        }
+                    });
+                }
+            })
+        })
     });
 </script>
 
@@ -90,20 +142,19 @@
 
 <br />
 <div class="container">
-    <form method="POST" action="{{url('/sellGroup/update')}}" enctype="multipart/form-data" class="needs-validation" novalidate>
-        @method('PUT')
+    <form id="form-data" method="POST" action="{{url('/sellGroup/update')}}" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {{csrf_field()}}
         <div class="card">
             <div class="card-header">
                 <h2>ขายทอง</h2>
             </div>
             <div class="card-body">
-                {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคากลางทองแท่งประจำวัน*</h4>
+                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคากลางทองรูปพรรณประจำวัน*</h4>
+                        <h4>ราคาขายออกทองรูปพรรณประจำวัน*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -277,9 +328,9 @@
         <br />
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/sell')}}">กลับ</a>
-            <a type="button" class="btn btn-info" href="{{url('/sell')}}"><i class="fas fa-receipt"></i> พิมพ์ใบเสร็จรับเงิน</a>
-            <a type="button" class="btn btn-info" href="{{url('/sell')}}"><i class="fas fa-receipt"></i> พิมพ์ใบกำกับภาษี</a>
-            <button id="btn-save" type="submit" class="btn btn-success">ทำการขาย</button>
+            <button type="button" class="btn btn-info"><i class="fas fa-receipt"></i> พิมพ์ใบเสร็จรับเงิน</button>
+            <button type="button" id="btn-update" class="btn btn-info"><i class="fas fa-receipt"></i> พิมพ์ใบกำกับภาษี</button>
+            <button id="btn-save" type="button" class="btn btn-success">ทำการขาย</button>
         </div>
         <!-- <input type="hidden" name="_method" value="PATCH" /> -->
     </form>

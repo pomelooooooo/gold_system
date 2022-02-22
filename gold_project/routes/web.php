@@ -52,7 +52,10 @@ Route::resource('/buy', 'BuyController')->middleware('auth');
 
 Route::resource('/sell', 'SellController')->middleware('auth');
 Route::get('/sell/group/{id}', 'SellController@sell_group')->middleware('auth');
-Route::put('/sellGroup/update', 'SellController@updateGroup')->middleware('auth');
+Route::post('/sellGroup/update', 'SellController@updateGroup')->middleware('auth');
+Route::get('/sellGroup/formSell/{id}', 'SellController@formSell')->middleware('auth');
+Route::get('/formSelltest', 'SellController@formSelltest')->middleware('auth');
+
 
 Route::resource('/manufacturer', 'ManufacturerController')->middleware('auth');
 
