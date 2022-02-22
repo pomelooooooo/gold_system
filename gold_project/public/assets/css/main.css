@@ -2959,3 +2959,54 @@ table.order-details tbody td {
   vertical-align: middle;
   width: 100%;
 }
+
+table.wrap-box {
+  width: 100%;
+  text-align: left;
+  line-height: 97%;
+}
+
+table.wrap-top {
+  width: 100%;        
+  text-align: left;
+  line-height: 97%;
+}
+
+table.wrap-content, table.wrap-total {
+  width: 100%;        
+  text-align: left;
+  line-height: 97%;
+}
+table.wrap-content tr th{
+  font-weight: bold;
+  text-align: center;
+  background-color: #eee;
+}
+
+table.wrap-content tr td{
+  border-bottom-color: #ddd;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+}
+
+table.wrap-total tr td{
+  text-align: right;
+}
+
+.line-top{
+  border-top: 1px solid #ccc;
+}
+.line-bottom{
+  border-bottom: 1px solid #ccc;
+}
+.line-left{
+  border-left: 1px solid #ccc;
+}
+.line-right{
+  border-right: 1px solid #ccc;
+}
+
+.header-title {
+  font-size: 22px;
+  font-weight: bold;
+}

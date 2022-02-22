@@ -74,13 +74,14 @@
 
         $("body").on('click', '#btn-save', function(e) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
+                title: 'ต้องการขายทองหรือไม่?',
+                // text: "You won't be able to revert this!",
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!',
+                confirmButtonText: 'ใช่',
+                cancelButtonText: 'ไม่',
             }).then((result) => {
                 if (result.isConfirmed) {
                     var formData = new FormData($('#form-data')[0]);
@@ -92,8 +93,8 @@
                         contentType: false,
                         processData: false,
                         success: function(data) {
-                            // var group_id = data.id
-                            var group_id = 1
+                            var group_id = data.id
+                            // var group_id = 1
                             if (data.status) {
                                 Swal.fire({
                                     icon: 'success',
@@ -102,14 +103,14 @@
                                     timer: 1500
                                 }).then((result) => {
                                     Swal.fire({
-                                        title: 'ต้องการพิมพ์ใบกำกับภาษีหรือไม่?',
+                                        title: 'ต้องการพิมพ์ใบเสร็จรับเงิน/ใบกำกับภาษีหรือไม่?',
                                         // text: "You won't be able to revert this!",
-                                        icon: 'warning',
+                                        icon: 'question',
                                         showCancelButton: true,
                                         confirmButtonColor: '#3085d6',
                                         cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Yes',
-                                        cancelButtonText: 'No',
+                                        confirmButtonText: 'ใช่',
+                                        cancelButtonText: 'ไม่',
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             window.open('/sellGroup/formSell/'+group_id, '_blank')
