@@ -223,7 +223,7 @@
                                     @endforeach
                                 </select>
                                 <br>
-                                <a>หมายเหตุ(ถ้ามี) </a>
+                                <a>บันทึกช่วยจำ(ถ้ามี) </a>
                                 <input name="note" type="text" class="form-control" id="note" placeholder="" />
                             </div>
                             <div class="modal-footer">

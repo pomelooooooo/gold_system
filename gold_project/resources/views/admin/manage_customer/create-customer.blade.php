@@ -241,7 +241,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationid">เลขบัตรประชาชน*</h4>
+                        <h4 for="validationid">เลขบัตรประชาชน/เลขประจำตัวผู้เสียภาษี*</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationtel">เบอร์โทร*</h4>
@@ -290,27 +290,21 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationdatecardstart">วันออกบัตร*</h4>
+                        <h4 for="validationdatecardstart">วันออกบัตร</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdatecardend">วันบัตรหมดอายุ*</h4>
+                        <h4 for="validationdatecardend">วันบัตรหมดอายุ</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" id="validationdatecardstart" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกวันออกบัตร
-                            </div>
+                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" id="validationdatecardend" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกวันบัตรหมดอายุ
-                            </div>
+                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>

@@ -83,10 +83,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationname">ชื่อ</h4>
+                        <h4 for="validationname">ชื่อ*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationlastname">นามสกุล</h4>
+                        <h4 for="validationlastname">นามสกุล*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -109,10 +109,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationid">เลขบัตรประชาชน</h4>
+                        <h4 for="validationid">เลขบัตรประชาชน/เลขประจำตัวผู้เสียภาษี*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtel">เบอร์โทร</h4>
+                        <h4 for="validationtel">เบอร์โทร*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -135,7 +135,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน</h4>
+                        <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน*</h4>
                     </div>
                     <div class="col-6">
                         <h4>ที่อยู่ปัจจุบัน</h4>
@@ -158,27 +158,21 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationdatecardstart">วันออกบัตร*</h4>
+                        <h4 for="validationdatecardstart">วันออกบัตร</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdatecardend">วันบัตรหมดอายุ*</h4>
+                        <h4 for="validationdatecardend">วันบัตรหมดอายุ</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" value="{{$managecustomer->date_card_start}}" id="validationdatecardstart" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกวันออกบัตร
-                            </div>
+                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" value="{{$managecustomer->date_card_start}}" />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" value="{{$managecustomer->date_card_end}}" id="validationdatecardend" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกวันบัตรหมดอายุ
-                            </div>
+                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" value="{{$managecustomer->date_card_end}}"  />
                         </div>
                     </div>
                 </div>

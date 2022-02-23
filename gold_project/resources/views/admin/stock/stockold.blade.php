@@ -1,5 +1,12 @@
 @extends('layouts.master')
 @section('title','ส่งโรงหลอม')
+@section('style')
+<style>
+    .swal2-input{
+        width: unset !important;
+    }
+</style>
+@endsection
 @section('content')
 <script>
     $(document).ready(function() {
@@ -46,10 +53,24 @@
 
                             Swal.fire({
                                 title: 'ต้องการส่งโรงหลอมหรือไม่?',
-                                icon: 'warning',
-                                input: 'text',
+                                icon: 'question',
+                                input: 'number',
                                 inputAttributes: {
+                                    min: 25000,
+                                    max: 250000,
                                     autocapitalize: 'off'
+                                },
+                                inputValidator: (value) => {                                    
+                                    if (value == '') {
+                                        return 'กรุณาใส่ราคาขาย'
+                                    } else if (value > 250000) {
+                                        return 'กรุณาใส่ราคาขายน้อยกว่า 250000'
+                                    } else if (value < 25000) {
+                                        return 'กรุณาใส่ราคาขายมากกว่า 25000'
+                                    }
+                                },
+                                customClass: {
+                                    input: 'form-control',
                                 },
                                 html: 'จำนวนทองที่ส่งโรงหลอม' + "<br>" +
                                     text +

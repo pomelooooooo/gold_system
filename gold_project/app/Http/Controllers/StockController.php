@@ -207,12 +207,12 @@ class StockController extends Controller
             $stockold = $stockold->where('product_details.size', $filter_size2);
         }
         $filter_date2 = $request->get('filter_date2');
-        if (!empty($filter_date2)) {
-            $stockold = $stockold->where('product_details.created_at', '>=', $filter_date2);
-        }
         $filter_date_end2 = $request->get('filter_date_end2');
+        if (!empty($filter_date2)) {
+            $stockold = $stockold->whereDate('product_details.created_at', '>=', $filter_date2);
+        }
         if (!empty($filter_date_end2)) {
-            $stockold = $stockold->where('product_details.created_at', '<=', $filter_date_end2);
+            $stockold = $stockold->whereDate('product_details.created_at', '<=', $filter_date_end2);
         }
         $stockold = $stockold->paginate(15);
         $product = Product::all();
@@ -243,7 +243,7 @@ class StockController extends Controller
         }
         $filter_date3 = $request->get('filter_date3');
         if (!empty($filter_date3)) {
-            $stock_old = $stock_old->where('product_details.created_at', '>=', $filter_date3);
+            $stock_old = $stock_old->whereDate('product_details.created_at', '>=', $filter_date3);
         }
         $filter_status3 = $request->get('filter_status3');
         if ($filter_status3 == '2' || $filter_status3 == '0') {
@@ -251,7 +251,7 @@ class StockController extends Controller
         }
         $filter_date_end3 = $request->get('filter_date_end3');
         if (!empty($filter_date_end3)) {
-            $stock_old = $stock_old->where('product_details.created_at', '<=', $filter_date_end3);
+            $stock_old = $stock_old->whereDate('product_details.created_at', '<=', $filter_date_end3);
         }
         $stock_old = $stock_old->paginate(15);
         $product = Product::all();
