@@ -180,7 +180,7 @@
                     <tr>
                         <td style="text-align:center;">{{++$key}}</td>
                         <td>{{$row->detail}}</td>
-                        <td style="text-align:right;">{{$row->gram}}</td>
+                        <td style="text-align:center;">{{$row->gram}}</td>
                         <td style="text-align:right;">{{$row->sellprice}}</td>
                     </tr>
                     @endforeach

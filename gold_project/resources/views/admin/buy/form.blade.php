@@ -97,8 +97,17 @@
         }
 
         .header-title {
-            font-size: 22px;
+            font-size: 25px;
             font-weight: bold;
+        }
+
+        b {
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .details {
+            font-size: 19px;
         }
     </style>
 </head>
@@ -106,63 +115,38 @@
 <body>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width: 60%;"><span class="header-title">ห้างหุ้นส่วนจำกัด มาทอง เยาราช (สำนักงานใหญ่)</span>
-                <br /> เลขที่ 158 หมู่ที่ 1 ตำบลขนอม อำเภอขนอม จังหวัดนครศรีธรรมราช
-                <br /> โทรศัพท์ 086-6947040 เลขที่ประจำตัวผู้เสียภาษี Tax ID : 0803564001495
-            </td>
-            <td style="text-align: right;width: 40%;"><span class="header-title">ใบกำกับภาษี/ใบเสร็จรับเงิน</span>
-                <br />
-                เล่มที่ ...................... เลขที่......................<br />
-                วันที่.........................................................
+            <td style="text-align:center"><u><span class="header-title">ใบรับเงิน /ใบรับสินค้า</span></u>
             </td>
         </tr>
     </table>
     <br>
-    <div class="line"></div>
-
-    <table class="wrap-box line-top" cellpadding="0" cellspacing="0">
+    <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width:60%;">
-                <table class="wrap-top" cellpadding="3" cellspacing="0">
-                    <tr>
-                        <td style="width:20%;"><b>ชื่อลูกค้า</b></td>
-                        <td style="width:80%;"></td>
-                    </tr>
-                    <tr>
-                        <td><b>ที่อยู่</b></td>
-                        <td></td>
-                    </tr>
-                </table>
+            <td style="width:50%;"><b>วันที่____________________________________________</b></td>
+            <td style="width:20%;"><b>เล่มที่______________</b></td>
+            <td style="width:30%;"><b>เลขที่_________________________</b></td>
+        </tr>
+    </table>
+    <table class="wrap-box" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width:50%; padding-top: 5px; padding-bottom: 5px;"><b>ชื่อ </b>&nbsp;&nbsp;{{$form[0]->namecustomer}} {{$form[0]->lastnamecustomer}}</td>
+            <td style="width:50%;"><b>เลขประจำตัวผู้เสียภาษี</b>&nbsp;&nbsp;{{$form[0]->idcardcustomer}}</td>
+        </tr>
+    </table>
+    <table class="wrap-box" cellpadding="0" cellspacing="0">
+        <tr>
+            <td><b>ที่อยู่</b>&nbsp;&nbsp;{{$form[0]->addresscustomer}}</td>
+
+        </tr>
+    </table>
+
+    <table class="wrap-box" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-top: 10px; padding-bottom: 10px;" class="details">
+                ได้รับเงินจาก ห้างหุ้นส่วนจำกัด มาทอง เยาราช (สำนักงานใหญ่) เลขประจำตัวผู้เสียภาษี 0803564001495
+                เลขที่ 158 หมู่ที่ 1 ตำบลขนอม อำเภอขนอม จังหวัดนครศรีธรรมราช ดังรายการต่อไปนี้
             </td>
-            <td>
-                <table class="wrap-top" cellpadding="3" cellspacing="0">
-                    <tr>
-                        <td style="width:25%;"><b>เลขผู้เสียภาษี</b></td>
-                        <td style="width:75%;"></td>
-                    </tr>
-                    <br>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-            </td>
+
         </tr>
     </table>
     <div class="line"></div>
@@ -173,62 +157,41 @@
                     <tr>
                         <th style="width:6%;">ลำดับที่</th>
                         <th style="width:44%;">รายการสินค้า</th>
-                        <th style="width:23%;">น้ำหนัก(กรัม)</th>
+                        <th style="width:10%;">จำนวน</th>
+                        <th style="width:20%;">ราคาต่อหน่วย</th>
+                        <th style="width:19%;">น้ำหนัก</th>
                         <th style="width:27%;">จำนวนเงิน(บาท)</th>
                     </tr>
+                    @foreach($form as $key => $row)
                     <tr>
-                        <td style="text-align:center;"></td>
+                        <td style="text-align:center;">{{++$key}}</td>
+                        <td>{{$row->detail}}</td>
+                        <td style="text-align:center;">1</td>
                         <td></td>
-                        <td style="text-align:right;"></td>
-                        <td style="text-align:right;"></td>
+                        <td style="text-align:center;">{{$row->gram}}</td>
+                        <td style="text-align:right;">{{$row->allprice}}</td>
                     </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-
-
-    <table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
-        <tr>
-            <td>
-                <table class="wrap-total" cellpadding="3" cellspacing="0">
+                    @endforeach
                     <tr>
-                        <td style="width: 60%; text-align:left">ทองคำแท่งซื้อเข้า บาทละ : </td>
-                        <td style="width: 20%; font-weight: bold;">ราคาสินค้ารวมค่ากำเหน็จก่อนภาษี</td>
-                        <td style="width: 20%;"> บาท</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:left">ทองคำแท่งขายออก บาทละ : </td>
-                        <td style="font-weight: bold;">ส่วนลด</td>
-                        <td>-</td>
-                    </tr>
-
-                    <tr>
-                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน บาทละ : </td>
-                        <td style="font-weight: bold;">หักราคาซื้อทองประจำวัน</td>
-                        <td> บาท</td>
-                    </tr>
-
-                    <tr>
-                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน กรัมละ : </td>
-                        <td style="font-weight: bold;">จำนวนส่วนต่างฐานภาษี</td>
-                        <td> บาท</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td style="font-weight: bold;">ภาษีมูลค่าเพิ่ม 7%</td>
-                        <td> บาท</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;background-color:#A2A2A2 ">(ตัวอักษร)</td>
-                        <td style="font-weight: bold;"> รวมรับเงินสุทธิ</td>
-                        <td> บาท</td>
+                        <td colspan="4" style="text-align: left;background-color:#A2A2A2 ">(ตัวอักษร)</td>
+                        <td style="font-weight: bold; text-align:center;"> รวมเป็นเงิน</td>
+                        <td></td>
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
     <br>
+    <table class="wrap-box" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-top: 10px; padding-bottom: 10px;" class="details">
+                ข้าพเจ้าขอรับรองวำทรัพย์สินที่นำมาขายเป็นกรรมสิทธิ์ของข้าพเจ้าโดยแท้จริง และขอรับรองว่าทรัพย์สินที่นำมาขายนั้น
+                เป็นทรัพย์สินที่บริสุทธิ์ ถ้าหากเป็นของทุจริตแล้ว ข้าพเจ้าขอรับผิดชอบทั้งสิ้น ข้าพเจ้าได้อ่านและรับเงินเรียบร้อยแล้ว
+                จึงลงนามไว้เป็นหลักฐาน
+            </td>
+
+        </tr>
+    </table>
     <br>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
@@ -236,10 +199,18 @@
             <td style="text-align:center"><b>ลงชื่อ...................................................ผู้รับเงิน / Collector</b><br /> </td>
         </tr>
         <tr>
-            <td style="padding-left: 45px;"><b>วันที่ / Date.........................................</b><br /> </td>
-            <td style="padding-left: 45px;"><b>วันที่ / Date.........................................</b><br /> </td>
+            <td style="padding-left: 20px;"><b>วันที่ / Date.........................................</b><br /> </td>
+            <td style="padding-left: 20px;"><b>วันที่ / Date.........................................</b><br /> </td>
         </tr>
     </table>
+    <table class="wrap-box" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-left: 20px;">
+                <p>หมายเหตุ : แนบสำเนาบัตรประชาชนของผู้รับเงิน / ผู้ขาย</p><br />
+            </td>
+        </tr>
+    </table>
+
 
 
 

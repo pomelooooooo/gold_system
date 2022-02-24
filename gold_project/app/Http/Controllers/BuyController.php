@@ -109,7 +109,7 @@ class BuyController extends Controller
                 $file = $request->file('pic')[$key];
 
                 $extension = $file->getClientOriginalExtension();
-                $filename = time().$key . '.' . $extension;
+                $filename = time() . $key . '.' . $extension;
                 $file->move('assets/img/gold', $filename);
                 $buy->pic = $filename;
             }
@@ -244,7 +244,7 @@ class BuyController extends Controller
                 $file = $request->file('pic')[$key];
 
                 $extension = $file->getClientOriginalExtension();
-                $filename = time().$key . '.' . $extension;
+                $filename = time() . $key . '.' . $extension;
                 $file->move('assets/img/gold', $filename);
                 $buy->pic = $filename;
             }
@@ -268,12 +268,12 @@ class BuyController extends Controller
 
     public function formBuy($id)
     {
-        $form = FormBuy::select('formbuy.*', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.idcard as idcardcustomer', 'customer.address as addresscustomer','product_details.details as detail','product_details.gram as gram','product_details.sellprice')
-        ->leftJoin('customer', 'formbuy.customer_id', '=', 'customer.id')->leftJoin('product_details', 'formbuy.product_detail_id', '=', 'product_details.id')->where('group_id',$id)->get();
+        $form = FormBuy::select('formbuy.*', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.idcard as idcardcustomer', 'customer.address as addresscustomer', 'product_details.details as detail', 'product_details.gram as gram', 'product_details.allprice')
+            ->leftJoin('customer', 'formbuy.customer_id', '=', 'customer.id')->leftJoin('product_details', 'formbuy.product_detail_id', '=', 'product_details.id')->where('group_id', $id)->get();
         // dd($form[0]);
         $customer = Customer::all();
         $productdetail = ProductDetails::all();
-        $pdf = PDF::loadView('admin.buy.form', compact('form','productdetail','customer'));
+        $pdf = PDF::loadView('admin.buy.form', compact('form', 'productdetail', 'customer'));
 
         // return view('admin.sell.form');
         return $pdf->stream('formbuy.pdf');
