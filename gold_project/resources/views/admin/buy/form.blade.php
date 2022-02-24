@@ -173,7 +173,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="4" style="text-align: left;background-color:#A2A2A2 ">(ตัวอักษร)</td>
+                        <td colspan="4" style="text-align: left;">(ตัวอักษร)</td>
                         <td style="font-weight: bold; text-align:center;"> รวมเป็นเงิน</td>
                         <td></td>
                     </tr>
