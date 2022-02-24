@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Customer;
+use App\FormBuy;
 use App\Striped;
+use PDF;
 use Illuminate\Support\Facades\File;
 
 class BuyController extends Controller
@@ -210,5 +212,70 @@ class BuyController extends Controller
         $users = User::all();
         $producttype = TypeGold::all();
         return response()->json(['status' => true], 200);
+    }
+
+    public function updateGroup(Request $request)
+    {
+        $form_buy = FormBuy::select('group_id')->orderBy('group_id', "desc")->first();
+        if (!empty($form_buy)) {
+            $group_id = $form_buy->group_id + 1;
+        } else {
+            $group_id = 1;
+        }
+        foreach ($request->get('code') as $key => $value) {
+            $buy = new ProductDetails(
+                [
+                    'code' => $request->get('code')[$key],
+                    'details' => $request->get('details')[$key],
+                    'type_gold_id' => $request->get('type_gold_id')[$key],
+                    'striped_id' => $request->get('striped_id')[$key],
+                    'size' => $request->get('size')[$key],
+                    'gram' => $request->get('gram')[$key],
+                    'status' => '1',
+                    'status_trade' => '0',
+                    'type' => 'ทองเก่า',
+                    'allprice' => $request->get('allprice')[$key],
+                    'user_id' => $request->get('user_id'),
+                    'customer_id' => $request->get('customer_id'),
+                    'datetime' => $request->get('datetime'),
+                ]
+            );
+            if ($request->hasFile('pic')) {
+                $file = $request->file('pic')[$key];
+
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().$key . '.' . $extension;
+                $file->move('assets/img/gold', $filename);
+                $buy->pic = $filename;
+            }
+            $buy->save();
+
+            $formbuy = new FormBuy([
+                'group_id' => $group_id,
+                'product_detail_id' => $buy->id,
+                'customer_id' => $request->get('customer_id'),
+            ]);
+            $formbuy->save();
+        }
+
+        $producttype = TypeGold::all();
+        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('created_at', "desc")->paginate(5);
+        $customer = Customer::all();
+        $users = User::all();
+        return response()->json(['status' => true, 'id' => $group_id], 200);
+        // return redirect('/buy')->with(['producttype' => $producttype, 'buy' => $buy, 'customer' => $customer, 'users' => $users]);
+    }
+
+    public function formBuy($id)
+    {
+        $form = FormBuy::select('formbuy.*', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.idcard as idcardcustomer', 'customer.address as addresscustomer','product_details.details as detail','product_details.gram as gram','product_details.sellprice')
+        ->leftJoin('customer', 'formbuy.customer_id', '=', 'customer.id')->leftJoin('product_details', 'formbuy.product_detail_id', '=', 'product_details.id')->where('group_id',$id)->get();
+        // dd($form[0]);
+        $customer = Customer::all();
+        $productdetail = ProductDetails::all();
+        $pdf = PDF::loadView('admin.buy.form', compact('form','productdetail','customer'));
+
+        // return view('admin.sell.form');
+        return $pdf->stream('formbuy.pdf');
     }
 }

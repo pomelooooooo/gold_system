@@ -95,6 +95,59 @@
         $("body").on('change', '.imgInp', function() {
             readURL(this, $(this).closest('.card').find('.img-upload'));
         });
+
+        $("body").on('click', '#btn-save', function(e) {
+            Swal.fire({
+                title: 'ต้องการรับซื้อทองหรือไม่?',
+                // text: "You won't be able to revert this!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่',
+                cancelButtonText: 'ไม่',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = new FormData($('#form-data')[0]);
+                    $.ajax({
+                        url: "/buyGroup/update",
+                        type: 'POST',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            var group_id = data.id
+                            // var group_id = 1
+                            if (data.status) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'อัปเดตสถานะเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result) => {
+                                    Swal.fire({
+                                        title: 'ต้องการพิมพ์ใบรับเงิน/ใบรับสินค้าหรือไม่?',
+                                        // text: "You won't be able to revert this!",
+                                        icon: 'question',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'ใช่',
+                                        cancelButtonText: 'ไม่',
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.open('/buy/formBuy/'+group_id, '_blank')
+                                        }
+                                        window.location = '/buy'
+                                    })
+                                })
+                            }
+                        }
+                    });
+                }
+            })
+        })
     });
 
 
@@ -159,7 +212,7 @@
 <!-- end hero area -->
 <br />
 <div class="container">
-    <form method="POST" action="{{route('buy.store')}} " class="needs-validation" enctype="multipart/form-data">
+    <form id="form-data" method="POST" action="{{route('buy.store')}} " class="needs-validation" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
                 <h2>ซื้อทองเข้าร้าน</h2>
@@ -390,7 +443,7 @@
         <br>
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/buy')}}">กลับ</a>
-            <button type="submit" class="btn btn-success">บันทึก</button>
+            <button type="button" id="btn-save" class="btn btn-success">ทำการรับซื้อ</button>
         </div>
     </form>
 
