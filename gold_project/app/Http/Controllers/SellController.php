@@ -234,8 +234,12 @@ class SellController extends Controller
 
     public function formSell($id)
     {
-        $form = FormSell::find($id);
-        $pdf = PDF::loadView('admin.sell.form', compact('form'));
+        $form = FormSell::select('formsell.*', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.idcard as idcardcustomer', 'customer.address as addresscustomer','product_details.details as detail','product_details.gram as gram','product_details.sellprice')
+        ->leftJoin('customer', 'formsell.customer_id', '=', 'customer.id')->leftJoin('product_details', 'formsell.product_detail_id', '=', 'product_details.id')->where('group_id',$id)->get();
+        // dd($form[0]);
+        $customer = Customer::all();
+        $productdetail = ProductDetails::all();
+        $pdf = PDF::loadView('admin.sell.form', compact('form','productdetail','customer'));
 
         // return view('admin.sell.form');
         return $pdf->stream('formsell.pdf');

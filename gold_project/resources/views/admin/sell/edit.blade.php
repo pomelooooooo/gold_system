@@ -336,8 +336,8 @@
         <br />
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/sell')}}">กลับ</a>
-            <button type="button" class="btn btn-info"><i class="fas fa-receipt"></i> พิมพ์ใบเสร็จรับเงิน</button>
-            <button type="button" id="btn-update" class="btn btn-info"><i class="fas fa-receipt"></i> พิมพ์ใบกำกับภาษี</button>
+            <!-- <button type="button" class="btn btn-info"><i class="fas fa-receipt"></i> พิมพ์ใบเสร็จรับเงิน</button>
+            <button type="button" id="btn-update" class="btn btn-info"><i class="fas fa-receipt"></i> พิมพ์ใบกำกับภาษี</button> -->
             <button id="btn-save" type="button" class="btn btn-success">ทำการขาย</button>
         </div>
         <!-- <input type="hidden" name="_method" value="PATCH" /> -->

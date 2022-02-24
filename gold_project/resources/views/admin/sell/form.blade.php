@@ -105,117 +105,122 @@
 <br>
 <div class="line"></div>
 
-<table class="wrap-box line-top" cellpadding="0" cellspacing="0">
-    <tr>
-        <td style="width:60%;"><table class="wrap-top" cellpadding="3" cellspacing="0">
-                <tr>
-                    <td style="width:20%;"><b>ชื่อลูกค้า</b></td>
-                    <td style="width:80%;">Name   Surname</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>ที่อยู่</b></td>
-                    <td></td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table class="wrap-top" cellpadding="3" cellspacing="0">
-                <tr>
-                    <td style="width:25%;"><b>เลขผู้เสียภาษี</b></td>
-                    <td style="width:75%;">12/45/4411</td>
-                </tr>
-               
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
-<div class="line"></div>
-<table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
-    <tr>
-        <td><table class="wrap-content" cellpadding="3" cellspacing="0">
-            <tr>
-                <th style="width:6%;">ลำดับที่</th>                
-                <th style="width:44%;">รายการสินค้า</th>
-                <th style="width:23%;">น้ำหนัก(กรัม)</th>
-                <th style="width:27%;">จำนวนเงิน(บาท)</th>
-            </tr>
-           
-                <tr>
-                    <td style="text-align:center;"></td>                    
-                    <td></td>
-                    <td style="text-align:right;"></td>
-                    <td style="text-align:right;"></td>
-                </tr>
-
-        </table></td>
-    </tr>
-</table>
-
-
-    <table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
+    <table class="wrap-box line-top" cellpadding="0" cellspacing="0">
         <tr>
-            <td><table class="wrap-total" cellpadding="3" cellspacing="0">
+            <td style="width:60%;"><table class="wrap-top" cellpadding="3" cellspacing="0">
                     <tr>
-                        <td style="width: 60%; text-align:left">ทองคำแท่งซื้อเข้า บาทละ : </td>
-                        <td style="width: 20%; font-weight: bold;">ราคาสินค้ารวมค่ากำเหน็จก่อนภาษี</td>
-                        <td style="width: 20%;"> บาท</td>
-                    </tr>                    
-                        <tr>
-                            <td style="text-align:left">ทองคำแท่งขายออก บาทละ : </td>
-                            <td style="font-weight: bold;">ส่วนลด</td>
-                            <td>-</td>
-                        </tr>
-                        
-                        <tr>
-                            <td style="text-align:left">ทองรูปพรรณรับซื้อคืน บาทละ : </td>
-                            <td style="font-weight: bold;">หักราคาซื้อทองประจำวัน</td>
-                            <td> บาท</td>
-                        </tr>    
-                                   
-                    <tr>
-                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน กรัมละ : </td>
-                        <td style="font-weight: bold;">จำนวนส่วนต่างฐานภาษี</td>
-                        <td> บาท</td>
+                        <td style="width:20%;"><b>ชื่อลูกค้า</b></td>
+                        <td style="width:80%;">{{$form[0]->namecustomer}}   {{$form[0]->lastnamecustomer}}</td>
                     </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td style="font-weight: bold;">ภาษีมูลค่าเพิ่ม 7%</td>
-                            <td> บาท</td>
-                        </tr>
                     <tr>
-                        <td style="text-align: left;background-color:#A2A2A2 ">(ตัวอักษร)</td>
-                        <td style="font-weight: bold;"> รวมรับเงินสุทธิ</td>
-                        <td> บาท</td>
+                        <td><b>ที่อยู่</b></td>
+                        <td>{{$form[0]->addresscustomer}}</td>
                     </tr>
-                   
+                </table>
+            </td>
+            <td>
+                <table class="wrap-top" cellpadding="3" cellspacing="0">
+                    <tr>
+                        <td style="width:25%;"><b>เลขผู้เสียภาษี</b></td>
+                        <td style="width:75%;">{{$form[0]->idcardcustomer}}</td>
+                    </tr>
+                <br>
+                <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </table>
             </td>
         </tr>
     </table>
+    <div class="line"></div>
+    <table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
+        <tr>
+            <td><table class="wrap-content" cellpadding="3" cellspacing="0">
+                <tr>
+                    <th style="width:6%;">ลำดับที่</th>                
+                    <th style="width:44%;">รายการสินค้า</th>
+                    <th style="width:23%;">น้ำหนัก(กรัม)</th>
+                    <th style="width:27%;">จำนวนเงิน(บาท)</th>
+                </tr>
+                @foreach($form as $key => $row)
+                    <tr>
+                        <td style="text-align:center;">{{++$key}}</td>                    
+                        <td>{{$row->detail}}</td>
+                        <td style="text-align:right;">{{$row->gram}}</td>
+                        <td style="text-align:right;">{{$row->sellprice}}</td>
+                    </tr>
+                    @endforeach
+            </table></td>
+        </tr>
+    </table>
 
-        <table class="wrap-box" cellpadding="0" cellspacing="0">
+
+        <table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
             <tr>
-                <td><b>หมายเหตุ</b><br />
-               
+                <td><table class="wrap-total" cellpadding="3" cellspacing="0">
+                        <tr>
+                            <td style="width: 60%; text-align:left">ทองคำแท่งซื้อเข้า บาทละ : {{$form[0]->goldBar_buy_medain_price}}</td>
+                            <td style="width: 20%; font-weight: bold;">ราคาสินค้ารวมค่ากำเหน็จก่อนภาษี</td>
+                            <td style="width: 20%;"> บาท</td>
+                        </tr>                    
+                            <tr>
+                                <td style="text-align:left">ทองคำแท่งขายออก บาทละ : {{$form[0]->goldBar_sell_medain_price}}</td>
+                                <td style="font-weight: bold;">ส่วนลด</td>
+                                <td>-</td>
+                            </tr>
+                            
+                            <tr>
+                                <td style="text-align:left">ทองรูปพรรณรับซื้อคืน บาทละ : {{$form[0]->gold_buy_medain_price}}</td>
+                                <td style="font-weight: bold;">หักราคาซื้อทองประจำวัน</td>
+                                <td> บาท</td>
+                            </tr>    
+                                    
+                        <tr>
+                            <td style="text-align:left">ทองรูปพรรณรับซื้อคืน กรัมละ : {{$form[0]->gold_buy_gram_medain_price}}</td>
+                            <td style="font-weight: bold;">จำนวนส่วนต่างฐานภาษี</td>
+                            <td> บาท</td>
+                        </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td style="font-weight: bold;">ภาษีมูลค่าเพิ่ม 7%</td>
+                                <td> บาท</td>
+                            </tr>
+                        <tr>
+                            <td style="text-align: left;background-color:#A2A2A2 ">(ตัวอักษร)</td>
+                            <td style="font-weight: bold;"> รวมรับเงินสุทธิ</td>
+                            <td> บาท</td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
+
+            <table class="wrap-box" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td><b>หมายเหตุ</b><br />
+                
+                    </td>
+                </tr>
+            </table>
+
+
 
 </body>
 </html>
