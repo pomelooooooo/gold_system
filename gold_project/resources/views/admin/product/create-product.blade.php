@@ -78,7 +78,21 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="weight" type="text" class="form-control" placeholder="" id="validationweight" required />
+                            <select name="weight" class="form-control" id="validationweight" required>
+                                <option selected disabled value="">เลือกน้ำหนักทอง</option>
+                                <option value="001">ครึ่งสลึง</option>
+                                <option value="01">1 สลึง</option>
+                                <option value="02">2 สลึง</option>
+                                <option value="03">3 สลึง</option>
+                                <option value="06">6 สลึง</option>
+                                <option value="1">1 บาท</option>
+                                <option value="2">2 บาท</option>
+                                <option value="3">3 บาท</option>
+                                <option value="4">4 บาท</option>
+                                <option value="5">5 บาท</option>
+                                <option value="10">10 บาท</option>
+                            </select>
+                            <!-- <input name="weight" type="text" class="form-control" placeholder="" id="validationweight" required /> -->
                             <div class="invalid-feedback">
                                 โปรดกรอกน้ำหนักทอง
                             </div>

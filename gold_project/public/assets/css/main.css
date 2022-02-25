@@ -3010,3 +3010,7 @@ table.wrap-total tr td{
   font-size: 22px;
   font-weight: bold;
 }
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}

@@ -97,56 +97,114 @@
         });
 
         $("body").on('click', '#btn-save', function(e) {
-            Swal.fire({
-                title: 'ต้องการรับซื้อทองหรือไม่?',
-                // text: "You won't be able to revert this!",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ใช่',
-                cancelButtonText: 'ไม่',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var formData = new FormData($('#form-data')[0]);
-                    $.ajax({
-                        url: "/buyGroup/update",
-                        type: 'POST',
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(data) {
-                            var group_id = data.id
-                            // var group_id = 1
-                            if (data.status) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'อัปเดตสถานะเรียบร้อย',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then((result) => {
+            if($('#validationuser').val() != null && $('#validationcustomer').val() != null){
+                Swal.fire({
+                    title: 'ต้องการรับซื้อทองหรือไม่?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData($('#form-data')[0]);
+                        $.ajax({
+                            url: "/buyGroup/update",
+                            type: 'POST',
+                            data: formData,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(data) {
+                                var group_id = data.id
+                                // var group_id = 1
+                                if (data.status) {
                                     Swal.fire({
-                                        title: 'ต้องการพิมพ์ใบรับเงิน/ใบรับสินค้าหรือไม่?',
-                                        // text: "You won't be able to revert this!",
-                                        icon: 'question',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'ใช่',
-                                        cancelButtonText: 'ไม่',
+                                        icon: 'success',
+                                        title: 'อัปเดตสถานะเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
                                     }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.open('/buy/formBuy/' + group_id, '_blank')
-                                        }
-                                        window.location = '/buy'
+                                        Swal.fire({
+                                            title: 'ต้องการพิมพ์ใบรับเงิน/ใบรับสินค้าหรือไม่?',
+                                            // text: "You won't be able to revert this!",
+                                            icon: 'question',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'ใช่',
+                                            cancelButtonText: 'ไม่',
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.open('/buy/formBuy/' + group_id, '_blank')
+                                            }
+                                            window.location = '/buy'
+                                        })
                                     })
-                                })
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                })
+            }else{
+                $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
+                $('.validateUser').find('.invalid-feedback').css('display', 'none')
+
+                $('.validateCustomer').find('.select2-selection--single').removeClass('is-invalid')
+                $('.validateCustomer').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationCategory').find('.custom-select--single').removeClass('is-invalid')
+                $('.validationCategory').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationWeight').find('.custom-select--size').removeClass('is-invalid')
+                $('.validationWeight').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationGram').find('.gram').removeClass('is-invalid')
+                $('.validationGram').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationStriped').find('.custom-select--striped').removeClass('is-invalid')
+                $('.validationStriped').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationDetails').find('.form-control--detail').removeClass('is-invalid')
+                $('.validationDetails').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationPrice').find('.form-control--price').removeClass('is-invalid')
+                $('.validationPrice').find('.invalid-feedback').css('display', 'none')
+
+                if ($('#validationuser').val() == null) {
+                    $('.validateUser').find('.select2-selection--single').addClass('is-invalid')
+                    $('.validateUser').find('.invalid-feedback').css('display', 'block')
                 }
-            })
+                if ($('#validationcustomer').val() == null) {
+                    $('.validateCustomer').find('.select2-selection--single').addClass('is-invalid')
+                    $('.validateCustomer').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationcategory').val() == null) {
+                    $('.validationCategory').find('.custom-select--single').addClass('is-invalid')
+                    $('.validationCategory').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationweight').val() == null) {
+                    $('.validationWeight').find('.custom-select--size').addClass('is-invalid')
+                    $('.validationWeight').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationgram').val() == null) {
+                    $('.validationGram').find('.gram').addClass('is-invalid')
+                    $('.validationGram').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationstriped').val() == null) {
+                    $('.validationStriped').find('.custom-select--striped').addClass('is-invalid')
+                    $('.validationStriped').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationdetails').val() == null) {
+                    $('.validationDetails').find('.form-control--detail').addClass('is-invalid')
+                    $('.validationDetails').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationprice').val() == null) {
+                    $('.validationPrice').find('.form-control--price').addClass('is-invalid')
+                    $('.validationPrice').find('.invalid-feedback').css('display', 'block')
+                }
+            }
         })
     });
 
@@ -251,7 +309,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                        <div class="input-group mb-3 validateUser" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="user_id" id="validationuser" required>
                                 <option selected disabled value="">เลือกผู้รับซื้อ</option>
                                 @foreach($users as $row)
@@ -259,18 +317,21 @@
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
+                                โปรดเลือกผู้รับซื้อ
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group mb-3" style="margin-top: 0.5em;">
-                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer">
+                        <div class="input-group mb-3 validateCustomer" style="margin-top: 0.5em;">
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
                                 <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกลูกค้า
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -307,22 +368,22 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select" name="type_gold_id[]" required>
+                            <div class="input-group mb-3 validationCategory">
+                                <select class="custom-select custom-select--single" name="type_gold_id[]" id="validationcategory" required>
                                     <option selected disabled value="">เลือกหน่วยนับ</option>
                                     @foreach($producttype as $row)
                                     <option value="{{$row->id}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
-                                    โปรดเลือกหน่วยนับที่ต้องการ
+                                    โปรดเลือกประเภทที่ต้องการ
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                            <h4 for="validationweight">นํ้าหนัก*</h4>
                         </div>
                         <div class="col-6">
                             <h4>นํ้าหนัก(กรัม)*</h4>
@@ -330,9 +391,9 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select size" name="size[]" required>
-                                    <option selected disabled value="">เลือกหน่วยนับ</option>
+                            <div class="input-group mb-3 validationWeight">
+                                <select class="custom-select size custom-select--size" name="size[]" id="validationweight" required>
+                                    <option selected disabled value="">เลือกน้ำหนัก</option>
                                     @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                     <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
                                     @endforeach
@@ -343,9 +404,12 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group">
-                                <input name="gram[]" type="text" class="form-control gram" placeholder="" />
+                            <div class="form-group validationGram">
+                                <input name="gram[]" type="text" class="form-control gram" placeholder="" id="validationgram" required />
                             </div>
+                            <div class="invalid-feedback">
+                                    โปรดกรอกนํ้าหนักกรัม
+                                </div>
                         </div>
                     </div>
                     <div class="row">
@@ -358,21 +422,21 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select" name="striped_id[]" id="validationstriped" required>
+                            <div class="input-group mb-3 validationStriped">
+                                <select class="custom-select custom-select--striped" name="striped_id[]" id="validationstriped" required>
                                     <option selected disabled value="">เลือกลาย</option>
                                     @foreach($striped as $row)
                                     <option value="{{$row->id}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
-                                    โปรดเลือกประเภทที่ต้องการ
+                                    โปรดเลือกลายที่ต้องการ
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group">
-                                <input name="details[]" type="text" class="form-control" placeholder="" required />
+                            <div class="form-group validationDetails">
+                                <input name="details[]" type="text" class="form-control form-control--detail" placeholder="" id="validationdetails" required />
                                 <div class="invalid-feedback">
                                     โปรดกรอกรายละเอียดทอง
                                 </div>
@@ -386,8 +450,8 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="form-group">
-                                <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                            <div class="form-group validationPrice">
+                                <input name="allprice[]" type="text" class="form-control allprice form-control--price" placeholder="" id="validationprice" required />
                                 <div class="invalid-feedback">
                                     โปรดกรอกราคารับซื้อ
                                 </div>

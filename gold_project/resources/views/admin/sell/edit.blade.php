@@ -76,56 +76,73 @@
         })
 
         $("body").on('click', '#btn-save', function(e) {
-            Swal.fire({
-                title: 'ต้องการขายทองหรือไม่?',
-                // text: "You won't be able to revert this!",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ใช่',
-                cancelButtonText: 'ไม่',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var formData = new FormData($('#form-data')[0]);
-                    $.ajax({
-                        url: "/sellGroup/update",
-                        type: 'POST',
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(data) {
-                            var group_id = data.id
-                            // var group_id = 1
-                            if (data.status) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'อัปเดตสถานะเรียบร้อย',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then((result) => {
+            if($('#validationuser').val() != null && $('#validationcustomer').val() != null){
+                Swal.fire({
+                    title: 'ต้องการขายทองหรือไม่?',
+                    // text: "You won't be able to revert this!",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData($('#form-data')[0]);
+                        $.ajax({
+                            url: "/sellGroup/update",
+                            type: 'POST',
+                            data: formData,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(data) {
+                                var group_id = data.id
+                                // var group_id = 1
+                                if (data.status) {
                                     Swal.fire({
-                                        title: 'ต้องการพิมพ์ใบเสร็จรับเงิน/ใบกำกับภาษีหรือไม่?',
-                                        // text: "You won't be able to revert this!",
-                                        icon: 'question',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'ใช่',
-                                        cancelButtonText: 'ไม่',
+                                        icon: 'success',
+                                        title: 'อัปเดตสถานะเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
                                     }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.open('/sellGroup/formSell/'+group_id, '_blank')
-                                        }
-                                        window.location = '/sell'
+                                        Swal.fire({
+                                            title: 'ต้องการพิมพ์ใบเสร็จรับเงิน/ใบกำกับภาษีหรือไม่?',
+                                            // text: "You won't be able to revert this!",
+                                            icon: 'question',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'ใช่',
+                                            cancelButtonText: 'ไม่',
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.open('/sellGroup/formSell/'+group_id, '_blank')
+                                            }
+                                            window.location = '/sell'
+                                        })
                                     })
-                                })
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                })
+            }else{
+                $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
+                $('.validateUser').find('.invalid-feedback').css('display', 'none')
+                $('.validateCustomer').find('.select2-selection--single').removeClass('is-invalid')
+                $('.validateCustomer').find('.invalid-feedback').css('display', 'none')
+                if ($('#validationuser').val() == null) {
+                    
+                    // Add is-invalid class when select2 element is required
+                    $('.validateUser').find('.select2-selection--single').addClass('is-invalid')
+                    $('.validateUser').find('.invalid-feedback').css('display', 'block')
                 }
-            })
+                if ($('#validationcustomer').val() == null) {
+                    $('.validateCustomer').find('.select2-selection--single').addClass('is-invalid')
+                    $('.validateCustomer').find('.invalid-feedback').css('display', 'block')
+                }
+            }
         })
     });
 </script>
@@ -187,7 +204,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                        <div class="input-group mb-3 validateUser" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="user_id" id="validationuser" required>
                                 <option selected disabled value="">เลือกผู้ขาย</option>
                                 @foreach($users as $row)
@@ -200,7 +217,7 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                        <div class="input-group mb-3 validateCustomer" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
