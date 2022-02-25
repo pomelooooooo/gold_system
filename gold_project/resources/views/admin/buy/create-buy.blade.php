@@ -7,11 +7,11 @@
     $(function() {
         $("#validationuser").select2({
             placeholder: "เลือกผู้รับซื้อ",
-            // allowClear: true
+            allowClear: true
         });
         $("#validationcustomer").select2({
             placeholder: "เลือกลูกค้า",
-            // allowClear: true
+            allowClear: true
         });
 
         $("body").on('change', '.size', function() {

@@ -47,6 +47,7 @@ Route::resource('/type_gold', 'TypeGoldController')->middleware('auth');
 Route::resource('/striped', 'StripedController')->middleware('auth');
 
 Route::resource('/manage_customer', 'ManageCustomerController')->middleware('auth');
+Route::get('/manage_customer/validateIdcard/{idCard}/{id?}', 'ManageCustomerController@validateIdcard')->middleware('auth');
 
 Route::resource('/buy', 'BuyController')->middleware('auth');
 Route::get('/buy/formBuy/{id}', 'BuyController@formBuy')->middleware('auth');

@@ -8,11 +8,11 @@
     $(function() {
         $("#validationuser").select2({
             placeholder: "เลือกผู้ขาย",
-            // allowClear: true
+            allowClear: true
         });
         $("#validationcustomer").select2({
             placeholder: "เลือกลูกค้า",
-            // allowClear: true
+            allowClear: true
         });
         $.ajax({
             url: "http://127.0.0.1:3000/latest",

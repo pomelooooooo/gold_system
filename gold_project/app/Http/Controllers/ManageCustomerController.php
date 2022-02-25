@@ -147,4 +147,17 @@ class ManageCustomerController extends Controller
         $managecustomer = Customer::select('*')->paginate(5);
         return response()->json(['status' => true], 200);
     }
+
+    public function validateIdcard($idCard, $id = '')
+    {
+        if (!empty($id)) {
+            $managecustomer = Customer::where('idcard', $idCard)->where('id', '!=', $id)->first();
+        } else {
+            $managecustomer = Customer::where('idcard', $idCard)->first();
+        }
+        if (!empty($managecustomer))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
 }
