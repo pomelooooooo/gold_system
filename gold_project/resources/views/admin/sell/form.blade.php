@@ -176,14 +176,26 @@
                         <th style="width:23%;">น้ำหนัก(กรัม)</th>
                         <th style="width:27%;">จำนวนเงิน(บาท)</th>
                     </tr>
+                    @php
+                    $sellpriceall = 0;
+                    $gram = 0;
+                    @endphp
                     @foreach($form as $key => $row)
                     <tr>
                         <td style="text-align:center;">{{++$key}}</td>
                         <td>{{$row->detail}}</td>
                         <td style="text-align:center;">{{$row->gram}}</td>
-                        <td style="text-align:right;">{{$row->sellprice}}</td>
+                        <td style="text-align:right;">{{number_format($row->sellprice, 2)}}</td>
                     </tr>
+                    @php
+                    $sellpriceall += $row->sellprice;
+                    $gram += $row->gram;
+                    @endphp
                     @endforeach
+                    @php
+                    $cut_price = $gram * $form[0]->gold_buy_gram_medain_price;
+                    $tax_base_diff = $sellpriceall - $cut_price;
+                    @endphp
                 </table>
             </td>
         </tr>
@@ -195,36 +207,36 @@
             <td>
                 <table class="wrap-total" cellpadding="3" cellspacing="0">
                     <tr>
-                        <td style="width: 60%; text-align:left">ทองคำแท่งซื้อเข้า บาทละ : {{$form[0]->goldBar_buy_medain_price}}</td>
+                        <td style="width: 60%; text-align:left">ทองคำแท่งซื้อเข้า บาทละ : {{number_format($form[0]->goldBar_buy_medain_price, 2)}}</td>
                         <td style="width: 20%; font-weight: bold;">ราคาสินค้ารวมค่ากำเหน็จก่อนภาษี</td>
-                        <td style="width: 20%;"> บาท</td>
+                        <td style="width: 20%;">{{number_format($sellpriceall, 2)}} บาท</td>
                     </tr>
                     <tr>
-                        <td style="text-align:left">ทองคำแท่งขายออก บาทละ : {{$form[0]->goldBar_sell_medain_price}}</td>
+                        <td style="text-align:left">ทองคำแท่งขายออก บาทละ : {{number_format($form[0]->goldBar_sell_medain_price, 2)}}</td>
                         <td style="font-weight: bold;">ส่วนลด</td>
                         <td>-</td>
                     </tr>
 
                     <tr>
-                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน บาทละ : {{$form[0]->gold_buy_medain_price}}</td>
+                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน บาทละ : {{number_format($form[0]->gold_buy_medain_price, 2)}}</td>
                         <td style="font-weight: bold;">หักราคาซื้อทองประจำวัน</td>
-                        <td> บาท</td>
+                        <td>{{number_format($cut_price, 2)}} บาท</td>
                     </tr>
 
                     <tr>
-                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน กรัมละ : {{$form[0]->gold_buy_gram_medain_price}}</td>
+                        <td style="text-align:left">ทองรูปพรรณรับซื้อคืน กรัมละ : {{number_format($form[0]->gold_buy_gram_medain_price, 2)}}</td>
                         <td style="font-weight: bold;">จำนวนส่วนต่างฐานภาษี</td>
-                        <td> บาท</td>
+                        <td>{{number_format($tax_base_diff, 2)}} บาท</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                         <td style="font-weight: bold;">ภาษีมูลค่าเพิ่ม 7%</td>
-                        <td> บาท</td>
+                        <td>{{number_format($tax_base_diff*0.07, 2)}} บาท</td>
                     </tr>
                     <tr>
                         <td style="text-align: left;background-color:#A2A2A2 ">(ตัวอักษร)</td>
                         <td style="font-weight: bold;"> รวมรับเงินสุทธิ</td>
-                        <td> บาท</td>
+                        <td>{{number_format($sellpriceall + ($tax_base_diff*0.07), 2)}} บาท</td>
                     </tr>
                 </table>
             </td>

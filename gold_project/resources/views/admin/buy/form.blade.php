@@ -162,20 +162,28 @@
                         <th style="width:19%;">น้ำหนัก</th>
                         <th style="width:27%;">จำนวนเงิน(บาท)</th>
                     </tr>
+                    @php
+                    $sellpriceall = 0;
+                    $gram = 0;
+                    @endphp
                     @foreach($form as $key => $row)
                     <tr>
                         <td style="text-align:center;">{{++$key}}</td>
                         <td>{{$row->detail}}</td>
                         <td style="text-align:center;">1</td>
-                        <td></td>
+                        <td align="center">{{number_format($form[0]->gold_buy_gram_medain_price * $row->gram, 2)}}</td>
                         <td style="text-align:center;">{{$row->gram}}</td>
-                        <td style="text-align:right;">{{$row->allprice}}</td>
+                        <td style="text-align:right;">{{number_format($row->allprice, 2)}}</td>
                     </tr>
+                    @php
+                    $sellpriceall += $row->allprice;
+                    $gram += $row->gram;
+                    @endphp
                     @endforeach
                     <tr>
                         <td colspan="4" style="text-align: left;">(ตัวอักษร)</td>
                         <td style="font-weight: bold; text-align:center;"> รวมเป็นเงิน</td>
-                        <td></td>
+                        <td align="right">{{number_format($sellpriceall, 2)}}</td>
                     </tr>
                 </table>
             </td>

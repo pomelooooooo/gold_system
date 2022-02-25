@@ -18,6 +18,7 @@ class CreateFormBuysTable extends Migration
             $table->integer('group_id');
             $table->integer('product_detail_id');
             $table->integer('customer_id');
+            $table->decimal('gold_buy_gram_medain_price', 15, 2);
             $table->timestamps();
         });
     }

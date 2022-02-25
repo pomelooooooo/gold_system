@@ -254,6 +254,7 @@ class BuyController extends Controller
                 'group_id' => $group_id,
                 'product_detail_id' => $buy->id,
                 'customer_id' => $request->get('customer_id'),
+                'gold_buy_gram_medain_price' => str_replace(',', '', $request->get('gold_buy_gram_medain_price')),
             ]);
             $formbuy->save();
         }

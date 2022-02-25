@@ -32,7 +32,7 @@
 
             var size_val = size.val()
             $.each(size_arr, function(i, el) {
-                if(size_val == i){
+                if (size_val == i) {
                     size.closest('.card.card-item').find('.gram').val(el)
                 }
             })
@@ -137,7 +137,7 @@
                                         cancelButtonText: 'ไม่',
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            window.open('/buy/formBuy/'+group_id, '_blank')
+                                            window.open('/buy/formBuy/' + group_id, '_blank')
                                         }
                                         window.location = '/buy'
                                     })
@@ -187,6 +187,7 @@
                 console.log(response.response)
                 $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
                 $("#gold_sell").val(response.response.price.gold.sell)
+                $("#gold_spot").val(response.response.gold_spot)
             },
             error: function(xhr) {
                 "Not have Data!!"
@@ -231,6 +232,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
+                            <input type="hidden" id="gold_spot" name="gold_buy_gram_medain_price" value="">
                         </div>
                     </div>
                     <div class="col-6">
@@ -516,7 +518,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <select class="custom-select" name="striped_id[]"  required>
+                        <select class="custom-select" name="striped_id[]" required>
                             <option selected disabled value="">เลือกลาย</option>
                             @foreach($striped as $row)
                             <option value="{{$row->id}}">{{$row->name}}</option>
