@@ -30,7 +30,8 @@
                                 _token: "{{ csrf_token() }}",
                                 id: id,
                                 status_check: $('#status_check').val(),
-                                note: $('#note').val()
+                                note: $('#note').val(),
+                                note_check: $('#note_check').val()
                             },
                             dataType: 'json',
                             success: function(data) {
@@ -141,6 +142,7 @@
                                 <th scope="col">วันที่นำเข้า</th>
                                 <th scope="col">วันที่เช็คล่าสุด</th>
                                 <th scope="col">ผลการเช็คสต๊อก</th>
+                                <th scope="col">หมายเหตุ(อื่นๆ)</th>
                                 <th scope="col">บันทึกช่วยจำ</th>
                                 <th scope="col"></th>
                             </tr>
@@ -182,6 +184,14 @@
                                 @endphp
                                 <td class="{{$status_check_color}}">{{$status_check_text}}</td>
                                 @php
+                                if($row->note_check == ''){
+                                $note_check_text = '-';
+                                } else {
+                                $note_check_text = $row->note_check;
+                                }
+                                @endphp
+                                <td class="text-warning">{{$note_check_text}}</td>
+                                @php
                                 if($row->note == ''){
                                 $note_text = '-';
                                 } else {
@@ -215,13 +225,17 @@
                             </div>
                             <div class="modal-body">
                                 <a>กรุณาเลือกรายการผลการเช็คสต๊อก</a>
-                                <br>
                                 <select class="custom-select" name="status_check" id="status_check">
                                     <option selected disabled value="">เลือกผลการเช็ค</option>
                                     @foreach(["0"=>"ปกติ","3"=>"ชำรุด","4"=>"อื่นๆ"] as $sizeWay => $sizeLable)
                                     <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
                                     @endforeach
                                 </select>
+                                <br>
+                                <br>
+                                <a>โปรดระบุหมายเหตุสถานะอื่นๆ(ถ้ามี) </a>
+                                <input name="note_check" type="text" class="form-control" id="note_check" placeholder="" />
+                                <br>
                                 <br>
                                 <a>บันทึกช่วยจำ(ถ้ามี) </a>
                                 <input name="note" type="text" class="form-control" id="note" placeholder="" />

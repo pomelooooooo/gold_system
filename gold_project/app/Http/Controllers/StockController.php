@@ -280,7 +280,7 @@ class StockController extends Controller
 
     public function updateStatusCheckNew(Request $request)
     {
-        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check", 'note' => "$request->note"]);
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check", 'note' => "$request->note", 'note_check' => "$request->note_check"]);
 
         return response()->json(['status' => true], 200);
     }
