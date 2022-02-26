@@ -157,20 +157,38 @@
                 $('.validationCategory').find('.custom-select--single').removeClass('is-invalid')
                 $('.validationCategory').find('.invalid-feedback').css('display', 'none')
 
+                $('.validationCategory2').find('.custom-select--single2').removeClass('is-invalid')
+                $('.validationCategory2').find('.invalid-feedback').css('display', 'none')
+
                 $('.validationWeight').find('.custom-select--size').removeClass('is-invalid')
                 $('.validationWeight').find('.invalid-feedback').css('display', 'none')
 
-                $('.validationGram').find('.gram').removeClass('is-invalid')
+                $('.validationWeight2').find('.custom-select--size2').removeClass('is-invalid')
+                $('.validationWeight2').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationGram').find('.input-gram').removeClass('is-invalid')
                 $('.validationGram').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationGram2').find('.input-gram2').removeClass('is-invalid')
+                $('.validationGram2').find('.invalid-feedback').css('display', 'none')
 
                 $('.validationStriped').find('.custom-select--striped').removeClass('is-invalid')
                 $('.validationStriped').find('.invalid-feedback').css('display', 'none')
 
+                $('.validationStriped2').find('.custom-select--striped2').removeClass('is-invalid')
+                $('.validationStriped2').find('.invalid-feedback').css('display', 'none')
+
                 $('.validationDetails').find('.form-control--detail').removeClass('is-invalid')
                 $('.validationDetails').find('.invalid-feedback').css('display', 'none')
 
+                $('.validationDetails2').find('.form-control--detail2').removeClass('is-invalid')
+                $('.validationDetails2').find('.invalid-feedback').css('display', 'none')
+
                 $('.validationPrice').find('.form-control--price').removeClass('is-invalid')
                 $('.validationPrice').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationPrice2').find('.form-control--price2').removeClass('is-invalid')
+                $('.validationPrice2').find('.invalid-feedback').css('display', 'none')
 
                 if ($('#validationuser').val() == null) {
                     $('.validateUser').find('.select2-selection--single').addClass('is-invalid')
@@ -184,25 +202,49 @@
                     $('.validationCategory').find('.custom-select--single').addClass('is-invalid')
                     $('.validationCategory').find('.invalid-feedback').css('display', 'block')
                 }
+                if ($('#validationcategory2').val() == null) {
+                    $('.validationCategory2').find('.custom-select--single2').addClass('is-invalid')
+                    $('.validationCategory2').find('.invalid-feedback').css('display', 'block')
+                }
                 if ($('#validationweight').val() == null) {
                     $('.validationWeight').find('.custom-select--size').addClass('is-invalid')
                     $('.validationWeight').find('.invalid-feedback').css('display', 'block')
                 }
-                if ($('#validationgram').val() == null) {
-                    $('.validationGram').find('.gram').addClass('is-invalid')
+                if ($('#validationweight2').val() == null) {
+                    $('.validationWeight2').find('.custom-select--size2').addClass('is-invalid')
+                    $('.validationWeight2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationgram').val() == '') {
+                    $('.validationGram').find('.input-gram').addClass('is-invalid')
                     $('.validationGram').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationgram2').val() == '') {
+                    $('.validationGram2').find('.input-gram2').addClass('is-invalid')
+                    $('.validationGram2').find('.invalid-feedback').css('display', 'block')
                 }
                 if ($('#validationstriped').val() == null) {
                     $('.validationStriped').find('.custom-select--striped').addClass('is-invalid')
                     $('.validationStriped').find('.invalid-feedback').css('display', 'block')
                 }
-                if ($('#validationdetails').val() == null) {
+                if ($('#validationstriped2').val() == null) {
+                    $('.validationStriped2').find('.custom-select--striped2').addClass('is-invalid')
+                    $('.validationStriped2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationdetails').val() == '') {
                     $('.validationDetails').find('.form-control--detail').addClass('is-invalid')
                     $('.validationDetails').find('.invalid-feedback').css('display', 'block')
                 }
-                if ($('#validationprice').val() == null) {
+                if ($('#validationdetails2').val() == '') {
+                    $('.validationDetails2').find('.form-control--detail2').addClass('is-invalid')
+                    $('.validationDetails2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationprice').val() == '') {
                     $('.validationPrice').find('.form-control--price').addClass('is-invalid')
                     $('.validationPrice').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationprice2').val() == '') {
+                    $('.validationPrice2').find('.form-control--price2').addClass('is-invalid')
+                    $('.validationPrice2').find('.invalid-feedback').css('display', 'block')
                 }
             }
         })
@@ -405,11 +447,11 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group validationGram">
-                                <input name="gram[]" type="text" class="form-control gram" placeholder="" id="validationgram" required />
-                            </div>
-                            <div class="invalid-feedback">
+                                <input name="gram[]" type="text" class="form-control gram input-gram" placeholder="" id="validationgram" required />
+                                <div class="invalid-feedback">
                                     โปรดกรอกนํ้าหนักกรัม
                                 </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -531,8 +573,8 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="type_gold_id[]" required>
+                        <div class="input-group mb-3 validationCategory2">
+                            <select class="custom-select custom-select--single2" name="type_gold_id[]" id="validationcategory2" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}">{{$row->name}}</option>
@@ -546,7 +588,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                        <h4 for="validationweight2">นํ้าหนัก*</h4>
                     </div>
                     <div class="col-6">
                         <h4>นํ้าหนัก(กรัม)*</h4>
@@ -554,8 +596,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select size" name="size[]" required>
+                        <div class="input-group mb-3 validationWeight2">
+                            <select class="custom-select size custom-select--size2" name="size[]" id="validationweight2" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -567,8 +609,11 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="gram[]" type="text" class="form-control gram" placeholder="" />
+                        <div class="form-group validationGram2">
+                            <input name="gram[]" type="text" class="form-control gram input-gram2" placeholder="" id="validationgram2" required/>
+                            <div class="invalid-feedback">
+                                โปรดกรอกนํ้าหนัก(กรัม)
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -581,8 +626,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <select class="custom-select" name="striped_id[]" required>
+                    <div class="col-6 validationStriped2">
+                        <select class="custom-select custom-select--striped2" name="striped_id[]" id="validationstriped2" required>
                             <option selected disabled value="">เลือกลาย</option>
                             @foreach($striped as $row)
                             <option value="{{$row->id}}">{{$row->name}}</option>
@@ -591,16 +636,10 @@
                         <div class="invalid-feedback">
                             โปรดเลือกประเภทที่ต้องการ
                         </div>
-                        <!-- <div class="form-group">
-                            <input name="striped_id[]" type="text" class="form-control" placeholder="" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกลายที่ต้องการ
-                            </div>
-                        </div> -->
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="details[]" type="text" class="form-control" placeholder="" required />
+                        <div class="form-group validationDetails2">
+                            <input name="details[]" type="text" class="form-control form-control--detail2" placeholder="" id="validationdetails2" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกรายละเอียดทอง
                             </div>
@@ -614,8 +653,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                        <div class="form-group validationPrice2">
+                            <input name="allprice[]" type="text" class="form-control allprice form-control--price2" placeholder="" id="validationprice2" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
                             </div>
