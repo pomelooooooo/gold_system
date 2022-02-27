@@ -61,7 +61,7 @@
                 </div>
                 <br />
                 <div class="text-right">
-                    <a type="button" class="btn btn-secondary" href="{{url('/type_gold')}}">กลับ</a>
+                    <a type="button" class="btn btn-secondary" href="{{url('/striped')}}">กลับ</a>
                     <button type="submit" class="btn btn-success">บันทึก</button>
                 </div>
                 <br />
