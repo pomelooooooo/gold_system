@@ -97,7 +97,7 @@
         });
 
         $("body").on('click', '#btn-save', function(e) {
-            if($('#validationuser').val() != null && $('#validationcustomer').val() != null){
+            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null) {
                 Swal.fire({
                     title: 'ต้องการรับซื้อทองหรือไม่?',
                     icon: 'question',
@@ -147,7 +147,7 @@
                         });
                     }
                 })
-            }else{
+            } else {
                 $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
                 $('.validateUser').find('.invalid-feedback').css('display', 'none')
 
@@ -286,6 +286,7 @@
             success: function(response) {
                 console.log(response.response)
                 $("#gold_bar_sell").val(response.response.price.gold_bar.sell)
+                $("#gold_bar_buy").val(response.response.price.gold_bar.buy)
                 $("#gold_sell").val(response.response.price.gold.sell)
                 $("#gold_spot").val(response.response.gold_spot)
             },
@@ -322,10 +323,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคากลางทองแท่งประจำวัน*</h4>
+                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคากลางทองรูปพรรณประจำวัน*</h4>
+                        <h4>ราคารับซื้อทองคำแท่งประจำวัน*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -337,7 +338,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
+                            <input type="text" class="form-control" id="gold_bar_buy" placeholder="" readonly />
                         </div>
                     </div>
                 </div>
@@ -610,7 +611,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group validationGram2">
-                            <input name="gram[]" type="text" class="form-control gram input-gram2" placeholder="" id="validationgram2" required/>
+                            <input name="gram[]" type="text" class="form-control gram input-gram2" placeholder="" id="validationgram2" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกนํ้าหนัก(กรัม)
                             </div>

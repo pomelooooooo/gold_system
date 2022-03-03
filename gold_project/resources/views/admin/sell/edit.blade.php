@@ -76,7 +76,7 @@
         })
 
         $("body").on('click', '#btn-save', function(e) {
-            if($('#validationuser').val() != null && $('#validationcustomer').val() != null){
+            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null) {
                 Swal.fire({
                     title: 'ต้องการขายทองหรือไม่?',
                     // text: "You won't be able to revert this!",
@@ -117,7 +117,7 @@
                                             cancelButtonText: 'ไม่',
                                         }).then((result) => {
                                             if (result.isConfirmed) {
-                                                window.open('/sellGroup/formSell/'+group_id, '_blank')
+                                                window.open('/sellGroup/formSell/' + group_id, '_blank')
                                             }
                                             window.location = '/sell'
                                         })
@@ -127,13 +127,13 @@
                         });
                     }
                 })
-            }else{
+            } else {
                 $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
                 $('.validateUser').find('.invalid-feedback').css('display', 'none')
                 $('.validateCustomer').find('.select2-selection--single').removeClass('is-invalid')
                 $('.validateCustomer').find('.invalid-feedback').css('display', 'none')
                 if ($('#validationuser').val() == null) {
-                    
+
                     // Add is-invalid class when select2 element is required
                     $('.validateUser').find('.select2-selection--single').addClass('is-invalid')
                     $('.validateUser').find('.invalid-feedback').css('display', 'block')
@@ -175,7 +175,7 @@
                         <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคาขายออกทองรูปพรรณประจำวัน*</h4>
+                        <h4>ราคารับซื้อทองแท่งประจำวัน*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -186,7 +186,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" name="" class="form-control" id="gold_sell" placeholder="" readonly />
+                            <input type="text" name="" class="form-control" id="gold_bar_buy" placeholder="" readonly />
                             <input type="hidden" id="gold_spot" name="gold_buy_gram_medain_price" value="">
                             <input type="hidden" id="gold_bar_buy" name="goldBar_buy_medain_price" value="">
                             <input type="hidden" id="gold_buy" name="gold_buy_medain_price" value="">

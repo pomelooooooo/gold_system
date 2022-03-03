@@ -32,7 +32,7 @@
 
             var size_val = size.val()
             $.each(size_arr, function(i, el) {
-                if(size_val == i){
+                if (size_val == i) {
                     size.closest('.card.card-item').find('.gram').val(el)
                 }
             })
@@ -69,12 +69,12 @@
         var no = $('.card-item .code').not(':first').not(':first').length
         var code = $('.card-item .code')[0].value
         var num_code = "0"
-        var code_string = code.replace('P', '')
+        var code_string = code.replace('D', '')
         var items = parseInt(code_string) + parseInt(no);
         for (let i = (parseInt(code_string) + 1).toString().length; i < 3; i++) {
             num_code += "0";
         }
-        $txtFormNumber.val("P" + num_code + items.toString());
+        $txtFormNumber.val("D" + num_code + items.toString());
     }
 
     (function() {
@@ -134,10 +134,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคากลางทองแท่งประจำวัน*</h4>
+                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคากลางทองรูปพรรณประจำวัน*</h4>
+                        <h4>ราคารับซื้อทองคำแท่งประจำวัน*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -428,7 +428,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <select class="custom-select" name="striped_id[]"  required>
+                        <select class="custom-select" name="striped_id[]" required>
                             <option selected disabled value="">เลือกลาย</option>
                             @foreach($striped as $row)
                             <option value="{{$row->id}}">{{$row->name}}</option>

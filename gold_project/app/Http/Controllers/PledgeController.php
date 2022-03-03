@@ -26,11 +26,11 @@ class PledgeController extends Controller
         $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc");
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
-            ->orWhere('product_details.details', 'like', "%$keyword%")
-            ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
-            ->orWhere('product_details.category', 'like', "%$keyword%")
-            ->orWhere('product_details.user_id', 'like', "%$keyword%")
-            ->orWhere('product_details.customer_id', 'like', "%$keyword%");
+                ->orWhere('product_details.details', 'like', "%$keyword%")
+                ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
+                ->orWhere('product_details.category', 'like', "%$keyword%")
+                ->orWhere('product_details.user_id', 'like', "%$keyword%")
+                ->orWhere('product_details.customer_id', 'like', "%$keyword%");
         }
         $filter_type = $request->get('filter_type');
         if (!empty($filter_type)) {
@@ -45,7 +45,7 @@ class PledgeController extends Controller
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.pledge.index', compact('product', 'productdetail','customer','users', 'keyword','filter_type','filter_size','producttype'));
+        return view('admin.pledge.index', compact('product', 'productdetail', 'customer', 'users', 'keyword', 'filter_type', 'filter_size', 'producttype'));
     }
 
     /**
@@ -71,13 +71,13 @@ class PledgeController extends Controller
         } else {
             $code = "0001";
         }
-        $code = "P".$code;
+        $code = "D" . $code;
         $product = Product::all();
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.create', compact('product', 'gold_type','users','customer', 'striped', 'code', 'producttype'));
+        return view('admin.pledge.create', compact('product', 'gold_type', 'users', 'customer', 'striped', 'code', 'producttype'));
     }
 
     /**
@@ -113,7 +113,7 @@ class PledgeController extends Controller
                     'installment_end' => $request->get('installment_end'),
                 ]
             );
-            $pledges -> save();
+            $pledges->save();
         }
         $producttype = TypeGold::all();
         $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc")->paginate(5);

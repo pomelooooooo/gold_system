@@ -6,11 +6,11 @@
     $(document).ready(function() {
         $(document).on('keyup', '#idcard', function() {
             $.ajax({
-                url: "/manage_employee/validateIdcard/"+$(this).val(),
+                url: "/manage_employee/validateIdcard/" + $(this).val(),
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data.status){
+                    if (data.status) {
                         $('#validate_id_card').css('display', 'none')
                     } else {
                         $('#validate_id_card').css('display', 'block')
@@ -51,7 +51,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    if(data.status){
+                    if (data.status) {
                         window.location = "{{route('manage_employee.index')}}"
                     } else {
                         $('#validate_id_card').css('display', 'block')
@@ -312,7 +312,7 @@
                         <div class="form-group">
                             <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" required />
                             <div class="invalid-feedback" style="display: none;" id="validate_id_card">
-                               เลขบัตรประชาชนซ้ำ
+                                เลขบัตรประชาชนซ้ำ
                             </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกเลขบัตรประชาชน

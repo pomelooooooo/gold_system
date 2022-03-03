@@ -3,7 +3,7 @@
 @section('content')
 
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         $.ajax({
             url: "http://127.0.0.1:3000/latest",
             type: 'GET',
@@ -41,111 +41,111 @@
         </div>
         <div class="card-body">
             <!-- <form method="POST" action="{{route('productdetail.store')}} " enctype="multipart/form-data" class="needs-validation" novalidate> -->
-                <!-- {{csrf_field()}} -->
-                <div class="row">
-                    <div class="col-6">
-                        <h4>รหัสสินค้า*</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ราคาขายออกทองแท่งประจำวัน*</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ราคาขายออกทองรูปพรรณประจำวัน*</h4>
+            <!-- {{csrf_field()}} -->
+            <div class="row">
+                <div class="col-6">
+                    <h4>รหัสสินค้า*</h4>
+                </div>
+                <div class="col-3">
+                    <h4>ราคาขายออกทองแท่งประจำวัน*</h4>
+                </div>
+                <div class="col-3">
+                    <h4>ราคารับซื้อทองแท่งประจำวัน*</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input name="gold_id" type="text" class="form-control" placeholder="" readonly />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input name="gold_id" type="text" class="form-control" placeholder="" readonly />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
-                        </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>วันเวลาที่ขาย*</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ประเภท</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>น้ำหนัก</h4>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class='form-group'>
-                            <input type="datetime-local" class="form-control" name="date_time"> 
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="type_gold" type="text" class="form-control" placeholder=""  />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="weight" type="text" class="form-control" placeholder=""  />
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4>วันเวลาที่ขาย*</h4>
+                </div>
+                <div class="col-3">
+                    <h4>ประเภท</h4>
+                </div>
+                <div class="col-3">
+                    <h4>น้ำหนัก</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class='form-group'>
+                        <input type="datetime-local" class="form-control" name="date_time">
                     </div>
                 </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input name="type_gold" type="text" class="form-control" placeholder="" />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input name="weight" type="text" class="form-control" placeholder="" />
+                    </div>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-6">
-                        <h4>ผู้ขาย*</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ค่าแรงทองต่อเส้น</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4>ราคาทุน</h4>
+            <div class="row">
+                <div class="col-6">
+                    <h4>ผู้ขาย*</h4>
+                </div>
+                <div class="col-3">
+                    <h4>ค่าแรงทองต่อเส้น</h4>
+                </div>
+                <div class="col-3">
+                    <h4>ราคาทุน</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class='form-group'>
+                        <input type="text" class="form-control" name="user_id">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class='form-group'>
-                            <input type="text" class="form-control" name="user_id"> 
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="wage" type="text" class="form-control" placeholder=""  />
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder=""  />
-                        </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input name="wage" type="text" class="form-control" placeholder="" />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>ราคาขาย*</h4>
+                <div class="col-3">
+                    <div class="form-group">
+                        <input name="price_of_gold" type="text" class="form-control" placeholder="" />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class='form-group'>
-                            <input type="text" class="form-control datetimepicker" name="sell_price"> 
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4>ราคาขาย*</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class='form-group'>
+                        <input type="text" class="form-control datetimepicker" name="sell_price">
                     </div>
                 </div>
-                
-                <br />
-                <div class="text-right">
-                    <a type="button" class="btn btn-secondary" href="{{url('/sell')}}">กลับ</a>
-                    <button type="submit" class="btn btn-success">บันทึก</button>
-                </div>
-                <br />
+            </div>
+
+            <br />
+            <div class="text-right">
+                <a type="button" class="btn btn-secondary" href="{{url('/sell')}}">กลับ</a>
+                <button type="submit" class="btn btn-success">บันทึก</button>
+            </div>
+            <br />
             <!-- </form> -->
         </div>
     </div>
