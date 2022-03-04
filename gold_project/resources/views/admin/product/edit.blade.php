@@ -79,8 +79,11 @@
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder="" value="{{$product->price_of_gold}}" id="validationprice" required />
+                        <div class="input-group">
+                            <input name="price_of_gold" type="number" class="form-control" placeholder="" value="{{$product->price_of_gold}}" id="validationprice" required >
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคาทองต่อเส้น
                             </div>

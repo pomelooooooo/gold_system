@@ -114,8 +114,8 @@
                                 <tr>
                                     <th scope="col">ชื่อ</th>
                                     <th scope="col">นามสกุล</th>
-                                    <th scope="col">เลขบัตรประชาชน</th>
                                     <th scope="col">เบอร์โทร</th>
+                                    <th scope="col">ที่อยู่</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -126,8 +126,8 @@
                                 <tr>
                                     <td>{{$row['name']}}</td>
                                     <td>{{$row['lastname']}}</td>
-                                    <td>{{$row['idcard']}}</td>
                                     <td>{{$row['telephone']}}</td>
+                                    <td>{{$row['address']}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('ManageEmployeeController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>

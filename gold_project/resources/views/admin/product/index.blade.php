@@ -116,7 +116,7 @@
                                     <th scope="col">รหัสล็อต</th>
                                     <th scope="col">จำนวนสินต้า</th>
                                     <th scope="col">วันที่นำเข้า</th>
-                                    <th scope="col">ราคาทอง</th>
+                                    <th scope="col">ราคาทอง(บาท)</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>

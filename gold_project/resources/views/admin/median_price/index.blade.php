@@ -68,8 +68,11 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="form-group">
+                                                    <div class="input-group">
                                                         <input type="text" class="form-control" placeholder="" id="gold_bar_buy" readonly/>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="basic-addon2">บาท</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -78,8 +81,11 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="form-group">
+                                                    <div class="input-group">
                                                         <input type="text" class="form-control" placeholder="" id="gold_bar_sell" readonly/>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="basic-addon2">บาท</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,8 +111,11 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="form-group">
+                                                    <div class="input-group">
                                                         <input type="text" class="form-control" placeholder="" id="gold_buy" readonly/>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="basic-addon2">บาท</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,8 +124,11 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="form-group">
+                                                    <div class="input-group">
                                                         <input type="text" class="form-control" placeholder="" id="gold_sell" readonly/>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="basic-addon2">บาท</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

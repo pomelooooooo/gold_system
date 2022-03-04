@@ -120,8 +120,11 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group">
-                            <input name="price_of_gold" type="text" class="form-control" placeholder="" id="validationprice" required />
+                        <div class="input-group">
+                            <input name="price_of_gold" type="number" class="form-control" placeholder="" id="validationprice" required >
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคาทองต่อเส้น
                             </div>

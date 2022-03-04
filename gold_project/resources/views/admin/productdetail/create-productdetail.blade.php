@@ -221,8 +221,11 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="gram" id="gram" type="text" class="form-control" placeholder="" required/>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">กรัม</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกน้ำหนักกรัม
                             </div>
@@ -244,8 +247,11 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="gratuity" type="number" class="form-control" placeholder="" id="validationgratuity" min="0" max="3000" required style="width: 100% !important;" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกค่าแรงในช่วง 0-3000
                             </div>

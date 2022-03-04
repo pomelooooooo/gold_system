@@ -45,7 +45,7 @@ class SellController extends Controller
         if (!empty($filter_size)) {
             $productdetail = $productdetail->where('product_details.size', $filter_size);
         }
-        $productdetail = $productdetail->paginate(5);
+        $productdetail = $productdetail->paginate(8);
         $product = Product::all();
         $users = User::all();
         $producttype = TypeGold::all();
@@ -224,7 +224,7 @@ class SellController extends Controller
             ]);
             $formsell->save();
         }
-        $productdetail = ProductDetails::select('*')->paginate(10);
+        $productdetail = ProductDetails::select('*')->paginate(8);
         $pd_id = explode(',', $request->json('pd_Id'));
         $product = Product::all();
         $customer = Customer::all();

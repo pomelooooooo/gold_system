@@ -57,7 +57,6 @@
                         $('#validate_id_card').css('display', 'block')
                         $("#validate_id_card").focus();
                     }
-                    // window.location = "{{route('manage_employee.index')}}"
                 },
                 cache: false,
                 contentType: false,
@@ -321,7 +320,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" type="text" class="form-control" placeholder="" id="validationtel" required />
+                            <input name="telephone" type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="validationtel" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร
                             </div>
