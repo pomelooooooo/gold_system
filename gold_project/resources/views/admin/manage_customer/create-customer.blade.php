@@ -6,11 +6,11 @@
     $(document).ready(function() {
         $(document).on('keyup', '#idcard', function() {
             $.ajax({
-                url: "/manage_customer/validateIdcard/"+$(this).val(),
+                url: "/manage_customer/validateIdcard/" + $(this).val(),
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    if(data.status){
+                    if (data.status) {
                         $('#validate_id_card').css('display', 'none')
                     } else {
                         $('#validate_id_card').css('display', 'block')
@@ -51,7 +51,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    if(data.status){
+                    if (data.status) {
                         window.location = "{{route('manage_customer.index')}}"
                     } else {
                         $('#validate_id_card').css('display', 'block')
@@ -272,9 +272,9 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder=""required />
+                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" required />
                             <div class="invalid-feedback" style="display: none;" id="validate_id_card">
-                               เลขบัตรประชาชนซ้ำ
+                                เลขบัตรประชาชนซ้ำ
                             </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกเลขบัตรประชาชน
@@ -283,7 +283,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tel" id="tel" type="text" class="form-control" placeholder="" id="validationtel" required />
+                            <input name="tel" id="tel" type="number" class="form-control" placeholder="" id="validationtel" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร
                             </div>

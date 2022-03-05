@@ -79,6 +79,7 @@
         $("#imgInp").change(function() {
             readURL(this);
         });
+
     });
 
     function openConnection() {
@@ -99,10 +100,9 @@
                 var rawStr = event.data.toString(); // Split with '@'
                 var res = rawStr.split('@');
                 console.log(res);
-
                 // Connected
                 if (res[0] == "Connected") {
-                    document.getElementById("content").innerHTML = rawStr;
+                    // document.getElementById("content").innerHTML = rawStr;
                 }
                 var strtitle1 = ["-", "ID Card : ", "TH_Prefix :", "TH_Firstname : ", "TH_Lastname : ", "Sex : ", "Birthday : ", "EN_Prefix : ", "EN_Firstname : ", "EN_Lastname : ", "Issue : ", "Expire : ", "Address House No : ", "image"]
 
@@ -151,13 +151,13 @@
 
             conn.onerror = function(event) {
                 // Web Socket Error
-                document.getElementById("content").innerHTML = "Web Socket Error";
+                // document.getElementById("content").innerHTML = "Web Socket Error";
             };
 
 
             conn.onclose = function(event) {
                 // Web Socket Closed
-                document.getElementById("content").innerHTML = "Web Socket Closed";
+                // document.getElementById("content").innerHTML = "Web Socket Closed";
 
             };
         }
@@ -320,7 +320,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="validationtel" required />
+                            <input name="telephone" type="number" class="form-control" id="validationtel" required style="width: 100% !important;" />
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร
                             </div>

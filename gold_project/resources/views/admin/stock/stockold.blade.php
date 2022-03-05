@@ -2,7 +2,7 @@
 @section('title','ส่งโรงหลอม')
 @section('style')
 <style>
-    .swal2-input{
+    .swal2-input {
         width: unset !important;
     }
 </style>
@@ -61,7 +61,7 @@
                                     max: 250000,
                                     autocapitalize: 'off'
                                 },
-                                inputValidator: (value) => {                                    
+                                inputValidator: (value) => {
                                     if (value == '') {
                                         return 'กรุณาใส่ราคาขาย'
                                     } else if (value > 250000) {
@@ -79,6 +79,7 @@
                                     '<b style="float: left">ผู้ผลิต</b>' +
                                     '<select id="manufacturer" class="form-control">' + manufacturer + '</select>' + "<br>" +
                                     '<b style="float: left">วัน,เวลา</b>' + "<br>" +
+                                    '<input type="datetime-local" class="form-control" id="datecheck_stock">' + "<br>" +
                                     '<b style="left: 0;position: absolute;margin-left: 30px;">ราคาขาย(บาท)</b>',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
@@ -129,6 +130,7 @@
                                             data: {
                                                 _token: "{{ csrf_token() }}",
                                                 id: id,
+                                                datecheck_stock: $('#datecheck_stock').val(),
                                             },
                                             dataType: 'json',
                                             success: function(data) {

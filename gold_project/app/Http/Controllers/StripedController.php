@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductDetails;
 use App\Striped;
 use Illuminate\Http\Request;
 
@@ -102,6 +103,10 @@ class StripedController extends Controller
      */
     public function destroy($id)
     {
+        $productDetail = ProductDetails::where('striped_id', $id)->first();
+        if (!empty($productDetail)) {
+            return response()->json(['status' => false], 200);
+        }
         $striped = Striped::find($id);
         $striped->delete();
         $striped = Striped::select('*')->paginate(5);

@@ -59,6 +59,12 @@
                                 }).then((result) => {
                                     window.location = '/striped'
                                 })
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'ไม่สามารถลบได้',
+                                    showConfirmButton: false,
+                                })
                             }
 
                         }

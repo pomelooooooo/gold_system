@@ -266,7 +266,7 @@ class StockController extends Controller
 
     public function updateGroup(Request $request)
     {
-        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_trade' => '2']);
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_trade' => '2', 'datecheck_stock' => $request->datecheck_stock]);
 
         return response()->json(['status' => true], 200);
     }
@@ -301,7 +301,6 @@ class StockController extends Controller
                     'name_group' => $name_group,
                     'product_detail_id' => $id,
                     'manufacturer' => $request->json('manufacturer'),
-                    'datecheck_stock' => $request->json('datecheck_stock'),
                     'total_size' => $request->json('total_size'),
                     'total_price' => $request->json('total_price'),
                 ]
