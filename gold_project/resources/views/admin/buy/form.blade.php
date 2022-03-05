@@ -171,7 +171,8 @@
                         <td style="text-align:center;">{{++$key}}</td>
                         <td>{{$row->detail}}</td>
                         <td style="text-align:center;">1</td>
-                        <td align="center">{{number_format($form[0]->gold_buy_gram_medain_price * $row->gram, 2)}}</td>
+                        <!-- <td align="center">{{number_format($form[0]->gold_buy_gram_medain_price * $row->gram, 2)}}</td> -->
+                        <td align="center">{{number_format($row->allprice, 2)}}</td>
                         <td style="text-align:center;">{{$row->gram}}</td>
                         <td style="text-align:right;">{{number_format($row->allprice, 2)}}</td>
                     </tr>
