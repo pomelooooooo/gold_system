@@ -273,7 +273,7 @@ class StockController extends Controller
 
     public function updateStatusCheck(Request $request)
     {
-        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check", 'note' => "$request->note"]);
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_check' => "$request->status_check", 'note' => "$request->note", 'datecheck_stock' => "$request->datecheck_stock"]);
 
         return response()->json(['status' => true], 200);
     }
@@ -301,6 +301,7 @@ class StockController extends Controller
                     'name_group' => $name_group,
                     'product_detail_id' => $id,
                     'manufacturer' => $request->json('manufacturer'),
+                    'datecheck_stock' => $request->json('datecheck_stock'),
                     'total_size' => $request->json('total_size'),
                     'total_price' => $request->json('total_price'),
                 ]
@@ -316,5 +317,47 @@ class StockController extends Controller
         $manufacturer = Manufacturer::all();
 
         return response()->json(['status' => true, 'data' => $manufacturer]);
+    }
+
+    public function stockold_recheck(Request $request)
+    {
+        $keyword4 = $request->get('search4');
+        $stockold_recheck = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('code', "desc")->where('type', 'ทองเก่า')->where('status_trade', '2');
+        if (!empty($keyword4)) {
+            $stockold_recheck = $stockold_recheck->where('product_details.code', 'like', "%$keyword4%")
+                ->orWhere('product_details.details', 'like', "%$keyword4%");
+        }
+        $filter_type4 = $request->get('filter_type4');
+        if (!empty($filter_type4)) {
+            $stockold_recheck = $stockold_recheck->where('product_details.type_gold_id', $filter_type4);
+        }
+        $filter_size4 = $request->get('filter_size4');
+        if (!empty($filter_size4)) {
+            $stockold_recheck = $stockold_recheck->where('product_details.size', $filter_size4);
+        }
+        $filter_date4 = $request->get('filter_date4');
+        $filter_date_end4 = $request->get('filter_date_end4');
+        if (!empty($filter_date4)) {
+            $stockold_recheck = $stockold_recheck->whereDate('product_details.created_at', '>=', $filter_date4);
+        }
+        if (!empty($filter_date_end4)) {
+            $stockold_recheck = $stockold_recheck->whereDate('product_details.created_at', '<=', $filter_date_end4);
+        }
+        $stockold_recheck = $stockold_recheck->paginate(15);
+        $product = Product::all();
+        $typegold = TypeGold::all();
+        $user = User::all();
+        $customer = Customer::all();
+        $striped = Striped::all();
+
+
+        return view('admin.stock.stockold_recheck', compact('product',  'stockold_recheck', 'typegold', 'user', 'customer', 'striped', 'keyword4', 'filter_type4', 'filter_size4', 'filter_date4', 'filter_date_end4'));
+    }
+
+    public function updateGroup_recheck(Request $request)
+    {
+        ProductDetails::whereIn('id', explode(",", $request->id))->update(['status_trade' => '0']);
+
+        return response()->json(['status' => true], 200);
     }
 }
