@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Illuminate\Http\Request;
 
 class ConfirmPasswordController extends Controller
 {
@@ -26,7 +27,17 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function authenticated(Request $request, $user)
+    {
+        if($user->hasRole('superadministrator')){
+        return redirect()->route('admin.median_price.index');
+        }
+        
+        if($user->hasRole('user')){
+            return redirect()->route('user.median_price.index');
+        }
+
+    }
 
     /**
      * Create a new controller instance.
