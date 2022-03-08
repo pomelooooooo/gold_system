@@ -180,6 +180,7 @@
                                 <th scope="col">ลูกค้า</th>
                                 <th scope="col">ราคารับซื้อ</th>
                                 <th scope="col">วันที่นำเข้า</th>
+                                <th scope="col">วันที่ส่งโรงหลอม</th>
                                 <th scope="col">สถานะ</th>
                                 <th scope="col"></th>
                             </tr>
@@ -195,6 +196,7 @@
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
                                 <td>{{$row->created_at}}</td>
+                                <td>{{$row->datecheck_stock}}</td>
                                 <td class="{{$row->status_trade == '2' ? 'text-success' : ''}}">{{$row->status_trade == '2' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>
                                     <div class="form-check text-center">
