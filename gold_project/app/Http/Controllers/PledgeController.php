@@ -110,6 +110,7 @@ class PledgeController extends Controller
                 [
                     'product_detail_id' => $productdetail->id,
                     'installment_start' => $request->get('installment_start'),
+                    'installment_next' => $request->get('installment_next'),
                     'installment_end' => $request->get('installment_end'),
                 ]
             );
@@ -175,6 +176,11 @@ class PledgeController extends Controller
         $productdetail->allprice = $request->get('allprice');
         $productdetail->save();
         $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc")->paginate(5);
+        $pledge = Pledge::find($id);
+        $pledge->installment_start = $request->get('installment_start');
+        $pledge->installment_next = $request->get('installment_next');
+        $pledge->installment_end = $request->get('installment_end');
+        $pledge->save();
         $customer = Customer::all();
         $users = User::all();
         // return view('admin.buy.index', compact('buy','users','customer', 'id'));

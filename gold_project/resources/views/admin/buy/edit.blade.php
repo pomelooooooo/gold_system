@@ -8,11 +8,11 @@
     $(function() {
         $("#validationuser").select2({
             placeholder: "เลือกผู้รับซื้อ",
-            // allowClear: true
+            allowClear: true
         });
         $("#validationcustomer").select2({
             placeholder: "เลือกลูกค้า",
-            // allowClear: true
+            allowClear: true
         });
     })
     $(document).ready(function() {
@@ -163,8 +163,11 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="gram" type="text" class="form-control" placeholder="" value="{{$buy->gram}}" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">กรัม</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -206,8 +209,11 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="allprice" type="text" class="form-control" placeholder="" id="validationprice" value="{{$buy->allprice}}" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">กรัม</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
                             </div>

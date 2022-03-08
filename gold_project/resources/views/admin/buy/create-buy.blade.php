@@ -447,8 +447,11 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group validationGram">
+                            <div class="input-group validationGram">
                                 <input name="gram[]" type="text" class="form-control gram input-gram" placeholder="" id="validationgram" required />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">กรัม</span>
+                                </div>
                                 <div class="invalid-feedback">
                                     โปรดกรอกนํ้าหนักกรัม
                                 </div>
@@ -493,8 +496,11 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="form-group validationPrice">
+                            <div class="input-group validationPrice">
                                 <input name="allprice[]" type="text" class="form-control allprice form-control--price" placeholder="" id="validationprice" required />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">บาท</span>
+                                </div>
                                 <div class="invalid-feedback">
                                     โปรดกรอกราคารับซื้อ
                                 </div>
@@ -610,8 +616,11 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group validationGram2">
+                        <div class="input-group validationGram2">
                             <input name="gram[]" type="text" class="form-control gram input-gram2" placeholder="" id="validationgram2" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">กรัม</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกนํ้าหนัก(กรัม)
                             </div>
@@ -654,8 +663,11 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group validationPrice2">
+                        <div class="input-group validationPrice2">
                             <input name="allprice[]" type="text" class="form-control allprice form-control--price2" placeholder="" id="validationprice2" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
                             </div>

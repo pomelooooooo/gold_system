@@ -63,6 +63,7 @@
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'ไม่สามารถลบได้',
+                                    text: "ไม่สามารถลบลายทองได้เนื่องจากมีทองลายดังกล่าวอยู่ในคลังทอง",
                                     showConfirmButton: false,
                                 })
                             }

@@ -7,11 +7,11 @@
     $(function() {
         $("#validationuser").select2({
             placeholder: "เลือกผู้รับซื้อ",
-            // allowClear: true
+            allowClear: true
         });
         $("#validationcustomer").select2({
             placeholder: "เลือกลูกค้า",
-            // allowClear: true
+            allowClear: true
         });
 
         $("body").on('change', '.size', function() {
@@ -189,14 +189,30 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <h4>วันเวลาที่รับจำนำ*</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>วันเวลาจ่ายดอกรอบถัดไป*</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>วันเวลาที่หมดรับจำนำ*</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class='form-group'>
-                            <input type="datetime-local" class="form-control" name="datetime" value="{{date('Y-m-d').'T'.date('H:i:s')}}">
+                            <input type="datetime-local" class="form-control" name="installment_start" value="{{date('Y-m-d').'T'.date('H:i:s')}}">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class='form-group'>
+                            <input type="datetime-local" class="form-control" name="installment_next" value="">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class='form-group'>
+                            <input type="datetime-local" class="form-control" name="installment_end" value="">
                         </div>
                     </div>
                 </div>
@@ -257,8 +273,11 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group">
+                            <div class="input-group">
                                 <input name="gram[]" type="text" class="form-control gram" placeholder="" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">กรัม</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -306,24 +325,33 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="form-group">
+                            <div class="input-group">
                                 <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">บาท</span>
+                                </div>
                                 <div class="invalid-feedback">
-                                    โปรดกรอกราคารับซื้อ
+                                    โปรดกรอกราคารับจำนำ
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
-                            <div class="form-group">
+                            <div class="input-group">
                                 <input name="" type="text" class="form-control" placeholder="" value="1.25" required />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">%</span>
+                                </div>
                                 <div class="invalid-feedback">
                                     โปรดกรอกดอกเบี้ย
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
-                            <div class="form-group">
+                            <div class="input-group">
                                 <input name="" type="text" class="form-control" placeholder="" required />
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">บาท</span>
+                                </div>
                                 <div class="invalid-feedback">
                                     โปรดกรอกค่างวด
                                 </div>
@@ -413,8 +441,11 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="gram[]" type="text" class="form-control gram" placeholder="" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">กรัม</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -457,13 +488,44 @@
                     <div class="col-6">
                         <h4 for="validationprice">ราคารับซื้อ*</h4>
                     </div>
+                    <div class="col-3">
+                        <h4 for="validationprice">ดอกเบี้ย*</h4>
+                    </div>
+                    <div class="col-3">
+                        <h4 for="validationprice">ค่างวด*</h4>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <input name="" type="text" class="form-control" placeholder="" value="1.25" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">%</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                โปรดกรอกดอกเบี้ย
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <input name="" type="text" class="form-control" placeholder="" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                โปรดกรอกค่างวด
                             </div>
                         </div>
                     </div>

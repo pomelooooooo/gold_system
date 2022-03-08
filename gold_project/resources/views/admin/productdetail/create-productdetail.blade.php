@@ -242,8 +242,11 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input type="text" class="form-control" placeholder="" id="priceofgold" readonly />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
@@ -268,8 +271,11 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="allprice" type="text" class="form-control" placeholder="" id="validationallprice" required readonly />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคาทุน
                             </div>

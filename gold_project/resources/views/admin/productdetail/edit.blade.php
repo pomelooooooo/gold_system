@@ -151,7 +151,15 @@
                         </div>
                     </div>
                     <div class="col-6">
+                        <div class="input-group">
                             <input name="gram" type="text" class="form-control" placeholder="" value="{{$productdetail->gram}}" />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">กรัม</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                โปรดกรอกน้ำหนักกรัม
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -164,13 +172,19 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input type="text" class="form-control" value="{{$productdetail->price_of_gold}}" placeholder="" readonly />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="input-group">
                             <input name="gratuity" type="text" class="form-control" placeholder="" value="{{$productdetail->gratuity}}" id="validationgratuity" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกค่าแรง
                             </div>
@@ -187,8 +201,11 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" id="validationallprice" required />
+                        <div class="input-group">
+                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" id="validationallprice" required readonly/>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคาทุน
                             </div>
