@@ -186,9 +186,8 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" name="" class="form-control" id="gold_bar_buy" placeholder="" readonly />
+                            <input type="text" name="goldBar_buy_medain_price" class="form-control" id="gold_bar_buy" placeholder="" readonly />
                             <input type="hidden" id="gold_spot" name="gold_buy_gram_medain_price" value="">
-                            <input type="hidden" id="gold_bar_buy" name="goldBar_buy_medain_price" value="">
                             <input type="hidden" id="gold_buy" name="gold_buy_medain_price" value="">
 
                         </div>

@@ -219,7 +219,7 @@ class SellController extends Controller
                 'customer_id' => $request->get('customer_id'),
                 'goldBar_buy_medain_price' => str_replace(',', '', $request->get('goldBar_buy_medain_price')),
                 'goldBar_sell_medain_price' => str_replace(',', '', $request->get('goldBar_sell_medain_price')),
-                'gold_buy_medain_price' => str_replace(',', '', $request->get('goldBar_buy_medain_price')),
+                'gold_buy_medain_price' => str_replace(',', '', $request->get('gold_buy_medain_price')),
                 'gold_buy_gram_medain_price' => str_replace(',', '', $request->get('gold_buy_gram_medain_price')),
             ]);
             $formsell->save();
