@@ -63,7 +63,6 @@ class ManageEmployeeController extends Controller
                 'email' => $request->email,
                 'date_card_start' => $request->date_card_start,
                 'date_card_end' => $request->date_card_end,
-                'row_id' => $request->row_id,
                 'password' => Hash::make($request->password),
             ]
         );
@@ -133,7 +132,6 @@ class ManageEmployeeController extends Controller
         $manageemployee->email = $request->get('email');
         $manageemployee->date_card_start = $request->get('date_card_start');
         $manageemployee->date_card_end = $request->get('date_card_end');
-        $manageemployee->row_id = $request->get('row_id');
         $manageemployee->password =  Hash::make($request->get('password'));
         // $managegold->pic = $request->get('pic');
         if ($request->hasFile('picture')) {
@@ -175,6 +173,17 @@ class ManageEmployeeController extends Controller
         }
         if (!empty($manageemployee))
             return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
+
+    public function reset_password(Request $request){
+        $manageemployee = User::find($request->json('id'));
+        if(empty($request->json('password'))){
+            return response()->json(['status' => false], 500);
+        }
+        $manageemployee->password =  Hash::make($request->json('password'));
+        $manageemployee->save();
 
         return response()->json(['status' => true], 200);
     }

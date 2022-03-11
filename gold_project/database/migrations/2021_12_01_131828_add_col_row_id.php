@@ -15,7 +15,7 @@ class AddColRowId extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->string('row_id')->nullable()->after('email');
+            $table->enum('row_id', ['0', '1'])->default('1')->after('email');
 
         });
     }

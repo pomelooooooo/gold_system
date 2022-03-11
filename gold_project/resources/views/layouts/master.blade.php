@@ -77,28 +77,42 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a>
+						@if(\Auth::user()->row_id == '0')
+							<a href="/manage_employee/{{\Auth::user()->id}}/edit">
+								<img src="{{url('assets/img/logo.png')}}" alt="">
+
+							</a>
+						@else
+							<a href="/manage_employee/{{\Auth::user()->id}}/edit">
 								<img src="{{url('assets/img/logo.png')}}" alt="">
 							</a>
+						@endif
 						</div>
 						<!-- logo -->
 
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
+								@if(\Auth::user()->row_id == '1')
+									<li><a href="/median_price">ราคากลางทองประจำวัน</a></li>
+								@endif
+								@if(\Auth::user()->row_id == '0')
 								<li class="current-list-item"><a>จัดการข้อมูลร้าน</a>
 									<ul class="sub-menu">
 										<li><a href="/stores">จัดการข้อมูลร้าน</a></li>
 										<li><a href="/median_price">ราคากลางทองประจำวัน</a></li>
-										<!-- <li><a href="/set_price">ตั้งราคาขาย</a></li> -->
 									</ul>
 								</li>
+								@endif
 								<li><a>จัดการข้อมูลผู้ใช้งาน</a>
 									<ul class="sub-menu">
+									@if(\Auth::user()->row_id == '0')
 										<li><a href="/manage_employee">จัดการข้อมูลพนักงาน</a></li>
+									@endif
 										<li><a href="/manage_customer">จัดการข้อมูลลูกค้า</a></li>
 									</ul>
 								</li>
+								@if(\Auth::user()->row_id == '0')
 								<li><a>คลังทอง</a>
 									<ul class="sub-menu">
 										<li><a href="/manufacturer">จัดการข้อมูลผู้ผลิต</a></li>
@@ -110,6 +124,7 @@
 										<li><a href="/stockold">ส่งโรงหลอม</a></li>
 									</ul>
 								</li>
+								@endif
 								<li><a>การซื้อขายทอง</a>
 									<ul class="sub-menu">
 										<li><a href="/buy">ซื้อทอง</a></li>
@@ -117,13 +132,14 @@
 									</ul>
 								</li>
 								<li><a href="/pledge">การจำนำทอง</a></li>
+								@if(\Auth::user()->row_id == '0')
 								<li><a>รายงานผลการดำเนินงาน</a>
 									<ul class="sub-menu">
 										<li><a>ประวัติการซื้อขายย้อนหลัง</a></li>
 
 									</ul>
 								</li>
-
+								@endif
 								<li>
 									<div class="header-icons">
 										<i class="fas fa-sign-out-alt white-text"></i>

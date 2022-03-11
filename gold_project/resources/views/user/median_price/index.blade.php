@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.master')
 @section('title','ราคากลางทองประจำวัน')
 @section('content')
 

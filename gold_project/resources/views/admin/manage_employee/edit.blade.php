@@ -26,8 +26,59 @@
                 label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
             input.trigger('fileselect', [label]);
         });
+        $(document).on('click', '#reset_password', function(){
+            Swal.fire({
+            title: 'แก้ไขรหัสผ่าน',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'บันทึก',
+            cancelButtonText: 'ยกเลิก',
+            showLoaderOnConfirm: true,
+            preConfirm: (password) => {
+                return fetch(`/manage_employee/reset_password`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        _token: "{{ csrf_token() }}",
+                        password: password,
+                        id: $('#id').val()
+                    }),
+                })
+                .then(response => {
+                    if (response.status != 200) {
+                        throw new Error(response.status)
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'แก้ไขรหัสผ่านเรียบร้อย',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
+                .catch(error => {
+                    Swal.showValidationMessage(
+                        `กรุณากรอกรหัสผ่าน`
+                    )
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+            })
+        });
 
         $("form#data").submit(function(e) {
+            // Swal.fire({
+            // icon: 'success',
+            // title: 'อัปเดตข้อมูลเรียบร้อย',
+            // showConfirmButton: false,
+            // timer: 1500
+            // })
             e.preventDefault();
             var formData = new FormData(this);
             var data = {
@@ -129,12 +180,10 @@
                     <div class="col-6">
                         <h4 for="validationusername">ชื่อผู้ใช้</h4>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <h4 for="validationemail">อีเมล</h4>
                     </div>
-                    <div class="col-3">
-                        <h4 for="validationpassword">พาสเวิร์ด</h4>
-                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -145,7 +194,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <input name="email" type="text" class="form-control" placeholder="" value="{{$manageemployee->email}}" id="validationemail" required />
                             <div class="invalid-feedback">
@@ -153,13 +202,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <input name="password" type="text" class="form-control" placeholder="" value="{{$manageemployee->password}}" id="validationpassword" required />
+                    <div class="col-2">
+                        <button class="btn btn-primary" type="button" id="reset_password"><i class="fa fa-edit"></i> แก้ไขรหัสผ่าน</button>
+                        <!-- <div class="form-group">
+                            <input name="password" type="text" class="form-control" placeholder="" value="{{$manageemployee->password}}" id="validationpassword" required  />
                             <div class="invalid-feedback">
                                 โปรดกรอกพาสเวิส
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="row">
@@ -303,7 +353,9 @@
                 </div>
                 <br />
                 <div class="text-right">
+                @if(\Auth::user()->row_id == '0')
                     <a type="button" class="btn btn-secondary" href="{{url('/manage_employee')}}">กลับ</a>
+                @endif
                     <button type="submit" class="btn btn-success">บันทึก</button>
                 </div>
                 <input type="hidden" name="_method" value="PATCH" />

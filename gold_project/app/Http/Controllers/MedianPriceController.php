@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MedianPriceController extends Controller
 {
@@ -13,6 +14,14 @@ class MedianPriceController extends Controller
      */
     public function index()
     {
+        // dd(Auth::user()->row_id);
+        // if(Auth::user()->row_id == '0'){
+        //     return view('admin.median_price.index');
+        //     }
+        
+        // if(Auth::user()->row_id == '1'){
+        //     return view('user.median_price.index');
+        // }
         return view('admin.median_price.index');
     }
 
