@@ -492,7 +492,7 @@
                         <h4 for="validationprice">ดอกเบี้ย*</h4>
                     </div>
                     <div class="col-3">
-                        <h4 for="validationprice">ค่างวด*</h4>
+                        <h4 for="validationprice">ดอกเบี้ย*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -514,7 +514,7 @@
                                 <span class="input-group-text" id="basic-addon2">%</span>
                             </div>
                             <div class="invalid-feedback">
-                                โปรดกรอกดอกเบี้ย
+                                โปรดกรอกดอกเบี้ย%
                             </div>
                         </div>
                     </div>
@@ -525,7 +525,7 @@
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>
                             <div class="invalid-feedback">
-                                โปรดกรอกค่างวด
+                                โปรดกรอกดอกเบี้ยบาท
                             </div>
                         </div>
                     </div>
