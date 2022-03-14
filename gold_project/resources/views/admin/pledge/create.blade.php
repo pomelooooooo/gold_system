@@ -189,6 +189,26 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-6">
+                        <h4 for="validationcustomer">เบอร์โทรลูกค้า</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4 for="validationcustomer">ที่อยู่ลูกค้า</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class='form-group'>
+                            <input type="text" class="form-control" id="" placeholder="" readonly />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class='form-group'>
+                            <input type="text" class="form-control" id="" placeholder="" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-4">
                         <h4>วันเวลาที่รับจำนำ*</h4>
                     </div>
