@@ -91,7 +91,13 @@
                 data: formData,
                 success: function(data) {
                     if(data.status){
-                        window.location = "{{route('manage_employee.index')}}"
+                        // window.location = "{{route('manage_employee.index')}}"
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'อัปเดตข้อมูลเรียบร้อย',
+                        showConfirmButton: false,
+                        timer: 1500
+                        })
                     } else {
                         $('#validate_id_card').css('display', 'block')
                         $("#validate_id_card").focus();

@@ -132,7 +132,7 @@ class ManageEmployeeController extends Controller
         $manageemployee->email = $request->get('email');
         $manageemployee->date_card_start = $request->get('date_card_start');
         $manageemployee->date_card_end = $request->get('date_card_end');
-        $manageemployee->password =  Hash::make($request->get('password'));
+        // $manageemployee->password =  Hash::make($request->get('password'));
         // $managegold->pic = $request->get('pic');
         if ($request->hasFile('picture')) {
             $destination = 'assets/img/employee' . $manageemployee->picture;
