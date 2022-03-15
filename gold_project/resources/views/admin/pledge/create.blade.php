@@ -39,6 +39,20 @@
         });
     })
     $(document).ready(function() {
+        $("#validationcustomer").change(function() {
+            $.ajax({
+                url: "/pledge/gettel/" + $("#validationcustomer").val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $("#tel_customer").val(data.customer.tel)
+                    $("#address_customer").val(data.customer.address)
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
         $('#btn-buy').click(function() {
             var $item = $('#templateCard .card-item').clone();
             $item.appendTo('#card');
@@ -190,21 +204,21 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationcustomer">เบอร์โทรลูกค้า</h4>
+                        <h4>เบอร์โทรลูกค้า</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcustomer">ที่อยู่ลูกค้า</h4>
+                        <h4>ที่อยู่ลูกค้า</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control" id="" placeholder="" readonly />
+                            <input type="text" class="form-control" id="tel_customer" placeholder="" readonly />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control" id="" placeholder="" readonly />
+                            <input type="text" class="form-control" id="address_customer" placeholder="" readonly />
                         </div>
                     </div>
                 </div>
@@ -337,10 +351,10 @@
                             <h4 for="validationprice">ราคารับจำนำ*</h4>
                         </div>
                         <div class="col-3">
-                            <h4 for="validationprice">ดอกเบี้ย*</h4>
+                            <h4 for="validationpriceper">ดอกเบี้ย*</h4>
                         </div>
                         <div class="col-3">
-                            <h4 for="validationprice">ค่างวด*</h4>
+                            <h4 for="validationprice">ดอกเบี้ย*</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -362,7 +376,7 @@
                                     <span class="input-group-text" id="basic-addon2">%</span>
                                 </div>
                                 <div class="invalid-feedback">
-                                    โปรดกรอกดอกเบี้ย
+                                    โปรดกรอกดอกเบี้ย%
                                 </div>
                             </div>
                         </div>
@@ -373,7 +387,7 @@
                                     <span class="input-group-text" id="basic-addon2">บาท</span>
                                 </div>
                                 <div class="invalid-feedback">
-                                    โปรดกรอกค่างวด
+                                    โปรดกรอกดอกเบี้ยบาท
                                 </div>
                             </div>
                         </div>

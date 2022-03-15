@@ -204,4 +204,13 @@ class PledgeController extends Controller
         $producttype = TypeGold::all();
         return response()->json(['status' => true], 200);
     }
+
+    public function getTel($id)
+    {
+        $customer = Customer::where('id', $id)->first();
+        // dd($customer);
+        return response()->json(["customer" => $customer]);
+
+    }
+
 }
