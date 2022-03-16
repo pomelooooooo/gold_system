@@ -371,7 +371,7 @@
                         </div>
                         <div class="col-3">
                             <div class="input-group">
-                                <input name="" type="text" class="form-control" placeholder="" value="1.25" required />
+                                <input name="interest_per[]" type="text" class="form-control" placeholder="" value="1.25" required />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">%</span>
                                 </div>
@@ -382,7 +382,7 @@
                         </div>
                         <div class="col-3">
                             <div class="input-group">
-                                <input name="" type="text" class="form-control" placeholder="" required />
+                                <input name="interest_bath[]" type="text" class="form-control" placeholder="" required />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">บาท</span>
                                 </div>
@@ -502,12 +502,6 @@
                         <div class="invalid-feedback">
                             โปรดเลือกประเภทที่ต้องการ
                         </div>
-                        <!-- <div class="form-group">
-                            <input name="striped_id[]" type="text" class="form-control" placeholder="" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกลายที่ต้องการ
-                            </div>
-                        </div> -->
                     </div>
                     <div class="col-6">
                         <div class="form-group">
@@ -543,7 +537,7 @@
                     </div>
                     <div class="col-3">
                         <div class="input-group">
-                            <input name="" type="text" class="form-control" placeholder="" value="1.25" required />
+                            <input name="interest_per[]" type="text" class="form-control" placeholder="" value="1.25" required />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">%</span>
                             </div>
@@ -554,7 +548,7 @@
                     </div>
                     <div class="col-3">
                         <div class="input-group">
-                            <input name="" type="text" class="form-control" placeholder="" required />
+                            <input name="interest_bath[]" type="text" class="form-control" placeholder="" required />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>

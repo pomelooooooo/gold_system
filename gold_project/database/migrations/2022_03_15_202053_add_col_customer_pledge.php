@@ -18,7 +18,7 @@ class AddColCustomerPledge extends Migration
             $table->integer('customer_id')->nullable()->after('group_id');
             $table->integer('user_id')->nullable()->after('customer_id');
             $table->decimal('price_pledge',15,2)->nullable()->after('user_id');
-            $table->enum('status_check', ['0', '1'])->nullable()->after('price_pledge');
+            $table->enum('status_check', ['0', '1','2'])->nullable()->after('price_pledge');
             $table->decimal('interest_per',3,2)->nullable()->after('status_check');
             $table->decimal('interest_bath',15,2)->nullable()->after('interest_per');
         });

@@ -42,10 +42,11 @@ class PledgeController extends Controller
         }
         $productdetail = $productdetail->paginate(10);
         $producttype = TypeGold::all();
+        $pledge = Pledge::all();
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.pledge.index', compact('product', 'productdetail', 'customer', 'users', 'keyword', 'filter_type', 'filter_size', 'producttype'));
+        return view('admin.pledge.index', compact('product', 'productdetail', 'customer', 'users','pledge', 'keyword', 'filter_type', 'filter_size', 'producttype'));
     }
 
     /**
@@ -72,12 +73,13 @@ class PledgeController extends Controller
             $code = "0001";
         }
         $code = "D" . $code;
+        $pledge = Pledge::all();
         $product = Product::all();
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.create', compact('product', 'gold_type', 'users', 'customer', 'striped', 'code', 'producttype'));
+        return view('admin.pledge.create', compact('product', 'gold_type', 'users', 'customer', 'striped', 'code','pledge', 'producttype'));
     }
 
     /**
@@ -97,6 +99,7 @@ class PledgeController extends Controller
                     'striped_id' => $request->get('striped_id')[$key],
                     'size' => $request->get('size')[$key],
                     'gram' => $request->get('gram')[$key],
+                    'status' => '1',
                     'status_trade' => '3',
                     'type' => 'ทองจำนำ',
                     'allprice' => $request->get('allprice')[$key],
@@ -109,6 +112,12 @@ class PledgeController extends Controller
             $pledges = new Pledge(
                 [
                     'product_detail_id' => $productdetail->id,
+                    'user_id' => $request->get('user_id'),
+                    'customer_id' => $request->get('customer_id'),
+                    'price_pledge' => $request->get('price_pledge'),
+                    'status_check' => '0',
+                    'interest_per' => $request->get('interest_per'),
+                    'interest_bath' => $request->get('interest_bath'),
                     'installment_start' => $request->get('installment_start'),
                     'installment_next' => $request->get('installment_next'),
                     'installment_end' => $request->get('installment_end'),
@@ -120,7 +129,7 @@ class PledgeController extends Controller
         $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc")->paginate(5);
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.pledge.index', compact('productdetail', 'producttype', 'customer', 'users'));
+        return view('admin.pledge.index', compact('productdetail','pledges', 'producttype', 'customer', 'users'));
     }
 
     /**
@@ -144,11 +153,12 @@ class PledgeController extends Controller
     {
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
         $productdetail = ProductDetails::find($id);
+        $pledges = Pledge::find($id);
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.edit', compact('productdetail', 'producttype', 'striped', 'customer', 'users', 'gold_type', 'id'));
+        return view('admin.pledge.edit', compact('productdetail', 'producttype', 'striped','pledges', 'customer', 'users', 'gold_type', 'id'));
     }
 
     /**
@@ -177,6 +187,13 @@ class PledgeController extends Controller
         $productdetail->save();
         $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc")->paginate(5);
         $pledge = Pledge::find($id);
+        $pledge->group_id = $request->get('group_id');
+        $pledge->customer_id = $request->get('customer_id');
+        $pledge->user_id = $request->get('user_id');
+        $pledge->price_pledge = $request->get('price_pledge');
+        $pledge->status_check = $request->get('status_check');
+        $pledge->interest_per = $request->get('interest_per');
+        $pledge->interest_bath = $request->get('interest_bath');
         $pledge->installment_start = $request->get('installment_start');
         $pledge->installment_next = $request->get('installment_next');
         $pledge->installment_end = $request->get('installment_end');
@@ -184,7 +201,7 @@ class PledgeController extends Controller
         $customer = Customer::all();
         $users = User::all();
         // return view('admin.buy.index', compact('buy','users','customer', 'id'));
-        return redirect()->route('pledge.index')->with(['productdetail' => $productdetail, 'users' => $users, 'customer' => $customer]);
+        return redirect()->route('pledge.index')->with(['productdetail' => $productdetail, 'users' => $users, 'customer' => $customer,'pledge' => $pledge]);
     }
 
     /**
