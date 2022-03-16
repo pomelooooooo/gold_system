@@ -31,8 +31,8 @@
                 }
             });
             Swal.fire({
-                title: 'Are you sure?',
-                text: "ต้องการลบข้อมูลการซื้อหรือไม่?",
+                title: 'ต้องการลบข้อมูลการจำนำหรือไม่?',
+                // text: "ต้องการลบข้อมูลการซื้อหรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -55,9 +55,9 @@
                                     icon: 'success',
                                     title: 'ลบข้อมูลเรียบร้อย',
                                     showConfirmButton: false,
-                                    timer: 2000
+                                    timer: 1500
                                 }).then((result) => {
-                                    window.location = '/buy'
+                                    window.location = '/pledge'
                                 })
                             }
 
@@ -100,20 +100,14 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
-                        <form class="form-inline" action="/productdetail" method="GET">
-                            <input type="hidden" id="productdetail-all" name="productdetailall">
+                        <form class="form-inline" action="/pledge" method="GET">
+                            <input type="hidden" id="pledge-all" name="pledgeall">
                             <i class="fas fa-search" id="mySearch"></i>
-                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูลทอง">
-                            <select class="form-control mr-sm-2" name="filter_type" id="validationcategory">
-                                <option value="">เลือกประเภท</option>
-                                @foreach($producttype as $row)
-                                <option value="{{$row->id}}" {{isset($filter_type) && $row->id == $filter_type?"selected":""}}>{{$row->name}}</option>
-                                @endforeach
-                            </select>
-                            <select class="form-control " name="filter_size">
-                                <option value="">เลือกนํ้าหนัก</option>
-                                @foreach($productdetail as $row)
-                                <option value="{{$row->size}}" {{isset($filter_size) && $row->id == $filter_size?"selected":""}}>{{$row->size}}</option>
+                            <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูล">
+                            <select class="form-control mr-sm-2" name="filter_customer">
+                                <option value="">เลือกลูกค้า</option>
+                                @foreach($customer as $row)
+                                <option value="{{$row->id}}" {{isset($filter_customer) && $row->id == $filter_customer?"selected":""}}>{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
@@ -126,29 +120,24 @@
                         <table class="table table-bordered table-striped" id="myTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">รหัสสินค้า</th>
-                                    <th scope="col">รายละเอียดสินค้า</th>
-                                    <th scope="col">ประเภท</th>
-                                    <th scope="col">นํ้าหนัก</th>
-                                    <th scope="col">ผู้รับซื้อ</th>
                                     <th scope="col">ลูกค้า</th>
-                                    <th scope="col">วันที่รับซื้อ</th>
+                                    <th scope="col">เบอร์โทร</th>
+                                    <th scope="col">วันที่รับจำนำ</th>
+                                    <th scope="col">วันที่จ่ายดอกรอบถัดไป</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach($productdetail as $row)
+                                @foreach($pledge as $row)
                                 <tr>
-                                    <td>{{$row->code}}</td>
-                                    <td>{{$row->details}}</td>
-                                    <td>{{$row->name}}</td>
-                                    <td>{{$row->size}}</td>
-                                    <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                     <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
-                                    <td>{{$row->created_at}}</td>
+                                    <td>{{$row->telcustomer}}</td>
+                                    <td>{{$row->installment_start}}</td>
+                                    <td>{{$row->installment_next}}</td>
                                     <td class="text-center">
+                                        <a class="btn btn-primary" href=""><i class="fa fa-receipt"></i> จ่ายดอก</a>&nbsp;
                                         <a class="btn btn-warning" href="{{action('PledgeController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
                                     <td class="text-center">
@@ -160,9 +149,9 @@
                             </tbody>
 
                         </table>
-                        <!-- <div class="col-6">
-                            {{ $productdetail->links() }}
-                        </div> -->
+                        <div class="col-6">
+                            {{ $pledge->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

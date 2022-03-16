@@ -24,30 +24,19 @@ class PledgeController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc");
+        $pledge = Pledge::select("pledges.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer')->leftJoin('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc");
         if (!empty($keyword)) {
-            $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
-                ->orWhere('product_details.details', 'like', "%$keyword%")
-                ->orWhere('product_details.type_gold_id', 'like', "%$keyword%")
-                ->orWhere('product_details.category', 'like', "%$keyword%")
-                ->orWhere('product_details.user_id', 'like', "%$keyword%")
-                ->orWhere('product_details.customer_id', 'like', "%$keyword%");
+            $pledge = $pledge->where('pledges.id', 'like', "%$keyword%")
+                ->orWhere('pledges.customer_id', 'like', "%$keyword%");
         }
-        $filter_type = $request->get('filter_type');
-        if (!empty($filter_type)) {
-            $productdetail = $productdetail->where('product_details.type_gold_id', $filter_type);
+        $filter_customer = $request->get('filter_customer');
+        if (!empty($filter_customer)) {
+            $pledge = $pledge->where('pledges.customer_id', $filter_customer);
         }
-        $filter_size = $request->get('filter_size');
-        if (!empty($filter_size)) {
-            $productdetail = $productdetail->where('product_details.size', $filter_size);
-        }
-        $productdetail = $productdetail->paginate(10);
-        $producttype = TypeGold::all();
-        $pledge = Pledge::all();
-        $product = Product::all();
+        $pledge = $pledge->paginate(10);
         $customer = Customer::all();
         $users = User::all();
-        return view('admin.pledge.index', compact('product', 'productdetail', 'customer', 'users', 'pledge', 'keyword', 'filter_type', 'filter_size', 'producttype'));
+        return view('admin.pledge.index', compact('customer', 'users', 'pledge', 'keyword', 'filter_customer',));
     }
 
     /**

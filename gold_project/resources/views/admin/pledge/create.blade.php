@@ -223,20 +223,20 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <h4>วันเวลาที่รับจำนำ*</h4>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <h4>วันเวลาจ่ายดอกรอบถัดไป*</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class='form-group'>
-                            <input type="date" class="form-control" name="installment_start" value="{{date('Y-m-d').'T'.date('H:i:s')}}">
+                            <input type="date" class="form-control" name="installment_start" value="{{date('Y-m-d')}}">
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class='form-group'>
                             <input type="date" class="form-control" name="installment_next" value="">
                         </div>
@@ -363,7 +363,7 @@
                         </div>
                         <div class="col-3">
                             <div class="input-group">
-                                <input name="interest_per[]" type="text" class="form-control" placeholder="" value="1.25" required />
+                                <input name="interest_per[]" type="text" class="form-control" placeholder="" value="" required />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">%</span>
                                 </div>
