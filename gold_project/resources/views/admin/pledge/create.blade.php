@@ -229,24 +229,16 @@
                     <div class="col-4">
                         <h4>วันเวลาจ่ายดอกรอบถัดไป*</h4>
                     </div>
-                    <div class="col-4">
-                        <h4>วันเวลาที่หมดรับจำนำ*</h4>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
                         <div class='form-group'>
-                            <input type="datetime-local" class="form-control" name="installment_start" value="{{date('Y-m-d').'T'.date('H:i:s')}}">
+                            <input type="date" class="form-control" name="installment_start" value="{{date('Y-m-d').'T'.date('H:i:s')}}">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class='form-group'>
-                            <input type="datetime-local" class="form-control" name="installment_next" value="">
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class='form-group'>
-                            <input type="datetime-local" class="form-control" name="installment_end" value="">
+                            <input type="date" class="form-control" name="installment_next" value="">
                         </div>
                     </div>
                 </div>
@@ -426,7 +418,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <h4>รหัสสินค้า</h4>
+                        <h4>รหัสการรับจำนำ</h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationcategory">ประเภท*</h4>
@@ -514,7 +506,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationprice">ราคารับซื้อ*</h4>
+                        <h4 for="validationprice">ราคารับจำนำ*</h4>
                     </div>
                     <div class="col-3">
                         <h4 for="validationprice">ดอกเบี้ย*</h4>
