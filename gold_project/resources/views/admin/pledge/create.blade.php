@@ -416,7 +416,7 @@
         </div>
         <br>
         <div class="text-right">
-            <a type="button" class="btn btn-secondary" href="{{url('/buy')}}">กลับ</a>
+            <a type="button" class="btn btn-secondary" href="{{url('/pledge')}}">กลับ</a>
             <button type="submit" class="btn btn-success">บันทึก</button>
         </div>
     </form>
