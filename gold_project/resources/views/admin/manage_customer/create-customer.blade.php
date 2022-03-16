@@ -101,9 +101,9 @@
                 console.log(res);
 
                 // Connected
-                if (res[0] == "Connected") {
-                    document.getElementById("content").innerHTML = rawStr;
-                }
+                // if (res[0] == "Connected") {
+                //     document.getElementById("content").innerHTML = rawStr;
+                // }
                 var strtitle1 = ["-", "ID Card : ", "TH_Prefix :", "TH_Firstname : ", "TH_Lastname : ", "Sex : ", "Birthday : ", "EN_Prefix : ", "EN_Firstname : ", "EN_Lastname : ", "Issue : ", "Expire : ", "Address House No : ", "image"]
 
                 var strtitle2 = ["-", "DocumentNo : ", "Familyname : ", "Givenname : ", "Birthday : ", "PersonalNo : ", "Nationality : ", "Sex : ", "Dateofexpiry : ", "IssueState : ", "image"]

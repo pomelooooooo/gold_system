@@ -73,7 +73,7 @@ class ManageCustomerController extends Controller
         }
         $managecustomer->save();
         $managecustomer = Customer::select('*')->paginate(5);
-        return view('admin.manage_customer.index', compact('managecustomer'));
+        return response()->json(['status' => true], 200);
     }
 
     /**
