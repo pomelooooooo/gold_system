@@ -160,13 +160,13 @@ class PledgeController extends Controller
     public function edit($id)
     {
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
+        $pledges = Pledge::select("pledges.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer', 'users.name as nameusers', 'users.lastname as lastnameusers',)->leftJoin('customer', 'pledges.customer_id', '=', 'customer.id')->leftJoin('users', 'pledges.user_id', '=', 'user.id')->orderBy('created_at', "desc");
         $productdetail = ProductDetails::find($id);
-        $pledges = Pledge::find($id);
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.edit', compact('productdetail', 'producttype', 'striped', 'pledges', 'customer', 'users', 'gold_type', 'id'));
+        return view('admin.pledge.edit', compact('productdetail', 'producttype', 'striped', 'pledges', 'customer', 'users', 'id'));
     }
 
     /**
@@ -208,7 +208,6 @@ class PledgeController extends Controller
         $pledge->save();
         $customer = Customer::all();
         $users = User::all();
-        // return view('admin.buy.index', compact('buy','users','customer', 'id'));
         return redirect()->route('pledge.index')->with(['productdetail' => $productdetail, 'users' => $users, 'customer' => $customer, 'pledge' => $pledge]);
     }
 
@@ -235,5 +234,57 @@ class PledgeController extends Controller
         $customer = Customer::where('id', $id)->first();
         // dd($customer);
         return response()->json(["customer" => $customer]);
+    }
+
+    public function interest($id)
+    {
+        $productdetail = ProductDetails::select('code')->orderBy('code', "desc")->first();
+        if (!empty($productdetail)) {
+            $productdetail->code = substr($productdetail->code, 1);
+            $code = $productdetail->code + 1;
+            $num = "0";
+            // dd(strlen(str_replace('0', '', $code)));
+            if (strlen($code) <= 3) {
+                for ($i = strlen($code); $i < 3; $i++) {
+                    $num .= "0";
+                }
+                $code = $num . $code;
+            }
+        } else {
+            $code = "0001";
+        }
+        $code = "D" . $code;
+        // $productdetail = ProductDetails::find($id);
+        // $productdetail = ProductDetails::select("*");
+        $pledgeLine = PledgeLine::select("pledges_line.*",'product_details.code as code','product_details.type_gold_id as typegold','product_details.size as size','product_details.gram as gram','product_details.striped_id as striped','product_details.details as details')->leftJoin('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->leftJoin('pledges', 'pledges_line.pledges_id', '=', 'pledges.id')->orderBy('created_at', "desc");
+        // $pledges = Pledge::select("pledges.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer', 'users.name as nameusers', 'users.lastname as lastnameusers',)->leftJoin('customer', 'pledges.customer_id', '=', 'customer.id')->leftJoin('users', 'pledges.user_id', '=', 'user.id')->orderBy('created_at', "desc")->find($id);
+        $pledges = Pledge::find($id);
+        $producttype = TypeGold::all();
+        $users = User::all();
+        $customer = Customer::all();
+        $striped = Striped::all();
+        return view('admin.pledge.interest', compact('productdetail', 'producttype','code', 'striped', 'pledges','pledgeLine', 'customer', 'users', 'id'));
+    }
+
+    public function interest_update(Request $request)
+    {
+        foreach ($request->id as $key => $value) {
+            $productdetail = ProductDetails::find($request->id[$key]);
+            $productdetail->type_gold_id = $request->type_gold_id[$key];
+            $productdetail->details = $request->details[$key];
+            $productdetail->striped_id = $request->striped_id[$key];
+            $productdetail->size = $request->size[$key];
+            $productdetail->gram = $request->gram[$key];
+            $productdetail->allprice = $request->allprice[$key];
+            $productdetail->save();
+
+            $pledges = Pledge::find($request->id[$key]);
+            $pledges->save();
+
+            $pledgeLine = PledgeLine::find($request->id[$key]);
+            $pledgeLine->save();
+        }
+
+        return redirect()->route('pledge.index');
     }
 }

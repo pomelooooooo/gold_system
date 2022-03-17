@@ -244,12 +244,4 @@ class SellController extends Controller
         // return view('admin.sell.form');
         return $pdf->stream('formsell.pdf');
     }
-
-    public function formSelltest()
-    {
-        
-        $pdf = PDF::loadView('admin.sell.form');
-        // return $pdf->download('formtest.pdf');
-        return view('admin.sell.form');
-    }
 }

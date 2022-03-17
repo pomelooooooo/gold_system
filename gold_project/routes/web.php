@@ -82,3 +82,7 @@ Route::get('/stockold_recheck/getManusactor', 'StockController@getManusactor')->
 
 Route::resource('/pledge', 'PledgeController')->middleware('auth');
 Route::get('/pledge/gettel/{id}', 'PledgeController@getTel')->middleware('auth');
+Route::get('/pledge/interest/{id}', 'PledgeController@interest')->middleware('auth');
+Route::post('/pledge/interest_update', 'PledgeController@interest_update')->middleware('auth');
+
+

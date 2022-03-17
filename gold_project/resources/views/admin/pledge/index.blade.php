@@ -137,7 +137,7 @@
                                     <td>{{$row->installment_start}}</td>
                                     <td>{{$row->installment_next}}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary" href=""><i class="fa fa-receipt"></i> จ่ายดอก</a>&nbsp;
+                                        <a class="btn btn-primary" href="{{action('PledgeController@interest',$row->id)}}"><i class="fa fa-receipt"></i> จ่ายดอก</a>&nbsp;
                                         <a class="btn btn-warning" href="{{action('PledgeController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                     </td>
                                     <td class="text-center">
