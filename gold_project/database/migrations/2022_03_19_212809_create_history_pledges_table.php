@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePledgesLine extends Migration
+class CreateHistoryPledgesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePledgesLine extends Migration
      */
     public function up()
     {
-        Schema::create('pledges_line', function (Blueprint $table) {
+        Schema::create('history_pledges', function (Blueprint $table) {
             $table->id();
             $table->integer('pledges_id');
-            $table->integer('product_detail_id');
-            $table->enum('status_check', ['0', '1','2'])->nullable();
+            $table->string('customer_name');
+            $table->date('due_date');
+            $table->decimal('deposit', 15, 2);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreatePledgesLine extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pledges_line');
+        Schema::dropIfExists('history_pledges');
     }
 }

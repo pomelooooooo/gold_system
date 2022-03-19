@@ -1,7 +1,11 @@
 @extends('layouts.master')
 @section('title','จำนำทอง')
 @section('content')
-
+<style>
+    input[type=number]{
+        width: 100%;
+    }
+</style>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 <script type="text/javascript">
@@ -140,33 +144,13 @@
 <!-- end hero area -->
 <br />
 <div class="container">
-    <form method="POST" action="{{url('/pledge/interest_update', $id)}} " class="needs-validation" novalidate>
+    <form method="POST" action="{{action('PledgeController@interest_update', $id)}} " class="needs-validation" novalidate>
         <div class="card">
             <div class="card-header">
                 <h2>รับจำนำทอง</h2>
             </div>
             <div class="card-body">
                 {{csrf_field()}}
-                <div class="row">
-                    <div class="col-6">
-                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
-                    </div>
-                    <div class="col-6">
-                        <h4>ราคารับซื้อทองคำแท่งประจำวัน*</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="gold_bar_sell" placeholder="" readonly />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="gold_sell" placeholder="" readonly />
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-6">
                         <h4 for="validationuser">ผู้รับจำนำ*</h4>
@@ -181,7 +165,7 @@
                             <select class="custom-select selectpicker" name="user_id" id="validationuser" disabled> 
                                 <option selected disabled value="">เลือกผู้รับซื้อ</option>
                                 @foreach($users as $row)
-                                <option value="{{$row->id}}" {{!empty($pledges->user_id)&&$row->id == $pledges->user_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
+                                <option value="{{$row->id}}" {{!empty($pledges[0]->user_id)&&$row->id == $pledges[0]->user_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -194,7 +178,7 @@
                             <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" disabled>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
-                                <option value="{{$row->id}}" {{!empty($pledges->customer_id)&&$row->id == $pledges->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
+                                <option value="{{$row->id}}" {{!empty($pledges[0]->customer_id)&&$row->id == $pledges[0]->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -211,39 +195,94 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control" id="tel_customer" placeholder="" readonly />
+                            <input type="text" class="form-control" id="tel_customer" placeholder="" value="{{!empty($pledges[0])?$pledges[0]->tel:''}}" readonly />
                         </div>
                     </div>
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control" id="address_customer" placeholder="" readonly />
+                            <input type="text" class="form-control" id="address_customer" placeholder="" value="{{!empty($pledges[0])?$pledges[0]->address:''}}" readonly />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>วันเวลาที่รับจำนำ*</h4>
+                        <h4>วันที่รับฝาก</h4>
                     </div>
                     <div class="col-6">
-                        <h4>วันเวลาจ่ายดอกรอบถัดไป*</h4>
+                        <h4>วันกำหนดชำระ*</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="date" class="form-control" name="installment_start" value="{{date('Y-m-d')}}">
+                            <input type="text" class="form-control" name="" value="{{$pledges[0]->installment_start}}" readonly>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="date" class="form-control" name="installment_next" value="">
+                            <input type="date" class="form-control" name="due_date" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>ราคาทองที่จำนำทั้งหมด</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4>ยอดค้างชำระ</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class='form-group'>
+                            <input type="text" class="form-control" value="{{number_format(!empty($pledges[0])?$pledges[0]->price_pledge: 0, 2)}}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class='form-group'>
+                            <input type="text" class="form-control" value="{{number_format($deposit,2)}}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <h4>เงินที่ชำระ</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>ดอกเบี้ยที่ชำระ</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>ผู้ชำระเงิน</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class='form-group'>
+                            <input type="number" class="form-control" name="deposit" value="">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input name="interest_bath" type="number" class="form-control" placeholder="" value="{{$interest_bath}}" required readonly/>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">บาท</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                โปรดกรอกดอกเบี้ยบาท
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-4">
+                        <div class='form-group'>
+                            <input type="text" class="form-control" name="customer_name" value="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <br>
-        @foreach($pledgeLine as $key => $value)
+        @foreach($pledges as $key => $value)
         <div id="card">
             <div class="card card-item">
                 <div class="card-body">
@@ -258,15 +297,15 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <input name="code[]" type="text" class="form-control code" placeholder="" value="{{$code}}" readonly />
+                                <input name="code[]" type="text" class="form-control code" placeholder="" value="{{$value->code}}" readonly />
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group mb-3">
-                                <input type="hidden" name="type_gold_id[]" value="{{$value->typegold}}">
+                                <input type="hidden" name="type_gold_id[]" value="{{$value->type_gold_id}}">
                                 <select class="custom-select" disabled>
-                                    <option selected disabled value="">เลือกประเภททอง</option>
-                                    @foreach($productdetail as $row)
+                                    <option selected disabled value="">เลือกหน่วยนับ</option>
+                                    @foreach($producttype as $row)
                                     <option value="{{$row->id}}" {{$row->id == $value->type_gold_id ? 'selected' : ''}}>{{$row->name}}</option>
                                     @endforeach
                                 </select>
@@ -289,9 +328,9 @@
                             <div class="input-group mb-3">
                                 <input type="hidden" name="size[]" value="{{$value->size}}">
                                 <select class="custom-select size" name="size[]" disabled>
-                                    <option selected disabled value="">เลือกหน่วยนับ</option>
+                                    <option disabled value="">เลือกหน่วยนับ</option>
                                     @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
-                                    <option value="{{ $sizeWay }}">{{ old("size", $value->size) == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
+                                    <option value="{{ $sizeWay }}" {{ $value->size == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
@@ -301,7 +340,7 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                <input name="gram[]" type="text" class="form-control gram" placeholder=""  readonly/>
+                                <input name="gram[]" type="text" class="form-control gram" placeholder="" value="{{$value->weight}}"  readonly/>
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">กรัม</span>
                                 </div>
@@ -319,11 +358,11 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="input-group mb-3">
-                                <input type="hidden" name="size[]" value="{{$value->striped}}">
+                                <input type="hidden" name="size[]" value="{{$value->striped_id}}">
                                 <select class="custom-select" name="striped_id[]" id="validationstriped" disabled>
-                                    <option selected disabled value="">เลือกลาย</option>
+                                    <option disabled value="">เลือกลาย</option>
                                     @foreach($striped as $row)
-                                    <option value="{{$row->id}}"> {{$row->id == $value->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                    <option value="{{$row->id}}" {{$row->id == $value->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
@@ -344,44 +383,16 @@
                         <div class="col-6">
                             <h4 for="validationprice">ราคารับจำนำ*</h4>
                         </div>
-                        <div class="col-3">
-                            <h4 for="validationpriceper">ดอกเบี้ย*</h4>
-                        </div>
-                        <div class="col-3">
-                            <h4 for="validationprice">ดอกเบี้ย*</h4>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="input-group">
-                                <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                                <input name="allprice[]" type="text" class="form-control allprice" placeholder="" value="{{$value->allprice}}" required readonly />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">บาท</span>
                                 </div>
                                 <div class="invalid-feedback">
                                     โปรดกรอกราคารับจำนำ
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="input-group">
-                                <input name="interest_per[]" type="text" class="form-control" placeholder="" value="" required />
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">%</span>
-                                </div>
-                                <div class="invalid-feedback">
-                                    โปรดกรอกดอกเบี้ย%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="input-group">
-                                <input name="interest_bath[]" type="text" class="form-control" placeholder="" required />
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">บาท</span>
-                                </div>
-                                <div class="invalid-feedback">
-                                    โปรดกรอกดอกเบี้ยบาท
                                 </div>
                             </div>
                         </div>

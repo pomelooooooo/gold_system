@@ -223,22 +223,36 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <h4>วันเวลาที่รับจำนำ*</h4>
+                    <div class="col-4">
+                        <h4>วันที่รับจำนำ*</h4>
                     </div>
-                    <div class="col-6">
-                        <h4>วันเวลาจ่ายดอกรอบถัดไป*</h4>
+                    <div class="col-4">
+                        <h4>วันจ่ายดอกรอบถัดไป*</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>ดอกเบี้ย</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class='form-group'>
                             <input type="date" class="form-control" name="installment_start" value="{{date('Y-m-d')}}">
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class='form-group'>
                             <input type="date" class="form-control" name="installment_next" value="">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input name="interest_per" type="number" class="form-control" placeholder="" value="" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">%</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                โปรดกรอกดอกเบี้ย%
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -342,12 +356,6 @@
                         <div class="col-6">
                             <h4 for="validationprice">ราคารับจำนำ*</h4>
                         </div>
-                        <div class="col-3">
-                            <h4 for="validationpriceper">ดอกเบี้ย*</h4>
-                        </div>
-                        <div class="col-3">
-                            <h4 for="validationprice">ดอกเบี้ย*</h4>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -358,28 +366,6 @@
                                 </div>
                                 <div class="invalid-feedback">
                                     โปรดกรอกราคารับจำนำ
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="input-group">
-                                <input name="interest_per[]" type="text" class="form-control" placeholder="" value="" required />
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">%</span>
-                                </div>
-                                <div class="invalid-feedback">
-                                    โปรดกรอกดอกเบี้ย%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="input-group">
-                                <input name="interest_bath[]" type="text" class="form-control" placeholder="" required />
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">บาท</span>
-                                </div>
-                                <div class="invalid-feedback">
-                                    โปรดกรอกดอกเบี้ยบาท
                                 </div>
                             </div>
                         </div>
@@ -508,12 +494,6 @@
                     <div class="col-6">
                         <h4 for="validationprice">ราคารับจำนำ*</h4>
                     </div>
-                    <div class="col-3">
-                        <h4 for="validationprice">ดอกเบี้ย*</h4>
-                    </div>
-                    <div class="col-3">
-                        <h4 for="validationprice">ดอกเบี้ย*</h4>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -524,28 +504,6 @@
                             </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกราคารับซื้อ
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="input-group">
-                            <input name="interest_per[]" type="text" class="form-control" placeholder="" value="1.25" required />
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">%</span>
-                            </div>
-                            <div class="invalid-feedback">
-                                โปรดกรอกดอกเบี้ย%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="input-group">
-                            <input name="interest_bath[]" type="text" class="form-control" placeholder="" required />
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">บาท</span>
-                            </div>
-                            <div class="invalid-feedback">
-                                โปรดกรอกดอกเบี้ยบาท
                             </div>
                         </div>
                     </div>

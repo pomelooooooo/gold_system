@@ -22,6 +22,8 @@ class CreatePledgesTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('piece')->nullable();
             $table->decimal('weight', 15, 2)->nullable();
+            $table->decimal('interest_per', 15, 2)->nullable();
+            $table->decimal('interest_bath', 15, 2)->nullable();
             $table->decimal('price_pledge', 15, 2)->nullable();
             $table->enum('status_check', ['0', '1', '2'])->nullable();
             $table->timestamps();

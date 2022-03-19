@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Customer;
+use App\HistoryPledges;
 use App\Pledge;
 use App\PledgeLine;
 use Illuminate\Support\Facades\File;
@@ -101,6 +102,8 @@ class PledgeController extends Controller
                 'piece' => $piece,
                 'weight' => $weight,
                 'price_pledge' => $price_pledge,
+                'interest_per' => $request->get('interest_per'),
+                'interest_bath' => $request->get('interest_bath'),
                 'installment_start' => $request->get('installment_start'),
                 'installment_next' => $request->get('installment_next'),
             ]
@@ -130,8 +133,6 @@ class PledgeController extends Controller
             $pledgeLine = new PledgeLine([
                 'pledges_id' => $pledges->id,
                 'product_detail_id' => $productdetail->id,
-                'interest_per' => $request->get('interest_per')[$key],
-                'interest_bath' => $request->get('interest_bath')[$key],
                 'status_check' => '0',
             ]);
             $pledgeLine->save();
@@ -238,52 +239,39 @@ class PledgeController extends Controller
 
     public function interest($id)
     {
-        $productdetail = ProductDetails::select('code')->orderBy('code', "desc")->first();
-        if (!empty($productdetail)) {
-            $productdetail->code = substr($productdetail->code, 1);
-            $code = $productdetail->code + 1;
-            $num = "0";
-            // dd(strlen(str_replace('0', '', $code)));
-            if (strlen($code) <= 3) {
-                for ($i = strlen($code); $i < 3; $i++) {
-                    $num .= "0";
-                }
-                $code = $num . $code;
-            }
-        } else {
-            $code = "0001";
+        $pledges = Pledge::select('pledges.*','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.tel', 'customer.address')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();        
+        $history_pledges = HistoryPledges::where('pledges_id',$pledges[0]->id)->get();
+        $deposit = 0;
+        // $interest_per = 0;
+        foreach($history_pledges as $key => $value){
+            $deposit += $value->deposit;
         }
-        $code = "D" . $code;
-        // $productdetail = ProductDetails::find($id);
-        // $productdetail = ProductDetails::select("*");
-        $pledgeLine = PledgeLine::select("pledges_line.*",'product_details.code as code','product_details.type_gold_id as typegold','product_details.size as size','product_details.gram as gram','product_details.striped_id as striped','product_details.details as details')->leftJoin('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->leftJoin('pledges', 'pledges_line.pledges_id', '=', 'pledges.id')->orderBy('created_at', "desc");
-        // $pledges = Pledge::select("pledges.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer', 'users.name as nameusers', 'users.lastname as lastnameusers',)->leftJoin('customer', 'pledges.customer_id', '=', 'customer.id')->leftJoin('users', 'pledges.user_id', '=', 'user.id')->orderBy('created_at', "desc")->find($id);
-        $pledges = Pledge::find($id);
+        $deposit = (float)$pledges[0]->price_pledge - $deposit;
+        $interest_bath = ($deposit * $pledges[0]->interest_per) / 100;
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.interest', compact('productdetail', 'producttype','code', 'striped', 'pledges','pledgeLine', 'customer', 'users', 'id'));
+        return view('admin.pledge.interest', compact('producttype', 'striped', 'pledges', 'customer', 'users', 'id', 'interest_bath','deposit'));
     }
 
-    public function interest_update(Request $request)
+    public function interest_update(Request $request,$id)
     {
-        foreach ($request->id as $key => $value) {
-            $productdetail = ProductDetails::find($request->id[$key]);
-            $productdetail->type_gold_id = $request->type_gold_id[$key];
-            $productdetail->details = $request->details[$key];
-            $productdetail->striped_id = $request->striped_id[$key];
-            $productdetail->size = $request->size[$key];
-            $productdetail->gram = $request->gram[$key];
-            $productdetail->allprice = $request->allprice[$key];
-            $productdetail->save();
+        $pledges = Pledge::find($id);
+        $pledges->interest_bath = $request->get('interest_bath');
+        $pledges->installment_start = $request->get('installment_start');
+        $pledges->save();
 
-            $pledges = Pledge::find($request->id[$key]);
-            $pledges->save();
+        $pledge_history = new HistoryPledges([
+            'pledges_id' => $pledges->id,
+            'deposit' => $request->get('deposit'),
+            'due_date' => $request->get('due_date'),
+            'customer_name' => $request->get('customer_name'),
+        ]);
+        $pledge_history->save();
 
-            $pledgeLine = PledgeLine::find($request->id[$key]);
-            $pledgeLine->save();
-        }
+        $customer = Customer::all();
+        $users = User::all();
 
         return redirect()->route('pledge.index');
     }
