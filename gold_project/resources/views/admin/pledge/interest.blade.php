@@ -279,6 +279,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <br>
@@ -383,6 +384,9 @@
                         <div class="col-6">
                             <h4 for="validationprice">ราคารับจำนำ*</h4>
                         </div>
+                        <div class="col-6">
+                            <h4>สถานะทอง</h4>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -396,7 +400,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="pl-2">
+                                <div class="form-group">
+                                    @foreach(["1"=>"ไถ่ถอนแล้ว","2"=>"หลุดจำนำ"] as $statusWay => $statusLable)
+                                    <input type="radio" class="form-check-input" name="status_check[]"  value="{{ $statusWay }}" required>
+                                    <h6 class="form-check-label">{{ $statusLable }}</h6>
+                                    <div class="invalid-feedback">โปรดเลือกสถานะทองที่ต้องการ</div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -262,6 +262,12 @@ class PledgeController extends Controller
         $pledges->installment_start = $request->get('installment_start');
         $pledges->save();
 
+        foreach ($request->id as $key => $value) {
+            $pledgeLine = PledgeLine::find($request->id[$key]);
+            $pledgeLine->status_check = $request->status_check[$key];
+            $pledgeLine->save();
+        }
+
         $pledge_history = new HistoryPledges([
             'pledges_id' => $pledges->id,
             'deposit' => $request->get('deposit'),
