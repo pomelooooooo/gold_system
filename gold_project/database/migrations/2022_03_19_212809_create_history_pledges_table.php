@@ -17,8 +17,8 @@ class CreateHistoryPledgesTable extends Migration
             $table->id();
             $table->integer('pledges_id');
             $table->string('customer_name');
-            $table->date('due_date');
-            $table->decimal('deposit', 15, 2);
+            $table->date('due_date')->nullable();
+            $table->decimal('deposit', 15, 2)->nullable();
             $table->timestamps();
         });
     }

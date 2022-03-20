@@ -215,12 +215,12 @@
                 <div class="row">
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="text" class="form-control" name="" value="{{$pledges[0]->installment_start}}" readonly>
+                            <input type="date" class="form-control" name="" value="{{Carbon\Carbon::parse($pledges[0]->installment_start)->format('Y-m-d')}}" readonly>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class='form-group'>
-                            <input type="date" class="form-control" name="due_date" value="">
+                            <input type="date" class="form-control" name="due_date" value="{{Carbon\Carbon::parse($history_pledges_due_date)->format('Y-m-d')}}">
                         </div>
                     </div>
                 </div>
@@ -284,6 +284,7 @@
         </div>
         <br>
         @foreach($pledges as $key => $value)
+        <input type="hidden" name="pledges_line_id[]" value="{{$value->pledges_line_id}}">
         <div id="card">
             <div class="card card-item">
                 <div class="card-body">
@@ -403,8 +404,8 @@
                         <div class="col-6">
                             <div class="pl-2">
                                 <div class="form-group">
-                                    @foreach(["1"=>"ไถ่ถอนแล้ว","2"=>"หลุดจำนำ"] as $statusWay => $statusLable)
-                                    <input type="radio" class="form-check-input" name="status_check[]"  value="{{ $statusWay }}" required>
+                                    @foreach(["0"=>"ยังไม่ไถ่ถอน","1"=>"ไถ่ถอนแล้ว","2"=>"หลุดจำนำ"] as $statusWay => $statusLable)
+                                    <input type="radio" class="form-check-input" name="status_check[{{$key}}]"  value="{{ $statusWay }}" {{$value->pledges_line_status_check == $statusWay ? "checked" : ""}} required>
                                     <h6 class="form-check-label">{{ $statusLable }}</h6>
                                     <div class="invalid-feedback">โปรดเลือกสถานะทองที่ต้องการ</div>
                                     @endforeach

@@ -239,7 +239,14 @@ class PledgeController extends Controller
 
     public function interest($id)
     {
-        $pledges = Pledge::select('pledges.*','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.tel', 'customer.address')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();        
+        $pledges = Pledge::select('pledges.*','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.tel', 'customer.address','pledges_line.id as pledges_line_id','pledges_line.status_check as pledges_line_status_check')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();        
+        // dd($pledges);
+        $history_pledges_due_date = HistoryPledges::select('due_date')->where('pledges_id',$pledges[0]->id)->orderBy('id','desc')->first();
+        if( !empty($history_pledges_due_date)){
+            $history_pledges_due_date = Carbon::parse($history_pledges_due_date->due_date)->addMonth();
+        }else{
+            $history_pledges_due_date = Carbon::parse($pledges[0]->installment_start)->addMonth();
+        }
         $history_pledges = HistoryPledges::where('pledges_id',$pledges[0]->id)->get();
         $deposit = 0;
         // $interest_per = 0;
@@ -252,19 +259,20 @@ class PledgeController extends Controller
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.interest', compact('producttype', 'striped', 'pledges', 'customer', 'users', 'id', 'interest_bath','deposit'));
+        return view('admin.pledge.interest', compact('producttype', 'striped', 'pledges', 'customer', 'users', 'id', 'interest_bath','deposit','history_pledges_due_date'));
     }
 
     public function interest_update(Request $request,$id)
     {
         $pledges = Pledge::find($id);
         $pledges->interest_bath = $request->get('interest_bath');
-        $pledges->installment_start = $request->get('installment_start');
+        $pledges->updated_at = Carbon::now();
         $pledges->save();
 
-        foreach ($request->id as $key => $value) {
-            $pledgeLine = PledgeLine::find($request->id[$key]);
+        foreach ($request->pledges_line_id as $key => $value) {
+            $pledgeLine = PledgeLine::find($value);
             $pledgeLine->status_check = $request->status_check[$key];
+            $pledgeLine->updated_at = Carbon::now();
             $pledgeLine->save();
         }
 
