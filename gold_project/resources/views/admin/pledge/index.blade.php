@@ -107,7 +107,7 @@
                             <select class="form-control mr-sm-2" name="filter_customer">
                                 <option value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
-                                <option value="{{$row->id}}" {{isset($filter_customer) && $row->id == $filter_customer?"selected":""}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{isset($filter_customer) && $row->id == $filter_customer?"selected":""}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
