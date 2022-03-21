@@ -17,7 +17,7 @@
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>ชื่อผู้ใช้งานหรือรหัสผ่านที่คุณป้อนไม่ถูกต้อง</strong>
                                     </span>
                                 @enderror
                             </div>

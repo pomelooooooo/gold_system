@@ -78,14 +78,21 @@
 						<!-- logo -->
 						<div class="site-logo">
 						@if(\Auth::user()->row_id == '0')
-							<a href="/manage_employee/{{\Auth::user()->id}}/edit">
-								<img src="{{url('assets/img/logo.png')}}" alt="">
-
-							</a>
+							<div class="avatar">
+								<a href="/manage_employee/{{\Auth::user()->id}}/edit">
+									<img src="{{url('assets/img/employee/'.Auth::user()->picture)}}" class="avatar__image">
+									<br>
+									{{Auth::user()->name}}
+								</a>
+							</div>
 						@else
-							<a href="/manage_employee/{{\Auth::user()->id}}/edit">
-								<img src="{{url('assets/img/logo.png')}}" alt="">
-							</a>
+							<div class="avatar">
+								<a href="/manage_employee/{{\Auth::user()->id}}/edit">
+									<img src="{{url('assets/img/employee/'.Auth::user()->picture)}}" class="avatar__image">
+									<br>
+									{{Auth::user()->name}}
+								</a>
+							</div>
 						@endif
 						</div>
 						<!-- logo -->
