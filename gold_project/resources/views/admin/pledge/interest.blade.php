@@ -246,24 +246,27 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <h4>เงินที่ชำระ</h4>
+                        <h4 for="validationdeposit">เงินที่ชำระ</h4>
                     </div>
                     <div class="col-4">
-                        <h4>ดอกเบี้ยที่ชำระ</h4>
+                        <h4 for="validationinterestbath">ดอกเบี้ยที่ชำระ</h4>
                     </div>
                     <div class="col-4">
-                        <h4>ผู้ชำระเงิน</h4>
+                        <h4 for="validationwhopay">ผู้ชำระเงิน</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
                         <div class='form-group'>
-                            <input type="number" class="form-control" name="deposit" value="">
+                            <input type="number" class="form-control" name="deposit" value="" id="validationdeposit" required>
+                            <div class="invalid-feedback">
+                                โปรดกรอกเงินที่ชำระ
+                            </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="input-group">
-                            <input name="interest_bath" type="number" class="form-control" placeholder="" value="{{$interest_bath}}" required readonly/>
+                            <input name="interest_bath" type="number" class="form-control" placeholder="" value="{{$interest_bath}}" id="validationinterestbath" required/>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>
@@ -275,7 +278,10 @@
                     </div>
                     <div class="col-4">
                         <div class='form-group'>
-                            <input type="text" class="form-control" name="customer_name" value="">
+                            <input type="text" class="form-control" name="customer_name" value="" id="validationwhopay" required>
+                            <div class="invalid-feedback">
+                                โปรดกรอกผู้ชำระเงิน
+                            </div>
                         </div>
                     </div>
                 </div>
