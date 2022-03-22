@@ -139,7 +139,7 @@
 <!-- end hero area -->
 <br />
 <div class="container">
-    <form method="POST" action="{{route('pledge.store')}} " class="needs-validation">
+    <form method="POST" action="{{route('pledge.store')}} " class="needs-validation" novalidate>
         <div class="card">
             <div class="card-header">
                 <h2>รับจำนำทอง</h2>
@@ -184,18 +184,21 @@
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
-                                โปรดเลือกหน่วยนับที่ต้องการ
+                                โปรดเลือกผู้รับซื้อ
                             </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="input-group mb-3" style="margin-top: 0.5em;">
-                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer">
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
                                 <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                                โปรดเลือกลูกค้า
+                            </div>
                         </div>
                     </div>
                     <div class="col-2">
@@ -230,7 +233,7 @@
                         <h4>วันจ่ายดอกรอบถัดไป*</h4>
                     </div>
                     <div class="col-4">
-                        <h4>ดอกเบี้ย</h4>
+                        <h4>ดอกเบี้ย*</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -241,7 +244,10 @@
                     </div>
                     <div class="col-4">
                         <div class='form-group'>
-                            <input type="date" class="form-control" name="installment_next" value="">
+                            <input type="date" class="form-control" name="installment_next" value="" required>
+                            <div class="invalid-feedback">
+                                โปรดเลือกวันจ่ายดอกรอบถัดไป
+                            </div>
                         </div>
                     </div>
                     <div class="col-4">
@@ -295,7 +301,7 @@
                             <h4 for="validationtelstore">นํ้าหนัก*</h4>
                         </div>
                         <div class="col-6">
-                            <h4>นํ้าหนัก(กรัม)*</h4>
+                            <h4 for="validationgram">นํ้าหนัก(กรัม)*</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -314,7 +320,7 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                <input name="gram[]" type="text" class="form-control gram" placeholder="" />
+                                <input name="gram[]" type="text" class="form-control gram" placeholder="" required/>
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">กรัม</span>
                                 </div>

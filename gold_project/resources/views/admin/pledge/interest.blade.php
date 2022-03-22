@@ -44,6 +44,21 @@
         });
     })
     $(document).ready(function() {
+        $("body").on('click', '#btn-update', function(e) {
+                Swal.fire({
+                    title: 'ต้องการอัปเดตสถานะการจ่ายดอกหรือไม่?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่',
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#post-update").submit()
+                    }
+                    })
+        })
         $("#validationcustomer").change(function() {
             $.ajax({
                 url: "/pledge/gettel/" + $("#validationcustomer").val(),
@@ -144,7 +159,7 @@
 <!-- end hero area -->
 <br />
 <div class="container">
-    <form method="POST" action="{{action('PledgeController@interest_update', $id)}} " class="needs-validation" novalidate>
+    <form method="POST" action="{{action('PledgeController@interest_update', $id)}} " id="post-update" class="needs-validation" novalidate>
         <div class="card">
             <div class="card-header">
                 <h2>รับจำนำทอง</h2>
@@ -427,7 +442,7 @@
         @endforeach
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/pledge')}}">กลับ</a>
-            <button type="submit" class="btn btn-success">บันทึก</button>
+            <button type="button" id="btn-update" class="btn btn-success">บันทึก</button>
         </div>
     </form>
 </div>

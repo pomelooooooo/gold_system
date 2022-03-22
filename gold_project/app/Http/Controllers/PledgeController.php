@@ -160,14 +160,28 @@ class PledgeController extends Controller
      */
     public function edit($id)
     {
-        $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
-        $pledges = Pledge::select("pledges.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer', 'users.name as nameusers', 'users.lastname as lastnameusers',)->leftJoin('customer', 'pledges.customer_id', '=', 'customer.id')->leftJoin('users', 'pledges.user_id', '=', 'user.id')->orderBy('created_at', "desc");
-        $productdetail = ProductDetails::find($id);
+        $pledges = Pledge::select('pledges.*','product_details.id as product_detail_id','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.tel', 'customer.address','pledges_line.id as pledges_line_id','pledges_line.status_check as pledges_line_status_check')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();        
+        // dd($pledges);
+
+        $history_pledges_due_date = HistoryPledges::select('due_date')->where('pledges_id',$pledges[0]->id)->orderBy('id','desc')->first();
+        if( !empty($history_pledges_due_date)){
+            $history_pledges_due_date = Carbon::parse($history_pledges_due_date->due_date)->addMonth();
+        }else{
+            $history_pledges_due_date = Carbon::parse($pledges[0]->installment_start)->addMonth();
+        }
+        $history_pledges = HistoryPledges::where('pledges_id',$pledges[0]->id)->get();
+        $deposit = 0;
+        // $interest_per = 0;
+        foreach($history_pledges as $key => $value){
+            $deposit += $value->deposit;
+        }
+        $deposit = (float)$pledges[0]->price_pledge - $deposit;
+        $interest_bath = ($deposit * $pledges[0]->interest_per) / 100;
         $producttype = TypeGold::all();
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.edit', compact('productdetail', 'producttype', 'striped', 'pledges', 'customer', 'users', 'id'));
+        return view('admin.pledge.edit', compact('producttype', 'striped', 'pledges', 'customer', 'users', 'id', 'interest_bath','deposit','history_pledges_due_date'));
     }
 
     /**
@@ -179,37 +193,36 @@ class PledgeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $productdetail = ProductDetails::find($id);
-        $productdetail->code = $request->get('code');
-        $productdetail->details = $request->get('details');
-        $productdetail->striped_id = $request->get('striped_id');
-        $productdetail->size = $request->get('size');
-        $productdetail->gram = $request->get('gram');
-        $productdetail->status_trade = '0';
-        $productdetail->type = 'ทองจำนำ';
-        $productdetail->gratuity = $request->get('gratuity');
-        $productdetail->user_id = $request->get('user_id');
-        $productdetail->datetime = $request->get('datetime');
-        $productdetail->customer_id = $request->get('customer_id');
-        $productdetail->type_gold_id = $request->get('type_gold_id');
-        $productdetail->allprice = $request->get('allprice');
-        $productdetail->save();
-        $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc")->paginate(5);
-        $pledge = Pledge::find($id);
-        $pledge->group_id = $request->get('group_id');
-        $pledge->customer_id = $request->get('customer_id');
-        $pledge->user_id = $request->get('user_id');
-        $pledge->price_pledge = $request->get('price_pledge');
-        $pledge->status_check = $request->get('status_check');
-        $pledge->interest_per = $request->get('interest_per');
-        $pledge->interest_bath = $request->get('interest_bath');
-        $pledge->installment_start = $request->get('installment_start');
-        $pledge->installment_next = $request->get('installment_next');
-        $pledge->installment_end = $request->get('installment_end');
-        $pledge->save();
+        // dd($request);
+        $pledges = Pledge::find($id);
+        $pledges->user_id = $request->get('user_id');
+        $pledges->customer_id = $request->get('customer_id');
+        $pledges->installment_start = $request->get('installment_start');
+        $pledges->installment_next = $request->get('installment_next');
+        $pledges->interest_per = $request->get('interest_per');
+        $pledges->updated_at = Carbon::now();
+        $pledges->save();
+
+        foreach ($request->pledges_line_id as $key => $value) {
+            $pledgeLine = PledgeLine::find($value);
+            $pledgeLine->updated_at = Carbon::now();
+            $pledgeLine->save();
+
+            $productdetail = ProductDetails::find($request->product_detail_id[$key]);
+            $productdetail->type_gold_id = $request->type_gold_id[$key];
+            $productdetail->size = $request->size[$key];
+            $productdetail->gram = $request->gram[$key];
+            $productdetail->striped_id = $request->striped_id[$key];
+            $productdetail->details = $request->details[$key];
+            $productdetail->allprice = $request->allprice[$key];
+            // dd($productdetail);
+            $productdetail->save();
+
+        }
         $customer = Customer::all();
         $users = User::all();
-        return redirect()->route('pledge.index')->with(['productdetail' => $productdetail, 'users' => $users, 'customer' => $customer, 'pledge' => $pledge]);
+
+        return redirect()->route('pledge.index');
     }
 
     /**
@@ -220,9 +233,9 @@ class PledgeController extends Controller
      */
     public function destroy($id)
     {
-        $productdetail = ProductDetails::find($id);
-        $productdetail->delete();
-        $productdetail = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองจำนำ')->orderBy('created_at', "desc")->paginate(5);
+        $pledges = Pledge::find($id);
+        $pledges->delete();
+        $pledges = Pledge::select('pledges.*','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.tel', 'customer.address','pledges_line.id as pledges_line_id','pledges_line.status_check as pledges_line_status_check')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->paginate(10);
         $product = Product::all();
         $customer = Customer::all();
         $users = User::all();
@@ -289,4 +302,37 @@ class PledgeController extends Controller
 
         return redirect()->route('pledge.index');
     }
+
+    // public function pledge_update(Request $request, $id)
+    // {
+    //     $pledges = Pledge::find($id);
+    //     $pledges->user_id = $request->get('user_id');
+    //     $pledges->customer_id = $request->get('customer_id');
+    //     $pledges->installment_start = $request->get('installment_start');
+    //     $pledges->installment_next = $request->get('installment_next');
+    //     $pledges->interest_per = $request->get('interest_per');
+    //     $pledges->updated_at = Carbon::now();
+    //     $pledges->save();
+
+    //     foreach ($request->pledges_line_id as $key => $value) {
+    //         $pledgeLine = PledgeLine::find($value);
+    //         $pledgeLine->updated_at = Carbon::now();
+    //         $pledgeLine->save();
+
+    //         $productdetail = ProductDetails::find($value);
+    //         $productdetail->type_gold_id = $request->type_gold_id[$key];
+    //         $productdetail->size = $request->size[$key];
+    //         $productdetail->gram = $request->gram[$key];
+    //         $productdetail->striped_id = $request->striped_id[$key];
+    //         $productdetail->details = $request->details[$key];
+    //         $productdetail->allprice = $request->allprice[$key];
+    //         dd($productdetail);
+    //         $productdetail->save();
+
+    //     }
+    //     $customer = Customer::all();
+    //     $users = User::all();
+
+    //     return redirect()->route('pledge.index');
+    // }
 }
