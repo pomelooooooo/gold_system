@@ -13,6 +13,7 @@ use App\Customer;
 use App\HistoryPledges;
 use App\Pledge;
 use App\PledgeLine;
+use PDF;
 use Illuminate\Support\Facades\File;
 
 class PledgeController extends Controller
@@ -303,36 +304,17 @@ class PledgeController extends Controller
         return redirect()->route('pledge.index');
     }
 
-    // public function pledge_update(Request $request, $id)
-    // {
-    //     $pledges = Pledge::find($id);
-    //     $pledges->user_id = $request->get('user_id');
-    //     $pledges->customer_id = $request->get('customer_id');
-    //     $pledges->installment_start = $request->get('installment_start');
-    //     $pledges->installment_next = $request->get('installment_next');
-    //     $pledges->interest_per = $request->get('interest_per');
-    //     $pledges->updated_at = Carbon::now();
-    //     $pledges->save();
+    public function formpledge($id)
+    {
+        // $form = FormBuy::select('formbuy.*', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.idcard as idcardcustomer', 'customer.address as addresscustomer', 'product_details.details as detail', 'product_details.gram as gram', 'product_details.allprice')
+        //     ->leftJoin('customer', 'formbuy.customer_id', '=', 'customer.id')->leftJoin('product_details', 'formbuy.product_detail_id', '=', 'product_details.id')->where('group_id', $id)->get();
+        // // dd($form[0]);
+        $pledges = Pledge::select('pledges.*','product_details.id as product_detail_id','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.name as namecustomer','customer.lastname as lastnamecustomer','customer.tel', 'customer.address','pledges_line.id as pledges_line_id','pledges_line.status_check as pledges_line_status_check')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();
+        $customer = Customer::all();
+        $productdetail = ProductDetails::all();
+        $pdf = PDF::loadView('admin.pledge.form', compact('productdetail', 'customer','pledges'));
 
-    //     foreach ($request->pledges_line_id as $key => $value) {
-    //         $pledgeLine = PledgeLine::find($value);
-    //         $pledgeLine->updated_at = Carbon::now();
-    //         $pledgeLine->save();
-
-    //         $productdetail = ProductDetails::find($value);
-    //         $productdetail->type_gold_id = $request->type_gold_id[$key];
-    //         $productdetail->size = $request->size[$key];
-    //         $productdetail->gram = $request->gram[$key];
-    //         $productdetail->striped_id = $request->striped_id[$key];
-    //         $productdetail->details = $request->details[$key];
-    //         $productdetail->allprice = $request->allprice[$key];
-    //         dd($productdetail);
-    //         $productdetail->save();
-
-    //     }
-    //     $customer = Customer::all();
-    //     $users = User::all();
-
-    //     return redirect()->route('pledge.index');
-    // }
+        // return view('admin.sell.form');
+        return $pdf->stream('formpledge.pdf');
+    }
 }

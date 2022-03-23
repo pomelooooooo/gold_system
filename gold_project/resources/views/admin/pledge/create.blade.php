@@ -39,6 +39,160 @@
         });
     })
     $(document).ready(function() {
+        $("body").on('click', '#btn-save', function(e) {
+            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null) {
+                Swal.fire({
+                    title: 'ต้องการรับซื้อขายฝากทองหรือไม่?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่',
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#post-save").submit(),
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'รับซื้อขายฝากทองเรียบร้อย',
+                        showConfirmButton: false,
+                        timer: 1500
+                        }).then((result) => {
+                            Swal.fire({
+                                title: 'ต้องการพิมพ์ใใบรับซื้อขายฝากทองหรือไม่?',
+                                // text: "You won't be able to revert this!",
+                                icon: 'question',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'ใช่',
+                                cancelButtonText: 'ไม่',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.open('/pledge/formpledge/' + group_id, '_blank')
+                                }
+                                window.location = '/pledge'
+                            })
+                        })
+                    }
+                    // window.open('/pledge/formpledge/' + group_id, '_blank')
+
+                })
+            }else{
+                $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
+                $('.validateUser').find('.invalid-feedback').css('display', 'none')
+
+                $('.validateCustomer').find('.select2-selection--single').removeClass('is-invalid')
+                $('.validateCustomer').find('.invalid-feedback').css('display', 'none')
+
+                $('.validateDatenext').find('.date-next').removeClass('is-invalid')
+                $('.validateDatenext').find('.invalid-feedback').css('display', 'none')
+
+                $('.validatePer').find('.input-per').removeClass('is-invalid')
+                $('.validatePer').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationCategory').find('.custom-select--single').removeClass('is-invalid')
+                $('.validationCategory').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationCategory2').find('.custom-select--single2').removeClass('is-invalid')
+                $('.validationCategory2').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationWeight').find('.custom-select--size').removeClass('is-invalid')
+                $('.validationWeight').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationWeight2').find('.custom-select--size2').removeClass('is-invalid')
+                $('.validationWeight2').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationGram').find('.input-gram').removeClass('is-invalid')
+                $('.validationGram').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationGram2').find('.input-gram2').removeClass('is-invalid')
+                $('.validationGram2').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationStriped').find('.custom-select--striped').removeClass('is-invalid')
+                $('.validationStriped').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationStriped2').find('.custom-select--striped2').removeClass('is-invalid')
+                $('.validationStriped2').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationDetails').find('.form-control--detail').removeClass('is-invalid')
+                $('.validationDetails').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationDetails2').find('.form-control--detail2').removeClass('is-invalid')
+                $('.validationDetails2').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationPrice').find('.form-control--price').removeClass('is-invalid')
+                $('.validationPrice').find('.invalid-feedback').css('display', 'none')
+
+                $('.validationPrice2').find('.form-control--price2').removeClass('is-invalid')
+                $('.validationPrice2').find('.invalid-feedback').css('display', 'none')
+
+                if ($('#validationuser').val() == null) {
+                    $('.validateUser').find('.select2-selection--single').addClass('is-invalid')
+                    $('.validateUser').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationcustomer').val() == null) {
+                    $('.validateCustomer').find('.select2-selection--single').addClass('is-invalid')
+                    $('.validateCustomer').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validatedatenext').val() == null) {
+                    $('.validateDatenext').find('.date-next').addClass('is-invalid')
+                    $('.validateDatenext').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validateper').val() == '') {
+                    $('.validatePer').find('.input-per').addClass('is-invalid')
+                    $('.validatePer').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationcategory').val() == null) {
+                    $('.validationCategory').find('.custom-select--single').addClass('is-invalid')
+                    $('.validationCategory').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationcategory2').val() == null) {
+                    $('.validationCategory2').find('.custom-select--single2').addClass('is-invalid')
+                    $('.validationCategory2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationweight').val() == null) {
+                    $('.validationWeight').find('.custom-select--size').addClass('is-invalid')
+                    $('.validationWeight').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationweight2').val() == null) {
+                    $('.validationWeight2').find('.custom-select--size2').addClass('is-invalid')
+                    $('.validationWeight2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationgram').val() == '') {
+                    $('.validationGram').find('.input-gram').addClass('is-invalid')
+                    $('.validationGram').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationgram2').val() == '') {
+                    $('.validationGram2').find('.input-gram2').addClass('is-invalid')
+                    $('.validationGram2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationstriped').val() == null) {
+                    $('.validationStriped').find('.custom-select--striped').addClass('is-invalid')
+                    $('.validationStriped').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationstriped2').val() == null) {
+                    $('.validationStriped2').find('.custom-select--striped2').addClass('is-invalid')
+                    $('.validationStriped2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationdetails').val() == '') {
+                    $('.validationDetails').find('.form-control--detail').addClass('is-invalid')
+                    $('.validationDetails').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationdetails2').val() == '') {
+                    $('.validationDetails2').find('.form-control--detail2').addClass('is-invalid')
+                    $('.validationDetails2').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationprice').val() == '') {
+                    $('.validationPrice').find('.form-control--price').addClass('is-invalid')
+                    $('.validationPrice').find('.invalid-feedback').css('display', 'block')
+                }
+                if ($('#validationprice2').val() == '') {
+                    $('.validationPrice2').find('.form-control--price2').addClass('is-invalid')
+                    $('.validationPrice2').find('.invalid-feedback').css('display', 'block')
+                }
+            }
+        })
         $("#validationcustomer").change(function() {
             $.ajax({
                 url: "/pledge/gettel/" + $("#validationcustomer").val(),
@@ -139,7 +293,7 @@
 <!-- end hero area -->
 <br />
 <div class="container">
-    <form method="POST" action="{{route('pledge.store')}} " class="needs-validation" novalidate>
+    <form method="POST" action="{{route('pledge.store')}} " id="post-save" class="needs-validation" novalidate>
         <div class="card">
             <div class="card-header">
                 <h2>รับจำนำทอง</h2>
@@ -176,7 +330,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                        <div class="input-group mb-3 validateUser" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="user_id" id="validationuser" required>
                                 <option selected disabled value="">เลือกผู้รับซื้อ</option>
                                 @foreach($users as $row)
@@ -189,7 +343,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                        <div class="input-group mb-3 validateCustomer" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
@@ -243,16 +397,16 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class='form-group'>
-                            <input type="date" class="form-control" name="installment_next" value="" required>
+                        <div class='form-group validateDatenext'>
+                            <input type="date" class="form-control date-next" name="installment_next" id="validatedatenext" value="" required>
                             <div class="invalid-feedback">
                                 โปรดเลือกวันจ่ายดอกรอบถัดไป
                             </div>
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="input-group">
-                            <input name="interest_per" type="number" class="form-control" placeholder="" value="" required />
+                        <div class="input-group validatePer">
+                            <input name="interest_per" type="number" class="form-control input-per" id="validateper" placeholder="" value="" required />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">%</span>
                             </div>
@@ -283,8 +437,8 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select" name="type_gold_id[]" required>
+                            <div class="input-group mb-3 validationCategory">
+                                <select class="custom-select custom-select--single" name="type_gold_id[]" id="validationcategory" required>
                                     <option selected disabled value="">เลือกหน่วยนับ</option>
                                     @foreach($producttype as $row)
                                     <option value="{{$row->id}}">{{$row->name}}</option>
@@ -306,8 +460,8 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select size" name="size[]" required>
+                            <div class="input-group mb-3 validationWeight">
+                                <select class="custom-select size custom-select--size" name="size[]" id="validationweight" required>
                                     <option selected disabled value="">เลือกหน่วยนับ</option>
                                     @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                     <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -319,10 +473,13 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="input-group">
-                                <input name="gram[]" type="text" class="form-control gram" placeholder="" required/>
+                            <div class="input-group validationGram">
+                                <input name="gram[]" type="text" class="form-control gram input-gram" id="validationgram" placeholder="" required/>
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">กรัม</span>
+                                </div>
+                                <div class="invalid-feedback">
+                                    โปรดกรอกน้ำหนักกรัม
                                 </div>
                             </div>
                         </div>
@@ -337,8 +494,8 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="input-group mb-3">
-                                <select class="custom-select" name="striped_id[]" id="validationstriped" required>
+                            <div class="input-group mb-3 validationStriped">
+                                <select class="custom-select custom-select--striped" name="striped_id[]" id="validationstriped" required>
                                     <option selected disabled value="">เลือกลาย</option>
                                     @foreach($striped as $row)
                                     <option value="{{$row->id}}">{{$row->name}}</option>
@@ -350,8 +507,8 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group">
-                                <input name="details[]" type="text" class="form-control" placeholder="" required />
+                            <div class="form-group validationDetails">
+                                <input name="details[]" type="text" class="form-control form-control--detail" id="validationdetails" placeholder="" required />
                                 <div class="invalid-feedback">
                                     โปรดกรอกรายละเอียดทอง
                                 </div>
@@ -365,8 +522,8 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <div class="input-group">
-                                <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                            <div class="input-group validationPrice">
+                                <input name="allprice[]" type="text" class="form-control allprice form-control--price" id="validationprice" placeholder="" required />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">บาท</span>
                                 </div>
@@ -401,7 +558,7 @@
         <br>
         <div class="text-right">
             <a type="button" class="btn btn-secondary" href="{{url('/pledge')}}">กลับ</a>
-            <button type="submit" class="btn btn-success">บันทึก</button>
+            <button type="button" id="btn-save" class="btn btn-success">บันทึก</button>
         </div>
     </form>
 
@@ -423,8 +580,8 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="type_gold_id[]" required>
+                        <div class="input-group mb-3 validationCategory2">
+                            <select class="custom-select custom-select--single2" name="type_gold_id[]" id="validationcategory2" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}">{{$row->name}}</option>
@@ -438,7 +595,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                        <h4>นํ้าหนัก*</h4>
                     </div>
                     <div class="col-6">
                         <h4>นํ้าหนัก(กรัม)*</h4>
@@ -446,8 +603,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group mb-3">
-                            <select class="custom-select size" name="size[]" required>
+                        <div class="input-group mb-3 validationWeight2">
+                            <select class="custom-select size custom-select--size2" name="size[]" id="validationweight2" required>
                                 <option selected disabled value="">เลือกหน่วยนับ</option>
                                 @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                 <option value="{{ $sizeWay }}">{{ $sizeLable }}</option>
@@ -459,11 +616,14 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group">
-                            <input name="gram[]" type="text" class="form-control gram" placeholder="" />
+                        <div class="input-group validationGram2">
+                            <input name="gram[]" type="text" class="form-control gram input-gram2" id="validationgram2" placeholder="" />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">กรัม</span>
                             </div>
+                            <div class="invalid-feedback">
+                                    โปรดกรอกน้ำหนักกรัม
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -476,8 +636,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <select class="custom-select" name="striped_id[]" required>
+                    <div class="col-6 validationStriped2">
+                        <select class="custom-select custom-select--striped2" name="striped_id[]" id="validationstriped2" required>
                             <option selected disabled value="">เลือกลาย</option>
                             @foreach($striped as $row)
                             <option value="{{$row->id}}">{{$row->name}}</option>
@@ -488,8 +648,8 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
-                            <input name="details[]" type="text" class="form-control" placeholder="" required />
+                        <div class="form-group validationDetails2">
+                            <input name="details[]" type="text" class="form-control form-control--detail2" id="validationdetails2" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกรายละเอียดทอง
                             </div>
@@ -503,8 +663,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <div class="input-group">
-                            <input name="allprice[]" type="text" class="form-control allprice" placeholder="" required />
+                        <div class="input-group validationPrice2">
+                            <input name="allprice[]" type="text" class="form-control allprice form-control--price2" id="validationprice2" placeholder="" required />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>

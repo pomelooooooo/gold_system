@@ -118,7 +118,6 @@
                             processData: false,
                             success: function(data) {
                                 var group_id = data.id
-                                // var group_id = 1
                                 if (data.status) {
                                     Swal.fire({
                                         icon: 'success',
