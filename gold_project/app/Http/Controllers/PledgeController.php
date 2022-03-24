@@ -139,7 +139,7 @@ class PledgeController extends Controller
             $pledgeLine->save();
         }
 
-        return redirect()->route('pledge.index');
+        return response()->json(['status' => true, 'id' => $pledges->id], 200);
     }
 
     /**
@@ -306,10 +306,8 @@ class PledgeController extends Controller
 
     public function formpledge($id)
     {
-        // $form = FormBuy::select('formbuy.*', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.idcard as idcardcustomer', 'customer.address as addresscustomer', 'product_details.details as detail', 'product_details.gram as gram', 'product_details.allprice')
-        //     ->leftJoin('customer', 'formbuy.customer_id', '=', 'customer.id')->leftJoin('product_details', 'formbuy.product_detail_id', '=', 'product_details.id')->where('group_id', $id)->get();
-        // // dd($form[0]);
-        $pledges = Pledge::select('pledges.*','product_details.id as product_detail_id','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.name as namecustomer','customer.lastname as lastnamecustomer','customer.tel', 'customer.address','pledges_line.id as pledges_line_id','pledges_line.status_check as pledges_line_status_check')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();
+        $pledges = Pledge::select('pledges.*','product_details.id as product_detail_id','product_details.code','product_details.type_gold_id','product_details.size','product_details.gram','product_details.striped_id','product_details.details','product_details.allprice','customer.name as namecustomer','customer.lastname as lastnamecustomer','customer.tel', 'customer.address','pledges_line.id as pledges_line_id','pledges_line.status_check as pledges_line_status_check','history_pledges.customer_name as customername','history_pledges.due_date','history_pledges.deposit','history_pledges.created_at as created_history_pledges')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->leftJoin('history_pledges', 'history_pledges.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();
+        // dd($pledges[0]->namecustomer);
         $customer = Customer::all();
         $productdetail = ProductDetails::all();
         $pdf = PDF::loadView('admin.pledge.form', compact('productdetail', 'customer','pledges'));

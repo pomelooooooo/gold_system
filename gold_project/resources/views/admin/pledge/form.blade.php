@@ -115,8 +115,8 @@
 <body>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="text-align:center"><u><span class="header-title">ใบรับซื้อขายฝากทอง</span></u>
-            </td>
+            <td style="text-align:left; width:50%;"><u><span class="header-title">ใบรับซื้อขายฝากทอง</span></u></td>
+            <td style="text-align:left; width:50%;"><u><span class="header-title">ใบรับซื้อขายฝากทอง</span></u></td>
         </tr>
     </table>
     <br>
@@ -129,7 +129,7 @@
     </table>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width:50%; padding-top: 5px; padding-bottom: 5px;"><b>ชื่อ </b>&nbsp;&nbsp;{{$form[0]->namecustomer}} {{$form[0]->lastnamecustomer}}</td>
+            <td style="width:50%; padding-top: 5px; padding-bottom: 5px;"><b>ชื่อ </b>&nbsp;&nbsp;{{$pledges[0]->namecustomer}} {{$pledges[0]->lastnamecustomer}}</td>
         </tr>
     </table>
     <table class="wrap-box" cellpadding="0" cellspacing="0">

@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 <script type="text/javascript">
     $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $("#validationuser").select2({
             placeholder: "เลือกผู้รับซื้อ",
             allowClear: true
@@ -49,31 +54,40 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'ใช่',
                     cancelButtonText: 'ไม่',
-                    }).then((result) => {
+                }).then((result) => {
                     if (result.isConfirmed) {
-                        $("#post-save").submit(),
-                        Swal.fire({
-                        icon: 'success',
-                        title: 'รับซื้อขายฝากทองเรียบร้อย',
-                        showConfirmButton: false,
-                        timer: 1500
-                        }).then((result) => {
-                            Swal.fire({
-                                title: 'ต้องการพิมพ์ใใบรับซื้อขายฝากทองหรือไม่?',
-                                // text: "You won't be able to revert this!",
-                                icon: 'question',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'ใช่',
-                                cancelButtonText: 'ไม่',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.open('/pledge/formpledge/' + group_id, '_blank')
+                        $.ajax({
+                            url: "{{route('pledge.store')}}",
+                            type: 'POST',
+                            data: $('#post-save').serialize(),
+                            dataType: 'json',
+                            success: function(data) {
+                                if(data.status){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'รับซื้อขายฝากทองเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then((result) => {
+                                        Swal.fire({
+                                            title: 'ต้องการพิมพ์ใบรับซื้อขายฝากทองหรือไม่?',
+                                            // text: "You won't be able to revert this!",
+                                            icon: 'question',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'ใช่',
+                                            cancelButtonText: 'ไม่',
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.open('/pledge/formpledge/' + data.id, '_blank')
+                                            }
+                                            window.location = '/pledge'
+                                        })
+                                    })
                                 }
-                                window.location = '/pledge'
-                            })
-                        })
+                            }
+                        });
                     }
                     // window.open('/pledge/formpledge/' + group_id, '_blank')
 
@@ -293,7 +307,7 @@
 <!-- end hero area -->
 <br />
 <div class="container">
-    <form method="POST" action="{{route('pledge.store')}} " id="post-save" class="needs-validation" novalidate>
+    <form method="POST" action="{{route('pledge.store')}}" id="post-save" class="needs-validation" novalidate>
         <div class="card">
             <div class="card-header">
                 <h2>รับจำนำทอง</h2>
