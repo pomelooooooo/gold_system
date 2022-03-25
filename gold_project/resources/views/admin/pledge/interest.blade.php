@@ -220,22 +220,30 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <h4>วันที่รับฝาก</h4>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <h4>วันกำหนดชำระ*</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4>วันที่ชำระ*</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class='form-group'>
                             <input type="date" class="form-control" name="" value="{{Carbon\Carbon::parse($pledges[0]->installment_start)->format('Y-m-d')}}" readonly>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class='form-group'>
                             <input type="date" class="form-control" name="due_date" value="{{Carbon\Carbon::parse($history_pledges_due_date)->format('Y-m-d')}}">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class='form-group'>
+                            <input type="date" class="form-control" name="due_date" value="{{date('Y-m-d')}}">
                         </div>
                     </div>
                 </div>
@@ -306,7 +314,8 @@
         <br>
         @foreach($pledges as $key => $value)
         <input type="hidden" name="pledges_line_id[]" value="{{$value->pledges_line_id}}">
-        <div id="card">
+        @if($value->status_check == '0')
+            <div id="card">
             <div class="card card-item">
                 <div class="card-body">
                     <div class="row">
@@ -343,7 +352,7 @@
                             <h4 for="validationtelstore">นํ้าหนัก*</h4>
                         </div>
                         <div class="col-6">
-                            <h4>นํ้าหนัก(กรัม)*</h4>
+                            <h4 for="validationprice">ราคารับจำนำ*</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -363,56 +372,6 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                <input name="gram[]" type="text" class="form-control gram" placeholder="" value="{{$value->weight}}"  readonly/>
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">กรัม</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <h4 for="validationstriped">ลาย*</h4>
-                        </div>
-                        <div class="col-6">
-                            <h4 for="validationdetails">รายละเอียด*</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="input-group mb-3">
-                                <input type="hidden" name="size[]" value="{{$value->striped_id}}">
-                                <select class="custom-select" name="striped_id[]" id="validationstriped" disabled>
-                                    <option disabled value="">เลือกลาย</option>
-                                    @foreach($striped as $row)
-                                    <option value="{{$row->id}}" {{$row->id == $value->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="invalid-feedback">
-                                    โปรดเลือกประเภทที่ต้องการ
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <input name="details[]" type="text" class="form-control" placeholder="" value="{{$value->details}}" required readonly/>
-                                <div class="invalid-feedback">
-                                    โปรดกรอกรายละเอียดทอง
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <h4 for="validationprice">ราคารับจำนำ*</h4>
-                        </div>
-                        <div class="col-6">
-                            <h4>สถานะทอง</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="input-group">
                                 <input name="allprice[]" type="text" class="form-control allprice" placeholder="" value="{{$value->allprice}}" required readonly />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">บาท</span>
@@ -422,6 +381,13 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>สถานะทอง</h4>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-6">
                             <div class="pl-2">
                                 <div class="form-group">
@@ -434,10 +400,15 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
+        @else
+            <style type="text/css">#divId{display:none;}</style>
+        
+        @endif
+
+       
         <br>
         @endforeach
         <div class="text-right">
