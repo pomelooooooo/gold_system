@@ -122,20 +122,20 @@
     <br>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width:50%;"><b>วันที่____________________________________________</b></td>
-            <td style="width:20%;"><b>เล่มที่______________</b></td>
-            <td style="width:30%;"><b>เลขที่_________________________</b></td>
+            <td style="width:50%;"class="details"><b>วันที่</b>&nbsp;&nbsp;{{$form[0]->created_at}}</td>
+            <td style="width:20%;"class="details"><b>เล่มที่______________</b></td>
+            <td style="width:30%;"class="details"><b>เลขที่_________________________</b></td>
         </tr>
     </table>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width:50%; padding-top: 5px; padding-bottom: 5px;"><b>ชื่อ </b>&nbsp;&nbsp;{{$form[0]->namecustomer}} {{$form[0]->lastnamecustomer}}</td>
-            <td style="width:50%;"><b>เลขประจำตัวผู้เสียภาษี</b>&nbsp;&nbsp;{{$form[0]->idcardcustomer}}</td>
+            <td style="width:50%; padding-top: 5px; padding-bottom: 5px;"class="details"><b>ชื่อ </b>&nbsp;&nbsp;{{$form[0]->namecustomer}} {{$form[0]->lastnamecustomer}}</td>
+            <td style="width:50%;"class="details"><b>เลขประจำตัวผู้เสียภาษี</b>&nbsp;&nbsp;{{$form[0]->idcardcustomer}}</td>
         </tr>
     </table>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td><b>ที่อยู่</b>&nbsp;&nbsp;{{$form[0]->addresscustomer}}</td>
+            <td class="details"><b>ที่อยู่</b>&nbsp;&nbsp;{{$form[0]->addresscustomer}}</td>
 
         </tr>
     </table>

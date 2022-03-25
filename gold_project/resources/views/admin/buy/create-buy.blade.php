@@ -97,19 +97,14 @@
         });
 
         $("body").on('click', '#btn-save', function(e) {
-            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null
+            if ($('#validationuser').val() != null && 
+            $('#validationcustomer').val() != null
             && $('#validationcategory').val() != null 
-            && $('#validationcategory2').val() != null
             && $('#validationweight').val() != null
-            && $('#validationweight2').val() != null
             && $('#validationgram').val() != ''
-            && $('#validationgram2').val() != ''
             && $('#validationstriped').val() != null
-            && $('#validationstriped2').val() != null
             && $('#validationdetails').val() != ''
-            && $('#validationdetails2').val() != ''
-            && $('#validationprice').val() != ''
-            && $('#validationprice2').val() != '') {
+            && $('#validationprice').val() != '') {
                 Swal.fire({
                     title: 'ต้องการรับซื้อทองหรือไม่?',
                     icon: 'question',

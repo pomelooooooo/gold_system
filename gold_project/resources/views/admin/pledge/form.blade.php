@@ -129,19 +129,23 @@
                         <td><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
                     </tr>
                     <tr class="pl-10">
-                        <td class="pt-10"><b>วันที่รับฝาก............................</b></td>
+                        <td class="pt-10"><b>วันที่รับฝาก&nbsp;&nbsp;{{$pledges[0]->installment_start}}</b></td>
                     </tr>
                     <tr class="pl-10">
-                        <td class="pt-10"><b>ชื่อ-นามสกุล............................</b></td>
+                        <td class="pt-10"><b>ชื่อ-นามสกุล&nbsp;&nbsp;{{$pledges[0]->namecustomer}}&nbsp;{{$pledges[0]->lastnamecustomer}}</b></td>
                     </tr>
                     <tr class="pl-10">
-                        <td class="pt-10"><b>รายการขายฝาก............................</b></td>
+                        <td class="pt-10"><b>รายการขายฝาก</b><b>&nbsp;&nbsp;
+                        @foreach($pledges as $key => $row)
+                            {{$row->type_gold_name}}
+                        @endforeach
+                        &nbsp;</b></td>
                     </tr>
                     <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวน.............ชิ้น นํ้าหนัก............กรัม</b></td>
+                        <td class="pt-10"><b>จำนวน.............ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
                     </tr>
                     <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวนเงิน....................บาท</b></td>
+                        <td class="pt-10"><b>จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
                     </tr>
                     <tr class="pl-10">
                         <td class="pt-10">
