@@ -2,7 +2,7 @@
 @section('title','จำนำทอง')
 @section('content')
 <style>
-    input[type=number]{
+    input[type=number] {
         width: 100%;
     }
 </style>
@@ -45,19 +45,19 @@
     })
     $(document).ready(function() {
         $("body").on('click', '#btn-update', function(e) {
-                Swal.fire({
-                    title: 'ต้องการอัปเดตสถานะการจ่ายดอกหรือไม่?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'ใช่',
-                    cancelButtonText: 'ไม่',
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        $("#post-update").submit()
-                    }
-                    })
+            Swal.fire({
+                title: 'ต้องการอัปเดตสถานะการจ่ายดอกหรือไม่?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่',
+                cancelButtonText: 'ไม่',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#post-update").submit()
+                }
+            })
         })
         $("#validationcustomer").change(function() {
             $.ajax({
@@ -177,7 +177,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group mb-3" style="margin-top: 0.5em;">
-                            <select class="custom-select selectpicker" name="user_id" id="validationuser" disabled> 
+                            <select class="custom-select selectpicker" name="user_id" id="validationuser" disabled>
                                 <option selected disabled value="">เลือกผู้รับซื้อ</option>
                                 @foreach($users as $row)
                                 <option value="{{$row->id}}" {{!empty($pledges[0]->user_id)&&$row->id == $pledges[0]->user_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
@@ -289,7 +289,7 @@
                     </div>
                     <div class="col-4">
                         <div class="input-group">
-                            <input name="interest_bath" type="number" class="form-control" placeholder="" value="{{$interest_bath}}" id="validationinterestbath" required/>
+                            <input name="interest_bath" type="number" class="form-control" placeholder="" value="{{$interest_bath}}" id="validationinterestbath" required />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>
@@ -297,7 +297,7 @@
                                 โปรดกรอกดอกเบี้ยบาท
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="col-4">
                         <div class='form-group'>
@@ -314,8 +314,8 @@
         <br>
         @foreach($pledges as $key => $value)
         <input type="hidden" name="pledges_line_id[]" value="{{$value->pledges_line_id}}">
-        @if($value->status_check == '0')
-            <div id="card">
+        @if($value->pledges_line_status_check == '0')
+        <div id="card">
             <div class="card card-item">
                 <div class="card-body">
                     <div class="row">
@@ -392,7 +392,7 @@
                             <div class="pl-2">
                                 <div class="form-group">
                                     @foreach(["0"=>"ยังไม่ไถ่ถอน","1"=>"ไถ่ถอนแล้ว","2"=>"หลุดจำนำ"] as $statusWay => $statusLable)
-                                    <input type="radio" class="form-check-input" name="status_check[{{$key}}]"  value="{{ $statusWay }}" {{$value->pledges_line_status_check == $statusWay ? "checked" : ""}} required>
+                                    <input type="radio" class="form-check-input" name="status_check[{{$key}}]" value="{{ $statusWay }}" {{$value->pledges_line_status_check == $statusWay ? "checked" : ""}} required>
                                     <h6 class="form-check-label">{{ $statusLable }}</h6>
                                     <div class="invalid-feedback">โปรดเลือกสถานะทองที่ต้องการ</div>
                                     @endforeach
@@ -404,11 +404,15 @@
             </div>
         </div>
         @else
-            <style type="text/css">#divId{display:none;}</style>
-        
+        <style type="text/css">
+            #divId {
+                display: none;
+            }
+        </style>
+
         @endif
 
-       
+
         <br>
         @endforeach
         <div class="text-right">
