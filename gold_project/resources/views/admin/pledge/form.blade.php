@@ -123,7 +123,7 @@
 <body>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="45%" style="vertical-align: top;border: 1px solid;">
+            <td width="50%" style="vertical-align: top;border: 1px solid;">
                 <table class="wrap-box" cellpadding="0" cellspacing="0" style="padding:10px;">
                     <tr style="padding-left: 10px;">
                         <td><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
@@ -136,10 +136,10 @@
                     </tr>
                     <tr class="pl-10">
                         <td class="pt-10"><b>รายการขายฝาก</b><b>&nbsp;&nbsp;
-                        @foreach($pledges as $key => $row)
-                            {{$row->type_gold_name}}
-                        @endforeach
-                        &nbsp;</b></td>
+                                @foreach($pledges as $key => $row)
+                                {{$row->type_gold_name}}
+                                @endforeach
+                                &nbsp;</b></td>
                     </tr>
                     <tr class="pl-10">
                         <td class="pt-10"><b>จำนวน.............ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
@@ -192,135 +192,91 @@
             </td>
         </tr>
     </table>
-    </tr>
-    <!-- <tr>
-
-        </tr> -->
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="text-align:left; width:50%;"><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
-            <td>วันกำหนดชำระ</td>
-            <td>วันที่ชำระ</td>
-            <td>ยอดรับฝากคงเหลือ</td>
-            <td>ผู้รับชำระ</td>
-        </tr>
-    </table>
     <br>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width:50%;"><b>วันที่รับฝาก............................</b></td>
-            <td style="width:50%;"><b>........................................................................................................</b></td>
+            <td width="50%" style="vertical-align: top;border: 1px solid;">
+                <table class="wrap-box" cellpadding="0" cellspacing="0" style="padding:10px;">
+                    <tr style="padding-left: 10px;">
+                        <td><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>วันที่รับฝาก&nbsp;&nbsp;{{$pledges[0]->installment_start}}</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>ชื่อ-นามสกุล&nbsp;&nbsp;{{$pledges[0]->namecustomer}}&nbsp;{{$pledges[0]->lastnamecustomer}}</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>เบอร์มือถือ&nbsp;&nbsp;{{$pledges[0]->telcustomer}}</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display:inline-block;padding:0 5px 0 0"><b>วันกำหนดชำระ</b></div>
+                            <div style="display:inline-block;padding:0 5px"><b>วันที่ชำระ</b></div>
+                            <div style="display:inline-block;padding:0 5px"><b>ยอดรับฝากคงเหลือ</b></div>
+                            <div style="display:inline-block;padding:0 5px"><b>ผู้รับชำระ</b></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;"><b>.....................................................................................................</b></td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;"><b>.....................................................................................................</b></td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;"><b>.....................................................................................................</b></td>
+                    </tr>
+                    <tr>
+                        <td style="width:70%;"><b>.....................................................................................................</b></td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;"><b>.....................................................................................................</b></td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;"><b>.....................................................................................................</b></td>
+                    </tr>
+                </table>
 
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>ชื่อ-นามสกุล............................</b></td>
-            <td style="width:50%;"><b>........................................................................................................</b></td>
-
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>รายการขายฝาก............................</b></td>
-            <td style="width:50%;"><b>........................................................................................................</b></td>
-
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:20%;"><b>จำนวน.............ชิ้น</b></td>
-            <td style="width:50%;"><b>นํ้าหนัก............กรัม</b></td>
-            <td style="width:70%;"><b>........................................................................................................</b></td>
-
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>จำนวนเงิน....................บาท</b></td>
-            <td style="width:50%;"><b>........................................................................................................</b></td>
-
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style=" width:50%;">
-                <div style="background-color: gray; width:50%; margin:auto; text-align:center;">
-                    สามพันบาท
-                </div>
             </td>
-            <!-- <td style="width:25%;"></td> -->
-            <td style="width:50%;"><b>........................................................................................................</b></td>
-
-        </tr>
-    </table>
-    <br>
-    <br>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="text-align:left; width:50%;"><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
-            <td style="text-align:left; width:50%;"><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
-        </tr>
-    </table>
-    <br>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>วันที่รับฝาก............................</b></td>
-            <td style="width:50%;"><b>วันที่รับฝาก............................</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>ชื่อ-นามสกุล............................</b></td>
-            <td style="width:50%;"><b>ชื่อ-นามสกุล............................</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>เบอร์มือถือ............................</b></td>
-            <td style="width:50%;"><b>เบอร์มือถือ............................</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:20%;"><b>นํ้าหนัก............กรัม</b></td>
-            <td style="width:50%;"><b>จำนวนเงิน............บาท</b></td>
-            <td style="width:70%;"><b>ที่อยู่ปัจจุบัน.....................</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:15%;">วันกำหนดชำระ</td>
-            <td style="width:10%;">วันที่ชำระ</td>
-            <td style="width:20%;">ยอดรับฝากคงเหลือ</td>
-            <td style="width:20%;">ผู้รับชำระ</td>
-            <td style="width:65%;"><b>รายการขายฝาก............................</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:70%;"><b>..........................................................................................</b></td>
-            <td style="width:20%;"><b>จำนวน.............ชิ้น</b></td>
-            <td style="width:50%;"><b>นํ้าหนัก............กรัม</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>..........................................................................................</b></td>
-            <td style="width:50%;"><b>จำนวนเงิน............บาท</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>..........................................................................................</b></td>
-            <td style="width:50%;"><b>ลงชื่อ............ผู้ขายฝาก</b></td>
-        </tr>
-    </table>
-    <table class="wrap-box" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="width:50%;"><b>..........................................................................................</b></td>
-            <td></td>
+            <td width="5%"></td>
+            <td width="100%" style="vertical-align: top;border: 1px solid;">
+                <table class="wrap-box" cellpadding="0" cellspacing="0" style="padding:10px;">
+                    <tr style="padding-left: 10px;">
+                        <td><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>วันที่รับฝาก&nbsp;&nbsp;{{$pledges[0]->installment_start}}</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>ชื่อ-นามสกุล&nbsp;&nbsp;{{$pledges[0]->namecustomer}}&nbsp;{{$pledges[0]->lastnamecustomer}}</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>ที่อยู่ปัจจุบัน&nbsp;&nbsp;{{$pledges[0]->addresscustomer}}</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>เบอร์มือถือ&nbsp;&nbsp;{{$pledges[0]->telcustomer}}</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>รายการขายฝาก</b><b>&nbsp;&nbsp;
+                                @foreach($pledges as $key => $row)
+                                {{$row->type_gold_name}}
+                                @endforeach
+                                &nbsp;</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>จำนวน.............ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
+                    </tr>
+                    <tr class="pl-10">
+                        <td class="pt-10"><b>ลงชื่อ....................................................................ผู้ขายฝาก</b></td>
+                    </tr>
+                </table>
+            </td>
         </tr>
     </table>
 </body>
