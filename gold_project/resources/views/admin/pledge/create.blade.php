@@ -48,17 +48,11 @@
             if ($('#validationuser').val() != null && $('#validationcustomer').val() != null  
             && $('#validateper').val() != '' 
             && $('#validationcategory').val() != null 
-            && $('#validationcategory2').val() != null
             && $('#validationweight').val() != null
-            && $('#validationweight2').val() != null
             && $('#validationgram').val() != ''
-            && $('#validationgram2').val() != ''
             && $('#validationstriped').val() != null
-            && $('#validationstriped2').val() != null
             && $('#validationdetails').val() != ''
-            && $('#validationdetails2').val() != ''
-            && $('#validationprice').val() != ''
-            && $('#validationprice2').val() != '') {
+            && $('#validationprice').val() != '') {
                 Swal.fire({
                     title: 'ต้องการรับซื้อขายฝากทองหรือไม่?',
                     icon: 'question',
