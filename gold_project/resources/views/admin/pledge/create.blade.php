@@ -45,7 +45,20 @@
     })
     $(document).ready(function() {
         $("body").on('click', '#btn-save', function(e) {
-            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null) {
+            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null  
+            && $('#validateper').val() != '' 
+            && $('#validationcategory').val() != null 
+            && $('#validationcategory2').val() != null
+            && $('#validationweight').val() != null
+            && $('#validationweight2').val() != null
+            && $('#validationgram').val() != ''
+            && $('#validationgram2').val() != ''
+            && $('#validationstriped').val() != null
+            && $('#validationstriped2').val() != null
+            && $('#validationdetails').val() != ''
+            && $('#validationdetails2').val() != ''
+            && $('#validationprice').val() != ''
+            && $('#validationprice2').val() != '') {
                 Swal.fire({
                     title: 'ต้องการรับซื้อขายฝากทองหรือไม่?',
                     icon: 'question',
@@ -555,7 +568,7 @@
             <div class="col-12">
                 <div class="float-right">
                     <div class='form-group'>
-                        <a type="button" class="btn btn-info text-white" id="btn-buy"><i class="fa fa-plus"></i> เพิ่มการซื้อ</a>
+                        <a type="button" class="btn btn-info text-white" id="btn-buy"><i class="fa fa-plus"></i> เพิ่มการรับซื้อขายฝาก</a>
                         <a type="button" class="btn btn-danger text-white" id="btn-remove"><i class="fa fa-trash"></i> ลบ</a>
                     </div>
                 </div>
