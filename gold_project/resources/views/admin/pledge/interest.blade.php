@@ -318,6 +318,36 @@
             </div>
         </div>
         <br>
+        <h4>ประวัติการชำระเงิน</h4>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">วันกำหนดชำระ</th>
+                    <th scope="col">วันที่ชำระ</th>
+                    <th scope="col">ยอดรับฝากคงเหลือ</th>
+                    <th scope="col">ผู้ชำระ</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @php
+                    $deposit_history = $pledges[0]->price_pledge;
+                @endphp
+                @foreach($history_pledges as $row)
+                @php
+                    $deposit_history -= $row->deposit;
+                @endphp
+                <tr>
+                    <td>{{$row->due_date}}</td>
+                    <td>{{$row->created_at}}</td>
+                    <td>{{$deposit_history}}</td>
+                    <td>{{$row->customer_name}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+
+        </table>
+        <br>
         @foreach($pledges as $key => $value)
         <input type="hidden" name="pledges_line_id[]" value="{{$value->pledges_line_id}}">
         @if($value->pledges_line_status_check == '0')

@@ -125,19 +125,17 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response    
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        $productdetail = ProductDetails::where('lot_id', $id)->first();
+        // dd($request);
+        $productdetail = ProductDetails::where('lot_id', $request->lot_id )->first();
         if (!empty($productdetail)) {
             return response()->json(['status' => false], 200);
         }
         $product = Product::find($id);
         $product->delete();
-        $product = Product::select('*')->paginate(5);
-        $type = TypeGold::all();
-        $manufacturer = Manufacturer::all();
         return response()->json(['status' => true], 200);
     }
 }

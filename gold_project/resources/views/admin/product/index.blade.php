@@ -25,6 +25,7 @@
     $(document).ready(function() {
         $("body").on('click', '#delete_button', function(e) {
             var id = $(this).data("id");
+            var lot_id = $(this).data("lot_id");
             var token = $("meta[name='csrf-token']").attr("content");
             $.ajaxSetup({
                 headers: {
@@ -47,6 +48,7 @@
                         type: 'delete',
                         data: {
                             id: id,
+                            lot_id: lot_id,
                             _token: token
                         },
                         dataType: 'json',
@@ -141,7 +143,7 @@
                                     </td>
                                     <td class="text-center">
                                         {{csrf_field()}}
-                                        <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row->id}}"><i class="fa fa-trash"></i> ลบ</button>
+                                        <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row->id}}" data-lot_id="{{$row->lot_id}}"><i class="fa fa-trash"></i> ลบ</button>
                                     </td>
                                 </tr>
                                 @endforeach

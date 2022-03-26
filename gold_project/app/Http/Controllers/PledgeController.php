@@ -262,6 +262,7 @@ class PledgeController extends Controller
         }
         $history_pledges = HistoryPledges::where('pledges_id', $pledges[0]->id)->get();
         $deposit = 0;
+        // dd($history_pledges);
         // $interest_per = 0;
         foreach ($history_pledges as $key => $value) {
             $deposit += $value->deposit;
@@ -272,7 +273,7 @@ class PledgeController extends Controller
         $users = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        return view('admin.pledge.interest', compact('producttype', 'striped', 'pledges', 'customer', 'users', 'id', 'interest_bath', 'deposit', 'history_pledges_due_date'));
+        return view('admin.pledge.interest', compact('producttype', 'striped', 'pledges', 'customer', 'users', 'id', 'interest_bath', 'deposit', 'history_pledges_due_date','history_pledges'));
     }
 
     public function interest_update(Request $request, $id)
@@ -306,10 +307,11 @@ class PledgeController extends Controller
     public function formpledge($id)
     {
         $pledges = Pledge::select('pledges.*', 'type_gold.name as type_gold_name', 'product_details.id as product_detail_id', 'product_details.code', 'product_details.type_gold_id', 'product_details.size', 'product_details.gram', 'product_details.striped_id', 'product_details.details', 'product_details.allprice', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer', 'customer.address as addresscustomer', 'pledges_line.id as pledges_line_id', 'pledges_line.status_check as pledges_line_status_check', 'history_pledges.customer_name as customername', 'history_pledges.due_date', 'history_pledges.deposit', 'history_pledges.created_at as created_history_pledges')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->leftJoin('history_pledges', 'history_pledges.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->join('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();
-        // dd($pledges[0]->namecustomer);
+        // dd(count($pledges));
+        $count = count($pledges);
         $customer = Customer::all();
         $productdetail = ProductDetails::all();
-        $pdf = PDF::loadView('admin.pledge.form', compact('productdetail', 'customer', 'pledges'));
+        $pdf = PDF::loadView('admin.pledge.form', compact('productdetail', 'customer', 'pledges','count'));
 
         // return view('admin.sell.form');
         return $pdf->stream('formpledge.pdf');

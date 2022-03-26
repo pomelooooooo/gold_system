@@ -142,7 +142,7 @@
                                 &nbsp;</b></td>
                     </tr>
                     <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวน.............ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
+                        <td class="pt-10"><b>จำนวน  {{$count}}  ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
                     </tr>
                     <tr class="pl-10">
                         <td class="pt-10"><b>จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
@@ -267,7 +267,7 @@
                                 &nbsp;</b></td>
                     </tr>
                     <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวน.............ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
+                        <td class="pt-10"><b>จำนวน  {{$count}}  ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
                     </tr>
                     <tr class="pl-10">
                         <td class="pt-10"><b>จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
