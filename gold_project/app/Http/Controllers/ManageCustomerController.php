@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Pledge;
+use App\ProductDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -142,6 +144,10 @@ class ManageCustomerController extends Controller
      */
     public function destroy($id)
     {
+        $pledges = Pledge::where('customer_id', $id)->first();
+        if (!empty($pledges)) {
+            return response()->json(['status' => false], 200);
+        }
         $managecustomer = Customer::find($id);
         $managecustomer->delete();
         $managecustomer = Customer::select('*')->paginate(5);

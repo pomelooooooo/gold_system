@@ -59,6 +59,13 @@
                                 }).then((result) => {
                                     window.location = '/manage_customer'
                                 })
+                            }else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'ไม่สามารถลบได้',
+                                    text: "ไม่สามารถลบลูกค้าได้เนื่องจากมีลูกค้าคนดังกล่าวอยู่ในระบบการจำนำ",
+                                    showConfirmButton: false,
+                                })
                             }
 
                         }

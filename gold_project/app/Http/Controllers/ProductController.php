@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Manufacturer;
 use App\Product;
+use App\ProductDetails;
 use App\TypeGold;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -128,6 +129,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $productdetail = ProductDetails::where('lot_id', $id)->first();
+        if (!empty($productdetail)) {
+            return response()->json(['status' => false], 200);
+        }
         $product = Product::find($id);
         $product->delete();
         $product = Product::select('*')->paginate(5);

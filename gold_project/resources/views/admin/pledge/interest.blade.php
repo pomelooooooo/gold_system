@@ -45,19 +45,25 @@
     })
     $(document).ready(function() {
         $("body").on('click', '#btn-update', function(e) {
-            Swal.fire({
-                title: 'ต้องการอัปเดตสถานะการจ่ายดอกหรือไม่?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ใช่',
-                cancelButtonText: 'ไม่',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $("#post-update").submit()
-                }
-            })
+                Swal.fire({
+                    title: 'ต้องการอัปเดตสถานะการจ่ายดอกหรือไม่?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#post-update").submit()
+                        Swal.fire({
+                            title: 'อัปเดตสถานะการจ่ายดอกแล้ว',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
         })
         $("#validationcustomer").change(function() {
             $.ajax({

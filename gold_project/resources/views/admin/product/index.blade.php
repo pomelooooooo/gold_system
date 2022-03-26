@@ -60,6 +60,13 @@
                                 }).then((result) => {
                                     window.location = '/product'
                                 })
+                            }else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'ไม่สามารถลบได้',
+                                    text: "ไม่สามารถลบล็อตทองได้เนื่องจากมีทองล็อตดังกล่าวอยู่ในคลังทอง",
+                                    showConfirmButton: false,
+                                })
                             }
 
                         }

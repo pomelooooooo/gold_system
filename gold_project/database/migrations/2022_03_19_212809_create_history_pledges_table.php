@@ -16,7 +16,7 @@ class CreateHistoryPledgesTable extends Migration
         Schema::create('history_pledges', function (Blueprint $table) {
             $table->id();
             $table->integer('pledges_id');
-            $table->string('customer_name');
+            $table->string('customer_name')->nullable();
             $table->date('due_date')->nullable();
             $table->decimal('deposit', 15, 2)->nullable();
             $table->timestamps();

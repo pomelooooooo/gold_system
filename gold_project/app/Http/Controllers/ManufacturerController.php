@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Manufacturer;
+use App\Product;
 use Illuminate\Http\Request;
 use PharIo\Manifest\Manifest;
 
@@ -113,6 +114,10 @@ class ManufacturerController extends Controller
      */
     public function destroy($id)
     {
+        $product = Product::where('manufacturer', $id)->first();
+        if (!empty($product)) {
+            return response()->json(['status' => false], 200);
+        }
         $manufacturer = Manufacturer::find($id);
         $manufacturer->delete();
         $manufacturer = Manufacturer::select('*')->paginate(5);

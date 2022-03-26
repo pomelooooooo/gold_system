@@ -59,8 +59,14 @@
                                 }).then((result) => {
                                     window.location = '/manufacturer'
                                 })
+                            }else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'ไม่สามารถลบได้',
+                                    text: "ไม่สามารถลบผู้ผลิตได้เนื่องจากมีผู้ผลิตดังกล่าวอยู่ในคลังทอง",
+                                    showConfirmButton: false,
+                                })
                             }
-
                         }
                     });
                 }

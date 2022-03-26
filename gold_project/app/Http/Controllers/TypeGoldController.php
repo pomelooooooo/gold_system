@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\TypeGold;
+use App\Product;
+use App\ProductDetails;
 use Illuminate\Http\Request;
 
 class TypeGoldController extends Controller
@@ -104,6 +106,14 @@ class TypeGoldController extends Controller
      */
     public function destroy($id)
     {
+        $product = Product::where('type_gold_id', $id)->first();
+        if (!empty($product)) {
+            return response()->json(['status' => false], 200);
+        }
+        $productdetail = ProductDetails::where('type_gold_id', $id)->first();
+        if (!empty($productdetail)) {
+            return response()->json(['status' => false], 200);
+        }
         $type = TypeGold::find($id);
         $type->delete();
         $type = TypeGold::select('*')->paginate(5);

@@ -59,8 +59,14 @@
                                 }).then((result) => {
                                     window.location = '/type_gold'
                                 })
+                            }else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'ไม่สามารถลบได้',
+                                    text: "ไม่สามารถลบประเภททองได้เนื่องจากมีทองประเภทดังกล่าวอยู่ในคลังทอง",
+                                    showConfirmButton: false,
+                                })
                             }
-
                         }
                     });
                 }
