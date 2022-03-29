@@ -49,9 +49,10 @@ class PledgeController extends Controller
     public function create()
     {
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
-        $productdetail = ProductDetails::select('code')->orderBy('code', "desc")->first();
+        $productdetail = ProductDetails::select('code')->where('code', 'LIKE', 'D%')->orderBy('code', "desc")->first();
         if (!empty($productdetail)) {
             $productdetail->code = substr($productdetail->code, 1);
+            // dd($productdetail->code);
             $code = $productdetail->code + 1;
             $num = "0";
             // dd(strlen(str_replace('0', '', $code)));
@@ -234,12 +235,13 @@ class PledgeController extends Controller
     public function destroy($id)
     {
         $pledges = Pledge::find($id);
+        $pledges_line = PledgeLine::where('pledges_id', $id)->get();
+        foreach($pledges_line as $key => $value){
+            $productDetail = ProductDetails::find($value->product_detail_id);
+            $productDetail->delete();
+        }
         $pledges->delete();
-        $pledges = Pledge::select('pledges.*', 'product_details.code', 'product_details.type_gold_id', 'product_details.size', 'product_details.gram', 'product_details.striped_id', 'product_details.details', 'product_details.allprice', 'customer.tel', 'customer.address', 'pledges_line.id as pledges_line_id', 'pledges_line.status_check as pledges_line_status_check')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->orderBy('created_at', "desc")->paginate(10);
-        $product = Product::all();
-        $customer = Customer::all();
-        $users = User::all();
-        $producttype = TypeGold::all();
+        PledgeLine::where('pledges_id', $id)->delete();
         return response()->json(['status' => true], 200);
     }
 

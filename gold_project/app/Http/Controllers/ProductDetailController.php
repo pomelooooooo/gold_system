@@ -53,7 +53,7 @@ class ProductDetailController extends Controller
     public function create()
     {
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
-        $productdetail = ProductDetails::select('code')->orderBy('code', "desc")->first();
+        $productdetail = ProductDetails::select('code')->where('code', 'LIKE', 'N%')->orderBy('code', "desc")->first();
         if (!empty($productdetail)) {
             $productdetail->code = substr($productdetail->code, 1);
             $code = $productdetail->code + 1;

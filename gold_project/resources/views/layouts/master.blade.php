@@ -142,8 +142,9 @@
 								@if(\Auth::user()->row_id == '0')
 								<li><a>รายงานผลการดำเนินงาน</a>
 									<ul class="sub-menu">
-										<li><a>ประวัติการซื้อขายย้อนหลัง</a></li>
-
+										<li><a href="report_buy">ประวัติการซื้อย้อนหลัง</a></li>
+										<li><a href="report_sell">ประวัติการขายย้อนหลัง</a></li>
+										<li><a href="report_pledge">ประวัติการจำนำย้อนหลัง</a></li>
 									</ul>
 								</li>
 								@endif

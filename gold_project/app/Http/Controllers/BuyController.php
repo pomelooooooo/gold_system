@@ -57,7 +57,7 @@ class BuyController extends Controller
     public function create()
     {
         $gold_type = ["ทองในถาด", "ทองในสต๊อค"];
-        $buy = ProductDetails::select('code')->orderBy('code', "desc")->where('type', 'ทองเก่า')->first();
+        $buy = ProductDetails::select('code')->where('code', 'LIKE', 'L%')->where('type', 'ทองเก่า')->orderBy('code', "desc")->first();
         if (!empty($buy)) {
             $buy->code = substr($buy->code, 1);
             $code = $buy->code + 1;

@@ -86,4 +86,10 @@ Route::get('/pledge/gettel/{id}', 'PledgeController@getTel')->middleware('auth')
 Route::get('/pledge/interest/{id}', 'PledgeController@interest')->middleware('auth');
 Route::post('/pledge/interest_update/{id}', 'PledgeController@interest_update')->middleware('auth');
 
+Route::get('/report_buy', 'ReportController@report_buy')->middleware('auth');
+Route::get('/report_sell', 'ReportController@report_sell')->middleware('auth');
+Route::get('/report_pledge', 'ReportController@report_pledge')->middleware('auth');
+
+
+
 
