@@ -281,6 +281,9 @@ class PledgeController extends Controller
     public function interest_update(Request $request, $id)
     {
         $pledges = Pledge::find($id);
+        if(count(array_unique($request->status_check)) == 1){
+            $pledges->status_check = $request->status_check[0];
+        }
         $pledges->interest_bath = $request->get('interest_bath');
         $pledges->updated_at = Carbon::now();
         $pledges->save();
@@ -314,8 +317,6 @@ class PledgeController extends Controller
         $customer = Customer::all();
         $productdetail = ProductDetails::all();
         $pdf = PDF::loadView('admin.pledge.form', compact('productdetail', 'customer', 'pledges','count'));
-
-        // return view('admin.sell.form');
         return $pdf->stream('formpledge.pdf');
     }
 }

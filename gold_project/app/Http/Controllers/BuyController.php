@@ -116,11 +116,11 @@ class BuyController extends Controller
             $buy->save();
         }
 
-        $producttype = TypeGold::all();
-        $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('created_at', "desc")->paginate(5);
-        $customer = Customer::all();
-        $users = User::all();
-        return redirect('/buy')->with(['producttype' => $producttype, 'buy' => $buy, 'customer' => $customer, 'users' => $users]);
+        // $producttype = TypeGold::all();
+        // $buy = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('created_at', "desc")->paginate(5);
+        // $customer = Customer::all();
+        // $users = User::all();
+        return redirect()->route('buy.index');
     }
 
     /**
