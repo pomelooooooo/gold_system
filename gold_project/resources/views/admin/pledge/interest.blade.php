@@ -45,25 +45,25 @@
     })
     $(document).ready(function() {
         $("body").on('click', '#btn-update', function(e) {
-                Swal.fire({
-                    title: 'ต้องการอัปเดตสถานะการจ่ายดอกหรือไม่?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'ใช่',
-                    cancelButtonText: 'ไม่',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $("#post-update").submit()
-                        Swal.fire({
-                            title: 'อัปเดตสถานะการจ่ายดอกแล้ว',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    }
-                })
+            Swal.fire({
+                title: 'ต้องการอัปเดตสถานะการจ่ายดอกหรือไม่?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่',
+                cancelButtonText: 'ไม่',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#post-update").submit()
+                    Swal.fire({
+                        title: 'อัปเดตสถานะการจ่ายดอกแล้ว',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
         })
         $("#validationcustomer").change(function() {
             $.ajax({
@@ -168,7 +168,7 @@
     <form method="POST" action="{{action('PledgeController@interest_update', $id)}} " id="post-update" class="needs-validation" novalidate>
         <div class="card">
             <div class="card-header">
-                <h2>รับจำนำทอง</h2>
+                <h2>จ่ายดอกเบี้ย</h2>
             </div>
             <div class="card-body">
                 {{csrf_field()}}
@@ -331,11 +331,11 @@
 
             <tbody>
                 @php
-                    $deposit_history = $pledges[0]->price_pledge;
+                $deposit_history = $pledges[0]->price_pledge;
                 @endphp
                 @foreach($history_pledges as $row)
                 @php
-                    $deposit_history -= $row->deposit;
+                $deposit_history -= $row->deposit;
                 @endphp
                 <tr>
                     <td>{{$row->due_date}}</td>
