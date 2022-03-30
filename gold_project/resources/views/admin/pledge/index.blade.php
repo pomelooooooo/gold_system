@@ -134,8 +134,8 @@
                                 <tr>
                                     <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                     <td>{{$row->telcustomer}}</td>
-                                    <td>{{$row->installment_start}}</td>
-                                    <td>{{$row->installment_next}}</td>
+                                    <td>{{\Carbon\Carbon::parse($row->installment_start)->format('d/m/Y')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($row->installment_next)->format('d/m/Y')}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-primary" href="{{action('PledgeController@interest',$row->id)}}"><i class="fa fa-receipt"></i> จ่ายดอก</a>&nbsp;
                                         <a class="btn btn-warning" href="{{action('PledgeController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>

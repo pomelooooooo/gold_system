@@ -301,13 +301,13 @@
                             <div class="input-group mb-3">
                                 <input type="hidden" name="type_gold_id[]" value="{{$value->type_gold_id}}">
                                 <select class="custom-select">
-                                    <option selected disabled value="">เลือกหน่วยนับ</option>
+                                    <option selected disabled value="">เลือกประเภททอง</option>
                                     @foreach($producttype as $row)
                                     <option value="{{$row->id}}" {{$row->id == $value->type_gold_id ? 'selected' : ''}}>{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
-                                    โปรดเลือกหน่วยนับที่ต้องการ
+                                    โปรดเลือกประเภททองที่ต้องการ
                                 </div>
                             </div>
                         </div>
@@ -325,7 +325,7 @@
                             <div class="input-group mb-3">
                                 <input type="hidden" name="size[]" value="{{$value->size}}">
                                 <select class="custom-select size" name="size[]">
-                                    <option disabled value="">เลือกหน่วยนับ</option>
+                                    <option disabled value="">เลือกน้ำหนัก</option>
                                     @foreach(["ครึ่งสลึง"=>"ครึ่งสลึง","1 สลึง"=>"1 สลึง","2 สลึง"=>"2 สลึง","3 สลึง"=>"3 สลึง","6 สลึง"=>"6 สลึง","1 บาท"=>"1 บาท","2 บาท"=>"2 บาท","3 บาท"=>"3 บาท","4 บาท"=>"4 บาท","5 บาท"=>"5 บาท","10 บาท"=>"10 บาท"] as $sizeWay => $sizeLable)
                                     <option value="{{ $sizeWay }}" {{ $value->size == $sizeWay ? "selected" : "" }}>{{ $sizeLable }}</option>
                                     @endforeach

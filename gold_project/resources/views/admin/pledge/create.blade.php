@@ -460,13 +460,13 @@
                         <div class="col-6">
                             <div class="input-group mb-3 validationCategory">
                                 <select class="custom-select custom-select--single" name="type_gold_id[]" id="validationcategory" required>
-                                    <option selected disabled value="">เลือกหน่วยนับ</option>
+                                    <option selected disabled value="">เลือกประเภททอง</option>
                                     @foreach($producttype as $row)
                                     <option value="{{$row->id}}">{{$row->name}}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
-                                    โปรดเลือกหน่วยนับที่ต้องการ
+                                    โปรดเลือกประเภททองที่ต้องการ
                                 </div>
                             </div>
                         </div>
@@ -603,7 +603,7 @@
                     <div class="col-6">
                         <div class="input-group mb-3 validationCategory2">
                             <select class="custom-select custom-select--single2" name="type_gold_id[]" id="validationcategory2" required>
-                                <option selected disabled value="">เลือกหน่วยนับ</option>
+                                <option selected disabled value="">เลือกประเภททอง</option>
                                 @foreach($producttype as $row)
                                 <option value="{{$row->id}}">{{$row->name}}</option>
                                 @endforeach
