@@ -86,7 +86,7 @@
                                     <td>{{$row->telcustomer}}</td>
                                     <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-primary" id="print" data-id="{{$row['id']}}"><i class="fa fa-receipt"></i> ปริ้นใบรับซื้อฝากทอง</button>
+                                        <button type="button" class="btn btn-primary" id="print" data-id="{{$row['id']}}"><i class="fa fa-receipt"></i> ปริ้นใบกำกับภาษี</button>
                                     </td>
                                 </tr>
                                 @endforeach
