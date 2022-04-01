@@ -15,6 +15,7 @@ use App\HistoryPledges;
 use App\Pledge;
 use App\PledgeLine;
 use PDF;
+use DB;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -95,6 +96,44 @@ class ReportController extends Controller
         //
     }
 
+    public function buy_report(Request $request)
+    {
+        $keyword = $request->get('search');
+        $buy_report = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('code', "desc");
+        if (!empty($keyword)) {
+            $buy_report = $buy_report->where('product_details.code', 'like', "%$keyword%")
+                ->orWhere('product_details.details', 'like', "%$keyword%");
+        }
+        $filter_type = $request->get('filter_type');
+        if (!empty($filter_type)) {
+            $buy_report = $buy_report->where('product_details.type_gold_id', $filter_type);
+        }
+        $filter_size = $request->get('filter_size');
+        if (!empty($filter_size)) {
+            $buy_report = $buy_report->where('product_details.size', $filter_size);
+        }
+        $filter_date = $request->get('filter_date');
+        if (!empty($filter_date)) {
+            $buy_report = $buy_report->whereDate('product_details.created_at', '>=', $filter_date);
+        }
+        $filter_status = $request->get('filter_status');
+        if ($filter_status == '2' || $filter_status == '0') {
+            $buy_report = $buy_report->where('product_details.status_trade', "$filter_status");
+        }
+        $filter_date_end = $request->get('filter_date_end');
+        if (!empty($filter_date_end)) {
+            $buy_report = $buy_report->whereDate('product_details.created_at', '<=', $filter_date_end);
+        }
+        $buy_report = $buy_report->paginate(15);
+        $product = Product::all();
+        $typegold = TypeGold::all();
+        $user = User::all();
+        $customer = Customer::all();
+        $striped = Striped::all();
+        $stockoldCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองเก่า')->where('status_trade', '0')->groupBy('type_gold_id')->get();
+        return view('admin.report.buy_report', compact('product',  'buy_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'filter_date_end', 'stockoldCount'));
+    }    
+
     public function report_buy(Request $request)
     {
         $keyword = $request->get('search');
@@ -129,6 +168,48 @@ class ReportController extends Controller
         $productdetail = ProductDetails::all();
         $pdf = PDF::loadView('admin.report.form_buy', compact('productdetail', 'customer', 'form','count'));
         return $pdf->stream('formbuy.pdf');
+    }
+    public function sell_report(Request $request)
+    {
+        $keyword = $request->get('search');
+        $sell_report = ProductDetails::select("product_details.*", 'type_gold.name', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameusers', 'users.lastname as lastnameusers')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '1')->orderBy('code', "desc");
+        if (!empty($keyword)) {
+            $sell_report = $sell_report->where('product_details.code', 'like', "%$keyword%")
+                ->orWhere('product_details.details', 'like', "%$keyword%");
+        }
+        $filter_type = $request->get('filter_type');
+        if (!empty($filter_type)) {
+            $sell_report = $sell_report->where('product_details.type_gold_id', $filter_type);
+        }
+        $filter_size = $request->get('filter_size');
+        if (!empty($filter_size)) {
+            $sell_report = $sell_report->where('product_details.size', $filter_size);
+        }
+        $filter_status = $request->get('filter_status');
+        if ($filter_status == '0' || $filter_status == '1') {
+            $sell_report = $sell_report->where('product_details.status_trade', "$filter_status");
+        }
+        $filter_status_gold = $request->get('filter_status_gold');
+        if ($filter_status_gold == '0' || $filter_status_gold == '1') {
+            $sell_report = $sell_report->where('product_details.status', "$filter_status_gold");
+        }
+        $filter_date = $request->get('filter_date');
+        $filter_date_end = $request->get('filter_date_end');
+        if (!empty($filter_date)) {
+            $sell_report = $sell_report->whereDate('product_details.created_at', '>=', $filter_date);
+        }
+        if (!empty($filter_date_end)) {
+            $sell_report = $sell_report->whereDate('product_details.created_at', '<=', $filter_date_end);
+        }
+        $sell_report = $sell_report->paginate(15);
+        $product = Product::all();
+        $typegold = TypeGold::all();
+        $user = User::all();
+        $customer = Customer::all();
+        $striped = Striped::all();
+        $sell_reportCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->groupBy('type_gold_id')->get();
+
+        return view('admin.report.sell_report', compact('product', 'sell_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'sell_reportCount'));
     }
     public function report_sell(Request $request)
     {

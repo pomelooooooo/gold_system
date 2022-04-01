@@ -96,6 +96,9 @@
                         <div class="col-6">
                             {{ $form->links() }}
                         </div>
+                        <div class="text-right">
+                            <a type="button" class="btn btn-secondary" href="{{url('/sell_report')}}">กลับ</a>
+                        </div>
                     </div>
                 </div>
             </div>
