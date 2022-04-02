@@ -153,7 +153,7 @@
 										<i class="fas fa-sign-out-alt white-text"></i>
 										<a class="shopping-cart" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-											{{ __('Logout') }}
+											{{ __('ออกจากระบบ') }}
 										</a>
 
 										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
