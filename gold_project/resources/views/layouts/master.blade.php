@@ -204,7 +204,7 @@
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">ข้อมูลร้านทอง</h2>
 						<p>ห้างหุ้นส่วนจำกัด มาทอง เยาราช (สำนักงานใหญ่) เลขประจำตัวผู้เสียภาษี 0803564001495 <br>
-                		เลขที่ 158 หมู่ที่ 1 ตำบลขนอม อำเภอขนอม จังหวัดนครศรีธรรมราช</p>
+                		เลขที่ 158 หมู่ที่ 1 ตำบลขนอม อำเภอขนอม </br>จังหวัดนครศรีธรรมราช</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
@@ -221,7 +221,7 @@
 					<div class="footer-box get-in-touch">
 						<h2 class="widget-title">ข้อมูลการติดต่อ</h2>
 						<ul>
-							<li><i class="fa fa-envelope" aria-hidden="true"></i> support@fruitkha.com</li>
+							<!-- <li><i class="fa fa-envelope" aria-hidden="true"></i> support@fruitkha.com</li> -->
 							<li><i class="fab fa-facebook-f"></i> ห้างทองมาทอง เยาวราช</li>
 							<li><i class="fa fa-phone" aria-hidden="true"></i> 065 449 5858</li>
 						</ul>
