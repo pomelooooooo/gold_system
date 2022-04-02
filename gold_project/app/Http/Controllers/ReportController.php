@@ -125,14 +125,18 @@ class ReportController extends Controller
             $buy_report = $buy_report->whereDate('product_details.created_at', '<=', $filter_date_end);
         }
         $buy_report = $buy_report->paginate(15);
+        $totalPrice = 0;
+        foreach($buy_report as $key => $value){
+            $totalPrice += $value->allprice;
+        }
         $product = Product::all();
         $typegold = TypeGold::all();
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        $stockoldPrice = ProductDetails::select("product_details.*", DB::raw('sum(allprice) as total_price'))->where('type', 'ทองเก่า')->where('status_trade', '0')->groupBy('type')->get();
+        // $stockoldPrice = ProductDetails::select("product_details.*", DB::raw('sum(allprice) as total_price'))->where('type', 'ทองเก่า')->where('status_trade', '0')->groupBy('type')->get();
         $stockoldCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองเก่า')->where('status_trade', '0')->groupBy('type_gold_id')->get();
-        return view('admin.report.buy_report', compact('product',  'buy_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'filter_date_end', 'stockoldCount','stockoldPrice'));
+        return view('admin.report.buy_report', compact('product',  'buy_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'filter_date_end', 'stockoldCount','totalPrice'));
     }    
 
     public function report_buy(Request $request)
@@ -205,14 +209,19 @@ class ReportController extends Controller
             // $sellPrice = $sellPrice->whereDate('product_details.datetime', '<=', $filter_date_end);
         }
         $sell_report = $sell_report->paginate(15);
+        $totalPrice = 0;
+        foreach($sell_report as $key => $value){
+            $totalPrice += $value->sellprice;
+        }
+        // dd($totalPrice);
         $product = Product::all();
         $typegold = TypeGold::all();
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
-        $sellPrice = ProductDetails::select("product_details.*", DB::raw('sum(sellprice) as total_price'))->where('type', 'ทองใหม่')->where('status_trade', '1')->groupBy('type')->get();
+        // $sellPrice = ProductDetails::select("product_details.*", DB::raw('sum(sellprice) as total_price'))->where('type', 'ทองใหม่')->where('status_trade', '1')->groupBy('type')->get();
         $sell_reportCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->groupBy('type_gold_id')->get();
-        return view('admin.report.sell_report', compact('product', 'sell_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'sell_reportCount','sellPrice'));
+        return view('admin.report.sell_report', compact('product', 'sell_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'sell_reportCount','totalPrice'));
     }
     public function report_sell(Request $request)
     {

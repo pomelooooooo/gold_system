@@ -74,7 +74,7 @@
 </div>
 <!-- end hero area -->
 <br>
-<form class="form-inline" action="/report_buy" method="GET">
+<form class="form-inline" action="/buy_report" method="GET">
     <div class="container">
         <div class="grid-item">
             <div class="card">
@@ -84,7 +84,7 @@
                             <h3>ทองเก่า</h3>
                         </div>
                         <div class="col-6"style="text-align: right;">
-                            <a type="button" class="btn btn-primary" href="{{url('/report_buy')}}"><i class="fa fa-receipt"></i> ใบเสร็จรับเงินย้อนหลัง</a>
+                            <a type="button" class="btn btn-outline-primary" href="{{url('/report_buy')}}"><i class="fa fa-receipt"></i> ใบเสร็จรับเงินย้อนหลัง</a>
                         </div>
                     </div>
                 </div>
@@ -136,9 +136,7 @@
                                 <div class="card-body">
                                     <h5>ยอดรับซื้อ</h5>
                                     <hr>
-                                    @foreach($stockoldPrice as $key => $value)
-                                    <span><b>ยอดรับซื้อรวม : </b>{{$value->total_price.' บาท'}}</span><br>
-                                    @endforeach
+                                    <span><b>ยอดรับซื้อรวม : </b>{{$totalPrice.' บาท'}}</span><br>
                                 </div>
                             </div>
                         </div>
@@ -147,8 +145,8 @@
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">รหัสสินค้า</th>
-                                <th scope="col">รายละเอียดสินค้า</th>
+                                <th scope="col" style="text-align: left;">รหัสสินค้า</th>
+                                <th scope="col" style="text-align: left;">รายละเอียดสินค้า</th>
                                 <th scope="col">ประเภท</th>
                                 <th scope="col">นํ้าหนัก</th>
                                 <th scope="col">ผู้รับซื้อ</th>
@@ -160,8 +158,8 @@
                         <tbody>
                             @foreach($buy_report as $row)
                             <tr>
-                                <td>{{$row->code}}</td>
-                                <td>{{$row->details}}</td>
+                                <td style="text-align: left;">{{$row->code}}</td>
+                                <td style="text-align: left;">{{$row->details}}</td>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->size}}</td>
                                 <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>

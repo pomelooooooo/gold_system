@@ -281,14 +281,16 @@ class PledgeController extends Controller
     public function interest_update(Request $request, $id)
     {
         $pledges = Pledge::find($id);
-        dd($request->status_check);
+        // dd($request->status_check);
+        $request->status_check = array_values($request->status_check);
+        // dd($request->status_check);
         if(count(array_unique($request->status_check)) == 1){
             $pledges->status_check = $request->status_check[0];
         }
         $pledges->interest_bath = $request->get('interest_bath');
         $pledges->updated_at = Carbon::now();
         $pledges->save();
-
+        // dd($request->pledges_line_id);
         foreach ($request->pledges_line_id as $key => $value) {
             $pledgeLine = PledgeLine::find($value);
             $pledgeLine->status_check = $request->status_check[$key];
@@ -313,7 +315,6 @@ class PledgeController extends Controller
     public function formpledge($id)
     {
         $pledges = Pledge::select('pledges.*', 'type_gold.name as type_gold_name', 'product_details.id as product_detail_id', 'product_details.code', 'product_details.type_gold_id', 'product_details.size', 'product_details.gram', 'product_details.striped_id', 'product_details.details', 'product_details.allprice', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer', 'customer.address as addresscustomer', 'pledges_line.id as pledges_line_id', 'pledges_line.status_check as pledges_line_status_check', 'history_pledges.customer_name as customername', 'history_pledges.due_date', 'history_pledges.deposit', 'history_pledges.created_at as created_history_pledges')->join('pledges_line', 'pledges_line.pledges_id', '=', 'pledges.id')->leftJoin('history_pledges', 'history_pledges.pledges_id', '=', 'pledges.id')->join('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->join('customer', 'pledges.customer_id', '=', 'customer.id')->join('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->orderBy('created_at', "desc")->where('pledges.id', $id)->get();
-        // dd(count($pledges));
         $count = count($pledges);
         $customer = Customer::all();
         $productdetail = ProductDetails::all();

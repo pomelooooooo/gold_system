@@ -86,7 +86,7 @@
                             <h3>ทองใหม่</h3>
                         </div>
                         <div class="col-6"style="text-align: right;">
-                            <a type="button" class="btn btn-primary" href="{{url('/report_sell')}}"><i class="fa fa-receipt"></i> ใบเกำกับภาษีย้อนหลัง</a>
+                            <a type="button" class="btn btn-outline-primary" href="{{url('/report_sell')}}"><i class="fa fa-receipt"></i> ใบกำกับภาษีย้อนหลัง</a>
                         </div>
                     </div>
                 </div>
@@ -144,9 +144,7 @@
                                 <div class="card-body">
                                     <h5>ยอดขาย</h5>
                                     <hr>
-                                    @foreach($sellPrice as $key => $value)
-                                    <span><b>ยอดขายออกรวม : </b>{{$value->total_price.' บาท'}}</span><br>
-                                    @endforeach
+                                    <span><b>ยอดขายออกรวม : </b>{{$totalPrice.' บาท'}}</span><br>
                                 </div>
                             </div>
                         </div>
@@ -155,8 +153,8 @@
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">รหัสสินค้า</th>
-                                <th scope="col">รายละเอียดสินค้า</th>
+                                <th scope="col" style="text-align: left;">รหัสสินค้า</th>
+                                <th scope="col" style="text-align: left;">รายละเอียดสินค้า</th>
                                 <th scope="col">ประเภท</th>
                                 <th scope="col">นํ้าหนัก</th>
                                 <th scope="col">สถานะทอง</th>
@@ -170,8 +168,8 @@
                         <tbody>
                             @foreach($sell_report as $row)
                             <tr>
-                                <td>{{$row->code}}</td>
-                                <td>{{$row->details}}</td>
+                                <td style="text-align: left;">{{$row->code}}</td>
+                                <td style="text-align: left;">{{$row->details}}</td>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->size}}</td>
                                 <td>{{$row->status == '0' ? 'ทองในถาด' : 'ทองในสต็อก'}}</td>

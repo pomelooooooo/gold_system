@@ -349,8 +349,8 @@
         </table>
         <br>
         @foreach($pledges as $key => $value)
-        <input type="hidden" name="pledges_line_id[]" value="{{$value->pledges_line_id}}">
         @if($value->pledges_line_status_check == '0')
+        <input type="hidden" name="pledges_line_id[]" value="{{$value->pledges_line_id}}">
         <div id="card">
             <div class="card card-item">
                 <div class="card-body">
