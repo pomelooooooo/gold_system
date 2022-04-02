@@ -81,8 +81,14 @@
         <div class="grid-item">
             <div class="card">
                 <div class="card-header">
-                    <h3>ทองใหม่</h3>
-                    <a type="button" class="btn btn-primary" href="{{url('/report_sell')}}">ใบเกำกับภาษีย้อนหลัง</a>
+                    <div class="row">
+                        <div class="col-6" style="text-align: left;">
+                            <h3>ทองใหม่</h3>
+                        </div>
+                        <div class="col-6"style="text-align: right;">
+                            <a type="button" class="btn btn-primary" href="{{url('/report_sell')}}"><i class="fa fa-receipt"></i> ใบเกำกับภาษีย้อนหลัง</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -121,11 +127,28 @@
                         </div>
                     </div>
                     <br>
-                    <div class="card">
-                        <div class="card-body">
-                            @foreach($sell_reportCount as $key => $value)
-                            <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><br>
-                            @endforeach
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>ทองคงเหลือ</h5>
+                                    <hr>
+                                    @foreach($sell_reportCount as $key => $value)
+                                    <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><br>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>ยอดขาย</h5>
+                                    <hr>
+                                    @foreach($sellPrice as $key => $value)
+                                    <span><b>ยอดขายออกรวม : </b>{{$value->total_price.' บาท'}}</span><br>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br>

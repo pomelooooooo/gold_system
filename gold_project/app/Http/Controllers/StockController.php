@@ -193,7 +193,7 @@ class StockController extends Controller
     public function stockold(Request $request)
     {
         $keyword2 = $request->get('search2');
-        $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->orderBy('code', "desc")->where('type', 'ทองเก่า')->where('status_trade', '0');
+        $stockold = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->where('status_trade', '0')->orderBy('code', "desc");
         if (!empty($keyword2)) {
             $stockold = $stockold->where('product_details.code', 'like', "%$keyword2%")
                 ->orWhere('product_details.details', 'like', "%$keyword2%");
@@ -228,7 +228,7 @@ class StockController extends Controller
     public function stock_old(Request $request)
     {
         $keyword3 = $request->get('search3');
-        $stock_old = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('code', "desc");
+        $stock_old = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->where('status_trade', '0')->orderBy('code', "desc");
         if (!empty($keyword3)) {
             $stock_old = $stock_old->where('product_details.code', 'like', "%$keyword3%")
                 ->orWhere('product_details.details', 'like', "%$keyword3%");

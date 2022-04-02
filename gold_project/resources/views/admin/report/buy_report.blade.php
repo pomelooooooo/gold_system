@@ -74,13 +74,19 @@
 </div>
 <!-- end hero area -->
 <br>
-<form class="form-inline" action="/stock_old" method="GET">
+<form class="form-inline" action="/report_buy" method="GET">
     <div class="container">
         <div class="grid-item">
             <div class="card">
                 <div class="card-header">
-                    <h3>ทองเก่า</h3>
-                    <a type="button" class="btn btn-primary" href="{{url('/report_buy')}}">ใบเสร็จรับเงินย้อนหลัง</a>
+                    <div class="row">
+                        <div class="col-6" style="text-align: left;">
+                            <h3>ทองเก่า</h3>
+                        </div>
+                        <div class="col-6"style="text-align: right;">
+                            <a type="button" class="btn btn-primary" href="{{url('/report_buy')}}"><i class="fa fa-receipt"></i> ใบเสร็จรับเงินย้อนหลัง</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -113,11 +119,28 @@
                         </div>
                     </div>
                     <br>
-                    <div class="card">
-                        <div class="card-body">
-                            @foreach($stockoldCount as $key => $value)
-                            <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><br>
-                            @endforeach
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>ทองคงเหลือ</h5>
+                                    <hr>
+                                    @foreach($stockoldCount as $key => $value)
+                                    <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><br>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>ยอดรับซื้อ</h5>
+                                    <hr>
+                                    @foreach($stockoldPrice as $key => $value)
+                                    <span><b>ยอดรับซื้อรวม : </b>{{$value->total_price.' บาท'}}</span><br>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br>

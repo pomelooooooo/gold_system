@@ -99,7 +99,7 @@ class ReportController extends Controller
     public function buy_report(Request $request)
     {
         $keyword = $request->get('search');
-        $buy_report = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->orderBy('code', "desc");
+        $buy_report = ProductDetails::select("product_details.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameemployee', 'users.lastname as lastnameemployee', 'type_gold.name')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->where('type', 'ทองเก่า')->where('status_trade', '0')->orderBy('code', "desc");
         if (!empty($keyword)) {
             $buy_report = $buy_report->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%");
@@ -130,8 +130,9 @@ class ReportController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
+        $stockoldPrice = ProductDetails::select("product_details.*", DB::raw('sum(allprice) as total_price'))->where('type', 'ทองเก่า')->where('status_trade', '0')->groupBy('type')->get();
         $stockoldCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองเก่า')->where('status_trade', '0')->groupBy('type_gold_id')->get();
-        return view('admin.report.buy_report', compact('product',  'buy_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'filter_date_end', 'stockoldCount'));
+        return view('admin.report.buy_report', compact('product',  'buy_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_date', 'filter_date_end', 'stockoldCount','stockoldPrice'));
     }    
 
     public function report_buy(Request $request)
@@ -207,9 +208,9 @@ class ReportController extends Controller
         $user = User::all();
         $customer = Customer::all();
         $striped = Striped::all();
+        $sellPrice = ProductDetails::select("product_details.*", DB::raw('sum(sellprice) as total_price'))->where('type', 'ทองใหม่')->where('status_trade', '1')->groupBy('type')->get();
         $sell_reportCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->groupBy('type_gold_id')->get();
-
-        return view('admin.report.sell_report', compact('product', 'sell_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'sell_reportCount'));
+        return view('admin.report.sell_report', compact('product', 'sell_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'sell_reportCount','sellPrice'));
     }
     public function report_sell(Request $request)
     {

@@ -114,6 +114,8 @@
                     <br>
                     <div class="card">
                         <div class="card-body">
+                            <h5>ทองคงเหลือ</h5>
+                            <hr>
                             @foreach($stockoldCount as $key => $value)
                             <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><br>
                             @endforeach
