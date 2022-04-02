@@ -281,6 +281,7 @@ class PledgeController extends Controller
     public function interest_update(Request $request, $id)
     {
         $pledges = Pledge::find($id);
+        dd($request->status_check);
         if(count(array_unique($request->status_check)) == 1){
             $pledges->status_check = $request->status_check[0];
         }

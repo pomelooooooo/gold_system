@@ -185,7 +185,7 @@
                                 <td>{{$row->nameusers}} {{$row->lastnameusers}}</td>
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$sellprice_text}}</td>
-                                <td>{{Carbon\Carbon::parse($row->datetime)->format('Y-m-d')}}</td>
+                                <td>{{Carbon\Carbon::parse($row->datetime)->format('d/m/Y')}}</td>
                             </tr>
                             @endforeach
                         </tbody>

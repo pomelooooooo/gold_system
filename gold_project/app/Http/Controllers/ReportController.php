@@ -197,10 +197,12 @@ class ReportController extends Controller
         $filter_date = $request->get('filter_date');
         $filter_date_end = $request->get('filter_date_end');
         if (!empty($filter_date)) {
-            $sell_report = $sell_report->whereDate('product_details.created_at', '>=', $filter_date);
+            $sell_report = $sell_report->whereDate('product_details.datetime', '>=', $filter_date);
+            // $sellPrice = $sellPrice->whereDate('product_details.datetime', '>=', $filter_date);
         }
         if (!empty($filter_date_end)) {
-            $sell_report = $sell_report->whereDate('product_details.created_at', '<=', $filter_date_end);
+            $sell_report = $sell_report->whereDate('product_details.datetime', '<=', $filter_date_end);
+            // $sellPrice = $sellPrice->whereDate('product_details.datetime', '<=', $filter_date_end);
         }
         $sell_report = $sell_report->paginate(15);
         $product = Product::all();
