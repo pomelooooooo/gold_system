@@ -106,12 +106,12 @@
                                 <option value="{{ $sizeWay }}" {{$sizeWay == $filter_size?"selected":""}}>{{ $sizeLable }}</option>
                                 @endforeach
                             </select>
-                            <!-- <select class="form-control " name="filter_status">
-                                <option value="">สถานะทอง</option>
-                                @foreach(["0"=>"ทองเก่าในสต็อก" ,"2"=>"ส่งโรงหลอมแล้ว"] as $key => $val)
-                                <option value="{{$key}}" {{($filter_status == '0' || $filter_status == '2') && $key == $filter_status?"selected":""}}>{{$val}}</option>
+                            <select class="form-control " name="filter_status">
+                                <option value="">เลือกลูกค้า</option>
+                                @foreach($customer as $row)
+                                <option value="{{$row->id}}" {{$row->id == $filter_customer?"selected":""}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
-                            </select> -->
+                            </select>
                             <br>
                             <input class="form-control" type="date" name="filter_date" value="{{$filter_date}}"> ถึง
                             <input class="form-control" type="date" name="filter_date_end" value="{{$filter_date_end}}">

@@ -276,6 +276,10 @@ class ReportController extends Controller
         if (!empty($filter_size)) {
             $pledge_report = $pledge_report->where('product_details.size', $filter_size);
         }
+        $filter_customer = $request->get('filter_customer');
+        if (!empty($filter_customer)) {
+            $pledge_report = $pledge_report->where('product_details.customer', $filter_customer);
+        }
         $filter_status = $request->get('filter_status');
         if ($filter_status == '0' || $filter_status == '1') {
             $pledge_report = $pledge_report->where('product_details.status_trade', "$filter_status");
@@ -307,7 +311,7 @@ class ReportController extends Controller
         $striped = Striped::all();
         // $pledgePrice = ProductDetails::select("product_details.*", DB::raw('sum(pledgeprice) as total_price'))->where('type', 'ทองใหม่')->where('status_trade', '1')->groupBy('type')->get();
         $pledge_reportCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองจำนำ')->groupBy('type_gold_id')->get();
-        return view('admin.report.pledge_report', compact('product', 'pledge_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'pledge_reportCount','totalPrice'));
+        return view('admin.report.pledge_report', compact('product', 'pledge_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end','filter_customer', 'pledge_reportCount','totalPrice'));
     }
     public function report_pledge(Request $request)
     {
