@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" type="text" class="form-control" placeholder="" value="{{$managecustomer->idcard}}" id="validationid" required />
+                            <input name="idcard" type="text" class="form-control" placeholder="" pattern="\d{13}" value="{{$managecustomer->idcard}}" id="validationid" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเลขบัตรประชาชน
                             </div>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tel" type="text" class="form-control" placeholder="" value="{{$managecustomer->tel}}" id="validationtel" required />
+                            <input name="tel" type="tel" class="form-control" placeholder="" pattern="\d{10}" value="{{$managecustomer->tel}}" id="validationtel" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร
                             </div>

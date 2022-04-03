@@ -85,7 +85,7 @@
                                     }
                                 @endphp
                                 <td>{{$sellprice_text}}</td>
-                                <td>{{$row->created_at}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -154,7 +154,7 @@
                                 <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
-                                <td>{{$row->created_at}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
                             </tr>
                             @endforeach
                         </tbody>

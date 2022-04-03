@@ -195,8 +195,8 @@
                                 <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
-                                <td>{{$row->created_at}}</td>
-                                <td>{{$row->datecheck_stock}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->datecheck_stock)->format('d/m/Y')}}</td>
                                 <td class="{{$row->status_trade == '2' ? 'text-success' : ''}}">{{$row->status_trade == '2' ? 'ส่งโรงหลอมแล้ว' : 'ทองเก่าในสต็อก'}}</td>
                                 <td>
                                     <div class="form-check text-center">

@@ -258,6 +258,57 @@ class ReportController extends Controller
         $pdf = PDF::loadView('admin.report.form_sell', compact('productdetail', 'customer', 'form','count'));
         return $pdf->stream('formsell.pdf');
     }
+    public function pledge_report(Request $request)
+    {
+        $keyword = $request->get('search');
+        $pledge_report = ProductDetails::select("product_details.*", 'type_gold.name', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'users.name as nameusers', 'users.lastname as lastnameusers')->leftJoin('users', 'product_details.user_id', '=', 'users.id')->leftJoin('customer', 'product_details.customer_id', '=', 'customer.id')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองจำนำ')->orderBy('code', "desc");
+        // $pledge = Pledge::select("pledges_line.*", 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.tel as telcustomer', 'pledges.price_pledge as price_pledge')->join('pledges', 'pledges_line.pledges_id', '=', 'pledges.id')->leftJoin('customer', 'pledges.customer_id', '=', 'customer.id')->leftJoin('product_details', 'pledges_line.product_detail_id', '=', 'product_details.id')->orderBy('created_at', "desc");
+        
+        if (!empty($keyword)) {
+            $pledge_report = $pledge_report->where('product_details.code', 'like', "%$keyword%")
+                ->orWhere('product_details.details', 'like', "%$keyword%");
+        }
+        $filter_type = $request->get('filter_type');
+        if (!empty($filter_type)) {
+            $pledge_report = $pledge_report->where('product_details.type_gold_id', $filter_type);
+        }
+        $filter_size = $request->get('filter_size');
+        if (!empty($filter_size)) {
+            $pledge_report = $pledge_report->where('product_details.size', $filter_size);
+        }
+        $filter_status = $request->get('filter_status');
+        if ($filter_status == '0' || $filter_status == '1') {
+            $pledge_report = $pledge_report->where('product_details.status_trade', "$filter_status");
+        }
+        $filter_status_gold = $request->get('filter_status_gold');
+        if ($filter_status_gold == '0' || $filter_status_gold == '1') {
+            $pledge_report = $pledge_report->where('product_details.status', "$filter_status_gold");
+        }
+        $filter_date = $request->get('filter_date');
+        $filter_date_end = $request->get('filter_date_end');
+        if (!empty($filter_date)) {
+            $pledge_report = $pledge_report->whereDate('product_details.created_at', '>=', $filter_date);
+            // $pledgePrice = $pledgePrice->whereDate('product_details.created_at', '>=', $filter_date);
+        }
+        if (!empty($filter_date_end)) {
+            $pledge_report = $pledge_report->whereDate('product_details.created_at', '<=', $filter_date_end);
+            // $pledgePrice = $pledgePrice->whereDate('product_details.created_at', '<=', $filter_date_end);
+        }
+        $pledge_report = $pledge_report->paginate(15);
+        $totalPrice = 0;
+        foreach($pledge_report as $key => $value){
+            $totalPrice += $value->allprice;
+        }
+        // dd($totalPrice);
+        $product = Product::all();
+        $typegold = TypeGold::all();
+        $user = User::all();
+        $customer = Customer::all();
+        $striped = Striped::all();
+        // $pledgePrice = ProductDetails::select("product_details.*", DB::raw('sum(pledgeprice) as total_price'))->where('type', 'ทองใหม่')->where('status_trade', '1')->groupBy('type')->get();
+        $pledge_reportCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองจำนำ')->groupBy('type_gold_id')->get();
+        return view('admin.report.pledge_report', compact('product', 'pledge_report', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'pledge_reportCount','totalPrice'));
+    }
     public function report_pledge(Request $request)
     {
         $keyword = $request->get('search');

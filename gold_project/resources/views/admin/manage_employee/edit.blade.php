@@ -202,7 +202,7 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="email" type="text" class="form-control" placeholder="" value="{{$manageemployee->email}}" id="validationemail" required />
+                            <input name="email" type="email" class="form-control" placeholder="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="{{$manageemployee->email}}" id="validationemail" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกอีเมล
                             </div>
@@ -255,20 +255,20 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" type="text" class="form-control" placeholder="" value="{{$manageemployee->idcard}}" id="idcard" required />
+                            <input name="idcard" type="text" class="form-control" placeholder="" pattern="\d{13}" value="{{$manageemployee->idcard}}" id="idcard" required />
                             <div class="invalid-feedback" style="display: none;" id="validate_id_card">
                                เลขบัตรประชาชนซ้ำ
                             </div>
                             <div class="invalid-feedback">
-                                โปรดกรอกเลขบัตรประชาชน
+                                โปรดกรอกเลขบัตรประชาชน(13หลัก)
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" type="text" class="form-control" placeholder="" value="{{$manageemployee->telephone}}" id="validationtel" required />
+                            <input name="telephone" type="tel" class="form-control" placeholder="" pattern="\d{10}" value="{{$manageemployee->telephone}}" id="validationtel" required />
                             <div class="invalid-feedback">
-                                โปรดกรอกเบอร์โทร
+                                โปรดกรอกเบอร์โทร(10หลัก)
                             </div>
                         </div>
                     </div>

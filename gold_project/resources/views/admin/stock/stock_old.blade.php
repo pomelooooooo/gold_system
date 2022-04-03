@@ -148,7 +148,7 @@
                                 <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                 <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
                                 <td>{{$row->allprice}}</td>
-                                <td>{{$row->created_at}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
                                 @php
                                 if($row->status_check == '0'){
                                 $status_check_color = 'text-success';

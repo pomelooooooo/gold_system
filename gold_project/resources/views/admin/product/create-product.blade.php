@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <input name="lot_count" type="text" class="form-control" placeholder="" id="validationcount" required />
+                            <input name="lot_count" type="number" class="form-control" placeholder="" id="validationcount" style="width: 100% !important;" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกจำนวนสินค้า
                             </div>

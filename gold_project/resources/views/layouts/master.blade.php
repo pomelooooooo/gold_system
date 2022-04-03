@@ -144,7 +144,7 @@
 									<ul class="sub-menu">
 										<li><a href="/buy_report">ประวัติการซื้อย้อนหลัง</a></li>
 										<li><a href="/sell_report">ประวัติการขายย้อนหลัง</a></li>
-										<li><a href="/report_pledge">ประวัติการจำนำย้อนหลัง</a></li>
+										<li><a href="/pledge_report">ประวัติการจำนำย้อนหลัง</a></li>
 									</ul>
 								</li>
 								@endif

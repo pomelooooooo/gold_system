@@ -272,20 +272,20 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" required />
+                            <input name="idcard" id="idcard" type="text" class="form-control" pattern="\d{13}" placeholder="" required />
                             <div class="invalid-feedback" style="display: none;" id="validate_id_card">
                                 เลขบัตรประชาชนซ้ำ
                             </div>
                             <div class="invalid-feedback">
-                                โปรดกรอกเลขบัตรประชาชน
+                                โปรดกรอกเลขบัตรประชาชน(13หลัก)
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tel" id="tel" type="number" class="form-control" placeholder="" id="validationtel" required />
+                            <input name="tel" id="tel" type="tel" class="form-control"  pattern="\d{10}"  placeholder="" id="validationtel" required />
                             <div class="invalid-feedback">
-                                โปรดกรอกเบอร์โทร
+                                โปรดกรอกเบอร์โทร(10หลัก)
                             </div>
                         </div>
                     </div>
@@ -315,21 +315,27 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationdatecardstart">วันออกบัตร</h4>
+                        <h4 for="validationdatecardstart">วันออกบัตร*</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdatecardend">วันบัตรหมดอายุ</h4>
+                        <h4 for="validationdatecardend">วันบัตรหมดอายุ*</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" />
+                            <input name="date_card_start" id="date_card_start" type="text" class="form-control" placeholder="" required/>
+                            <div class="invalid-feedback">
+                                โปรดกรอกวันออกบัตร
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" />
+                            <input name="date_card_end" id="date_card_end" type="text" class="form-control" placeholder="" required/>
+                            <div class="invalid-feedback">
+                                โปรดกรอกวันบัตรหมดอายุ
+                            </div>
                         </div>
                     </div>
                 </div>

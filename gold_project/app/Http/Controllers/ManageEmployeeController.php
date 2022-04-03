@@ -79,6 +79,7 @@ class ManageEmployeeController extends Controller
             file_put_contents($file, $image_base64);
             $manageemployee->picture = $uniqid . '.' . $image_type;
         }
+        // dd($manageemployee);
         $manageemployee->save();
         $manageemployee = User::select('*')->paginate(5);
         // return view('admin.manage_employee.index', compact('manageemployee'));

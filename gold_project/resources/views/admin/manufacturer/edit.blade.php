@@ -67,9 +67,9 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input name="tax" type="text" class="form-control" id="validationttax" placeholder="" value="{{$manufacturer->tax}}" required/>
+                                <input name="tax" type="text" class="form-control" pattern="\d{13}" id="validationttax" placeholder="" value="{{$manufacturer->tax}}" required/>
                                 <div class="invalid-feedback">
-                                    โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี
+                                    โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี(13หลัก)
                                 </div>
                             </div>
                         </div>

@@ -136,7 +136,7 @@
                                 <tr>
                                     <td>{{$row->lot_id}}</td>
                                     <td>{{$row->lot_count}}</td>
-                                    <td>{{$row->date_of_import}}</td>
+                                    <td>{{\Carbon\Carbon::parse($row->date_of_import)->format('d/m/Y')}}</td>
                                     <td>{{$row->price_of_gold}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('ProductController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>

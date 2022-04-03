@@ -167,8 +167,8 @@
                                 }
                                 @endphp
                                 <td>{{$sellprice_text}}</td>
-                                <td>{{$row->created_at}}</td>
-                                <td>{{$row->updated_at}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->updated_at)->format('d/m/Y')}}</td>
                                 @php
                                 if($row->status_check == '0'){
                                 $status_check_color = 'text-success';

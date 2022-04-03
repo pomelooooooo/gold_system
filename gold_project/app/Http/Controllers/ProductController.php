@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $product = Product::select("*");
+        $product = Product::select("*")->orderBy('date_of_import','desc');
         if (!empty($keyword)) {
             $product = $product->where('products.lot_id', 'like', "%$keyword%")
                 ->orWhere('products.lot_count', 'like', "%$keyword%")

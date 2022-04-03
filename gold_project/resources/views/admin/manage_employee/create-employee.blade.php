@@ -257,7 +257,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <input name="email" id="email" type="mail" class="form-control" placeholder="" id="validationemail" required />
+                            <input name="email" id="email" type="email" class="form-control" placeholder="" id="validationemail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกอีเมล
                             </div>
@@ -267,7 +267,7 @@
                         <div class="form-group">
                             <input name="password" id="password" type="text" class="form-control" placeholder="" id="validationpassword" required />
                             <div class="invalid-feedback">
-                                โปรดกรอกพาสเวิส
+                                โปรดกรอกพาสเวิร์ด
                             </div>
                         </div>
                     </div>
@@ -309,20 +309,20 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" id="idcard" type="text" class="form-control" placeholder="" required />
+                            <input name="idcard" id="idcard" type="text" class="form-control" pattern="\d{13}"  placeholder="" required />
                             <div class="invalid-feedback" style="display: none;" id="validate_id_card">
                                 เลขบัตรประชาชนซ้ำ
                             </div>
                             <div class="invalid-feedback">
-                                โปรดกรอกเลขบัตรประชาชน
+                                โปรดกรอกเลขบัตรประชาชน(13หลัก)
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="telephone" type="number" class="form-control" id="validationtel" required style="width: 100% !important;" />
+                            <input name="telephone" type="tel" class="form-control" pattern="\d{10}" id="validationtel" required style="width: 100% !important;" />
                             <div class="invalid-feedback">
-                                โปรดกรอกเบอร์โทร
+                                โปรดกรอกเบอร์โทร(10หลัก)
                             </div>
                         </div>
                     </div>
