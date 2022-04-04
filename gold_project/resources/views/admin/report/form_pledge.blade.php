@@ -204,7 +204,7 @@
                         <td style="padding-top: 10px; padding-bottom: 10px;" class="details">
                             ผู้ขายฝากขอรับรองว่าทรัพย์สินที่นำมาขายฝากไว้ เป็นกรรมสิทธิ์ของผู้กู้แค่เพียงผู้เดียว ไม่มีการค้ำประกันใดๆ
                             และได้มาโดยชอบกฎหมาย ผู้ขายฝากจะมาไถ่ทรัพย์คืนภายในวันที่____________________เป็นจำนวนเท่ากับ
-                            ราคาฝากรวมประโยชน์ตอบแทนร้อยละ____________ต่อเดือน เศษของเดือน นับเป็น 1 เดือน (ราคานี้ไม่รวม
+                            ราคาฝากรวมประโยชน์ตอบแทนร้อยละ {{number_format($pledges[0]->interest_per, 2)}} ต่อเดือน เศษของเดือน นับเป็น 1 เดือน (ราคานี้ไม่รวม
                             ภาษีมูลค่าเพิ่ม) หากพ้นกำหนดวันซื้อคืนตังกล่าว ผู้ขายไม่มีสิทธิ์ ไถ่ทรัพย์สินคืนได้อีก
                             ชำระโดย เงินสด________________บาท
                             เช็ค/งินโอน____________________________บาท ธนาคาร___________________สาขา_________________
@@ -220,6 +220,20 @@
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
             <td width="100%" style="vertical-align: baseline;border: 1.3px solid; padding: 10px;">
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="50%">
+
+                        </td>
+                        <td width="50%" class="details">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ส่วนนี้ส่งแผนกบัญชีเมื่อ <br>
+                            ผู้ขายฝาก &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-top: 8px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ไถ่ทรัพย์คืนตามเอกสารเลขที่................ <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-top: 8px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ไม่ไถ่ถอนพ้นกำหนดเวลา
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <br>
                 <table class="wrap-box" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="text-align:center"><b>...................................................</b><br /> </td>
