@@ -123,157 +123,114 @@
 <body>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="50%" style="vertical-align: top;border: 1px solid;">
-                <table class="wrap-box" cellpadding="0" cellspacing="0" style="padding:10px;">
-                    <tr style="padding-left: 10px;">
-                        <td><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>วันที่รับฝาก&nbsp;&nbsp;{{$pledges[0]->installment_start}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>ชื่อ-นามสกุล&nbsp;&nbsp;{{$pledges[0]->namecustomer}}&nbsp;{{$pledges[0]->lastnamecustomer}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>รายการขายฝาก</b><b>&nbsp;&nbsp;
-                                @foreach($pledges as $key => $row)
-                                {{$row->type_gold_name}}
-                                @endforeach
-                                &nbsp;</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวน  {{$count}}  ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10">
-                            <div style="background-color: gray; width:50%; margin:auto; text-align:center;">
-                                สามพันบาท
-                            </div>
+            <td width="100%" style="vertical-align: baseline;border: 1.3px solid; padding: 10px;">
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="text-align:center"><span class="header-title">ห้างหุ้นส่วนจำกัด มาทอง เยาราช (สำนักงานใหญ่) <br>
+                        เลขที่ 158 หมู่ที่ 1 ตำบลขนอม อำเภอขนอม จังหวัดนครศรีธรรมราช <br>
+                        โทรศัพท์ 0866947040 เลขประจำตัวผู้เสียภาษี Tax ID:0803564001495 <br>
+                        ใบรับซื้อฝากทอง
+                    </span>
                         </td>
                     </tr>
                 </table>
-            </td>
-            <td width="10%"></td>
-            <td width="45%" style="vertical-align: top;border: 1px solid;">
-                <table class="wrap-box" cellpadding="0" cellspacing="0" style="padding: 10px;">
+                <br>
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td style="padding-bottom:10px;"><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
+                        <td style="width:50%;"class="details"><b>วันที่</b>&nbsp;&nbsp;{{$pledges[0]->installment_start}}</td>
+                        <td style="width:50%;"class="details"><b>เลขที่ ________________________________</b></td>
                     </tr>
+                </table>
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width:50%; padding-top: 5px; padding-bottom: 5px;"class="details"><b>ชื่อผู้ขายฝาก </b>&nbsp;&nbsp;{{$pledges[0]->namecustomer}}&nbsp;{{$pledges[0]->lastnamecustomer}}</td>
+                        <td style="width:50%;"class="details"><b>เลขประจำตัวประชาชน</b>&nbsp;&nbsp;{{$pledges[0]->idcardcustomer}}</td>
+                    </tr>
+                </table>
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="details"><b>ที่อยู่</b>&nbsp;&nbsp;{{$pledges[0]->addresscustomer}}</td>
+
+                    </tr>
+                </table>
+                </td>
+        </tr>
+    </table>
+                <div class="line"></div>
+                <table class="wrap-box table-bor" cellpadding="0" cellspacing="0">
                     <tr>
                         <td>
-                            <div style="display:inline-block;padding:0 10px 0 0">วันกำหนดชำระ</div>
-                            <div style="display:inline-block;padding:0 10px">วันที่ชำระ</div>
-                            <div style="display:inline-block;padding:0 10px">ยอดรับฝากคงเหลือ</div>
-                            <div style="display:inline-block;padding:0 10px">ผู้รับชำระ</div>
+                            <table class="wrap-content" cellpadding="3" cellspacing="0">
+                                <tr>
+                                    <th style="width:6%;">ลำดับที่</th>
+                                    <th style="width:44%;">รายการสินค้า</th>
+                                    <th style="width:19%;">น้ำหนัก</th>
+                                    <th style="width:10%;">จำนวน</th>
+                                    <th style="width:20%;">ราคาต่อหน่วย</th>
+                                    <th style="width:27%;">ราคาขายฝาก</th>
+                                </tr>
+                                @php
+                                $pledgepriceall = 0;
+                                $gram = 0;
+                                @endphp
+                                @foreach($pledges as $key => $row)
+                                <tr>
+                                    <td style="text-align:center;">{{++$key}}</td>
+                                    <td>{{$row->details}}</td>
+                                    <td style="text-align:center;">{{$row->gram}}</td>
+                                    <td style="text-align:center;">1</td>
+                                    <td align="center">{{number_format($row->allprice, 2)}}</td>
+                                    <td style="text-align:right;">{{number_format($row->allprice, 2)}}</td>
+                                </tr>
+                                @php
+                                $pledgepriceall += $row->allprice;
+                                $gram += $row->gram;
+                                @endphp
+                                @endforeach
+                                <tr>
+                                    <td colspan="4" style="text-align: left;">(ตัวอักษร)</td>
+                                    <td style="font-weight: bold; text-align:center;">จำนวนเงินรวม</td>
+                                    <td align="right">{{number_format($pledgepriceall, 2)}}</td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
+                </table>
+    <table class="wrap-box" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="100%" style="vertical-align: baseline;border: 1.3px solid; padding: 10px;">
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:70%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
+                        <td style="padding-top: 10px; padding-bottom: 10px;" class="details">
+                            ข้าพเจ้าขอรับรองวำทรัพย์สินที่นำมาขายเป็นกรรมสิทธิ์ของข้าพเจ้าโดยแท้จริง และขอรับรองว่าทรัพย์สินที่นำมาขายนั้น
+                            เป็นทรัพย์สินที่บริสุทธิ์ ถ้าหากเป็นของทุจริตแล้ว ข้าพเจ้าขอรับผิดชอบทั้งสิ้น ข้าพเจ้าได้อ่านและรับเงินเรียบร้อยแล้ว
+                            จึงลงนามไว้เป็นหลักฐาน
+                        </td>
+
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
-    <br>
+                <div class="line"></div>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="50%" style="vertical-align: top;border: 1px solid;">
-                <table class="wrap-box" cellpadding="0" cellspacing="0" style="padding:10px;">
-                    <tr style="padding-left: 10px;">
-                        <td><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>วันที่รับฝาก&nbsp;&nbsp;{{$pledges[0]->installment_start}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>ชื่อ-นามสกุล&nbsp;&nbsp;{{$pledges[0]->namecustomer}}&nbsp;{{$pledges[0]->lastnamecustomer}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>เบอร์มือถือ&nbsp;&nbsp;{{$pledges[0]->telcustomer}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
+            <td width="100%" style="vertical-align: baseline;border: 1.3px solid; padding: 10px;">
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="text-align:center"><b>ลงชื่อ...................................................ผู้รับสินค้า / Receiver</b><br /> </td>
+                        <td style="text-align:center"><b>ลงชื่อ...................................................ผู้รับเงิน / Collector</b><br /> </td>
                     </tr>
                     <tr>
-                        <td>
-                            <div style="display:inline-block;padding:0 5px 0 0"><b>วันกำหนดชำระ</b></div>
-                            <div style="display:inline-block;padding:0 5px"><b>วันที่ชำระ</b></div>
-                            <div style="display:inline-block;padding:0 5px"><b>ยอดรับฝากคงเหลือ</b></div>
-                            <div style="display:inline-block;padding:0 5px"><b>ผู้รับชำระ</b></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:70%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
-                    </tr>
-                    <tr>
-                        <td style="width:50%;"><b>.....................................................................................................</b></td>
+                        <td style="padding-left: 20px;"><b>วันที่ / Date.........................................</b><br /> </td>
+                        <td style="padding-left: 20px;"><b>วันที่ / Date.........................................</b><br /> </td>
                     </tr>
                 </table>
-
-            </td>
-            <td width="5%"></td>
-            <td width="100%" style="vertical-align: top;border: 1px solid;">
-                <table class="wrap-box" cellpadding="0" cellspacing="0" style="padding:10px;">
-                    <tr style="padding-left: 10px;">
-                        <td><u><span class="header-title">ใบรับซื้อขายฝาก</span></u></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>วันที่รับฝาก&nbsp;&nbsp;{{$pledges[0]->installment_start}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>ชื่อ-นามสกุล&nbsp;&nbsp;{{$pledges[0]->namecustomer}}&nbsp;{{$pledges[0]->lastnamecustomer}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>ที่อยู่ปัจจุบัน&nbsp;&nbsp;{{$pledges[0]->addresscustomer}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>เบอร์มือถือ&nbsp;&nbsp;{{$pledges[0]->telcustomer}}</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>รายการขายฝาก</b><b>&nbsp;&nbsp;
-                                @foreach($pledges as $key => $row)
-                                {{$row->type_gold_name}}
-                                @endforeach
-                                &nbsp;</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวน  {{$count}}  ชิ้น นํ้าหนัก&nbsp;{{$pledges[0]->weight}}&nbsp;กรัม</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>จำนวนเงิน&nbsp;{{$pledges[0]->price_pledge}}&nbsp;บาท</b></td>
-                    </tr>
-                    <tr class="pl-10">
-                        <td class="pt-10"><b>ลงชื่อ....................................................................ผู้ขายฝาก</b></td>
+                <table class="wrap-box" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="padding-left: 20px;">
+                            <p>หมายเหตุ : แนบสำเนาบัตรประชาชนของผู้รับเงิน / ผู้ขาย</p><br />
+                        </td>
                     </tr>
                 </table>
             </td>

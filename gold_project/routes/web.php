@@ -95,7 +95,7 @@ Route::get('/report_sell/formsell/{id}', 'ReportController@formsell')->middlewar
 Route::get('/sell_report', 'ReportController@sell_report')->middleware('auth');
 
 Route::get('/report_pledge', 'ReportController@report_pledge')->middleware('auth');
-Route::get('/report_pledge/formpledge/{id}', 'PledgeController@formpledge')->middleware('auth');
+Route::get('/report_pledge/formpledge/{id}', 'ReportController@formpledge')->middleware('auth');
 Route::get('/pledge_report', 'ReportController@pledge_report')->middleware('auth');
 
 
