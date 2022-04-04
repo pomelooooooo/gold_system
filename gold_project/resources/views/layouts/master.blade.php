@@ -111,14 +111,18 @@
 									</ul>
 								</li>
 								@endif
+								@if(\Auth::user()->row_id == '0')
 								<li><a>จัดการข้อมูลผู้ใช้งาน</a>
 									<ul class="sub-menu">
-									@if(\Auth::user()->row_id == '0')
 										<li><a href="/manage_employee">จัดการข้อมูลพนักงาน</a></li>
-									@endif
 										<li><a href="/manage_customer">จัดการข้อมูลลูกค้า</a></li>
 									</ul>
 								</li>
+								@endif
+
+								@if(\Auth::user()->row_id == '1')
+								<li><a href="/manage_customer">จัดการข้อมูลลูกค้า</a></li>
+								@endif
 								@if(\Auth::user()->row_id == '0')
 								<li><a>คลังทอง</a>
 									<ul class="sub-menu">
