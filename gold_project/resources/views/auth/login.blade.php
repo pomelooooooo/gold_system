@@ -1,9 +1,10 @@
 @extends('layouts.firstpage')
 @section('title','เข้าสู่ระบบ')
 @section('content')
-            <div class="card">
+<div class="container">
+<div class="card">
                 <div class="card-header">
-                   <div class="h4">ล็อคอิน</div> 
+                   <div class="h3">ล็อคอิน</div> 
                 </div>
 
                 <div class="card-body">
@@ -36,6 +37,17 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-11 offset-md-4">
                             
@@ -47,6 +59,8 @@
                     </form>
                 </div>
             </div>
+</div>
+           
 
 
 @endsection
