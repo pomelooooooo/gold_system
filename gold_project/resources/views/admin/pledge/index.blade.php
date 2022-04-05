@@ -124,6 +124,7 @@
                                     <th scope="col">เบอร์โทร</th>
                                     <th scope="col">วันที่รับจำนำ</th>
                                     <th scope="col">วันที่จ่ายดอกรอบถัดไป</th>
+                                    <th scope="col">สถานะ</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -136,11 +137,23 @@
                                     <td>{{$row->telcustomer}}</td>
                                     <td>{{\Carbon\Carbon::parse($row->installment_start)->format('d/m/Y')}}</td>
                                     <td>{{\Carbon\Carbon::parse($row->installment_next)->format('d/m/Y')}}</td>
+                                    @php
+                                    if($row->status_check == '0'){
+                                    $status_check_text = 'ยังไม่ไถ่ถอน';
+                                    } else if($row->status_check == '1') {
+                                    $status_check_text = 'ไถ่ถอนแล้ว';
+                                    } else if($row->status_check == '2') {
+                                    $status_check_text = 'หลุดจำนำ';
+                                    } else {
+                                    $status_check_text = '-';
+                                    }
+                                    @endphp
+                                    <td>{{$status_check_text}}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary" href="{{action('PledgeController@interest',$row->id)}}"><i class="fa fa-receipt"></i> จ่ายดอก</a>&nbsp;
-                                        <a class="btn btn-warning" href="{{action('PledgeController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
+                                        <a class="btn btn-primary" href="{{action('PledgeController@interest',$row->id)}}"><i class="fa fa-receipt"></i> จ่ายดอก</a>
                                     </td>
                                     <td class="text-center">
+                                        <a class="btn btn-warning" href="{{action('PledgeController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                         {{csrf_field()}}
                                         <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row->id}}"><i class="fa fa-trash"></i> ลบ</button>
                                     </td>

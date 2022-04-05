@@ -127,7 +127,6 @@
                                     <th scope="col">วันที่นำเข้า</th>
                                     <th scope="col">ราคาทอง(บาท)</th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
 
@@ -140,8 +139,6 @@
                                     <td>{{$row->price_of_gold}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('ProductController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
-                                    </td>
-                                    <td class="text-center">
                                         {{csrf_field()}}
                                         <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row->id}}" data-lot_id="{{$row->lot_id}}"><i class="fa fa-trash"></i> ลบ</button>
                                     </td>

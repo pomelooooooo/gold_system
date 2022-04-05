@@ -134,7 +134,6 @@
                                     <th scope="col">ลูกค้า</th>
                                     <th scope="col">วันที่รับซื้อ</th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
 
@@ -150,8 +149,6 @@
                                     <td>{{$row->created_at}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('BuyController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
-                                    </td>
-                                    <td class="text-center">
                                         {{csrf_field()}}
                                         <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row->id}}"><i class="fa fa-trash"></i> ลบ</button>
                                     </td>

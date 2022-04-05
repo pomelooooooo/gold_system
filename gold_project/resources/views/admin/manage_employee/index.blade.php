@@ -117,7 +117,6 @@
                                     <th scope="col">เบอร์โทร</th>
                                     <th scope="col">ที่อยู่</th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
 
@@ -130,8 +129,6 @@
                                     <td>{{$row['address']}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('ManageEmployeeController@edit',$row['id'])}}"><i class="fa fa-edit"></i> แก้ไข</a>
-                                    </td>
-                                    <td class="text-center">
                                         {{csrf_field()}}
                                         <button class="btn btn-danger" type="button" id="delete_button" data-id="{{$row['id']}}"><i class="fa fa-trash"></i> ลบ</button>
                                     </td>
