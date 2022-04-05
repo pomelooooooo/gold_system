@@ -61,9 +61,9 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tel" type="text" class="form-control" id="validationtelstore" placeholder="" required />
+                            <input name="tel" type="tel"  pattern="\d{10}" class="form-control" id="validationtelstore" placeholder="" required />
                             <div class="invalid-feedback">
-                                โปรดกรอกเบอร์โทรร้าน
+                                โปรดกรอกเบอร์โทรร้าน(10หลัก)
                             </div>
                         </div>
                     </div>
@@ -79,17 +79,17 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tax_identification_number" type="text" class="form-control" id="validationtax" placeholder="" required />
+                            <input name="tax_identification_number" type="text" pattern="\d{13}" class="form-control" id="validationtax" placeholder="" required />
                             <div class="invalid-feedback">
-                                โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี
+                                โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี(13หลัก)
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="commercial_registration_number" type="text" class="form-control" id="validationcommercial" placeholder="" required />
+                            <input name="commercial_registration_number" type="text "pattern="\d{13}" class="form-control" id="validationcommercial" placeholder="" required />
                             <div class="invalid-feedback">
-                                โปรดกรอกเลขทะเบียนการค้า
+                                โปรดกรอกเลขทะเบียนการค้า(13หลัก)
                             </div>
                         </div>
                     </div>
