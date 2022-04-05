@@ -146,7 +146,7 @@
                                     <td>{{$row->size}}</td>
                                     <td>{{$row->nameemployee}} {{$row->lastnameemployee}}</td>
                                     <td>{{$row->namecustomer}} {{$row->lastnamecustomer}}</td>
-                                    <td>{{$row->created_at}}</td>
+                                    <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning" href="{{action('BuyController@edit',$row->id)}}"><i class="fa fa-edit"></i> แก้ไข</a>
                                         {{csrf_field()}}

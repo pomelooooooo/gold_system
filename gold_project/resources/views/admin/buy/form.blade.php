@@ -122,7 +122,7 @@
     <br>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width:50%;"class="details"><b>วันที่</b>&nbsp;&nbsp;{{$form[0]->created_at}}</td>
+            <td style="width:50%;"class="details"><b>วันที่</b>&nbsp;&nbsp;{{\Carbon\Carbon::parse($form[0]->created_at)->format('d/m/Y')}}</td>
             <td style="width:20%;"class="details"><b>เล่มที่______________</b></td>
             <td style="width:30%;"class="details"><b>เลขที่_________________________</b></td>
         </tr>

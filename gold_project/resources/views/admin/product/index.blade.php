@@ -109,10 +109,13 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <form class="form-inline" action="/product" method="GET">
                             <i class="fas fa-search" id="mySearch"></i>
                             <input class="form-control mr-sm-2" name="search" value="{{isset($keyword)?$keyword:''}}" type="search" id="myInput" placeholder="ค้นหาข้อมูลล็อตทอง">
+                            <input class="form-control" type="date" name="filter_date" value="{{$filter_date}}">&nbsp;&nbsp;ถึง&nbsp;&nbsp;
+                            <input class="form-control" type="date" name="filter_date_end" value="{{$filter_date_end}}">
+                            <input type="submit" class="btn btn-primary filters" value="ค้นหา">
                         </form>
                     </div>
                 </div>

@@ -2,6 +2,24 @@
 @section('title','แก้ไขข้อมูลผู้ผลิต')
 @section('content')
 
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
 <!-- hero area -->
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -26,7 +44,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{action('ManufacturerController@update', $id)}}">
+                <form method="POST" action="{{action('ManufacturerController@update', $id)}}" class="needs-validation" novalidate>
                     {{csrf_field()}}
                     <div class="row">
                         <div class="col-6">
@@ -59,7 +77,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <input name="tel" type="text" class="form-control" id="validationttel" placeholder="" value="{{$manufacturer->tel}}" required/>
+                                <input name="tel" type="tel" class="form-control" id="validationttel" placeholder="" value="{{$manufacturer->tel}}" required/>
                                 <div class="invalid-feedback">
                                     โปรดกรอกเบอร์โทร
                                 </div>

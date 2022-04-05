@@ -115,7 +115,7 @@
 <body>
     <table class="wrap-box" cellpadding="0" cellspacing="0">
         <tr>
-            <td style="text-align:center"><u><span class="header-title">ใบรับเงิน /ใบรับสินค้า</span></u>
+            <td style="text-align:center"><u><span class="header-title">ใบรับเงิน/ใบรับสินค้า</span></u>
             </td>
         </tr>
     </table>

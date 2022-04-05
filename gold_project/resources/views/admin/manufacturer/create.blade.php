@@ -42,7 +42,7 @@
             <h2>เพิ่มผู้ผลิต</h2>
         </div>
         <div class="card-body">
-            <form method="POST" class="needs-validation" action="{{route('manufacturer.store')}}" novalidate>
+            <form method="POST" action="{{route('manufacturer.store')}}" class="needs-validation" novalidate>
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">

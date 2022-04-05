@@ -20,16 +20,24 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $product = Product::select("*")->orderBy('date_of_import','desc');
+        $product = Product::select("*")->orderBy('created_at','desc');
         if (!empty($keyword)) {
             $product = $product->where('products.lot_id', 'like', "%$keyword%")
                 ->orWhere('products.lot_count', 'like', "%$keyword%")
                 ->orWhere('products.date_of_import', 'like', "%$keyword%")
                 ->orWhere('products.price_of_gold', 'like', "%$keyword%");
         }
+        $filter_date = $request->get('filter_date');
+        if (!empty($filter_date)) {
+            $product = $product->whereDate('products.date_of_import', '>=', $filter_date);
+        }
+        $filter_date_end = $request->get('filter_date_end');
+        if (!empty($filter_date_end)) {
+            $product = $product->whereDate('products.date_of_import', '<=', $filter_date_end);
+        }
         $product = $product->paginate(5);
         $type = TypeGold::all();
-        return view('admin.product.index', compact('product', 'type'));
+        return view('admin.product.index', compact('product', 'type','filter_date','filter_date_end'));
     }
 
     /**

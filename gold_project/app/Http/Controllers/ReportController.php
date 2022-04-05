@@ -252,6 +252,7 @@ class ReportController extends Controller
     {
         $form = FormSell::select('formsell.*', 'customer.name as namecustomer', 'customer.lastname as lastnamecustomer', 'customer.idcard as idcardcustomer', 'customer.address as addresscustomer','product_details.details as detail','product_details.gram as gram','product_details.sellprice')
         ->leftJoin('customer', 'formsell.customer_id', '=', 'customer.id')->leftJoin('product_details', 'formsell.product_detail_id', '=', 'product_details.id')->where('group_id', $id)->get();
+        // dd($form);
         $count = count($form);
         $customer = Customer::all();
         $productdetail = ProductDetails::all();
