@@ -122,20 +122,22 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="card">
+                                <div class="card-header" style="background-color: #571011d0;">
+                                    <h5 style="color:white;">ทองคงเหลือ</h5>
+                                </div>
                                 <div class="card-body">
-                                    <h5>ทองคงเหลือ</h5>
-                                    <hr>
                                     @foreach($pledge_reportCount as $key => $value)
-                                    <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><br>
+                                    <span><b>{{$value->name}} : </b>{{' จำนวน '.$value->total.' น้ำหนัก '.$value->total_gram.' กรัม'}}</span><hr>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="card">
+                                <div class="card-header" style="background-color: #571011d0;">
+                                    <h5 style="color:white;">ยอดรับจำนำ</h5>
+                                </div>
                                 <div class="card-body">
-                                    <h5>ยอดรับจำนำ</h5>
-                                    <hr>
                                     <span><b>ยอดรับจำนำรวม : </b>{{$totalPrice.' บาท'}}</span><br>
                                 </div>
                             </div>
