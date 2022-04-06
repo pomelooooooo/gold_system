@@ -57,7 +57,50 @@
                     }
                 }
             })
-        })
+        });
+        $("body").on('click', '#delete_button', function(e) {
+            var id = $(this).data("id");
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            Swal.fire({
+                title: 'ต้องการลบข้อมูลสต็อกทองหรือไม่?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'ไม่',
+                confirmButtonText: 'ใช่'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                $.ajax({
+                    url: "/productdetail/" + id,
+                    type: 'delete',
+                    data: {
+                        id: id,
+                        _token: token
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data.status){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'ลบข้อมูลเรียบร้อย',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then((result) => {
+                                window.location = '/stocknew'
+                            })
+                        }
+                        
+                    }
+                    });
+                }
+            })
+        });
     })
 </script>
 
@@ -81,7 +124,15 @@
         <div class="grid-item">
             <div class="card">
                 <div class="card-header">
-                    <h3>ทองใหม่</h3>
+                    <div class="row">
+                        <div class="col-6" style="text-align: left;">
+                            <h3>ทองใหม่</h3>
+                        </div>
+                        <div class="col-6" style="text-align: right;">
+                            {{csrf_field()}}
+                            <button class="btn btn-danger" type="button" id="delete_button"><i class="fa fa-trash"></i> เคลียร์ข้อมูลการเช็คสต็อก</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">

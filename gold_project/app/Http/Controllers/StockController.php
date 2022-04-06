@@ -190,6 +190,19 @@ class StockController extends Controller
 
         return view('admin.stock.stocknew', compact('product', 'stocknew', 'typegold', 'user', 'customer', 'striped', 'keyword', 'filter_type', 'filter_size', 'filter_status', 'filter_status_gold', 'filter_date', 'filter_date_end', 'stocknewCount'));
     }
+    public function deleteStockNew(Request $request,$id)
+    {
+        $stocknew = ProductDetails::find("product_details.*")->where('type', 'ทองใหม่')->where('status_trade', '1');
+        $stocknew->delete();
+        $stocknew = ProductDetails::select("product_details.*", 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->orderBy('code', "desc")->where('type', 'ทองใหม่')->paginate(15);
+        $product = Product::all();
+        $typegold = TypeGold::all();
+        $user = User::all();
+        $customer = Customer::all();
+        $striped = Striped::all();
+        $stocknewCount = ProductDetails::select("product_details.*", 'type_gold.name', DB::raw('count(*) as total'), DB::raw('sum(gram) as total_gram'))->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->groupBy('type_gold_id')->get();
+        return response()->json(['status' => true], 200);
+    }
     public function stockold(Request $request)
     {
         $keyword2 = $request->get('search2');
