@@ -237,13 +237,23 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationusername">ชื่อผู้ใช้*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationusername">ชื่อผู้ใช้</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
+
                     </div>
                     <div class="col-3">
-                        <h4 for="validationemail">อีเมล*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationemail">อีเมล</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                     <div class="col-3">
-                        <h4 for="validationpassword">พาสเวิร์ด*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationpassword">พาสเวิร์ด</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -274,10 +284,16 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationname">ชื่อ*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationname">ชื่อ</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationlastname">นามสกุล*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationlastname">นามสกุล</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -300,16 +316,22 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="idcard">เลขบัตรประชาชน*</h4>
+                        <div class="row col-12">
+                            <h4 for="idcard">เลขบัตรประชาชน</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtel">เบอร์โทร*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationtel">เบอร์โทร</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="idcard" id="idcard" type="text" class="form-control" pattern="\d{13}"  placeholder="" required />
+                            <input name="idcard" id="idcard" type="text" class="form-control" pattern="\d{13}" placeholder="" required />
                             <div class="invalid-feedback" style="display: none;" id="validate_id_card">
                                 เลขบัตรประชาชนซ้ำ
                             </div>
@@ -329,7 +351,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                     <div class="col-6">
                         <h4>ที่อยู่ปัจจุบัน</h4>
@@ -352,10 +377,16 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationdatecardstart">วันออกบัตร*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationdatecardstart">วันออกบัตร</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdatecardend">วันบัตรหมดอายุ*</h4>
+                        <div class="row col-12">
+                            <h4 for="validationdatecardend">วันบัตรหมดอายุ</h4>
+                            <h4 style="color: red;">*</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -378,7 +409,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>อัพโหลดภาพบัตรประชาชน*</h4>
+                        <div class="row col-12">
+                            <h4>อัพโหลดภาพบัตรประชาชน</h4>
+                            <h4 style=" color: red;">*</h4>
+                        </div>
                     </div>
                 </div>
                 <br>

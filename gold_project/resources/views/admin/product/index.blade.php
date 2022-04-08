@@ -62,7 +62,7 @@
                                 }).then((result) => {
                                     window.location = '/product'
                                 })
-                            }else {
+                            } else {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'ไม่สามารถลบได้',
