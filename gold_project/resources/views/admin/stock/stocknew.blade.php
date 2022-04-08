@@ -67,39 +67,51 @@
                 }
             });
             Swal.fire({
-                title: 'ต้องการลบข้อมูลสต็อกทองหรือไม่?',
-                icon: 'warning',
+                title: 'ต้องการเคลียร์ข้อมูลหรือไม่?',
+                icon: 'question',
+                html:
+                    '<input class="form-control" type="date" id="filter_date_delete"/>' + " ถึง " +
+                    '<input class="form-control" type="date" id="filter_date_delete_end"/>',                 
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 cancelButtonText: 'ไม่',
-                confirmButtonText: 'ใช่'
+                confirmButtonText: 'ใช่',
+                showLoaderOnConfirm: true,
             }).then((result) => {
                 if (result.isConfirmed) {
-                $.ajax({
-                    url: "/productdetail/" + id,
-                    type: 'delete',
-                    data: {
-                        id: id,
-                        _token: token
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        if(data.status){
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'ลบข้อมูลเรียบร้อย',
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then((result) => {
-                                window.location = '/stocknew'
-                            })
-                        }
+                    if($('#filter_date_delete').val() != "" && $('#filter_date_delete_end').val() != ""){
+                        $.ajax({
+                            url: "/stocknew/delete_stock",
+                            type: 'POST',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                filter_date_delete: $('#filter_date_delete').val(),
+                                filter_date_delete_end: $('#filter_date_delete_end').val(),
+                            },
+                            dataType: 'json',
+                            success: function(data) {
+                                if (data.status) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'เคลียร์ข้อมูลเรียบร้อย',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then((result) => {
+                                        window.location = '/stocknew'
+                                    })
+                                }
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'กรุณาเลือกช่วงเวลา',
+                        })
+                    }
                         
                     }
-                    });
-                }
-            })
+                })
         });
     })
 </script>
