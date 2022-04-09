@@ -42,6 +42,8 @@ Route::resource('/set_price', 'SetPriceController')->middleware('auth');
 Route::resource('/manage_employee', 'ManageEmployeeController')->middleware('auth');
 Route::post('/manage_employee/reset_password', 'ManageEmployeeController@reset_password')->middleware('auth');
 Route::get('/manage_employee/validateIdcard/{idCard}/{id?}', 'ManageEmployeeController@validateIdcard')->middleware('auth');
+Route::get('/manage_employee/validateTel/{Tel}/{id?}', 'ManageEmployeeController@validateTel')->middleware('auth');
+
 
 Route::resource('/type_gold', 'TypeGoldController')->middleware('auth');
 

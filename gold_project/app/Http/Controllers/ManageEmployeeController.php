@@ -178,6 +178,19 @@ class ManageEmployeeController extends Controller
         return response()->json(['status' => true], 200);
     }
 
+    public function validateTel($Tel, $id = '')
+    {
+        if (!empty($id)) {
+            $manageemployee = User::where('telephone', $Tel)->where('id', '!=', $id)->first();
+        } else {
+            $manageemployee = User::where('telephone', $Tel)->first();
+        }
+        if (!empty($manageemployee))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
+
     public function reset_password(Request $request){
         $manageemployee = User::find($request->json('id'));
         if(empty($request->json('password'))){
