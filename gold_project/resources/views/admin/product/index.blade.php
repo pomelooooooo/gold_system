@@ -126,6 +126,9 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">รหัสล็อต</th>
+                                    <th scope="col">ประเภท</th>
+                                    <th scope="col">ผู้ผลิต</th>
+                                    <th scope="col">น้ำหนัก(ต่อเส้น)</th>
                                     <th scope="col">จำนวนสินต้า</th>
                                     <th scope="col">วันที่นำเข้า</th>
                                     <th scope="col">ราคาทอง(บาท)</th>
@@ -137,6 +140,34 @@
                                 @foreach($product as $row)
                                 <tr>
                                     <td>{{$row->lot_id}}</td>
+                                    <td>{{$row->typename}}</td>
+                                    <td>{{$row->manuname}}</td>
+                                    @php
+                                    if($row->weight == '001'){
+                                    $weight_text = 'ครึ่งสลึง';
+                                    } else if($row->weight == '01') {
+                                    $weight_text = '1 สลึง';
+                                    } else if($row->weight == '02') {
+                                    $weight_text = '2 สลึง';
+                                    } else if($row->weight == '03') {
+                                    $weight_text = '3 สลึง';
+                                    } else if($row->weight == '06') {
+                                    $weight_text = '6 สลึง';
+                                    } else if($row->weight == '1') {
+                                    $weight_text = '1 บาท';
+                                    } else if($row->weight == '2') {
+                                    $weight_text = '2 บาท';
+                                    }else if($row->weight == '3') {
+                                    $weight_text = '3 บาท';
+                                    } else if($row->weight == '4') {
+                                    $weight_text = '4 บาท';
+                                    }else if($row->weight == '5') {
+                                    $weight_text = '5 บาท';
+                                    }else {
+                                    $weight_text = '10 บาท';
+                                    }
+                                    @endphp
+                                    <td>{{$weight_text}}</td>
                                     <td>{{$row->lot_count}}</td>
                                     <td>{{\Carbon\Carbon::parse($row->date_of_import)->format('d/m/Y')}}</td>
                                     <td>{{$row->price_of_gold}}</td>

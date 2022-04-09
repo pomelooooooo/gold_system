@@ -112,4 +112,17 @@ class StripedController extends Controller
         $striped = Striped::select('*')->paginate(5);
         return response()->json(['status' => true], 200);
     }
+
+    public function validateName($name, $id = '')
+    {
+        if (!empty($id)) {
+            $managestriped = Striped::where('name', $name)->where('id', '!=', $id)->first();
+        } else {
+            $managestriped = Striped::where('name', $name)->first();
+        }
+        if (!empty($managestriped))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
 }

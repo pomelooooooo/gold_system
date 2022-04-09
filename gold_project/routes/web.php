@@ -44,15 +44,16 @@ Route::post('/manage_employee/reset_password', 'ManageEmployeeController@reset_p
 Route::get('/manage_employee/validateIdcard/{idCard}/{id?}', 'ManageEmployeeController@validateIdcard')->middleware('auth');
 Route::get('/manage_employee/validateTel/{Tel}/{id?}', 'ManageEmployeeController@validateTel')->middleware('auth');
 
-
 Route::resource('/type_gold', 'TypeGoldController')->middleware('auth');
+Route::get('/type_gold/validateCategory/{category}/{id?}', 'TypeGoldController@validateCategory')->middleware('auth');
+Route::get('/type_gold/validateName/{name}/{id?}', 'TypeGoldController@validateName')->middleware('auth');
 
 Route::resource('/striped', 'StripedController')->middleware('auth');
+Route::get('/striped/validateName/{name}/{id?}', 'StripedController@validateName')->middleware('auth');
 
 Route::resource('/manage_customer', 'ManageCustomerController')->middleware('auth');
 Route::get('/manage_customer/validateIdcard/{idCard}/{id?}', 'ManageCustomerController@validateIdcard')->middleware('auth');
 Route::get('/manage_customer/validateTel/{Tel}/{id?}', 'ManageCustomerController@validateTel')->middleware('auth');
-
 
 Route::resource('/buy', 'BuyController')->middleware('auth');
 Route::get('/buy/formBuy/{id}', 'BuyController@formBuy')->middleware('auth');
@@ -66,6 +67,9 @@ Route::get('/sellGroup/formSell/{id}', 'SellController@formSell')->middleware('a
 
 
 Route::resource('/manufacturer', 'ManufacturerController')->middleware('auth');
+Route::get('/manufacturer/validateCode/{code}/{id?}', 'ManufacturerController@validateCode')->middleware('auth');
+Route::get('/manufacturer/validateName/{name}/{id?}', 'ManufacturerController@validateName')->middleware('auth');
+
 
 Route::resource('/stock', 'StockController')->middleware('auth');
 

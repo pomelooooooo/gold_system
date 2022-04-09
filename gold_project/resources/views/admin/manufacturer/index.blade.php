@@ -130,7 +130,7 @@
                             <tbody>
                                 @foreach($manufacturer as $row)
                                 <tr>
-                                    <td>{{$row->code}}</td>
+                                    <td class="text-center">{{$row->code}}</td>
                                     <td>{{$row->name}}</td>
                                     <td>{{$row->tel}}</td>
                                     <td>{{$row->tax}}</td>

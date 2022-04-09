@@ -123,4 +123,30 @@ class ManufacturerController extends Controller
         $manufacturer = Manufacturer::select('*')->paginate(5);
         return response()->json(['status' => true], 200);
     }
+
+    public function validateCode($code, $id = '')
+    {
+        if (!empty($id)) {
+            $managemanufactor = Manufacturer::where('code', $code)->where('id', '!=', $id)->first();
+        } else {
+            $managemanufactor = Manufacturer::where('code', $code)->first();
+        }
+        if (!empty($managemanufactor))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
+
+    public function validateName($name, $id = '')
+    {
+        if (!empty($id)) {
+            $managemanufactor = Manufacturer::where('name', $name)->where('id', '!=', $id)->first();
+        } else {
+            $managemanufactor = Manufacturer::where('name', $name)->first();
+        }
+        if (!empty($managemanufactor))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
 }

@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $product = Product::select("*")->orderBy('created_at','desc');
+        $product = Product::select("products.*", 'type_gold.name as typename', 'manufacturers.name as manuname')->leftJoin('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->leftJoin('manufacturers', 'products.manufacturer', '=', 'manufacturers.id')->orderBy('created_at','desc');
         if (!empty($keyword)) {
             $product = $product->where('products.lot_id', 'like', "%$keyword%")
                 ->orWhere('products.lot_count', 'like', "%$keyword%")
@@ -62,8 +62,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $type = TypeGold::select('category')->where('id', $request->get('type_gold_id'))->first();
-        // dd($type);
-        // dd(Carbon::parse($request->get('date_of_import'))->format("Ymd"));
+        $filter_date = $request->get('filter_date');
+        $filter_date_end = $request->get('filter_date_end');
         $date = Carbon::parse($request->get('date_of_import'))->format('Ymd');
         $weight = $request->get('weight');
         $lot_id = $type->category . $date . $weight;
@@ -79,8 +79,8 @@ class ProductController extends Controller
             ]
         );
         $product->save();
-        $product = Product::select('*')->paginate(5);
-        return view('admin.product.index', compact('product'));
+        $product = Product::select("products.*", 'type_gold.name as typename', 'manufacturers.name as manuname')->leftJoin('type_gold', 'products.type_gold_id', '=', 'type_gold.id')->leftJoin('manufacturers', 'products.manufacturer', '=', 'manufacturers.id')->orderBy('created_at','desc')->paginate(5);
+        return view('admin.product.index', compact('product','filter_date','filter_date_end'));
     }
 
     /**

@@ -119,4 +119,30 @@ class TypeGoldController extends Controller
         $type = TypeGold::select('*')->paginate(5);
         return response()->json(['status' => true], 200);
     }
+
+    public function validateCategory($category, $id = '')
+    {
+        if (!empty($id)) {
+            $managetypegold = TypeGold::where('category', $category)->where('id', '!=', $id)->first();
+        } else {
+            $managetypegold = TypeGold::where('category', $category)->first();
+        }
+        if (!empty($managetypegold))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
+
+    public function validateName($name, $id = '')
+    {
+        if (!empty($id)) {
+            $managetypegold = TypeGold::where('name', $name)->where('id', '!=', $id)->first();
+        } else {
+            $managetypegold = TypeGold::where('name', $name)->first();
+        }
+        if (!empty($managetypegold))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
 }
