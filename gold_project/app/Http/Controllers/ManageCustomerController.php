@@ -166,4 +166,17 @@ class ManageCustomerController extends Controller
 
         return response()->json(['status' => true], 200);
     }
+    
+    public function validateTel($Tel, $id = '')
+    {
+        if (!empty($id)) {
+            $managecustomer = Customer::where('tel', $Tel)->where('id', '!=', $id)->first();
+        } else {
+            $managecustomer = Customer::where('tel', $Tel)->first();
+        }
+        if (!empty($managecustomer))
+            return response()->json(['status' => false], 200);
+
+        return response()->json(['status' => true], 200);
+    }
 }

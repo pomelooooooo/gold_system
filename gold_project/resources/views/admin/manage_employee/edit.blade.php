@@ -21,6 +21,23 @@
                 processData: false
             });
         });
+        $(document).on('keyup', '#validationtel', function() {
+            $.ajax({
+                url: "/manage_employee/validateTel/" + $(this).val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.status) {
+                        $('#validate_tel').css('display', 'none')
+                    } else {
+                        $('#validate_tel').css('display', 'block')
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
         $(document).on('change', '.btn-file-img :file', function() {
             var input = $(this),
                 label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -184,10 +201,10 @@
                 <input type="hidden" value="{{$manageemployee->id}}" id="id" />
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationusername">ชื่อผู้ใช้</h4>
+                        <h4 for="validationusername">ชื่อผู้ใช้ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationemail">อีเมล</h4>
+                        <h4 for="validationemail">อีเมล <span style="color: red;"> *</span></h4>
                     </div>
                     
                 </div>
@@ -220,10 +237,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationname">ชื่อ</h4>
+                        <h4 for="validationname">ชื่อ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationlastname">นามสกุล</h4>
+                        <h4 for="validationlastname">นามสกุล <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -246,10 +263,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="idcard">เลขบัตรประชาชน</h4>
+                        <h4 for="idcard">เลขบัตรประชาชน <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtel">เบอร์โทร</h4>
+                        <h4 for="validationtel">เบอร์โทร <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -267,6 +284,9 @@
                     <div class="col-6">
                         <div class="form-group">
                             <input name="telephone" type="tel" class="form-control" placeholder="" pattern="\d{10}" value="{{$manageemployee->telephone}}" id="validationtel" required />
+                            <div class="invalid-feedback" style="display: none;" id="validate_tel">
+                                เบอร์โทรซ้ำ
+                            </div>
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร(10หลัก)
                             </div>
@@ -275,7 +295,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน</h4>
+                        <h4 for="validationaddress">ที่อยู่ตามบัตรประชาชน <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
                         <h4>ที่อยู่ปัจจุบัน</h4>
@@ -298,10 +318,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationdatecardstart">วันออกบัตร*</h4>
+                        <h4 for="validationdatecardstart">วันออกบัตร <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdatecardend">วันบัตรหมดอายุ*</h4>
+                        <h4 for="validationdatecardend">วันบัตรหมดอายุ <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -324,7 +344,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>อัพโหลดภาพบัตรประชาชน</h4>
+                        <h4>อัพโหลดภาพบัตรประชาชน <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <br>
