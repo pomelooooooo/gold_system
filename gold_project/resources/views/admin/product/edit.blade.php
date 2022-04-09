@@ -45,10 +45,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>รหัสล็อต</h4>
+                        <h4>รหัสล็อต <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcount">จำนวนสินค้า</h4>
+                        <h4 for="validationcount">จำนวนสินค้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -68,19 +68,19 @@
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <h4 for="validationprice">ราคาทองต่อเส้น</h4>
+                        <h4 for="validationprice">ราคาทองต่อเส้น <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-3">
-                        <h4 for="validationmanufacturer">ผู้ผลิต</h4>
+                        <h4 for="validationmanufacturer">ผู้ผลิต <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4>วันที่นำเข้า</h4>
+                        <h4>วันที่นำเข้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-3">
                         <div class="input-group">
-                            <input name="price_of_gold" type="number" class="form-control" placeholder="" value="{{$product->price_of_gold}}" id="validationprice" required >
+                            <input name="price_of_gold" type="number" class="form-control" placeholder="" value="{{$product->price_of_gold}}" id="validationprice" required>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <select name="manufacturer" class="form-control"  id="validationmanufacturer" required>
+                            <select name="manufacturer" class="form-control" id="validationmanufacturer" required>
                                 <option selected disabled value="">เลือกผู้ผลิต</option>
                                 @foreach($manufacturer as $row)
                                 <option value="{{$row->id}}" {{$row->id == $product->manufacturer ? 'selected' : ''}}>{{$row->name}}</option>
@@ -100,7 +100,7 @@
                             <div class="invalid-feedback">
                                 โปรดเลือกล็อตที่ต้องการ
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="col-6">

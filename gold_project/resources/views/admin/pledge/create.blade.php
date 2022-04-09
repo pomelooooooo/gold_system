@@ -45,14 +45,14 @@
     })
     $(document).ready(function() {
         $("body").on('click', '#btn-save', function(e) {
-            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null  
-            && $('#validateper').val() != '' 
-            && $('#validationcategory').val() != null 
-            && $('#validationweight').val() != null
-            && $('#validationgram').val() != ''
-            && $('#validationstriped').val() != null
-            && $('#validationdetails').val() != ''
-            && $('#validationprice').val() != '') {
+            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null &&
+                $('#validateper').val() != '' &&
+                $('#validationcategory').val() != null &&
+                $('#validationweight').val() != null &&
+                $('#validationgram').val() != '' &&
+                $('#validationstriped').val() != null &&
+                $('#validationdetails').val() != '' &&
+                $('#validationprice').val() != '') {
                 Swal.fire({
                     title: 'ต้องการรับซื้อขายฝากทองหรือไม่?',
                     icon: 'question',
@@ -69,7 +69,7 @@
                             data: $('#post-save').serialize(),
                             dataType: 'json',
                             success: function(data) {
-                                if(data.status){
+                                if (data.status) {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'รับซื้อขายฝากทองเรียบร้อย',
@@ -99,7 +99,7 @@
                     // window.open('/pledge/formpledge/' + group_id, '_blank')
 
                 })
-            }else{
+            } else {
                 $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
                 $('.validateUser').find('.invalid-feedback').css('display', 'none')
 
@@ -323,10 +323,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
+                        <h4>ราคาขายออกทองคำแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคารับซื้อทองคำแท่งประจำวัน*</h4>
+                        <h4>ราคารับซื้อทองคำแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -343,10 +343,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับจำนำ*</h4>
+                        <h4 for="validationuser">ผู้รับจำนำ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                        <h4 for="validationcustomer">ลูกค้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -402,13 +402,13 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <h4>วันที่รับจำนำ*</h4>
+                        <h4>วันที่รับจำนำ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4>วันจ่ายดอกรอบถัดไป*</h4>
+                        <h4>วันจ่ายดอกรอบถัดไป <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4>ดอกเบี้ย*</h4>
+                        <h4>ดอกเบี้ย <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -448,7 +448,7 @@
                             <h4>รหัสการรับจำนำ</h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationcategory">ประเภท*</h4>
+                            <h4 for="validationcategory">ประเภท <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -473,10 +473,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                            <h4 for="validationtelstore">นํ้าหนัก <span style="color: red;"> *</span></h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationgram">นํ้าหนัก(กรัม)*</h4>
+                            <h4 for="validationgram">นํ้าหนัก(กรัม) <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -495,7 +495,7 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group validationGram">
-                                <input name="gram[]" type="text" class="form-control gram input-gram" id="validationgram" placeholder="" required/>
+                                <input name="gram[]" type="text" class="form-control gram input-gram" id="validationgram" placeholder="" required />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">กรัม</span>
                                 </div>
@@ -507,10 +507,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationstriped">ลาย*</h4>
+                            <h4 for="validationstriped">ลาย <span style="color: red;"> *</span></h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationdetails">รายละเอียด*</h4>
+                            <h4 for="validationdetails">รายละเอียด</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -538,7 +538,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationprice">ราคารับจำนำ*</h4>
+                            <h4 for="validationprice">ราคารับจำนำ <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -643,8 +643,8 @@
                                 <span class="input-group-text" id="basic-addon2">กรัม</span>
                             </div>
                             <div class="invalid-feedback">
-                                    โปรดกรอกน้ำหนักกรัม
-                                </div>
+                                โปรดกรอกน้ำหนักกรัม
+                            </div>
                         </div>
                     </div>
                 </div>

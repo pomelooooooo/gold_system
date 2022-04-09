@@ -97,14 +97,14 @@
         });
 
         $("body").on('click', '#btn-save', function(e) {
-            if ($('#validationuser').val() != null && 
-            $('#validationcustomer').val() != null
-            && $('#validationcategory').val() != null 
-            && $('#validationweight').val() != null
-            && $('#validationgram').val() != ''
-            && $('#validationstriped').val() != null
-            && $('#validationdetails').val() != ''
-            && $('#validationprice').val() != '') {
+            if ($('#validationuser').val() != null &&
+                $('#validationcustomer').val() != null &&
+                $('#validationcategory').val() != null &&
+                $('#validationweight').val() != null &&
+                $('#validationgram').val() != '' &&
+                $('#validationstriped').val() != null &&
+                $('#validationdetails').val() != '' &&
+                $('#validationprice').val() != '') {
                 Swal.fire({
                     title: 'ต้องการรับซื้อทองหรือไม่?',
                     icon: 'question',
@@ -329,10 +329,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
+                        <h4>ราคาขายออกทองคำแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคารับซื้อทองคำแท่งประจำวัน*</h4>
+                        <h4>ราคารับซื้อทองคำแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -350,10 +350,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับซื้อ</h4>
+                        <h4 for="validationuser">ผู้รับซื้อ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcustomer">ลูกค้า</h4>
+                        <h4 for="validationcustomer">ลูกค้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -386,7 +386,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>วันเวลาที่รับซื้อ*</h4>
+                        <h4>วันเวลาที่รับซื้อ <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -407,7 +407,7 @@
                             <h4>รหัสสินค้า</h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationcategory">ประเภท*</h4>
+                            <h4 for="validationcategory">ประเภท <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -432,10 +432,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationweight">นํ้าหนัก*</h4>
+                            <h4 for="validationweight">นํ้าหนัก <span style="color: red;"> *</span></h4>
                         </div>
                         <div class="col-6">
-                            <h4>นํ้าหนัก(กรัม)*</h4>
+                            <h4>นํ้าหนัก(กรัม) <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -466,10 +466,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationstriped">ลาย*</h4>
+                            <h4 for="validationstriped">ลาย <span style="color: red;"> *</span></h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationdetails">รายละเอียด*</h4>
+                            <h4 for="validationdetails">รายละเอียด</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -497,7 +497,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationprice">ราคารับซื้อ*</h4>
+                            <h4 for="validationprice">ราคารับซื้อ <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -515,7 +515,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4>อัพโหลดรูปภาพ*</h4>
+                            <h4>อัพโหลดรูปภาพ <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">

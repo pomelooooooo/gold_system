@@ -26,8 +26,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>เพิ่มลายทอง</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>เพิ่มลายทอง</h1>
                 </div>
             </div>
         </div>
@@ -46,13 +46,13 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationname">ชื่อลายทอง</h4>
+                        <h4 for="validationname">ชื่อลายทอง <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" id="validationname" placeholder=""  required/>
+                            <input name="name" type="text" class="form-control" id="validationname" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกชื่อลายทอง
                             </div>

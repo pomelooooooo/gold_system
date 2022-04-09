@@ -66,10 +66,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>รหัสสินค้า</h4>
+                        <h4>รหัสสินค้า <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtellotid">ล็อต</h4>
+                        <h4 for="validationtellotid">ล็อต <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -94,10 +94,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationcategory">ประเภท</h4>
+                        <h4 for="validationcategory">ประเภท <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationstriped">ลาย</h4>
+                        <h4 for="validationstriped">ลาย <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -119,7 +119,7 @@
                             <select class="custom-select" name="striped_id" id="validationstriped" required>
                                 <option selected disabled value="">เลือกลาย</option>
                                 @foreach($striped as $row)
-                                <option value="{{$row->id}}"{{$row->id == $productdetail->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{$row->id == $productdetail->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -130,10 +130,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtelcategory">นํ้าหนัก</h4>
+                        <h4 for="validationtelcategory">นํ้าหนัก <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4>นํ้าหนัก(กรัม)</h4>
+                        <h4>นํ้าหนัก(กรัม) <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -164,10 +164,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคาทองต่อเส้น*</h4>
+                        <h4>ราคาทองต่อเส้น <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationgratuity">ค่าแรงทองต่อเส้น*</h4>
+                        <h4 for="validationgratuity">ค่าแรงทองต่อเส้น <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -193,16 +193,16 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationallprice">ราคาทุน*</h4>
+                        <h4 for="validationallprice">ราคาทุน <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdetails">รายละเอียด</h4>
+                        <h4 for="validationdetails">รายละเอียด </h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group">
-                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" id="validationallprice" required readonly/>
+                            <input name="allprice" type="text" class="form-control" placeholder="" value="{{$productdetail->allprice}}" id="validationallprice" required readonly />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>
@@ -222,7 +222,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationstatus">สถานะทอง</h4>
+                        <h4 for="validationstatus">สถานะทอง <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationtray">ถาด</h4>

@@ -45,13 +45,13 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-4">
-                        <h4>รหัสล็อต</h4>
+                        <h4>รหัสล็อต <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationtype">ประเภท</h4>
+                        <h4 for="validationtype">ประเภท <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationweight">น้ำหนัก</h4>
+                        <h4 for="validationweight">น้ำหนัก <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -101,13 +101,13 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <h4 for="validationcount">จำนวนสินค้า</h4>
+                        <h4 for="validationcount">จำนวนสินค้า <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationprice">ราคาทองต่อเส้น</h4>
+                        <h4 for="validationprice">ราคาทองต่อเส้น <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationmanufacturer">ผู้ผลิต</h4>
+                        <h4 for="validationmanufacturer">ผู้ผลิต <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-4">
                         <div class="input-group">
-                            <input name="price_of_gold" type="number" class="form-control" placeholder="" id="validationprice" required >
+                            <input name="price_of_gold" type="number" class="form-control" placeholder="" id="validationprice" required>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">บาท</span>
                             </div>
@@ -146,7 +146,7 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <h4>วันที่นำเข้า</h4>
+                        <h4>วันที่นำเข้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">

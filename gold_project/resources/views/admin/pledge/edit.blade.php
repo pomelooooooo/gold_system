@@ -40,19 +40,19 @@
     })
     $(document).ready(function() {
         $("body").on('click', '#btn-update', function(e) {
-                Swal.fire({
-                    title: 'ต้องการอัปเดตข้อมูลหรือไม่?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'ใช่',
-                    cancelButtonText: 'ไม่',
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        $("#post-update").submit()
-                    }
-                    })
+            Swal.fire({
+                title: 'ต้องการอัปเดตข้อมูลหรือไม่?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่',
+                cancelButtonText: 'ไม่',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#post-update").submit()
+                }
+            })
         })
 
         $("#validationcustomer").change(function() {
@@ -156,8 +156,8 @@
 <br />
 <div class="container">
     <form method="POST" action="{{action('PledgeController@update',$id)}}" class="needs-validation" id="post-update" novalidate>{{csrf_field()}}
-    @method("PUT")
-    <!-- <input type="hidden" name="id" value="{{$id}}"> -->
+        @method("PUT")
+        <!-- <input type="hidden" name="id" value="{{$id}}"> -->
         <div class="card">
             <div class="card-header">
                 <h2>รับจำนำทอง</h2>
@@ -166,10 +166,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
+                        <h4>ราคาขายออกทองคำแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคารับซื้อทองคำแท่งประจำวัน*</h4>
+                        <h4>ราคารับซื้อทองคำแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -186,10 +186,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับจำนำ*</h4>
+                        <h4 for="validationuser">ผู้รับจำนำ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                        <h4 for="validationcustomer">ลูกค้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -242,13 +242,13 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <h4>วันที่รับจำนำ*</h4>
+                        <h4>วันที่รับจำนำ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4>วันจ่ายดอกรอบถัดไป*</h4>
+                        <h4>วันจ่ายดอกรอบถัดไป <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4>ดอกเบี้ย*</h4>
+                        <h4>ดอกเบี้ย <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -281,14 +281,14 @@
         <input type="hidden" name="pledges_line_id[]" value="{{$value->pledges_line_id}}">
         <input type="hidden" name="product_detail_id[]" value="{{$value->product_detail_id}}">
         <div id="card">
-        <div class="card card-item">
+            <div class="card card-item">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
                             <h4>รหัสการรับจำนำ</h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationcategory">ประเภท*</h4>
+                            <h4 for="validationcategory">ประเภท <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -314,10 +314,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                            <h4 for="validationtelstore">นํ้าหนัก <span style="color: red;"> *</span></h4>
                         </div>
                         <div class="col-6">
-                            <h4>นํ้าหนัก(กรัม)*</h4>
+                            <h4>นํ้าหนัก(กรัม) <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -337,7 +337,7 @@
                         </div>
                         <div class="col-6">
                             <div class="input-group">
-                                <input name="gram[]" type="text" class="form-control gram" placeholder="" value="{{$value->weight}}"/>
+                                <input name="gram[]" type="text" class="form-control gram" placeholder="" value="{{$value->weight}}" />
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">กรัม</span>
                                 </div>
@@ -346,10 +346,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationstriped">ลาย*</h4>
+                            <h4 for="validationstriped">ลาย <span style="color: red;"> *</span></h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationdetails">รายละเอียด*</h4>
+                            <h4 for="validationdetails">รายละเอียด</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -369,7 +369,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <input name="details[]" type="text" class="form-control" placeholder="" value="{{$value->details}}" required/>
+                                <input name="details[]" type="text" class="form-control" placeholder="" value="{{$value->details}}" required />
                                 <div class="invalid-feedback">
                                     โปรดกรอกรายละเอียดทอง
                                 </div>
@@ -378,7 +378,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationprice">ราคารับจำนำ*</h4>
+                            <h4 for="validationprice">ราคารับจำนำ <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">

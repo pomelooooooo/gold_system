@@ -172,10 +172,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคาขายออกทองคำแท่งประจำวัน*</h4>
+                        <h4>ราคาขายออกทองคำแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4>ราคารับซื้อทองแท่งประจำวัน*</h4>
+                        <h4>ราคารับซื้อทองแท่งประจำวัน <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -195,7 +195,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้ขาย*</h4>
+                        <h4 for="validationuser">ผู้ขาย <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
                         <h4>ลูกค้า</h4>
@@ -231,7 +231,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>วันเวลาที่ขาย*</h4>
+                        <h4>วันเวลาที่ขาย <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -250,7 +250,7 @@
                 <div class="row">
                     <input type="hidden" name="id[]" value="{{$value->id}}">
                     <div class="col-6">
-                        <h4>รหัสสินค้า*</h4>
+                        <h4>รหัสสินค้า</h4>
                     </div>
                     <div class="col-3">
                         <h4>ประเภท</h4>
@@ -330,7 +330,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคาขาย*</h4>
+                        <h4>ราคาขาย <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">

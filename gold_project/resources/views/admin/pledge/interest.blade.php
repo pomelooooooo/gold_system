@@ -174,10 +174,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับจำนำ*</h4>
+                        <h4 for="validationuser">ผู้รับจำนำ<span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                        <h4 for="validationcustomer">ลูกค้า<span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -230,10 +230,10 @@
                         <h4>วันที่รับฝาก</h4>
                     </div>
                     <div class="col-4">
-                        <h4>วันกำหนดชำระ*</h4>
+                        <h4>วันกำหนดชำระ<span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-4">
-                        <h4>วันที่ชำระ*</h4>
+                        <h4>วันที่ชำระ <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -281,7 +281,7 @@
                         <h4 for="validationinterestbath">ดอกเบี้ยที่ชำระ</h4>
                     </div>
                     <div class="col-4">
-                        <h4 for="validationwhopay">ผู้ชำระเงิน</h4>
+                        <h4 for="validationwhopay">ผู้ชำระเงิน <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -359,7 +359,7 @@
                             <h4>รหัสการรับจำนำ</h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationcategory">ประเภท*</h4>
+                            <h4 for="validationcategory">ประเภท <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">
@@ -385,10 +385,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                            <h4 for="validationtelstore">นํ้าหนัก <span style="color: red;"> *</span></h4>
                         </div>
                         <div class="col-6">
-                            <h4 for="validationprice">ราคารับจำนำ*</h4>
+                            <h4 for="validationprice">ราคารับจำนำ <span style="color: red;"> *</span></h4>
                         </div>
                     </div>
                     <div class="row">

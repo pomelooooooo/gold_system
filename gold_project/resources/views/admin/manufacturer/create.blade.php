@@ -26,8 +26,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>เพิ่มผู้ผลิตทอง</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>เพิ่มผู้ผลิตทอง</h1>
                 </div>
             </div>
         </div>
@@ -46,16 +46,16 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationid">รหัสผู้ผลิต</h4>
+                        <h4 for="validationid">รหัสผู้ผลิต <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtype">ชื่อผู้ผลิต</h4>
+                        <h4 for="validationtype">ชื่อผู้ผลิต <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="code" type="text" class="form-control" id="validationid" placeholder="" required/>
+                            <input name="code" type="text" class="form-control" id="validationid" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกรหัสผู้ผลิต
                             </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" id="validationtype" placeholder=""  required/>
+                            <input name="name" type="text" class="form-control" id="validationtype" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกชื่อผู้ผลิต
                             </div>
@@ -72,16 +72,16 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationttel">เบอร์โทร</h4>
+                        <h4 for="validationttel">เบอร์โทร <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationttax">หมายเลขประจำตัวผู้เสียภาษี</h4>
+                        <h4 for="validationttax">หมายเลขประจำตัวผู้เสียภาษี <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tel" type="text" class="form-control" id="validationttel" placeholder=""  required/>
+                            <input name="tel" type="text" class="form-control" id="validationttel" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกเบอร์โทร
                             </div>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tax" type="text" class="form-control" pattern="\d{13}" id="validationttax" placeholder=""  required/>
+                            <input name="tax" type="text" class="form-control" pattern="\d{13}" id="validationttax" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกหมายเลขประจำตัวผู้เสียภาษี(13หลัก)
                             </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationaddress">ที่อยู่</h4>
+                        <h4 for="validationaddress">ที่อยู่ <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">

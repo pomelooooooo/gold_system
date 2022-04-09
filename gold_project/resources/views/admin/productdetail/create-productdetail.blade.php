@@ -40,17 +40,17 @@
         });
 
         function setItem($item) {
-        var $txtFormNumber = $('*[name^="code"]', $item);
-        var no = $('.card-item .code').not(':first').not(':first').length
-        var code = $('.card-item .code')[0].value
-        var num_code = "0"
-        var code_string = code.replace('N', '')
-        var items = parseInt(code_string) + parseInt(no);
-        for (let i = (parseInt(code_string) + 1).toString().length; i < 3; i++) {
-            num_code += "0";
+            var $txtFormNumber = $('*[name^="code"]', $item);
+            var no = $('.card-item .code').not(':first').not(':first').length
+            var code = $('.card-item .code')[0].value
+            var num_code = "0"
+            var code_string = code.replace('N', '')
+            var items = parseInt(code_string) + parseInt(no);
+            for (let i = (parseInt(code_string) + 1).toString().length; i < 3; i++) {
+                num_code += "0";
+            }
+            $txtFormNumber.val("N" + num_code + items.toString());
         }
-        $txtFormNumber.val("N" + num_code + items.toString());
-    }
 
         $("#validationtellotid").change(function() {
             $.ajax({
@@ -136,10 +136,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4>รหัสสินค้า*</h4>
+                        <h4>รหัสสินค้า <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtellotid">ล็อต*</h4>
+                        <h4 for="validationtellotid">ล็อต <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -164,10 +164,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationcategory">ประเภท*</h4>
+                        <h4 for="validationcategory">ประเภท <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationstriped">ลาย*</h4>
+                        <h4 for="validationstriped">ลาย <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -200,10 +200,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="size">นํ้าหนัก*</h4>
+                        <h4 for="size">นํ้าหนัก <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="gram">นํ้าหนัก(กรัม)*</h4>
+                        <h4 for="gram">นํ้าหนัก(กรัม) <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -222,7 +222,7 @@
                     </div>
                     <div class="col-6">
                         <div class="input-group">
-                            <input name="gram" id="gram" type="text" class="form-control" placeholder="" required/>
+                            <input name="gram" id="gram" type="text" class="form-control" placeholder="" required />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">กรัม</span>
                             </div>
@@ -234,10 +234,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>ราคาทองต่อเส้น*</h4>
+                        <h4>ราคาทองต่อเส้น <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationgratuity">ค่าแรงทองต่อเส้น*</h4>
+                        <h4 for="validationgratuity">ค่าแรงทองต่อเส้น <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -263,10 +263,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationallprice">ราคาทุน*</h4>
+                        <h4 for="validationallprice">ราคาทุน<span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdetails">รายละเอียด*</h4>
+                        <h4 for="validationdetails">รายละเอียด</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -291,8 +291,8 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-6">
-                        <h4 for="validationstatus">สถานะทอง*</h4>
+                    <div class="col-6">
+                        <h4 for="validationstatus">สถานะทอง<span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
                         <h4 for="validationtray">ถาด</h4>
@@ -312,11 +312,11 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="tray" type="text" class="form-control" placeholder="" id="validationtray"/>
+                            <input name="tray" type="text" class="form-control" placeholder="" id="validationtray" />
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="row">
                     <div class="col-12">
                         <h4>อัพโหลดรูปภาพ</h4>

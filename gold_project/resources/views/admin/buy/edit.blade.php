@@ -78,10 +78,10 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationuser">ผู้รับซื้อ*</h4>
+                        <h4 for="validationuser">ผู้รับซื้อ <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcustomer">ลูกค้า*</h4>
+                        <h4 for="validationcustomer">ลูกค้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -117,7 +117,7 @@
                         <h4>รหัสสินค้า</h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationcategory">ประเภท*</h4>
+                        <h4 for="validationcategory">ประเภท <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -142,10 +142,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationtelstore">นํ้าหนัก*</h4>
+                        <h4 for="validationtelstore">นํ้าหนัก <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4>นํ้าหนัก(กรัม)*</h4>
+                        <h4>นํ้าหนัก(กรัม) <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -173,10 +173,10 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationstriped">ลาย*</h4>
+                        <h4 for="validationstriped">ลาย <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationdetails">รายละเอียด*</h4>
+                        <h4 for="validationdetails">รายละเอียด</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -185,7 +185,7 @@
                             <select class="custom-select" name="striped_id" id="validationstriped" required>
                                 <option selected disabled value="">เลือกลาย</option>
                                 @foreach($striped as $row)
-                                <option value="{{$row->id}}"{{$row->id == $buy->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{$row->id == $buy->striped_id ? 'selected' : ''}}>{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -204,7 +204,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationprice">ราคารับซื้อ*</h4>
+                        <h4 for="validationprice">ราคารับซื้อ <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -222,7 +222,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>อัพโหลดรูปภาพ</h4>
+                        <h4>อัพโหลดรูปภาพ <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="col-6">

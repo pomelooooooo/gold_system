@@ -26,8 +26,8 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                        <p class="subtitle">Gold System</p>
-                        <h1>เพิ่มประเภททอง</h1>
+                    <p class="subtitle">Gold System</p>
+                    <h1>เพิ่มประเภททอง</h1>
                 </div>
             </div>
         </div>
@@ -46,16 +46,16 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-6">
-                        <h4 for="validationid">รหัสประเภททอง</h4>
+                        <h4 for="validationid">รหัสประเภททอง <span style="color: red;"> *</span></h4>
                     </div>
                     <div class="col-6">
-                        <h4 for="validationtype">ชื่อประเภท</h4>
+                        <h4 for="validationtype">ชื่อประเภท <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="category" type="text" class="form-control" id="validationid" placeholder="" required/>
+                            <input name="category" type="text" class="form-control" id="validationid" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกรหัสประเภททอง
                             </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" id="validationtype" placeholder=""  required/>
+                            <input name="name" type="text" class="form-control" id="validationtype" placeholder="" required />
                             <div class="invalid-feedback">
                                 โปรดกรอกชื่อประเภททอง
                             </div>
