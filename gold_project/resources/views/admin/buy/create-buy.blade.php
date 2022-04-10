@@ -370,7 +370,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="input-group mb-3 validateCustomer" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
@@ -382,6 +382,9 @@
                                 โปรดเลือกลูกค้า
                             </div>
                         </div>
+                    </div>
+                    <div class="col-2">
+                        <a type="button" class="btn btn-info" href="{{url('/manage_customer/create')}}">เพิ่มข้อมูลลูกค้า</a>
                     </div>
                 </div>
                 <div class="row">

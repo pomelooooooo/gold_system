@@ -16,7 +16,7 @@ class CreateProductDetailsTable extends Migration
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->string('details');
+            $table->string('details')->nullable();
             $table->integer('type_gold_id');
             $table->integer('striped_id');
             $table->enum('size', ['ครึ่งสลึง', '1 สลึง', '2 สลึง', '3 สลึง', '6 สลึง', '1 บาท', '2 บาท', '3 บาท', '4 บาท', '5 บาท', '10 บาท']);

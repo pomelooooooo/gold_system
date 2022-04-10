@@ -10,10 +10,10 @@
             placeholder: "เลือกผู้ขาย",
             allowClear: true
         });
-        $("#validationcustomer").select2({
-            placeholder: "เลือกลูกค้า",
-            allowClear: true
-        });
+        // $("#validationcustomer").select2({
+        //     placeholder: "เลือกลูกค้า",
+        //     allowClear: true
+        // });
         $.ajax({
             url: "http://127.0.0.1:3000/latest",
             type: 'GET',
@@ -130,18 +130,18 @@
             } else {
                 $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
                 $('.validateUser').find('.invalid-feedback').css('display', 'none')
-                $('.validateCustomer').find('.select2-selection--single').removeClass('is-invalid')
-                $('.validateCustomer').find('.invalid-feedback').css('display', 'none')
+                // $('.validateCustomer').find('.select2-selection--single').removeClass('is-invalid')
+                // $('.validateCustomer').find('.invalid-feedback').css('display', 'none')
                 if ($('#validationuser').val() == null) {
 
                     // Add is-invalid class when select2 element is required
                     $('.validateUser').find('.select2-selection--single').addClass('is-invalid')
                     $('.validateUser').find('.invalid-feedback').css('display', 'block')
                 }
-                if ($('#validationcustomer').val() == null) {
-                    $('.validateCustomer').find('.select2-selection--single').addClass('is-invalid')
-                    $('.validateCustomer').find('.invalid-feedback').css('display', 'block')
-                }
+                // if ($('#validationcustomer').val() == null) {
+                //     $('.validateCustomer').find('.select2-selection--single').addClass('is-invalid')
+                //     $('.validateCustomer').find('.invalid-feedback').css('display', 'block')
+                // }
             }
         })
     });
@@ -215,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="input-group mb-3 validateCustomer" style="margin-top: 0.5em;">
                             <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
@@ -227,6 +227,9 @@
                                 โปรดเลือกลูกค้า
                             </div>
                         </div>
+                    </div>
+                    <div class="col-2">
+                        <a type="button" class="btn btn-info" href="{{url('/manage_customer/create')}}">เพิ่มข้อมูลลูกค้า</a>
                     </div>
                 </div>
                 <div class="row">
