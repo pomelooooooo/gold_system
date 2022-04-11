@@ -18,6 +18,31 @@
             });
         }, false);
     })();
+
+    $(document).ready(function() {
+        $('#validationweight').change(function() {
+            let size_arr = {
+                "ครึ่งสลึง": "001:1.9",
+                "1 สลึง": "01:3.8",
+                "2 สลึง": "02:7.6",
+                "3 สลึง": "03:11.4",
+                "6 สลึง": "06:22.8",
+                "1 บาท": "1:15.2",
+                "2 บาท": "2:30.4",
+                "3 บาท": "3:45.5",
+                "4 บาท": "4:60.6",
+                "5 บาท": "5:76",
+                "10 บาท": "10:152"
+            }
+
+            $.each(size_arr, function(i, el) {
+                let weight = el.split(':')
+                if ($('#validationweight').val() == weight[0]) {
+                    $('#gram').val(weight[1])
+                }
+            })
+        })
+    })
 </script>
 
 <div class="breadcrumb-section breadcrumb-bg">
@@ -146,10 +171,25 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
+                        <h4 for="gram">นํ้าหนัก(กรัม) <span style="color: red;"> *</span></h4>
+                    </div>
+                    <div class="col-4">
                         <h4>วันที่นำเข้า <span style="color: red;"> *</span></h4>
                     </div>
                 </div>
+
                 <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <input name="gram" id="gram" type="text" class="form-control" placeholder="" required />
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">กรัม</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                โปรดกรอกน้ำหนักกรัม
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-4">
                         <div class="form-group">
                             <input name="date_of_import" type="date" class="form-control" value="{{date('Y-m-d')}}" />

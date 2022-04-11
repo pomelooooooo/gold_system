@@ -20,7 +20,7 @@ class ProductDetailController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade','0')->orderBy('created_at', "desc");
+        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->orderBy('created_at', "desc");
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")
@@ -41,7 +41,7 @@ class ProductDetailController extends Controller
         $producttype = TypeGold::all();
         $product = Product::all();
         // dd($productdetail);
-        return view('admin.productdetail.index', compact('product', 'productdetail', 'keyword','filter_type','filter_size','producttype'));
+        return view('admin.productdetail.index', compact('product', 'productdetail', 'keyword', 'filter_type', 'filter_size', 'producttype'));
         // return redirect('/productdetail')->with(['productdetail' => $productdetail, 'product' => $product , 'keyword' => $keyword]);
     }
 
@@ -68,7 +68,7 @@ class ProductDetailController extends Controller
         } else {
             $code = "0001";
         }
-        $code = "N".$code;
+        $code = "N" . $code;
         $product = Product::all();
         $producttype = TypeGold::all();
         $striped = Striped::all();
@@ -83,45 +83,41 @@ class ProductDetailController extends Controller
      */
     public function store(Request $request)
     {
-        $productdetail = new ProductDetails(
-            [
-                'code' => $request->get('code'),
-                'details' => $request->get('details'),
-                'type_gold_id' => $request->get('type_gold_id'),
-                'striped_id' => $request->get('striped_id'),
-                'size' => $request->get('size'),
-                'gram' => $request->get('gram'),
-                'status' => $request->get('status'),
-                'status_trade' => '0',
-                'type' => 'ทองใหม่',
-                'gratuity' => $request->get('gratuity'),
-                'tray' => $request->get('tray'),
-                'allprice' => $request->get('allprice'),
-                'datetime' => $request->get('datetime'),
-                'lot_id' => $request->get('lot_id'),
-                'num' => $request->get('num'),
-            ]
-        );
-        if ($request->hasFile('pic')) {
-            $file = $request->file('pic');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('assets/img/gold', $filename);
-            $productdetail->pic = $filename;
+        foreach ($request->get('code') as $key => $value) {
+            $productdetail = new ProductDetails(
+                [
+                    'code' => $value,
+                    'details' => $request->details[$key],
+                    'type_gold_id' => $request->type_gold_id[$key],
+                    'striped_id' => $request->striped_id[$key],
+                    'size' => $request->size[$key],
+                    'gram' => $request->gram[$key],
+                    'status' => $request->status[$key],
+                    'status_trade' => '0',
+                    'type' => 'ทองใหม่',
+                    'gratuity' => $request->gratuity[$key],
+                    'tray' => $request->tray[$key],
+                    'allprice' => $request->allprice[$key],
+                    'lot_id' => $request->lot_id[$key],
+                ]
+            );
+            if ($request->hasFile('pic.' . $key)) {
+                $file = $request->file('pic')[$key];
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('assets/img/gold', $filename);
+                $productdetail->pic = $filename;
+            }
+            $productdetail->save();
         }
-        $filter_type = $request->get('filter_type');
-        if (!empty($filter_type)) {
-            $productdetail = $productdetail->where('product_details.type_gold_id', $filter_type);
-        }
-        $filter_size = $request->get('filter_size');
-        if (!empty($filter_size)) {
-            $productdetail = $productdetail->where('product_details.size', $filter_size);
-        }
-        $productdetail->save();
+
         $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->orderBy('created_at', "desc")->paginate(10);
         $product = Product::all();
         $producttype = TypeGold::all();
-        return view('admin.productdetail.index', compact('productdetail', 'product','producttype','filter_type','filter_size'));
+
+        return redirect('/productdetail')->with(['productdetail' => $productdetail, 'product' => $product]);
+        // return view('admin.productdetail.index', compact('productdetail', 'product', 'producttype'));
+
     }
 
     /**

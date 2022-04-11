@@ -41,27 +41,27 @@
                 confirmButtonText: 'ใช่'
             }).then((result) => {
                 if (result.isConfirmed) {
-                $.ajax({
-                    url: "/productdetail/" + id,
-                    type: 'delete',
-                    data: {
-                        id: id,
-                        _token: token
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        if(data.status){
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'ลบข้อมูลเรียบร้อย',
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then((result) => {
-                                window.location = '/productdetail'
-                            })
+                    $.ajax({
+                        url: "/productdetail/" + id,
+                        type: 'delete',
+                        data: {
+                            id: id,
+                            _token: token
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.status) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'ลบข้อมูลเรียบร้อย',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result) => {
+                                    window.location = '/productdetail'
+                                })
+                            }
+
                         }
-                        
-                    }
                     });
                 }
             })
@@ -107,13 +107,13 @@
                             <select class="form-control mr-sm-2" name="filter_type" id="validationcategory">
                                 <option value="">เลือกประเภท</option>
                                 @foreach($producttype as $row)
-                                <option value="{{$row->id}}" {{$row->id == $filter_type?"selected":""}}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{isset($filter_type) && $row->id == $filter_type?"selected":""}}>{{$row->name}}</option>
                                 @endforeach
                             </select>
                             <select class="form-control " name="filter_size">
                                 <option value="">เลือกนํ้าหนัก</option>
                                 @foreach($productdetail as $row)
-                                <option value="{{$row->size}}" {{$row->id == $filter_size?"selected":""}}>{{$row->size}}</option>
+                                <option value="{{$row->size}}" {{isset($filter_size) && $row->id == $filter_size?"selected":""}}>{{$row->size}}</option>
                                 @endforeach
                             </select>
                             <input type="submit" class="btn btn-primary filters" value="ค้นหา">
