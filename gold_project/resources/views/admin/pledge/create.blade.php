@@ -529,10 +529,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group validationDetails">
-                                <input name="details[]" type="text" class="form-control form-control--detail" id="validationdetails" placeholder="" required />
-                                <div class="invalid-feedback">
-                                    โปรดกรอกรายละเอียดทอง
-                                </div>
+                                <input name="details[]" type="text" class="form-control form-control--detail" placeholder="" />
                             </div>
                         </div>
                     </div>

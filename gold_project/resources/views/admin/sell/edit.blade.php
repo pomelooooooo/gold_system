@@ -217,15 +217,12 @@
                     </div>
                     <div class="col-4">
                         <div class="input-group mb-3 validateCustomer" style="margin-top: 0.5em;">
-                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer">
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
                                 <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback">
-                                โปรดเลือกลูกค้า
-                            </div>
                         </div>
                     </div>
                     <div class="col-2">

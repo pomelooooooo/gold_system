@@ -283,10 +283,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <input name="details" type="text" class="form-control" placeholder="" id="validationdetails" required />
-                            <div class="invalid-feedback">
-                                โปรดกรอกรายละเอียดทอง
-                            </div>
+                            <input name="details" type="text" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
