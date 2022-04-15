@@ -10,10 +10,10 @@
             placeholder: "เลือกผู้ขาย",
             allowClear: true
         });
-        // $("#validationcustomer").select2({
-        //     placeholder: "เลือกลูกค้า",
-        //     allowClear: true
-        // });
+        $("#validationcustomer").select2({
+            placeholder: "เลือกลูกค้า",
+            allowClear: true
+        });
         $.ajax({
             url: "http://127.0.0.1:3000/latest",
             type: 'GET',
