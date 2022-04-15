@@ -127,11 +127,12 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">รหัสสินค้า</th>
-                                    <th scope="col">รายละเอียดสินค้า</th>
-                                    <th scope="col">หมวดหมู่</th>
+                                    <th scope="col">ประเภท</th>
+                                    <th scope="col">ลาย</th>
                                     <th scope="col">นํ้าหนัก</th>
+                                    <th scope="col">ถาด</th>
                                     <th scope="col">สถานะ</th>
-                                    <th scope="col">ล๊อต</th>
+                                    <th scope="col">ล็อต</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -140,9 +141,17 @@
                                 @foreach($productdetail as $row)
                                 <tr>
                                     <td>{{$row->code}}</td>
-                                    <td>{{$row->details}}</td>
-                                    <td>{{$row->name}}</td>
+                                    <td>{{$row->typegoldname}}</td>
+                                    <td>{{$row->stripedname}}</td>
                                     <td>{{$row->size}}</td>
+                                    @php
+                                    if($row->tray == ''){
+                                        $tray_text = '-';
+                                    } else {
+                                        $tray_text = $row->tray;
+                                    }
+                                    @endphp
+                                    <td>{{$tray_text}}</td>
                                     <td>{{$row->status == '0' ? 'ทองในถาด' : 'ทองในสต็อก'}}</td>
                                     <td>{{$row->lot_id}}</td>
                                     <td class="text-center">

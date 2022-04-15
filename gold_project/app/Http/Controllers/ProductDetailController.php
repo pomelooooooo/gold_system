@@ -20,7 +20,7 @@ class ProductDetailController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->orderBy('created_at', "desc");
+        $productdetail = ProductDetails::select('product_details.*', 'type_gold.name as typegoldname','stripeds.name as stripedname')->leftJoin('type_gold', 'product_details.type_gold_id', '=', 'type_gold.id')->leftJoin('stripeds', 'product_details.striped_id', '=', 'stripeds.id')->where('type', 'ทองใหม่')->where('status_trade', '0')->orderBy('created_at', "desc");
         if (!empty($keyword)) {
             $productdetail = $productdetail->where('product_details.code', 'like', "%$keyword%")
                 ->orWhere('product_details.details', 'like', "%$keyword%")

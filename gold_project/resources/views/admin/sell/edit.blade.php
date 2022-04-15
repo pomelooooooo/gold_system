@@ -76,7 +76,7 @@
         })
 
         $("body").on('click', '#btn-save', function(e) {
-            if ($('#validationuser').val() != null && $('#validationcustomer').val() != null) {
+            if ($('#validationuser').val() != null) {
                 Swal.fire({
                     title: 'ต้องการขายทองหรือไม่?',
                     // text: "You won't be able to revert this!",
