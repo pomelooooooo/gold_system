@@ -419,7 +419,7 @@
                     </div>
                     <div class="col-4">
                         <div class='form-group validateDatenext'>
-                            <input type="date" class="form-control date-next" name="installment_next" id="validatedatenext" value="" required>
+                            <input type="date" class="form-control date-next" name="installment_next" id="validatedatenext" value="{{Carbon\Carbon::now()->addMonth()->format('Y-m-d')}}" required>
                             <div class="invalid-feedback">
                                 โปรดเลือกวันจ่ายดอกรอบถัดไป
                             </div>

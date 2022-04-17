@@ -130,18 +130,10 @@
             } else {
                 $('.validateUser').find('.select2-selection--single').removeClass('is-invalid')
                 $('.validateUser').find('.invalid-feedback').css('display', 'none')
-                // $('.validateCustomer').find('.select2-selection--single').removeClass('is-invalid')
-                // $('.validateCustomer').find('.invalid-feedback').css('display', 'none')
                 if ($('#validationuser').val() == null) {
-
-                    // Add is-invalid class when select2 element is required
                     $('.validateUser').find('.select2-selection--single').addClass('is-invalid')
                     $('.validateUser').find('.invalid-feedback').css('display', 'block')
                 }
-                // if ($('#validationcustomer').val() == null) {
-                //     $('.validateCustomer').find('.select2-selection--single').addClass('is-invalid')
-                //     $('.validateCustomer').find('.invalid-feedback').css('display', 'block')
-                // }
             }
         })
     });
@@ -216,8 +208,8 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="input-group mb-3 validateCustomer" style="margin-top: 0.5em;">
-                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer">
+                        <div class="input-group mb-3" style="margin-top: 0.5em;">
+                            <select class="custom-select selectpicker" name="customer_id" id="validationcustomer" required>
                                 <option selected disabled value="">เลือกลูกค้า</option>
                                 @foreach($customer as $row)
                                 <option value="{{$row->id}}" {{!empty($productdetail->customer_id)&&$row->id == $productdetail->customer_id ? 'selected' : ''}}>{{$row->name}} {{$row->lastname}}</option>

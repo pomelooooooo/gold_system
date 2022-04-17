@@ -262,7 +262,7 @@ class PledgeController extends Controller
         } else {
             $history_pledges_due_date = Carbon::parse($pledges[0]->installment_start)->addMonth();
         }
-        $history_pledges = HistoryPledges::where('pledges_id', $pledges[0]->id)->get();
+        $history_pledges = HistoryPledges::select('history_pledges.*','pledges.interest_per as per')->join('pledges','history_pledges.pledges_id','=','pledges.id')->where('pledges_id', $pledges[0]->id)->get();
         $deposit = 0;
         // dd($history_pledges);
         // $interest_per = 0;

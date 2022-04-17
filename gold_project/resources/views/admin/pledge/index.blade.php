@@ -124,6 +124,7 @@
                                     <th scope="col">เบอร์โทร</th>
                                     <th scope="col">วันที่รับจำนำ</th>
                                     <th scope="col">วันที่จ่ายดอกรอบถัดไป</th>
+                                    <th scope="col" style="text-align: center;">ดอกเบี้ย%</th>
                                     <th scope="col">สถานะ</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
@@ -137,6 +138,7 @@
                                     <td>{{$row->telcustomer}}</td>
                                     <td>{{\Carbon\Carbon::parse($row->installment_start)->format('d/m/Y')}}</td>
                                     <td>{{\Carbon\Carbon::parse($row->installment_next)->format('d/m/Y')}}</td>
+                                    <td style="text-align: center;">{{$row->interest_per}}</td>
                                     @php
                                     if($row->status_check == '0'){
                                     $status_check_text = 'ยังไม่ไถ่ถอน';

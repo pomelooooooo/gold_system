@@ -17,7 +17,7 @@ class CreateFormsellTable extends Migration
             $table->id();
             $table->integer('group_id');
             $table->integer('product_detail_id');
-            $table->integer('customer_id');
+            $table->integer('customer_id')->nullable();
             $table->decimal('goldBar_buy_medain_price',15,2);
             $table->decimal('goldBar_sell_medain_price',15,2);
             $table->decimal('gold_buy_medain_price',15,2);

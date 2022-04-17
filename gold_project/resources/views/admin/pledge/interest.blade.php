@@ -324,7 +324,9 @@
                 <tr>
                     <th scope="col">วันกำหนดชำระ</th>
                     <th scope="col">วันที่ชำระ</th>
-                    <th scope="col">ยอดรับฝากคงเหลือ</th>
+                    <th scope="col">ดอกเบี้ย</th>
+                    <th scope="col">เงินที่ชำระ</th>
+                    <th scope="col">เงินต้นคงเหลือ</th>
                     <th scope="col">ผู้ชำระ</th>
                 </tr>
             </thead>
@@ -338,8 +340,10 @@
                 $deposit_history -= $row->deposit;
                 @endphp
                 <tr>
-                    <td>{{$row->due_date}}</td>
-                    <td>{{$row->created_at}}</td>
+                    <td>{{\Carbon\Carbon::parse($row->due_date)->format('d/m/Y')}}</td>
+                    <td>{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
+                    <td>{{$row->per}}</td>
+                    <td>{{$row->deposit}}</td>
                     <td>{{$deposit_history}}</td>
                     <td>{{$row->customer_name}}</td>
                 </tr>
